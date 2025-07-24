@@ -83,7 +83,7 @@ export function NegotiationChat({ passengerName, children }: { passengerName: st
                                 <div key={index} className={cn('flex items-end gap-2', { 'justify-end': msg.sender === 'driver' })}>
                                     {msg.sender === 'passenger' && (
                                         <Avatar className="h-8 w-8">
-                                            <AvatarImage src={`https://placehold.co/40x40`} data-ai-hint="person face" />
+                                            <AvatarImage src={`https://placehold.co/40x40.png`} data-ai-hint="person face" />
                                             <AvatarFallback>{passengerName.charAt(0)}</AvatarFallback>
                                         </Avatar>
                                     )}
@@ -99,7 +99,7 @@ export function NegotiationChat({ passengerName, children }: { passengerName: st
                                     </div>
                                      {msg.sender === 'driver' && (
                                         <Avatar className="h-8 w-8">
-                                            <AvatarImage src={`https://placehold.co/40x40`} data-ai-hint="person portrait" />
+                                            <AvatarImage src={`https://placehold.co/40x40.png`} data-ai-hint="person portrait" />
                                             <AvatarFallback>M</AvatarFallback>
                                         </Avatar>
                                     )}

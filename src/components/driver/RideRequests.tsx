@@ -30,7 +30,7 @@ const RideRequestCard = ({ passenger, from, to, price, negotiated }: { passenger
         <Card className={negotiated ? 'border-primary' : ''}>
             <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-4">
                 <Avatar>
-                    <AvatarImage src="https://placehold.co/100x100" data-ai-hint="person face" />
+                    <AvatarImage src="https://placehold.co/40x40.png" data-ai-hint="person face" />
                     <AvatarFallback>{passenger.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <div>

@@ -47,7 +47,7 @@ export function PassengerAuthForm() {
             <CardHeader className="text-center">
                 <div className="flex flex-col items-center gap-4">
                     <Avatar className="h-20 w-20">
-                        <AvatarImage src={`https://placehold.co/128x128`} data-ai-hint="person face" />
+                        <AvatarImage src={`https://placehold.co/128x128.png`} data-ai-hint="person face" />
                         <AvatarFallback>P</AvatarFallback>
                     </Avatar>
                     <div className="text-center">

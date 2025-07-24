@@ -123,7 +123,7 @@ export function UserManagementTable() {
                                 <TableCell>
                                     <div className="flex items-center gap-3">
                                         <Avatar>
-                                            <AvatarImage src={`https://placehold.co/40x40`} data-ai-hint={`${user.avatar} face`} />
+                                            <AvatarImage src={`https://placehold.co/40x40.png`} data-ai-hint={`${user.avatar} face`} />
                                             <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
                                         </Avatar>
                                         <div>

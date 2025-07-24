@@ -39,7 +39,7 @@ export function ProfileForm() {
                 <Dialog>
                   <DialogTrigger asChild>
                     <Avatar className="h-16 w-16 cursor-pointer">
-                        <AvatarImage src="https://placehold.co/100x100" data-ai-hint="person portrait" />
+                        <AvatarImage src="https://placehold.co/128x128.png" data-ai-hint="person portrait" />
                         <AvatarFallback>CM</AvatarFallback>
                     </Avatar>
                   </DialogTrigger>
@@ -51,7 +51,7 @@ export function ProfileForm() {
                       </DialogDescription>
                     </DialogHeader>
                     <div className="flex justify-center py-4">
-                        <Image src="https://placehold.co/256x256" alt="Foto de Perfil" width={256} height={256} className="rounded-full" data-ai-hint="person portrait" />
+                        <Image src="https://placehold.co/256x256.png" alt="Foto de Perfil" width={256} height={256} className="rounded-full" data-ai-hint="person portrait" />
                     </div>
                     <DialogFooter className="sm:justify-start">
                         <Input id="profile-picture-upload" type="file" className="flex-1" />

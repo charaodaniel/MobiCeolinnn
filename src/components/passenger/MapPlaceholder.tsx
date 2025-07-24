@@ -7,7 +7,7 @@ export function MapPlaceholder() {
     <Card className="h-full w-full shadow-lg overflow-hidden">
       <CardContent className="p-0 h-full w-full relative">
         <Image
-          src="https://placehold.co/800x600"
+          src="https://placehold.co/800x600.png"
           alt="Map view showing user location and nearby drivers"
           fill
           className="object-cover"
