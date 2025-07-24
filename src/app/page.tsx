@@ -1,9 +1,5 @@
-import { LoginCard } from '@/components/auth/LoginCard';
+import { PassengerDashboard } from '@/components/passenger/PassengerDashboard';
 
-export default function LoginPage() {
-  return (
-    <main className="flex min-h-screen w-full items-center justify-center p-4 bg-gradient-to-br from-background to-secondary">
-      <LoginCard />
-    </main>
-  );
+export default function HomePage() {
+  return <PassengerDashboard />;
 }

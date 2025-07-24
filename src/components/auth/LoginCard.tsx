@@ -17,33 +17,17 @@ export function LoginCard() {
       </CardHeader>
       <CardContent className="space-y-4 p-6">
         <Link href="/passenger" passHref>
-          <Button variant="outline" className="w-full h-14 text-lg justify-start gap-4">
-            <User className="text-primary" />
-            <span className="font-headline">Passageiro</span>
+          <Button variant="default" className="w-full h-14 text-lg justify-start gap-4">
+            <User className="text-primary-foreground" />
+            <span className="font-headline">Pedir uma Viagem</span>
           </Button>
         </Link>
-        <Link href="/driver" passHref>
+        <Link href="/driver/login" passHref>
           <Button variant="outline" className="w-full h-14 text-lg justify-start gap-4">
             <Car className="text-primary" />
-            <span className="font-headline">Motorista</span>
+            <span className="font-headline">Sou Motorista</span>
           </Button>
         </Link>
-        <Link href="/admin" passHref>
-          <Button variant="outline" className="w-full h-14 text-lg justify-start gap-4">
-            <Shield className="text-primary" />
-            <span className="font-headline">Administrador</span>
-          </Button>
-        </Link>
-
-        <div className="relative flex py-5 items-center">
-          <div className="flex-grow border-t border-muted"></div>
-          <span className="flex-shrink mx-4 text-muted-foreground text-sm">Ou</span>
-          <div className="flex-grow border-t border-muted"></div>
-        </div>
-
-        <Button className="w-full h-14 text-lg bg-accent hover:bg-accent/90 text-accent-foreground">
-          Login Rápido (Demo)
-        </Button>
       </CardContent>
     </Card>
   );

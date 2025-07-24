@@ -178,7 +178,7 @@ export function RideRequestForm() {
                                 </TooltipProvider>
                             </div>
                              <div className="mt-3 pt-3 border-t">
-                                <NegotiationChat passengerName="Você">
+                                <NegotiationChat passengerName="Passageiro">
                                     <Button className="w-full">
                                         <MessageSquareQuote className="mr-2 h-4 w-4" />
                                         Contratar e Negociar
