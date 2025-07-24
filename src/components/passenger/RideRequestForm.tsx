@@ -7,20 +7,32 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Separator } from '@/components/ui/separator';
-import { MapPin, ArrowRight, DollarSign, Clock, Route, Star, User } from 'lucide-react';
+import { MapPin, ArrowRight, DollarSign, Clock, Route, Star, User, Copy } from 'lucide-react';
 import { FareNegotiation } from './FareNegotiation';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { useToast } from '@/hooks/use-toast';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+
 
 const availableDrivers = [
-    { id: '1', name: 'Carlos Motorista', vehicle: 'Toyota Corolla', rating: 4.9, distance: '2 min', avatar: 'man' },
-    { id: '2', name: 'Fernanda Lima', vehicle: 'Honda Civic', rating: 4.8, distance: '5 min', avatar: 'woman' },
-    { id: '3', name: 'Roberto Freire', vehicle: 'Chevrolet Onix', rating: 4.9, distance: '8 min', avatar: 'person' },
+    { id: '1', name: 'Carlos Motorista', vehicle: 'Toyota Corolla', rating: 4.9, distance: '2 min', avatar: 'man', pixKey: 'carlos.motorista@email.com' },
+    { id: '2', name: 'Fernanda Lima', vehicle: 'Honda Civic', rating: 4.8, distance: '5 min', avatar: 'woman', pixKey: '123.456.789-00' },
+    { id: '3', name: 'Roberto Freire', vehicle: 'Chevrolet Onix', rating: 4.9, distance: '8 min', avatar: 'person', pixKey: '(11) 98765-4321' },
 ];
 
 export function RideRequestForm() {
   const [isRural, setIsRural] = useState(false);
   const [showEstimate, setShowEstimate] = useState(false);
   const [showDrivers, setShowDrivers] = useState(false);
+  const { toast } = useToast();
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    toast({
+        title: "Copiado!",
+        description: "A chave PIX do motorista foi copiada para a área de transferência.",
+    });
+  }
 
   return (
     <Card className="shadow-lg h-full">
@@ -99,23 +111,40 @@ export function RideRequestForm() {
               <h3 className="font-headline text-lg font-semibold">Motoristas Disponíveis</h3>
               <ul className="space-y-3">
                 {availableDrivers.map((driver) => (
-                  <li key={driver.id} className="flex items-center justify-between p-3 rounded-lg border hover:bg-secondary/50 transition-colors">
-                    <div className="flex items-center gap-3">
-                      <Avatar>
-                        <AvatarImage src={'https://placehold.co/40x40'} data-ai-hint={`${driver.avatar} face`} />
-                        <AvatarFallback>{driver.name.charAt(0)}</AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <p className="font-semibold">{driver.name}</p>
-                        <p className="text-sm text-muted-foreground">{driver.vehicle}</p>
-                      </div>
+                  <li key={driver.id} className="flex flex-col p-3 rounded-lg border hover:bg-secondary/50 transition-colors">
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <Avatar>
+                            <AvatarImage src={'https://placehold.co/40x40'} data-ai-hint={`${driver.avatar} face`} />
+                            <AvatarFallback>{driver.name.charAt(0)}</AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <p className="font-semibold">{driver.name}</p>
+                            <p className="text-sm text-muted-foreground">{driver.vehicle}</p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="flex items-center justify-end gap-1">
+                            <Star className="w-4 h-4 fill-primary text-primary" />
+                            <span>{driver.rating}</span>
+                          </div>
+                          <p className="text-sm text-muted-foreground">{driver.distance}</p>
+                        </div>
                     </div>
-                    <div className="text-right">
-                      <div className="flex items-center justify-end gap-1">
-                        <Star className="w-4 h-4 fill-primary text-primary" />
-                        <span>{driver.rating}</span>
-                      </div>
-                      <p className="text-sm text-muted-foreground">{driver.distance}</p>
+                    <div className="flex items-center justify-between mt-3 pt-3 border-t">
+                        <p className="text-sm text-muted-foreground">Chave PIX: <span className="font-mono">{driver.pixKey}</span></p>
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger asChild>
+                                    <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => copyToClipboard(driver.pixKey)}>
+                                        <Copy className="h-4 w-4" />
+                                    </Button>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <p>Copiar Chave PIX</p>
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
                     </div>
                   </li>
                 ))}

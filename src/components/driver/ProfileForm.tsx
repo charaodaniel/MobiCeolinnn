@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Star, Upload } from 'lucide-react';
+import { Star, Upload, KeyRound } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog';
@@ -93,6 +93,13 @@ export function ProfileForm() {
                 <div className="space-y-1">
                     <Label htmlFor="email">Email</Label>
                     <Input id="email" type="email" defaultValue="carlos@email.com" readOnly />
+                </div>
+                 <div className="space-y-1 md:col-span-2">
+                    <Label htmlFor="pix-key">Chave PIX</Label>
+                    <div className="relative">
+                         <KeyRound className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                        <Input id="pix-key" placeholder="Insira sua chave PIX (CPF, e-mail, etc.)" className="pl-10" />
+                    </div>
                 </div>
             </div>
         </div>
