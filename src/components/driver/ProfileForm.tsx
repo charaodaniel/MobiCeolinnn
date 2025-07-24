@@ -1,3 +1,4 @@
+
 'use client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -137,8 +138,8 @@ export function ProfileForm() {
             <h3 className="font-headline text-lg">Configurações de Corrida</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
                 <div className="space-y-1">
-                    <Label htmlFor="fixed-rate">Valor Fixo por Km (Urbano)</Label>
-                    <Input id="fixed-rate" type="number" placeholder="R$ 2,50" />
+                    <Label htmlFor="fixed-rate">Tarifa Fixa (Urbano)</Label>
+                    <Input id="fixed-rate" type="number" placeholder="25.50" />
                 </div>
                  <div className="flex items-center space-x-2 pt-5">
                     <Switch id="negotiate-rural" />

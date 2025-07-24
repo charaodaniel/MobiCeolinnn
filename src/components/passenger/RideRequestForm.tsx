@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import { useState } from 'react';
@@ -19,9 +20,9 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 
 
 const availableDrivers = [
-    { id: '1', name: 'Carlos Motorista', vehicle: 'Toyota Corolla', licensePlate: 'BRA2E19', vehiclePhoto: 'https://placehold.co/128x96.png', rating: 4.9, distance: '2 min', avatar: 'man', pixKey: 'carlos.motorista@email.com' },
-    { id: '2', name: 'Fernanda Lima', vehicle: 'Honda Civic', licensePlate: 'XYZ1234', vehiclePhoto: 'https://placehold.co/128x96.png', rating: 4.8, distance: '5 min', avatar: 'woman', pixKey: '123.456.789-00' },
-    { id: '3', name: 'Roberto Freire', vehicle: 'Chevrolet Onix', licensePlate: 'ABC9876', vehiclePhoto: 'https://placehold.co/128x96.png', rating: 4.9, distance: '8 min', avatar: 'person', pixKey: '(11) 98765-4321' },
+    { id: '1', name: 'Carlos Motorista', vehicle: 'Toyota Corolla', licensePlate: 'BRA2E19', vehiclePhoto: 'https://placehold.co/128x96.png', rating: 4.9, distance: '2 min', avatar: 'man', pixKey: 'carlos.motorista@email.com', urbanFare: 25.50 },
+    { id: '2', name: 'Fernanda Lima', vehicle: 'Honda Civic', licensePlate: 'XYZ1234', vehiclePhoto: 'https://placehold.co/128x96.png', rating: 4.8, distance: '5 min', avatar: 'woman', pixKey: '123.456.789-00', urbanFare: 28.00 },
+    { id: '3', name: 'Roberto Freire', vehicle: 'Chevrolet Onix', licensePlate: 'ABC9876', vehiclePhoto: 'https://placehold.co/128x96.png', rating: 4.9, distance: '8 min', avatar: 'person', pixKey: '(11) 98765-4321', urbanFare: 22.00 },
 ];
 
 export function RideRequestForm() {
@@ -31,6 +32,7 @@ export function RideRequestForm() {
   const [destination, setDestination] = useState('');
   const [origin, setOrigin] = useState('');
   const { toast } = useToast();
+  const [selectedDriver, setSelectedDriver] = useState<(typeof availableDrivers)[0] | null>(null);
 
   const handleGetCurrentLocation = () => {
     if (navigator.geolocation) {
@@ -69,6 +71,19 @@ export function RideRequestForm() {
         description: "A chave PIX do motorista foi copiada para a área de transferência.",
     });
   }
+
+  const handleShowEstimate = () => {
+    if (selectedDriver) {
+      setShowEstimate(true);
+      setShowDrivers(false);
+    } else {
+      toast({
+        variant: 'destructive',
+        title: 'Selecione um Motorista',
+        description: 'Por favor, selecione um motorista na lista para ver a tarifa.',
+      });
+    }
+  };
 
   return (
     <Card className="shadow-lg h-full">
@@ -122,7 +137,7 @@ export function RideRequestForm() {
             <div className="space-y-0.5">
               <Label htmlFor="rural-mode" className="text-base font-medium">Destino no interior?</Label>
               <p className="text-sm text-muted-foreground">
-                Ative para ver valor direto com o motorista.
+                Ative para negociar o valor com o motorista.
               </p>
             </div>
             <Switch id="rural-mode" checked={isRural} onCheckedChange={(checked) => {
@@ -133,8 +148,8 @@ export function RideRequestForm() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             {!isRural && (
-                <Button className="w-full" onClick={() => { setShowEstimate(true); setShowDrivers(false); }}>
-                  Ver Estimativa
+                <Button className="w-full" onClick={handleShowEstimate}>
+                  Ver Tarifa do Motorista
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
             )}
@@ -143,39 +158,30 @@ export function RideRequestForm() {
             </Button>
           </div>
 
-          {showEstimate && !isRural && (
+          {showEstimate && !isRural && selectedDriver && (
             <div className="space-y-4 pt-4 border-t">
-              <h3 className="font-headline text-lg font-semibold">Estimativa da Corrida</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-                <Card>
-                  <CardContent className="p-4">
-                    <DollarSign className="mx-auto h-6 w-6 mb-2 text-primary" />
-                    <p className="font-bold text-lg">R$ 25,50</p>
-                    <p className="text-xs text-muted-foreground">Valor</p>
+              <h3 className="font-headline text-lg font-semibold">Tarifa Fixa (Urbana)</h3>
+              <Card>
+                  <CardContent className="p-4 flex flex-col items-center justify-center">
+                    <p className="text-sm text-muted-foreground">Motorista: {selectedDriver.name}</p>
+                    <DollarSign className="mx-auto h-8 w-8 my-2 text-primary" />
+                    <p className="font-bold text-3xl">R$ {selectedDriver.urbanFare.toFixed(2)}</p>
+                    <p className="text-xs text-muted-foreground mt-1">Este é o valor fixo para a corrida.</p>
                   </CardContent>
-                </Card>
-                <Card>
-                  <CardContent className="p-4">
-                    <Clock className="mx-auto h-6 w-6 mb-2 text-primary" />
-                    <p className="font-bold text-lg">15 min</p>
-                    <p className="text-xs text-muted-foreground">Tempo</p>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardContent className="p-4">
-                    <Route className="mx-auto h-6 w-6 mb-2 text-primary" />
-                    <p className="font-bold text-lg">8.2 km</p>
-                    <p className="text-xs text-muted-foreground">Distância</p>
-                  </CardContent>
-                </Card>
-              </div>
+              </Card>
             </div>
           )}
 
           {showDrivers && (
             <div className="space-y-4 pt-4 border-t">
               <h3 className="font-headline text-lg font-semibold">Motoristas Disponíveis</h3>
-              <Accordion type="single" collapsible className="w-full">
+              <Accordion type="single" collapsible className="w-full" onValueChange={(value) => {
+                const driver = availableDrivers.find(d => d.id === value);
+                setSelectedDriver(driver || null);
+                if (driver && !isRural) {
+                  setShowEstimate(true);
+                }
+              }}>
                 {availableDrivers.map((driver) => (
                   <AccordionItem value={driver.id} key={driver.id} className="border-b-0">
                      <Card className="mb-2">
@@ -232,7 +238,7 @@ export function RideRequestForm() {
                                 <NegotiationChat passengerName="Passageiro">
                                     <Button className="w-full">
                                         <MessageSquareQuote className="mr-2 h-4 w-4" />
-                                        Contratar e Negociar
+                                        Chamar e Negociar (Interior)
                                     </Button>
                                 </NegotiationChat>
                             </div>
