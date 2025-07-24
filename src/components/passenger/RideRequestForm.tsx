@@ -18,9 +18,9 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 
 
 const availableDrivers = [
-    { id: '1', name: 'Carlos Motorista', vehicle: 'Toyota Corolla', licensePlate: 'BRA2E19', vehiclePhoto: 'https://placehold.co/100x75', rating: 4.9, distance: '2 min', avatar: 'man', pixKey: 'carlos.motorista@email.com' },
-    { id: '2', name: 'Fernanda Lima', vehicle: 'Honda Civic', licensePlate: 'XYZ1234', vehiclePhoto: 'https://placehold.co/100x75', rating: 4.8, distance: '5 min', avatar: 'woman', pixKey: '123.456.789-00' },
-    { id: '3', name: 'Roberto Freire', vehicle: 'Chevrolet Onix', licensePlate: 'ABC9876', vehiclePhoto: 'https://placehold.co/100x75', rating: 4.9, distance: '8 min', avatar: 'person', pixKey: '(11) 98765-4321' },
+    { id: '1', name: 'Carlos Motorista', vehicle: 'Toyota Corolla', licensePlate: 'BRA2E19', vehiclePhoto: 'https://placehold.co/256x256', rating: 4.9, distance: '2 min', avatar: 'man', pixKey: 'carlos.motorista@email.com' },
+    { id: '2', name: 'Fernanda Lima', vehicle: 'Honda Civic', licensePlate: 'XYZ1234', vehiclePhoto: 'https://placehold.co/256x256', rating: 4.8, distance: '5 min', avatar: 'woman', pixKey: '123.456.789-00' },
+    { id: '3', name: 'Roberto Freire', vehicle: 'Chevrolet Onix', licensePlate: 'ABC9876', vehiclePhoto: 'https://placehold.co/256x256', rating: 4.9, distance: '8 min', avatar: 'person', pixKey: '(11) 98765-4321' },
 ];
 
 export function RideRequestForm() {
@@ -152,8 +152,15 @@ export function RideRequestForm() {
                             </div>
                         </AccordionTrigger>
                         <AccordionContent className="p-3 pt-0">
-                            <div className="flex justify-center py-2">
-                                <Image src={`https://placehold.co/256x256`} alt={`Foto de perfil de ${driver.name}`} width={128} height={128} className="rounded-full" data-ai-hint={`${driver.avatar} portrait`} />
+                            <div className="grid grid-cols-2 gap-4 justify-items-center py-2">
+                                <div className="flex flex-col items-center gap-2">
+                                    <p className="font-semibold text-sm">Perfil</p>
+                                    <Image src={`https://placehold.co/256x256`} alt={`Foto de perfil de ${driver.name}`} width={128} height={128} className="rounded-full" data-ai-hint={`${driver.avatar} portrait`} />
+                                </div>
+                                 <div className="flex flex-col items-center gap-2">
+                                    <p className="font-semibold text-sm">Veículo</p>
+                                    <Image src={driver.vehiclePhoto} alt={`Foto do ${driver.vehicle}`} width={128} height={128} className="rounded-lg object-cover" data-ai-hint="white car side view" />
+                                </div>
                             </div>
                             <div className="flex items-center justify-between mt-3 pt-3 border-t">
                                 <p className="text-sm text-muted-foreground">Chave PIX: <span className="font-mono">{driver.pixKey}</span></p>
