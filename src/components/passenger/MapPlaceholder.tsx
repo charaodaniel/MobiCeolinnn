@@ -14,7 +14,9 @@ export function MapPlaceholder() {
           data-ai-hint="city map"
         />
         <div className="absolute inset-0 bg-black/10"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+        
+        {/* User's Location */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center" title="Sua Localização">
           <MapPin className="h-12 w-12 text-primary drop-shadow-lg" fill="hsl(var(--primary))" />
            <div className="relative flex h-3 w-3 mt-2">
             <div className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></div>
@@ -22,18 +24,18 @@ export function MapPlaceholder() {
           </div>
         </div>
 
-        {/* Simulated Drivers */}
-        <div className="absolute top-[20%] left-[30%]">
-          <Car className="h-8 w-8 text-foreground bg-background/80 p-1 rounded-full shadow-md" />
+        {/* Simulated Online Drivers */}
+        <div className="absolute top-[20%] left-[30%]" title="Carlos M. - Online">
+          <Car className="h-8 w-8 text-foreground bg-background/80 p-1 rounded-full shadow-md animate-pulse" />
         </div>
-        <div className="absolute top-[60%] left-[15%]">
-          <Car className="h-8 w-8 text-foreground bg-background/80 p-1 rounded-full shadow-md" />
+        <div className="absolute top-[60%] left-[15%]" title="Roberto F. - Online">
+          <Car className="h-8 w-8 text-foreground bg-background/80 p-1 rounded-full shadow-md animate-pulse" />
         </div>
-        <div className="absolute top-[40%] left-[70%]">
-          <Car className="h-8 w-8 text-foreground bg-background/80 p-1 rounded-full shadow-md" />
+        <div className="absolute top-[40%] left-[70%]" title="Motorista Anônimo - Online">
+          <Car className="h-8 w-8 text-foreground bg-background/80 p-1 rounded-full shadow-md animate-pulse" />
         </div>
-         <div className="absolute top-[75%] left-[80%]">
-          <Car className="h-8 w-8 text-foreground bg-background/80 p-1 rounded-full shadow-md" />
+         <div className="absolute top-[75%] left-[80%]" title="Motorista Anônimo - Online">
+          <Car className="h-8 w-8 text-foreground bg-background/80 p-1 rounded-full shadow-md animate-pulse" />
         </div>
       </CardContent>
     </Card>

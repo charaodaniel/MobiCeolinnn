@@ -4,7 +4,7 @@ import { AppLayout } from '@/components/layout/AppLayout';
 import { LoginCard } from '../auth/LoginCard';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
 import { Button } from '../ui/button';
-import { User } from 'lucide-react';
+import { User, Car } from 'lucide-react';
 
 export function PassengerDashboard() {
   return (
@@ -13,8 +13,14 @@ export function PassengerDashboard() {
         <div className="lg:col-span-2">
           <RideRequestForm />
         </div>
-        <div className="lg:col-span-3 h-[400px] lg:h-full">
-          <MapPlaceholder />
+        <div className="lg:col-span-3 h-[400px] lg:h-full flex flex-col gap-4">
+            <div className='flex items-center gap-2'>
+                <Car className="h-6 w-6 text-primary" />
+                <h2 className="font-headline text-xl font-semibold">Motoristas Próximos</h2>
+            </div>
+          <div className="flex-1">
+            <MapPlaceholder />
+          </div>
         </div>
       </div>
     </AppLayout>
