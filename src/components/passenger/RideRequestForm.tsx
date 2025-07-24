@@ -24,6 +24,7 @@ export function RideRequestForm() {
   const [isRural, setIsRural] = useState(false);
   const [showEstimate, setShowEstimate] = useState(false);
   const [showDrivers, setShowDrivers] = useState(false);
+  const [destination, setDestination] = useState('');
   const { toast } = useToast();
 
   const copyToClipboard = (text: string) => {
@@ -53,7 +54,13 @@ export function RideRequestForm() {
             <Label htmlFor="destination">Destino</Label>
             <div className="relative">
               <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-              <Input id="destination" placeholder="Digite o endereço ou local" className="pl-10" />
+              <Input 
+                id="destination" 
+                placeholder="Digite o endereço ou local" 
+                className="pl-10" 
+                value={destination}
+                onChange={(e) => setDestination(e.target.value)}
+              />
             </div>
           </div>
 
@@ -61,18 +68,23 @@ export function RideRequestForm() {
             <div className="space-y-0.5">
               <Label htmlFor="rural-mode" className="text-base font-medium">Destino no interior?</Label>
               <p className="text-sm text-muted-foreground">
-                Ative para negociar o valor da corrida.
+                Ative para obter uma tarifa justa com IA.
               </p>
             </div>
-            <Switch id="rural-mode" checked={isRural} onCheckedChange={setIsRural} />
+            <Switch id="rural-mode" checked={isRural} onCheckedChange={(checked) => {
+                setIsRural(checked);
+                setShowEstimate(false);
+            }} />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-            <Button className="w-full" onClick={() => { setShowEstimate(true); setShowDrivers(false); }}>
-              Ver Estimativa
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-            <Button variant="outline" className="w-full" onClick={() => { setShowDrivers(!showDrivers); setShowEstimate(false); }}>
+            {!isRural && (
+                <Button className="w-full" onClick={() => { setShowEstimate(true); setShowDrivers(false); }}>
+                  Ver Estimativa
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+            )}
+            <Button variant="outline" className={`w-full ${isRural ? 'col-span-2' : ''}`} onClick={() => { setShowDrivers(!showDrivers); setShowEstimate(false); }}>
                 {showDrivers ? 'Ocultar Motoristas' : 'Ver Motoristas Próximos'}
             </Button>
           </div>
@@ -156,7 +168,7 @@ export function RideRequestForm() {
         {isRural && (
           <>
             <Separator className="my-6" />
-            <FareNegotiation />
+            <FareNegotiation destination={destination} />
           </>
         )}
       </CardContent>

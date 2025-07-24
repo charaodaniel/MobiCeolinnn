@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Send } from 'lucide-react';
+import { Send, ThumbsUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 
@@ -19,10 +19,9 @@ interface Message {
 export function NegotiationChat({ passengerName, children }: { passengerName: string; children: React.ReactNode }) {
     const { toast } = useToast();
     const [messages, setMessages] = useState<Message[]>([
-        { sender: 'passenger', text: 'A tarifa de R$120 está um pouco alta. Aceita R$100?', timestamp: '10:30' },
+        { sender: 'passenger', text: 'Olá! A tarifa para minha viagem ficou em R$115,00. Podemos fechar nesse valor?', timestamp: '10:30' },
     ]);
     const [newMessage, setNewMessage] = useState('');
-    const [finalOffer, setFinalOffer] = useState<number | null>(null);
 
     const handleSendMessage = () => {
         if (newMessage.trim() === '') return;
@@ -37,20 +36,19 @@ export function NegotiationChat({ passengerName, children }: { passengerName: st
         setTimeout(() => {
             const botResponse: Message = {
                 sender: 'passenger',
-                text: 'Ok, R$110 é minha última oferta.',
+                text: 'Entendido. Fico no aguardo!',
                 timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
             };
             setMessages(prev => [...prev, botResponse]);
-            setFinalOffer(110);
         }, 1500);
 
         setNewMessage('');
     };
 
-    const handleAcceptOffer = () => {
+    const handleAcceptRide = () => {
         toast({
-            title: 'Oferta Aceita!',
-            description: `Você aceitou a oferta de R$ ${finalOffer?.toFixed(2)}. A corrida foi confirmada.`,
+            title: 'Corrida Aceita!',
+            description: `Você aceitou a corrida com ${passengerName}. Bom trabalho!`,
         });
         // Here you would typically close the dialog and update the ride status
     }
@@ -64,7 +62,7 @@ export function NegotiationChat({ passengerName, children }: { passengerName: st
                 <DialogHeader>
                     <DialogTitle>Negociar com {passengerName}</DialogTitle>
                     <DialogDescription>
-                        Converse com o passageiro para chegar a um acordo sobre a tarifa.
+                        Converse com o passageiro para confirmar os detalhes da corrida.
                     </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-4">
@@ -98,17 +96,10 @@ export function NegotiationChat({ passengerName, children }: { passengerName: st
                             ))}
                         </div>
                     </ScrollArea>
-                    
-                    {finalOffer && (
-                         <div className="p-3 bg-accent/20 rounded-lg text-center">
-                            <p className="font-semibold">Nova Oferta do Passageiro: R$ {finalOffer.toFixed(2)}</p>
-                            <Button size="sm" className="mt-2" onClick={handleAcceptOffer}>Aceitar Oferta Final</Button>
-                        </div>
-                    )}
-                    
+                                        
                     <div className="flex gap-2">
                         <Input
-                            placeholder="Digite sua mensagem ou oferta..."
+                            placeholder="Digite sua mensagem..."
                             value={newMessage}
                             onChange={(e) => setNewMessage(e.target.value)}
                             onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
@@ -119,6 +110,12 @@ export function NegotiationChat({ passengerName, children }: { passengerName: st
                         </Button>
                     </div>
                 </div>
+                 <DialogFooter>
+                    <Button onClick={handleAcceptRide} className="w-full">
+                        <ThumbsUp className="mr-2 h-4 w-4" />
+                        Aceitar Corrida e Iniciar Viagem
+                    </Button>
+                </DialogFooter>
             </DialogContent>
         </Dialog>
     );
