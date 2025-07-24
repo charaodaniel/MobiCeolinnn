@@ -1,8 +1,40 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { Car, MapPin } from 'lucide-react';
 
+interface DriverPosition {
+  id: number;
+  top: string;
+  left: string;
+  title: string;
+}
+
+const generateRandomPosition = (): { top: string; left: string } => {
+  // Avoid placing icons too close to the edges
+  const top = Math.floor(Math.random() * 80) + 10;
+  const left = Math.floor(Math.random() * 80) + 10;
+  return { top: `${top}%`, left: `${left}%` };
+};
+
 export function MapPlaceholder() {
+  const [driverPositions, setDriverPositions] = useState<DriverPosition[]>([]);
+
+  useEffect(() => {
+    // This code runs only on the client, after the component has mounted.
+    // This prevents hydration mismatch errors.
+    const initialPositions: DriverPosition[] = [
+      { id: 1, ...generateRandomPosition(), title: 'Carlos M. - Online' },
+      { id: 2, ...generateRandomPosition(), title: 'Roberto F. - Online' },
+      { id: 3, ...generateRandomPosition(), title: 'Motorista Anônimo - Online' },
+      { id: 4, ...generateRandomPosition(), title: 'Motorista Anônimo - Online' },
+    ];
+    setDriverPositions(initialPositions);
+  }, []);
+
+
   return (
     <Card className="h-full w-full shadow-lg overflow-hidden">
       <CardContent className="p-0 h-full w-full relative">
@@ -25,18 +57,16 @@ export function MapPlaceholder() {
         </div>
 
         {/* Simulated Online Drivers */}
-        <div className="absolute top-[20%] left-[30%]" title="Carlos M. - Online">
-          <Car className="h-8 w-8 text-foreground bg-background/80 p-1 rounded-full shadow-md animate-pulse" />
-        </div>
-        <div className="absolute top-[60%] left-[15%]" title="Roberto F. - Online">
-          <Car className="h-8 w-8 text-foreground bg-background/80 p-1 rounded-full shadow-md animate-pulse" />
-        </div>
-        <div className="absolute top-[40%] left-[70%]" title="Motorista Anônimo - Online">
-          <Car className="h-8 w-8 text-foreground bg-background/80 p-1 rounded-full shadow-md animate-pulse" />
-        </div>
-         <div className="absolute top-[75%] left-[80%]" title="Motorista Anônimo - Online">
-          <Car className="h-8 w-8 text-foreground bg-background/80 p-1 rounded-full shadow-md animate-pulse" />
-        </div>
+        {driverPositions.map((driver) => (
+            <div
+                key={driver.id}
+                className="absolute transition-all duration-1000 ease-in-out"
+                style={{ top: driver.top, left: driver.left }}
+                title={driver.title}
+            >
+                <Car className="h-8 w-8 text-foreground bg-background/80 p-1 rounded-full shadow-md animate-pulse" />
+            </div>
+        ))}
       </CardContent>
     </Card>
   );
