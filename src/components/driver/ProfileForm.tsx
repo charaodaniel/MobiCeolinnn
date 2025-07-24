@@ -12,18 +12,33 @@ export function ProfileForm() {
   return (
     <Card className="shadow-lg">
       <CardHeader>
-        <div className="flex items-center gap-4">
-          <Avatar className="h-16 w-16">
-            <AvatarImage src="https://placehold.co/100x100" data-ai-hint="person portrait" />
-            <AvatarFallback>CM</AvatarFallback>
-          </Avatar>
-          <div>
-            <CardTitle className="font-headline text-2xl">Carlos Motorista</CardTitle>
-            <div className="flex items-center gap-1 text-muted-foreground">
-              <Star className="w-4 h-4 fill-primary text-primary" />
-              <span>4.9 (238 corridas)</span>
+        <div className="flex items-start justify-between gap-4">
+            <div className="flex items-center gap-4">
+                <Avatar className="h-16 w-16">
+                    <AvatarImage src="https://placehold.co/100x100" data-ai-hint="person portrait" />
+                    <AvatarFallback>CM</AvatarFallback>
+                </Avatar>
+                <div>
+                    <CardTitle className="font-headline text-2xl">Carlos Motorista</CardTitle>
+                    <div className="flex items-center gap-1 text-muted-foreground">
+                        <Star className="w-4 h-4 fill-primary text-primary" />
+                        <span>4.9 (238 corridas)</span>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div className="space-y-1 w-40">
+                <Label htmlFor="driver-status">Status</Label>
+                <Select defaultValue="online">
+                    <SelectTrigger id="driver-status">
+                    <SelectValue placeholder="Selecione o status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                    <SelectItem value="online">Online</SelectItem>
+                    <SelectItem value="offline">Offline</SelectItem>
+                    <SelectItem value="rural-trip">Em Viagem (Interior)</SelectItem>
+                    </SelectContent>
+                </Select>
+            </div>
         </div>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -77,18 +92,9 @@ export function ProfileForm() {
                     <Label htmlFor="fixed-rate">Valor Fixo por Km (Urbano)</Label>
                     <Input id="fixed-rate" type="number" placeholder="R$ 2,50" />
                 </div>
-                 <div className="space-y-1">
-                    <Label htmlFor="driver-status">Status</Label>
-                    <Select defaultValue="online">
-                      <SelectTrigger id="driver-status">
-                        <SelectValue placeholder="Selecione o status" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="online">Online</SelectItem>
-                        <SelectItem value="offline">Offline</SelectItem>
-                        <SelectItem value="rural-trip">Em Viagem (Interior)</SelectItem>
-                      </SelectContent>
-                    </Select>
+                 <div className="flex items-center space-x-2 pt-5">
+                    <Switch id="negotiate-rural" />
+                    <Label htmlFor="negotiate-rural">Aceitar negociação para interior</Label>
                 </div>
             </div>
         </div>
