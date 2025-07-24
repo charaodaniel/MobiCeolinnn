@@ -3,36 +3,38 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
-import { Car, MapPin } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Car, MapPin, Star } from 'lucide-react';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import type { RideRequestFormProps } from './RideRequestForm';
 
 interface DriverPosition {
-  id: number;
+  id: string;
   top: string;
   left: string;
-  title: string;
+  driver: RideRequestFormProps['availableDrivers'][0];
 }
 
 const generateRandomPosition = (): { top: string; left: string } => {
-  // Avoid placing icons too close to the edges
   const top = Math.floor(Math.random() * 80) + 10;
   const left = Math.floor(Math.random() * 80) + 10;
   return { top: `${top}%`, left: `${left}%` };
 };
 
-export function MapPlaceholder() {
+export function MapPlaceholder({ drivers }: { drivers: RideRequestFormProps['availableDrivers'] }) {
   const [driverPositions, setDriverPositions] = useState<DriverPosition[]>([]);
 
   useEffect(() => {
     // This code runs only on the client, after the component has mounted.
     // This prevents hydration mismatch errors.
-    const initialPositions: DriverPosition[] = [
-      { id: 1, ...generateRandomPosition(), title: 'Carlos M. - Online' },
-      { id: 2, ...generateRandomPosition(), title: 'Roberto F. - Online' },
-      { id: 3, ...generateRandomPosition(), title: 'Motorista Anônimo - Online' },
-      { id: 4, ...generateRandomPosition(), title: 'Motorista Anônimo - Online' },
-    ];
+    const initialPositions: DriverPosition[] = drivers.map(driver => ({
+        id: driver.id,
+        ...generateRandomPosition(),
+        driver,
+    }));
     setDriverPositions(initialPositions);
-  }, []);
+  }, [drivers]);
 
 
   return (
@@ -57,15 +59,33 @@ export function MapPlaceholder() {
         </div>
 
         {/* Simulated Online Drivers */}
-        {driverPositions.map((driver) => (
-            <div
-                key={driver.id}
-                className="absolute transition-all duration-1000 ease-in-out"
-                style={{ top: driver.top, left: driver.left }}
-                title={driver.title}
-            >
-                <Car className="h-8 w-8 text-foreground bg-background/80 p-1 rounded-full shadow-md animate-pulse" />
-            </div>
+        {driverPositions.map(({id, top, left, driver}) => (
+            <Popover key={id}>
+                <PopoverTrigger asChild>
+                    <div
+                        className="absolute transition-all duration-1000 ease-in-out cursor-pointer"
+                        style={{ top: top, left: left }}
+                    >
+                        <Car className="h-8 w-8 text-foreground bg-background/80 p-1 rounded-full shadow-md animate-pulse" />
+                    </div>
+                </PopoverTrigger>
+                <PopoverContent className="w-80">
+                    <div className="flex gap-4">
+                        <Avatar className="h-12 w-12">
+                            <AvatarImage src={`https://placehold.co/48x48.png`} data-ai-hint={`${driver.avatar} face`} />
+                            <AvatarFallback>{driver.name.charAt(0)}</AvatarFallback>
+                        </Avatar>
+                        <div className="space-y-1">
+                            <h4 className="font-semibold">{driver.name}</h4>
+                            <p className="text-sm text-muted-foreground">{driver.vehicle} - <span className="font-mono">{driver.licensePlate}</span></p>
+                             <div className="flex items-center pt-1">
+                                <Star className="w-4 h-4 mr-1 fill-primary text-primary" />
+                                <span className="text-xs text-muted-foreground">{driver.rating} · {driver.distance}</span>
+                            </div>
+                        </div>
+                    </div>
+                </PopoverContent>
+            </Popover>
         ))}
       </CardContent>
     </Card>
