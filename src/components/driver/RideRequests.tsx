@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Check, X, MapPin, DollarSign, MessageSquareQuote } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { NegotiationChat } from './NegotiationChat';
 
 const RideRequestCard = ({ passenger, from, to, price, negotiated }: { passenger: string, from: string, to: string, price: string, negotiated?: boolean }) => {
     const { toast } = useToast();
@@ -53,10 +54,12 @@ const RideRequestCard = ({ passenger, from, to, price, negotiated }: { passenger
             </CardContent>
             <CardFooter className="grid grid-cols-2 gap-2">
                 {negotiated ? (
-                    <Button className="w-full col-span-2">
-                        <MessageSquareQuote className="mr-2 h-4 w-4" />
-                        Negociar Valor
-                    </Button>
+                     <NegotiationChat passengerName={passenger}>
+                        <Button className="w-full col-span-2">
+                            <MessageSquareQuote className="mr-2 h-4 w-4" />
+                            Negociar Valor
+                        </Button>
+                    </NegotiationChat>
                 ) : (
                     <>
                         <Button variant="outline" className="w-full" onClick={handleReject}>
