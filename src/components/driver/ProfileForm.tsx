@@ -7,6 +7,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Star, Upload } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog';
+import Image from 'next/image';
 
 export function ProfileForm() {
   return (
@@ -14,10 +16,29 @@ export function ProfileForm() {
       <CardHeader>
         <div className="flex items-start justify-between gap-4">
             <div className="flex items-center gap-4">
-                <Avatar className="h-16 w-16">
-                    <AvatarImage src="https://placehold.co/100x100" data-ai-hint="person portrait" />
-                    <AvatarFallback>CM</AvatarFallback>
-                </Avatar>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Avatar className="h-16 w-16 cursor-pointer">
+                        <AvatarImage src="https://placehold.co/100x100" data-ai-hint="person portrait" />
+                        <AvatarFallback>CM</AvatarFallback>
+                    </Avatar>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-md">
+                    <DialogHeader>
+                      <DialogTitle>Foto de Perfil</DialogTitle>
+                      <DialogDescription>
+                        Visualize sua foto de perfil ou envie uma nova.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="flex justify-center py-4">
+                        <Image src="https://placehold.co/256x256" alt="Foto de Perfil" width={256} height={256} className="rounded-full" data-ai-hint="person portrait" />
+                    </div>
+                    <DialogFooter className="sm:justify-start">
+                        <Input id="profile-picture-upload" type="file" className="flex-1" />
+                        <Button type="submit">Salvar</Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
                 <div>
                     <CardTitle className="font-headline text-2xl">Carlos Motorista</CardTitle>
                     <div className="flex items-center gap-1 text-muted-foreground">
