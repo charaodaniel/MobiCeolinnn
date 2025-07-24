@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Send, ThumbsUp } from 'lucide-react';
+import { Send, ThumbsUp, DollarSign } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 
@@ -14,35 +14,46 @@ interface Message {
     sender: 'driver' | 'passenger';
     text: string;
     timestamp: string;
+    type?: 'text' | 'offer';
 }
 
 export function NegotiationChat({ passengerName, children }: { passengerName: string; children: React.ReactNode }) {
     const { toast } = useToast();
     const [messages, setMessages] = useState<Message[]>([
-        { sender: 'passenger', text: 'Olá! A tarifa para minha viagem ficou em R$115,00. Podemos fechar nesse valor?', timestamp: '10:30' },
+        { sender: 'passenger', text: 'Olá! Solicitei uma corrida para a Zona Rural Leste. Qual seria o valor?', timestamp: '10:30', type: 'text' },
     ]);
     const [newMessage, setNewMessage] = useState('');
+    const [offer, setOffer] = useState('');
 
-    const handleSendMessage = () => {
-        if (newMessage.trim() === '') return;
+    const handleSendMessage = (type: 'text' | 'offer', content: string) => {
+        if (content.trim() === '') return;
+        
+        const text = type === 'offer' ? `Minha proposta de valor é R$${content}.` : content;
+
         const newMessages: Message[] = [...messages, {
             sender: 'driver',
-            text: newMessage,
-            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            text: text,
+            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            type: type,
         }];
         setMessages(newMessages);
+
+        if (type === 'text') {
+            setNewMessage('');
+        } else {
+            setOffer('');
+        }
 
         // Simple bot response for demo purposes
         setTimeout(() => {
             const botResponse: Message = {
                 sender: 'passenger',
-                text: 'Entendido. Fico no aguardo!',
-                timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                text: type === 'offer' ? 'Ok, valor recebido. Vou analisar.' : 'Entendido.',
+                timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                type: 'text'
             };
             setMessages(prev => [...prev, botResponse]);
         }, 1500);
-
-        setNewMessage('');
     };
 
     const handleAcceptRide = () => {
@@ -62,7 +73,7 @@ export function NegotiationChat({ passengerName, children }: { passengerName: st
                 <DialogHeader>
                     <DialogTitle>Negociar com {passengerName}</DialogTitle>
                     <DialogDescription>
-                        Converse com o passageiro para confirmar os detalhes da corrida.
+                        Converse com o passageiro para combinar os detalhes e o valor da corrida.
                     </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-4">
@@ -102,11 +113,27 @@ export function NegotiationChat({ passengerName, children }: { passengerName: st
                             placeholder="Digite sua mensagem..."
                             value={newMessage}
                             onChange={(e) => setNewMessage(e.target.value)}
-                            onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
+                            onKeyDown={(e) => e.key === 'Enter' && handleSendMessage('text', newMessage)}
                         />
-                        <Button onClick={handleSendMessage} disabled={!newMessage.trim()}>
+                        <Button onClick={() => handleSendMessage('text', newMessage)} disabled={!newMessage.trim()}>
                             <Send className="h-4 w-4" />
                             <span className="sr-only">Enviar</span>
+                        </Button>
+                    </div>
+                     <div className="flex gap-2">
+                        <div className="relative flex-1">
+                             <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                            <Input
+                                type="number"
+                                placeholder="Propor valor (ex: 150.00)"
+                                className="pl-10"
+                                value={offer}
+                                onChange={(e) => setOffer(e.target.value)}
+                                onKeyDown={(e) => e.key === 'Enter' && handleSendMessage('offer', offer)}
+                            />
+                        </div>
+                        <Button onClick={() => handleSendMessage('offer', offer)} disabled={!offer.trim()} variant="secondary">
+                            Enviar Proposta
                         </Button>
                     </div>
                 </div>
