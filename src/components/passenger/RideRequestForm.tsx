@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -16,9 +17,9 @@ import { NegotiationChat } from '@/components/driver/NegotiationChat';
 
 
 const availableDrivers = [
-    { id: '1', name: 'Carlos Motorista', vehicle: 'Toyota Corolla', rating: 4.9, distance: '2 min', avatar: 'man', pixKey: 'carlos.motorista@email.com' },
-    { id: '2', name: 'Fernanda Lima', vehicle: 'Honda Civic', rating: 4.8, distance: '5 min', avatar: 'woman', pixKey: '123.456.789-00' },
-    { id: '3', name: 'Roberto Freire', vehicle: 'Chevrolet Onix', rating: 4.9, distance: '8 min', avatar: 'person', pixKey: '(11) 98765-4321' },
+    { id: '1', name: 'Carlos Motorista', vehicle: 'Toyota Corolla', licensePlate: 'BRA2E19', vehiclePhoto: 'https://placehold.co/100x75', rating: 4.9, distance: '2 min', avatar: 'man', pixKey: 'carlos.motorista@email.com' },
+    { id: '2', name: 'Fernanda Lima', vehicle: 'Honda Civic', licensePlate: 'XYZ1234', vehiclePhoto: 'https://placehold.co/100x75', rating: 4.8, distance: '5 min', avatar: 'woman', pixKey: '123.456.789-00' },
+    { id: '3', name: 'Roberto Freire', vehicle: 'Chevrolet Onix', licensePlate: 'ABC9876', vehiclePhoto: 'https://placehold.co/100x75', rating: 4.9, distance: '8 min', avatar: 'person', pixKey: '(11) 98765-4321' },
 ];
 
 export function RideRequestForm() {
@@ -48,7 +49,7 @@ export function RideRequestForm() {
             <Label htmlFor="origin">Partida</Label>
             <div className="relative">
               <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-              <Input id="origin" placeholder="Digite seu local de partida" className="pl-10" />
+              <Input id="origin" placeholder="Seu local atual" className="pl-10" />
             </div>
           </div>
           <div className="space-y-2">
@@ -125,23 +126,25 @@ export function RideRequestForm() {
               <ul className="space-y-3">
                 {availableDrivers.map((driver) => (
                   <li key={driver.id} className="flex flex-col p-3 rounded-lg border hover:bg-secondary/50 transition-colors">
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <Avatar>
-                            <AvatarImage src={'https://placehold.co/40x40'} data-ai-hint={`${driver.avatar} face`} />
-                            <AvatarFallback>{driver.name.charAt(0)}</AvatarFallback>
-                          </Avatar>
-                          <div>
-                            <p className="font-semibold">{driver.name}</p>
-                            <p className="text-sm text-muted-foreground">{driver.vehicle}</p>
-                          </div>
+                    <div className="flex items-start justify-between gap-4">
+                        <div className="flex items-start gap-4">
+                            <Avatar className="h-12 w-12">
+                                <AvatarImage src={'https://placehold.co/48x48'} data-ai-hint={`${driver.avatar} face`} />
+                                <AvatarFallback>{driver.name.charAt(0)}</AvatarFallback>
+                            </Avatar>
+                            <div>
+                                <p className="font-semibold">{driver.name}</p>
+                                <p className="text-sm text-muted-foreground">{driver.vehicle} - <span className="font-mono">{driver.licensePlate}</span></p>
+                                <div className="flex items-center justify-start gap-1 text-sm text-muted-foreground">
+                                    <Star className="w-4 h-4 fill-primary text-primary" />
+                                    <span>{driver.rating}</span>
+                                    <span className="mx-1">·</span>
+                                    <span>{driver.distance}</span>
+                                </div>
+                            </div>
                         </div>
-                        <div className="text-right">
-                          <div className="flex items-center justify-end gap-1">
-                            <Star className="w-4 h-4 fill-primary text-primary" />
-                            <span>{driver.rating}</span>
-                          </div>
-                          <p className="text-sm text-muted-foreground">{driver.distance}</p>
+                        <div className="flex-shrink-0">
+                           <Image src={driver.vehiclePhoto} alt={`Foto do ${driver.vehicle}`} width={80} height={60} className="rounded-md object-cover" data-ai-hint="white car" />
                         </div>
                     </div>
                     <div className="flex items-center justify-between mt-3 pt-3 border-t">
