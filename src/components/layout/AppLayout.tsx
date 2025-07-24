@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Car, Rocket, Shield, User } from 'lucide-react';
 import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog';
 import { LoginCard } from '../auth/LoginCard';
+import { PassengerAuthForm } from '../auth/PassengerAuthForm';
 
 export function AppLayout({ children, title, showAuthButtons = false }: { children: ReactNode; title: string, showAuthButtons?: boolean }) {
   return (
@@ -36,10 +37,17 @@ export function AppLayout({ children, title, showAuthButtons = false }: { childr
                 <span className="sr-only">Admin</span>
               </Button>
            </Link>
-          <Button variant="ghost" size="icon" className="rounded-full">
-            <User className="h-5 w-5" />
-            <span className="sr-only">Toggle user menu</span>
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="ghost" size="icon" className="rounded-full">
+                <User className="h-5 w-5" />
+                <span className="sr-only">Toggle user menu</span>
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-md">
+              <PassengerAuthForm />
+            </DialogContent>
+          </Dialog>
         </div>
       </header>
       <main className="flex-1">{children}</main>
