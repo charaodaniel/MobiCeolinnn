@@ -9,7 +9,7 @@ export default function AdminDashboard() {
         <Card className="shadow-lg">
           <CardHeader>
             <CardTitle className="font-headline">Gerenciamento de Usuários</CardTitle>
-            <CardDescription>Ative ou desative contas de passageiros e motoristas.</CardDescription>
+            <CardDescription>Adicione, remova, ative ou desative contas de passageiros e motoristas.</CardDescription>
           </CardHeader>
           <CardContent>
             <UserManagementTable />
