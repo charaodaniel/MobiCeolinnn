@@ -14,6 +14,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useToast } from '@/hooks/use-toast';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { NegotiationChat } from '@/components/driver/NegotiationChat';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 
 const availableDrivers = [
@@ -123,56 +124,62 @@ export function RideRequestForm() {
           {showDrivers && (
             <div className="space-y-4 pt-4 border-t">
               <h3 className="font-headline text-lg font-semibold">Motoristas Disponíveis</h3>
-              <ul className="space-y-3">
+              <Accordion type="single" collapsible className="w-full">
                 {availableDrivers.map((driver) => (
-                  <li key={driver.id} className="flex flex-col p-3 rounded-lg border hover:bg-secondary/50 transition-colors">
-                    <div className="flex items-start justify-between gap-4">
-                        <div className="flex items-start gap-4">
-                            <Avatar className="h-12 w-12">
-                                <AvatarImage src={'https://placehold.co/48x48'} data-ai-hint={`${driver.avatar} face`} />
-                                <AvatarFallback>{driver.name.charAt(0)}</AvatarFallback>
-                            </Avatar>
-                            <div>
-                                <p className="font-semibold">{driver.name}</p>
-                                <p className="text-sm text-muted-foreground">{driver.vehicle} - <span className="font-mono">{driver.licensePlate}</span></p>
-                                <div className="flex items-center justify-start gap-1 text-sm text-muted-foreground">
-                                    <Star className="w-4 h-4 fill-primary text-primary" />
-                                    <span>{driver.rating}</span>
-                                    <span className="mx-1">·</span>
-                                    <span>{driver.distance}</span>
+                  <AccordionItem value={driver.id} key={driver.id} className="border-b-0">
+                     <Card className="mb-2">
+                        <AccordionTrigger className="p-3 hover:no-underline">
+                            <div className="flex items-start justify-between gap-4 w-full">
+                                <div className="flex items-start gap-4">
+                                    <Avatar className="h-12 w-12">
+                                        <AvatarImage src={'https://placehold.co/48x48'} data-ai-hint={`${driver.avatar} face`} />
+                                        <AvatarFallback>{driver.name.charAt(0)}</AvatarFallback>
+                                    </Avatar>
+                                    <div>
+                                        <p className="font-semibold text-left">{driver.name}</p>
+                                        <p className="text-sm text-muted-foreground text-left">{driver.vehicle} - <span className="font-mono">{driver.licensePlate}</span></p>
+                                        <div className="flex items-center justify-start gap-1 text-sm text-muted-foreground">
+                                            <Star className="w-4 h-4 fill-primary text-primary" />
+                                            <span>{driver.rating}</span>
+                                            <span className="mx-1">·</span>
+                                            <span>{driver.distance}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="flex-shrink-0">
+                                   <Image src={driver.vehiclePhoto} alt={`Foto do ${driver.vehicle}`} width={80} height={60} className="rounded-md object-cover" data-ai-hint="white car" />
                                 </div>
                             </div>
-                        </div>
-                        <div className="flex-shrink-0">
-                           <Image src={driver.vehiclePhoto} alt={`Foto do ${driver.vehicle}`} width={80} height={60} className="rounded-md object-cover" data-ai-hint="white car" />
-                        </div>
-                    </div>
-                    <div className="flex items-center justify-between mt-3 pt-3 border-t">
-                        <p className="text-sm text-muted-foreground">Chave PIX: <span className="font-mono">{driver.pixKey}</span></p>
-                        <TooltipProvider>
-                            <Tooltip>
-                                <TooltipTrigger asChild>
-                                    <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => copyToClipboard(driver.pixKey)}>
-                                        <Copy className="h-4 w-4" />
+                        </AccordionTrigger>
+                        <AccordionContent className="p-3 pt-0">
+                            <div className="flex items-center justify-between mt-3 pt-3 border-t">
+                                <p className="text-sm text-muted-foreground">Chave PIX: <span className="font-mono">{driver.pixKey}</span></p>
+                                <TooltipProvider>
+                                    <Tooltip>
+                                        <TooltipTrigger asChild>
+                                            <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => copyToClipboard(driver.pixKey)}>
+                                                <Copy className="h-4 w-4" />
+                                            </Button>
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                            <p>Copiar Chave PIX</p>
+                                        </TooltipContent>
+                                    </Tooltip>
+                                </TooltipProvider>
+                            </div>
+                             <div className="mt-3 pt-3 border-t">
+                                <NegotiationChat passengerName="Você">
+                                    <Button className="w-full">
+                                        <MessageSquareQuote className="mr-2 h-4 w-4" />
+                                        Contratar e Negociar
                                     </Button>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>Copiar Chave PIX</p>
-                                </TooltipContent>
-                            </Tooltip>
-                        </TooltipProvider>
-                    </div>
-                     <div className="mt-3 pt-3 border-t">
-                        <NegotiationChat passengerName="Você">
-                            <Button className="w-full">
-                                <MessageSquareQuote className="mr-2 h-4 w-4" />
-                                Contratar e Negociar
-                            </Button>
-                        </NegotiationChat>
-                    </div>
-                  </li>
+                                </NegotiationChat>
+                            </div>
+                        </AccordionContent>
+                     </Card>
+                  </AccordionItem>
                 ))}
-              </ul>
+              </Accordion>
             </div>
           )}
         </div>
