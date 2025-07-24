@@ -152,6 +152,9 @@ export function RideRequestForm() {
                             </div>
                         </AccordionTrigger>
                         <AccordionContent className="p-3 pt-0">
+                            <div className="flex justify-center py-2">
+                                <Image src={`https://placehold.co/256x256`} alt={`Foto de perfil de ${driver.name}`} width={128} height={128} className="rounded-full" data-ai-hint={`${driver.avatar} portrait`} />
+                            </div>
                             <div className="flex items-center justify-between mt-3 pt-3 border-t">
                                 <p className="text-sm text-muted-foreground">Chave PIX: <span className="font-mono">{driver.pixKey}</span></p>
                                 <TooltipProvider>
