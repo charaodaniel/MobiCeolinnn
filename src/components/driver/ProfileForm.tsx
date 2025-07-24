@@ -9,8 +9,28 @@ import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog';
 import Image from 'next/image';
+import { useToast } from '@/hooks/use-toast';
+import { useState } from 'react';
 
 export function ProfileForm() {
+  const { toast } = useToast();
+  const [status, setStatus] = useState('online');
+
+  const handleSave = () => {
+    toast({
+      title: 'Sucesso!',
+      description: 'Suas alterações foram salvas.',
+    });
+  };
+
+  const handleStatusChange = (newStatus: string) => {
+    setStatus(newStatus);
+    toast({
+      title: 'Status Atualizado',
+      description: `Seu status foi alterado para ${newStatus === 'online' ? 'Online' : newStatus === 'offline' ? 'Offline' : 'Em Viagem (Interior)'}.`,
+    });
+  }
+
   return (
     <Card className="shadow-lg">
       <CardHeader>
@@ -35,7 +55,7 @@ export function ProfileForm() {
                     </div>
                     <DialogFooter className="sm:justify-start">
                         <Input id="profile-picture-upload" type="file" className="flex-1" />
-                        <Button type="submit">Salvar</Button>
+                        <Button type="submit" onClick={() => toast({ title: 'Foto Salva', description: 'Sua nova foto de perfil foi salva com sucesso!' })}>Salvar</Button>
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
@@ -49,14 +69,14 @@ export function ProfileForm() {
             </div>
             <div className="space-y-1 w-40">
                 <Label htmlFor="driver-status">Status</Label>
-                <Select defaultValue="online">
+                <Select value={status} onValueChange={handleStatusChange}>
                     <SelectTrigger id="driver-status">
-                    <SelectValue placeholder="Selecione o status" />
+                      <SelectValue placeholder="Selecione o status" />
                     </SelectTrigger>
                     <SelectContent>
-                    <SelectItem value="online">Online</SelectItem>
-                    <SelectItem value="offline">Offline</SelectItem>
-                    <SelectItem value="rural-trip">Em Viagem (Interior)</SelectItem>
+                      <SelectItem value="online">Online</SelectItem>
+                      <SelectItem value="offline">Offline</SelectItem>
+                      <SelectItem value="rural-trip">Em Viagem (Interior)</SelectItem>
                     </SelectContent>
                 </Select>
             </div>
@@ -121,7 +141,7 @@ export function ProfileForm() {
         </div>
       </CardContent>
       <CardFooter>
-        <Button className="w-full md:w-auto ml-auto">Salvar Alterações</Button>
+        <Button className="w-full md:w-auto ml-auto" onClick={handleSave}>Salvar Alterações</Button>
       </CardFooter>
     </Card>
   );
