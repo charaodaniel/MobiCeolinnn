@@ -7,11 +7,12 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Separator } from '@/components/ui/separator';
-import { MapPin, ArrowRight, DollarSign, Clock, Route, Star, User, Copy } from 'lucide-react';
+import { MapPin, ArrowRight, DollarSign, Clock, Route, Star, User, Copy, MessageSquareQuote } from 'lucide-react';
 import { FareNegotiation } from './FareNegotiation';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useToast } from '@/hooks/use-toast';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { NegotiationChat } from '@/components/driver/NegotiationChat';
 
 
 const availableDrivers = [
@@ -157,6 +158,14 @@ export function RideRequestForm() {
                                 </TooltipContent>
                             </Tooltip>
                         </TooltipProvider>
+                    </div>
+                     <div className="mt-3 pt-3 border-t">
+                        <NegotiationChat passengerName="Você">
+                            <Button className="w-full">
+                                <MessageSquareQuote className="mr-2 h-4 w-4" />
+                                Contratar e Negociar
+                            </Button>
+                        </NegotiationChat>
                     </div>
                   </li>
                 ))}
