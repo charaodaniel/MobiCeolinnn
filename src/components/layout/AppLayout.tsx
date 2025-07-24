@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Car, Rocket, Shield, User } from 'lucide-react';
-import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog';
+import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '../ui/dialog';
 import { LoginCard } from '../auth/LoginCard';
 import { PassengerAuthForm } from '../auth/PassengerAuthForm';
 
@@ -26,6 +26,7 @@ export function AppLayout({ children, title, showAuthButtons = false }: { childr
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="max-w-md">
+                    <DialogTitle className="sr-only">Login</DialogTitle>
                    <LoginCard />
                 </DialogContent>
               </Dialog>
@@ -45,6 +46,7 @@ export function AppLayout({ children, title, showAuthButtons = false }: { childr
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-md">
+                <DialogTitle className="sr-only">Autenticação do Passageiro</DialogTitle>
               <PassengerAuthForm />
             </DialogContent>
           </Dialog>
