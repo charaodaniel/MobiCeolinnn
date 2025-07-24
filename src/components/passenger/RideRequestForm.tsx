@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -8,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Separator } from '@/components/ui/separator';
-import { MapPin, ArrowRight, DollarSign, Clock, Route, Star, User, Copy, MessageSquareQuote } from 'lucide-react';
+import { MapPin, ArrowRight, DollarSign, Clock, Route, Star, User, Copy, MessageSquareQuote, LocateFixed } from 'lucide-react';
 import { FareNegotiation } from './FareNegotiation';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useToast } from '@/hooks/use-toast';
@@ -28,7 +29,38 @@ export function RideRequestForm() {
   const [showEstimate, setShowEstimate] = useState(false);
   const [showDrivers, setShowDrivers] = useState(false);
   const [destination, setDestination] = useState('');
+  const [origin, setOrigin] = useState('');
   const { toast } = useToast();
+
+  const handleGetCurrentLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          // In a real app, you would use a geocoding service to convert lat/lng to an address.
+          // For this demo, we'll use a mock address.
+          setOrigin('Localização Atual (Exemplo)');
+          toast({
+            title: 'Localização Capturada!',
+            description: 'Seu local de partida foi preenchido.',
+          });
+        },
+        () => {
+          toast({
+            variant: 'destructive',
+            title: 'Erro de Localização',
+            description: 'Não foi possível obter sua localização. Verifique as permissões do seu navegador.',
+          });
+        }
+      );
+    } else {
+      toast({
+        variant: 'destructive',
+        title: 'Erro',
+        description: 'Geolocalização não é suportada neste navegador.',
+      });
+    }
+  };
+
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -50,7 +82,26 @@ export function RideRequestForm() {
             <Label htmlFor="origin">Partida</Label>
             <div className="relative">
               <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-              <Input id="origin" placeholder="Seu local atual" className="pl-10" />
+              <Input 
+                id="origin" 
+                placeholder="Seu local atual" 
+                className="pl-10 pr-10" 
+                value={origin}
+                onChange={(e) => setOrigin(e.target.value)}
+              />
+              <TooltipProvider>
+                <Tooltip>
+                    <TooltipTrigger asChild>
+                         <Button type="button" variant="ghost" size="icon" className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8" onClick={handleGetCurrentLocation}>
+                            <LocateFixed className="h-5 w-5 text-muted-foreground" />
+                            <span className="sr-only">Usar localização atual</span>
+                         </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Usar localização atual</p>
+                    </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             </div>
           </div>
           <div className="space-y-2">
@@ -204,3 +255,5 @@ export function RideRequestForm() {
     </Card>
   );
 }
+
+    
