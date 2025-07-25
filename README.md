@@ -1,17 +1,6 @@
-# MobiCeolin - Sistema de Mobilidade Urbana
+## MobiCeolin: Seu App de Transporte Inteligente
 
-Este é um protótipo de um sistema completo de mobilidade urbana, similar a aplicativos de transporte, construído com as mais modernas tecnologias de desenvolvimento web e inteligência artificial.
-
-## Visão Geral
-
-O MobiCeolin conecta passageiros a motoristas, oferecendo uma plataforma robusta e intuitiva para solicitação e gerenciamento de corridas. A aplicação possui três perfis de usuário principais: **Passageiro**, **Motorista** e **Administrador**, cada um com seu próprio painel e funcionalidades.
-
-## Tecnologias Utilizadas
-
-*   **Frontend:** Next.js (com App Router), React, TypeScript
-*   **UI:** ShadCN UI, Tailwind CSS
-*   **Inteligência Artificial:** Google Genkit
-*   **Hospedagem:** Firebase App Hosting
+MobiCeolin é uma plataforma de transporte que conecta passageiros e motoristas de forma eficiente e inovadora, com foco especial em atender tanto demandas urbanas quanto rurais.
 
 ## Funcionalidades Principais
 
@@ -36,12 +25,12 @@ O MobiCeolin conecta passageiros a motoristas, oferecendo uma plataforma robusta
 
 ## Como Começar
 
-1.  **Clone o repositório.**
-2.  **Instale as dependências:** `npm install`
-3.  **Execute o servidor de desenvolvimento:** `npm run dev`
-4.  A aplicação estará disponível em `http://localhost:9002`.
+1. **Clone o repositório.**
+2. **Instale as dependências:** `npm install`
+3. **Execute o servidor de desenvolvimento:** `npm run dev`
+4. A aplicação estará disponível em `http://localhost:9002`.
 
-### Acessos de Demonstração
+## Acessos de Demonstração
 
 - **Administrador:**
   - **Email:** `admin@mobiceolin.com`
@@ -53,3 +42,9 @@ O MobiCeolin conecta passageiros a motoristas, oferecendo uma plataforma robusta
 
 - **Passageiro:**
   - Não é necessário login para solicitar uma corrida. A autenticação é opcional.
+
+## Documentação Adicional
+
+- **PREINSTALL.md:** Informações importantes antes da instalação.
+- **POSTINSTALL.md:** Passos a serem seguidos após a instalação.
+- **CHANGELOG.md:** Histórico de mudanças da aplicação.
