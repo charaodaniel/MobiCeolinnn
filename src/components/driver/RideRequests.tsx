@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
@@ -5,17 +6,19 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Check, X, MapPin, DollarSign, MessageSquareQuote } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { NegotiationChat } from './NegotiationChat';
+import { RideChat } from './NegotiationChat';
+import { useState } from 'react';
 
 const RideRequestCard = ({ passenger, from, to, price, negotiated }: { passenger: string, from: string, to: string, price: string, negotiated?: boolean }) => {
     const { toast } = useToast();
+    const [isAccepted, setIsAccepted] = useState(false);
 
     const handleAccept = () => {
         toast({
             title: "Corrida Aceita!",
-            description: `Você aceitou a corrida de ${passenger}. Seu status foi atualizado.`,
+            description: `Você aceitou a corrida de ${passenger}.`,
         });
-        // Here you would also update the driver's status globally
+        setIsAccepted(true);
     };
     
     const handleReject = () => {
@@ -25,6 +28,32 @@ const RideRequestCard = ({ passenger, from, to, price, negotiated }: { passenger
             description: `Você rejeitou a corrida de ${passenger}.`,
         });
     };
+
+    if (isAccepted) {
+        return (
+             <Card className="border-primary">
+                <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-4">
+                     <Avatar>
+                        <AvatarImage src="https://placehold.co/40x40.png" data-ai-hint="person face" />
+                        <AvatarFallback>{passenger.charAt(0)}</AvatarFallback>
+                    </Avatar>
+                    <div>
+                        <p className="font-semibold">{passenger}</p>
+                         <p className="text-xs text-green-600 font-bold">CORRIDA EM ANDAMENTO</p>
+                    </div>
+                </CardHeader>
+                <CardContent>
+                    <RideChat passengerName={passenger} isNegotiation={false}>
+                        <Button className="w-full">
+                            <MessageSquareQuote className="mr-2 h-4 w-4" />
+                            Abrir Chat com {passenger}
+                        </Button>
+                    </RideChat>
+                </CardContent>
+            </Card>
+        )
+    }
+
 
     return (
         <Card className={negotiated ? 'border-primary' : ''}>
@@ -54,12 +83,12 @@ const RideRequestCard = ({ passenger, from, to, price, negotiated }: { passenger
             </CardContent>
             <CardFooter className="grid grid-cols-2 gap-2">
                 {negotiated ? (
-                     <NegotiationChat passengerName={passenger}>
+                     <RideChat passengerName={passenger} isNegotiation={true}>
                         <Button className="w-full col-span-2">
                             <MessageSquareQuote className="mr-2 h-4 w-4" />
                             Negociar Valor
                         </Button>
-                    </NegotiationChat>
+                    </RideChat>
                 ) : (
                     <>
                         <Button variant="outline" className="w-full" onClick={handleReject}>

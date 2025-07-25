@@ -15,7 +15,7 @@ import { FareNegotiation } from './FareNegotiation';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useToast } from '@/hooks/use-toast';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { NegotiationChat } from '@/components/driver/NegotiationChat';
+import { RideChat } from '@/components/driver/NegotiationChat';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 export interface RideRequestFormProps {
@@ -244,12 +244,12 @@ export function RideRequestForm({ availableDrivers }: RideRequestFormProps) {
                                 </TooltipProvider>
                             </div>
                              <div className="mt-3 pt-3 border-t">
-                                <NegotiationChat passengerName="Passageiro">
+                                <RideChat passengerName="Passageiro" isNegotiation={true}>
                                     <Button className="w-full">
                                         <MessageSquareQuote className="mr-2 h-4 w-4" />
                                         Chamar e Negociar (Interior)
                                     </Button>
-                                </NegotiationChat>
+                                </RideChat>
                             </div>
                         </AccordionContent>
                      </Card>

@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -17,11 +18,18 @@ interface Message {
     type?: 'text' | 'offer';
 }
 
-export function NegotiationChat({ passengerName, children }: { passengerName: string; children: React.ReactNode }) {
+const negotiationMessages: Message[] = [
+    { sender: 'passenger', text: 'Olá! Solicitei uma corrida para a Zona Rural Leste. Qual seria o valor?', timestamp: '10:30', type: 'text' },
+];
+
+const regularMessages: Message[] = [
+    { sender: 'passenger', text: 'Olá! Já estou no local de partida.', timestamp: '10:35', type: 'text' },
+];
+
+
+export function RideChat({ passengerName, children, isNegotiation }: { passengerName: string; children: React.ReactNode, isNegotiation: boolean }) {
     const { toast } = useToast();
-    const [messages, setMessages] = useState<Message[]>([
-        { sender: 'passenger', text: 'Olá! Solicitei uma corrida para a Zona Rural Leste. Qual seria o valor?', timestamp: '10:30', type: 'text' },
-    ]);
+    const [messages, setMessages] = useState<Message[]>(isNegotiation ? negotiationMessages : regularMessages);
     const [newMessage, setNewMessage] = useState('');
     const [offer, setOffer] = useState('');
 
@@ -71,9 +79,9 @@ export function NegotiationChat({ passengerName, children }: { passengerName: st
             </DialogTrigger>
             <DialogContent className="max-w-lg">
                 <DialogHeader>
-                    <DialogTitle>Negociar com {passengerName}</DialogTitle>
+                    <DialogTitle>{isNegotiation ? `Negociar com ${passengerName}` : `Conversar com ${passengerName}`}</DialogTitle>
                     <DialogDescription>
-                        Converse com o passageiro para combinar os detalhes e o valor da corrida.
+                        {isNegotiation ? 'Converse com o passageiro para combinar os detalhes e o valor da corrida.' : 'Comunique-se com o passageiro.'}
                     </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-4">
@@ -120,29 +128,33 @@ export function NegotiationChat({ passengerName, children }: { passengerName: st
                             <span className="sr-only">Enviar</span>
                         </Button>
                     </div>
-                     <div className="flex gap-2">
-                        <div className="relative flex-1">
-                             <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                            <Input
-                                type="number"
-                                placeholder="Propor valor (ex: 150.00)"
-                                className="pl-10"
-                                value={offer}
-                                onChange={(e) => setOffer(e.target.value)}
-                                onKeyDown={(e) => e.key === 'Enter' && handleSendMessage('offer', offer)}
-                            />
+                     {isNegotiation && (
+                        <div className="flex gap-2">
+                            <div className="relative flex-1">
+                                <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                                <Input
+                                    type="number"
+                                    placeholder="Propor valor (ex: 150.00)"
+                                    className="pl-10"
+                                    value={offer}
+                                    onChange={(e) => setOffer(e.target.value)}
+                                    onKeyDown={(e) => e.key === 'Enter' && handleSendMessage('offer', offer)}
+                                />
+                            </div>
+                            <Button onClick={() => handleSendMessage('offer', offer)} disabled={!offer.trim()} variant="secondary">
+                                Enviar Proposta
+                            </Button>
                         </div>
-                        <Button onClick={() => handleSendMessage('offer', offer)} disabled={!offer.trim()} variant="secondary">
-                            Enviar Proposta
-                        </Button>
-                    </div>
+                    )}
                 </div>
-                 <DialogFooter>
-                    <Button onClick={handleAcceptRide} className="w-full">
-                        <ThumbsUp className="mr-2 h-4 w-4" />
-                        Aceitar Corrida e Iniciar Viagem
-                    </Button>
-                </DialogFooter>
+                 {isNegotiation && (
+                    <DialogFooter>
+                        <Button onClick={handleAcceptRide} className="w-full">
+                            <ThumbsUp className="mr-2 h-4 w-4" />
+                            Aceitar Corrida e Iniciar Viagem
+                        </Button>
+                    </DialogFooter>
+                 )}
             </DialogContent>
         </Dialog>
     );
