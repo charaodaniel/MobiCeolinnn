@@ -19,7 +19,7 @@ const withPWA = require('next-pwa')({
       },
     },
     {
-      urlPattern: //_next/data/.*/,
+      urlPattern: /\/_next\/data\/.*/,
       handler: 'NetworkFirst',
       options: {
         cacheName: 'next-data-cache',
