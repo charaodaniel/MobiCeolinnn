@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Car, MapPin, Star } from 'lucide-react';
+import { Car, MapPin, Star, Phone } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import type { RideRequestFormProps } from './RideRequestForm';
@@ -70,19 +70,25 @@ export function MapPlaceholder({ drivers }: { drivers: RideRequestFormProps['ava
                     </div>
                 </PopoverTrigger>
                 <PopoverContent className="w-80">
-                    <div className="flex gap-4">
-                        <Avatar className="h-12 w-12">
-                            <AvatarImage src={`https://placehold.co/48x48.png`} data-ai-hint={`${driver.avatar} face`} />
-                            <AvatarFallback>{driver.name.charAt(0)}</AvatarFallback>
-                        </Avatar>
-                        <div className="space-y-1">
-                            <h4 className="font-semibold">{driver.name}</h4>
-                            <p className="text-sm text-muted-foreground">{driver.vehicle} - <span className="font-mono">{driver.licensePlate}</span></p>
-                             <div className="flex items-center pt-1">
-                                <Star className="w-4 h-4 mr-1 fill-primary text-primary" />
-                                <span className="text-xs text-muted-foreground">{driver.rating} · {driver.distance}</span>
+                    <div className="flex flex-col gap-4">
+                        <div className="flex gap-4">
+                            <Avatar className="h-12 w-12">
+                                <AvatarImage src={`https://placehold.co/48x48.png`} data-ai-hint={`${driver.avatar} face`} />
+                                <AvatarFallback>{driver.name.charAt(0)}</AvatarFallback>
+                            </Avatar>
+                            <div className="space-y-1">
+                                <h4 className="font-semibold">{driver.name}</h4>
+                                <p className="text-sm text-muted-foreground">{driver.vehicle} - <span className="font-mono">{driver.licensePlate}</span></p>
+                                <div className="flex items-center pt-1">
+                                    <Star className="w-4 h-4 mr-1 fill-primary text-primary" />
+                                    <span className="text-xs text-muted-foreground">{driver.rating} · {driver.distance}</span>
+                                </div>
                             </div>
                         </div>
+                        <Button className="w-full">
+                            <Phone className="mr-2 h-4 w-4" />
+                            Chamar Motorista
+                        </Button>
                     </div>
                 </PopoverContent>
             </Popover>
