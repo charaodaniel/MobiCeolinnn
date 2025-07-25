@@ -1,5 +1,7 @@
 import type {NextConfig} from 'next';
 
+const withPWA = require('./workbox.config');
+
 const nextConfig: NextConfig = {
   /* config options here */
   typescript: {
@@ -20,4 +22,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withPWA(nextConfig);

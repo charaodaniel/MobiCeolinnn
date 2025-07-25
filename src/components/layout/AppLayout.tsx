@@ -5,6 +5,7 @@ import { Car, Rocket, Shield, User } from 'lucide-react';
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '../ui/dialog';
 import { LoginCard } from '../auth/LoginCard';
 import { PassengerAuthForm } from '../auth/PassengerAuthForm';
+import { Footer } from './Footer';
 
 export function AppLayout({ children, title, showAuthButtons = false }: { children: ReactNode; title: string, showAuthButtons?: boolean }) {
   return (
@@ -53,6 +54,7 @@ export function AppLayout({ children, title, showAuthButtons = false }: { childr
         </div>
       </header>
       <main className="flex-1">{children}</main>
+      <Footer />
     </div>
   );
 }
