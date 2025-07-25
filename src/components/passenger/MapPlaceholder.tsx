@@ -8,6 +8,7 @@ import { Car, MapPin, Star, Phone } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import type { RideRequestFormProps } from './RideRequestForm';
+import { useToast } from '@/hooks/use-toast';
 
 interface DriverPosition {
   id: string;
@@ -24,6 +25,7 @@ const generateRandomPosition = (): { top: string; left: string } => {
 
 export function MapPlaceholder({ drivers }: { drivers: RideRequestFormProps['availableDrivers'] }) {
   const [driverPositions, setDriverPositions] = useState<DriverPosition[]>([]);
+  const { toast } = useToast();
 
   useEffect(() => {
     // This code runs only on the client, after the component has mounted.
@@ -35,6 +37,13 @@ export function MapPlaceholder({ drivers }: { drivers: RideRequestFormProps['ava
     }));
     setDriverPositions(initialPositions);
   }, [drivers]);
+
+  const handleCallDriver = (driverName: string) => {
+    toast({
+      title: 'Chamada Iniciada',
+      description: `Estamos conectando você com ${driverName}.`,
+    });
+  };
 
 
   return (
@@ -85,7 +94,7 @@ export function MapPlaceholder({ drivers }: { drivers: RideRequestFormProps['ava
                                 </div>
                             </div>
                         </div>
-                        <Button className="w-full">
+                        <Button className="w-full" onClick={() => handleCallDriver(driver.name)}>
                             <Phone className="mr-2 h-4 w-4" />
                             Chamar Motorista
                         </Button>
