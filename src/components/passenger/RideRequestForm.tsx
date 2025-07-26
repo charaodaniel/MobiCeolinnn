@@ -166,7 +166,7 @@ export function RideRequestForm({ availableDrivers }: RideRequestFormProps) {
             }} />
           </div>
 
-          <div className={`grid gap-2 ${isRural ? 'grid-cols-1' : 'grid-cols-1'}`}>
+          <div className="space-y-2">
             {!isRural && (
                 <Button className="w-full" onClick={handleRequestRide} disabled={isLoading}>
                   {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <ArrowRight className="mr-2 h-4 w-4" />}

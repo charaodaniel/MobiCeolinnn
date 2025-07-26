@@ -17,11 +17,11 @@ const availableDrivers = [
 export function PassengerDashboard() {
   return (
     <AppLayout title="Painel do Passageiro" showAuthButtons>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-4 md:p-6 lg:p-8 h-full">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-4 md:p-6 lg:p-8">
         <div className="lg:col-span-1">
           <RideRequestForm availableDrivers={availableDrivers} />
         </div>
-        <div className="lg:col-span-2 h-[400px] md:h-full flex flex-col gap-4">
+        <div className="lg:col-span-2 h-[400px] md:h-[calc(100vh-10rem)] flex flex-col gap-4">
             <div className='flex items-center gap-2'>
                 <Car className="h-6 w-6 text-primary" />
                 <h2 className="font-headline text-xl font-semibold">Motoristas Próximos</h2>
