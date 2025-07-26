@@ -30,7 +30,7 @@ const initialUsers = [
   { id: '2', name: 'Carlos Motorista', email: 'carlos@email.com', role: 'Motorista', status: true, avatar: 'man' },
   { id: '3', name: 'Ana Beatriz', email: 'ana.b@email.com', role: 'Passageiro', status: false, avatar: 'woman' },
   { id: '4', name: 'Roberto Freire', email: 'roberto.f@email.com', role: 'Motorista', status: true, avatar: 'person' },
-  { id: '5', name: 'Fernanda Lima', email: 'fernanda@email.com', role: 'Motorista', status: false, avatar: 'woman' },
+  { id: '5', name: 'Fernanda Lima', email: 'fernanda@email.com', role: 'Motoristainactive', status: false, avatar: 'woman' },
 ];
 
 // Mock de dados de corrida para os relatórios
