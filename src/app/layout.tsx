@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'MobiCeolin - Mobilidade Urbana',
+  title: 'CEOLIN Mobilidade urbana',
   description: 'Sistema completo de mobilidade urbana.',
 };
 

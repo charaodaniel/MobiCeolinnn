@@ -16,12 +16,12 @@ export default function TermsPage() {
                     <CardContent className="prose prose-lg max-w-none">
                         <h2 className="font-headline">1. Aceitação dos Termos</h2>
                         <p>
-                            Ao acessar e usar a plataforma MobiCeolin ("Serviço"), você concorda em cumprir e estar vinculado aos seguintes termos e condições de uso. Se você não concordar com estes termos, não deverá usar o Serviço.
+                            Ao acessar e usar a plataforma CEOLIN Mobilidade urbana ("Serviço"), você concorda em cumprir e estar vinculado aos seguintes termos e condições de uso. Se você não concordar com estes termos, não deverá usar o Serviço.
                         </p>
 
                         <h2 className="font-headline">2. Descrição do Serviço</h2>
                         <p>
-                            O MobiCeolin é uma plataforma de tecnologia que conecta usuários passageiros a motoristas parceiros para a solicitação de serviços de transporte. O serviço inclui a solicitação de corridas com tarifas fixas em áreas urbanas e um sistema de negociação para corridas em áreas rurais.
+                            O CEOLIN Mobilidade urbana é uma plataforma de tecnologia que conecta usuários passageiros a motoristas parceiros para a solicitação de serviços de transporte. O serviço inclui a solicitação de corridas com tarifas fixas em áreas urbanas e um sistema de negociação para corridas em áreas rurais.
                         </p>
 
                         <h2 className="font-headline">3. Responsabilidades do Usuário</h2>
@@ -35,7 +35,7 @@ export default function TermsPage() {
                         </p>
                          <h2 className="font-headline">5. Limitação de Responsabilidade</h2>
                         <p>
-                           O MobiCeolin atua como um intermediário e não se responsabiliza por quaisquer incidentes, acidentes, disputas ou danos que possam ocorrer durante ou como resultado do serviço de transporte. A relação contratual de transporte é estabelecida diretamente entre o passageiro e o motorista.
+                           O CEOLIN Mobilidade urbana atua como um intermediário e não se responsabiliza por quaisquer incidentes, acidentes, disputas ou danos que possam ocorrer durante ou como resultado do serviço de transporte. A relação contratual de transporte é estabelecida diretamente entre o passageiro e o motorista.
                         </p>
                     </CardContent>
                 </Card>

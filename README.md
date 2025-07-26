@@ -1,6 +1,6 @@
-## MobiCeolin: Seu App de Transporte Inteligente
+## CEOLIN Mobilidade urbana: Seu App de Transporte Inteligente
 
-MobiCeolin é uma plataforma de transporte que conecta passageiros e motoristas de forma eficiente e inovadora, com foco especial em atender tanto demandas urbanas quanto rurais.
+CEOLIN Mobilidade urbana é uma plataforma de transporte que conecta passageiros e motoristas de forma eficiente e inovadora, com foco especial em atender tanto demandas urbanas quanto rurais.
 
 ## Funcionalidades Principais
 

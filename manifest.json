@@ -1,6 +1,6 @@
 {
-  "name": "MobiCeolin",
-  "short_name": "MobiCeolin",
+  "name": "CEOLIN Mobilidade urbana",
+  "short_name": "CEOLIN",
   "description": "Sistema de Mobilidade Urbana",
   "start_url": "/",
   "display": "standalone",

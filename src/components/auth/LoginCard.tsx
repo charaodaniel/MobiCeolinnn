@@ -11,7 +11,7 @@ export function LoginCard() {
       <CardHeader className="text-center">
         <div className="flex justify-center items-center mb-4">
             <Rocket className="h-12 w-12 text-primary" />
-            <CardTitle className="font-headline text-3xl ml-2">MobiCeolin</CardTitle>
+            <CardTitle className="font-headline text-3xl ml-2">CEOLIN</CardTitle>
         </div>
         <CardDescription className="font-body">Selecione seu perfil para continuar</CardDescription>
       </CardHeader>

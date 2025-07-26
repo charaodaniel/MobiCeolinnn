@@ -8,7 +8,7 @@ export default function DocsPage() {
             <div className="container mx-auto max-w-4xl p-4 md:p-6 lg:p-8">
                 <Card className="shadow-lg">
                     <CardHeader>
-                        <CardTitle className="font-headline text-3xl">Documentação do MobiCeolin</CardTitle>
+                        <CardTitle className="font-headline text-3xl">Documentação do CEOLIN Mobilidade urbana</CardTitle>
                         <CardDescription>
                             Tudo o que você precisa saber para usar e integrar nossa plataforma.
                         </CardDescription>
@@ -16,7 +16,7 @@ export default function DocsPage() {
                     <CardContent className="prose prose-lg max-w-none">
                         <h2 className="font-headline">Visão Geral</h2>
                         <p>
-                            Bem-vindo à documentação oficial do MobiCeolin. Este documento fornece um guia completo sobre as funcionalidades da plataforma, tanto para passageiros quanto para motoristas e administradores.
+                            Bem-vindo à documentação oficial do CEOLIN Mobilidade urbana. Este documento fornece um guia completo sobre as funcionalidades da plataforma, tanto para passageiros quanto para motoristas e administradores.
                         </p>
 
                         <h2 className="font-headline">Funcionalidades para Passageiros</h2>
