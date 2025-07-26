@@ -1,10 +1,15 @@
+
+'use client';
+
+import { useState } from 'react';
 import { RideRequestForm } from '@/components/passenger/RideRequestForm';
 import { MapPlaceholder } from '@/components/passenger/MapPlaceholder';
 import { AppLayout } from '@/components/layout/AppLayout';
-import { LoginCard } from '../auth/LoginCard';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
-import { Button } from '../ui/button';
-import { User, Car } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Car, User, UserCheck } from 'lucide-react';
+import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '../ui/dialog';
+import { PassengerAuthForm } from '../auth/PassengerAuthForm';
 
 
 const availableDrivers = [
@@ -13,13 +18,45 @@ const availableDrivers = [
     { id: '3', name: 'Roberto Freire', vehicle: 'Chevrolet Onix', licensePlate: 'ABC9876', vehiclePhoto: 'https://placehold.co/128x96.png', rating: 4.9, distance: '8 min', avatar: 'person', pixKey: '(11) 98765-4321', urbanFare: 22.00 },
 ];
 
+// Simula a configuração do admin. Troque para `false` para testar o fluxo de login obrigatório.
+const ANONYMOUS_RIDES_ALLOWED = true;
 
 export function PassengerDashboard() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAuthDialogOpen, setIsAuthDialogOpen] = useState(false);
+
+  const showRequestForm = ANONYMOUS_RIDES_ALLOWED || isLoggedIn;
+
   return (
     <AppLayout title="Painel do Passageiro" showAuthButtons>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-4 md:p-6 lg:p-8">
         <div className="lg:col-span-1">
-          <RideRequestForm availableDrivers={availableDrivers} />
+          {showRequestForm ? (
+            <RideRequestForm availableDrivers={availableDrivers} />
+          ) : (
+            <Card className="shadow-lg h-full flex flex-col justify-center">
+              <CardHeader className="text-center">
+                <div className="flex justify-center mb-4">
+                  <UserCheck className="h-12 w-12 text-primary" />
+                </div>
+                <CardTitle className="font-headline">Login Necessário</CardTitle>
+                <CardDescription>
+                  Para solicitar uma corrida, você precisa fazer login ou criar uma conta.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="flex flex-col gap-2">
+                <Dialog open={isAuthDialogOpen} onOpenChange={setIsAuthDialogOpen}>
+                    <DialogTrigger asChild>
+                         <Button className="w-full">Fazer Login ou Registrar</Button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-md">
+                        <DialogTitle className="sr-only">Autenticação do Passageiro</DialogTitle>
+                        <PassengerAuthForm onLoginSuccess={() => { setIsLoggedIn(true); setIsAuthDialogOpen(false); }} />
+                    </DialogContent>
+                </Dialog>
+              </CardContent>
+            </Card>
+          )}
         </div>
         <div className="lg:col-span-2 h-[500px] lg:h-[calc(100vh-12rem)] flex flex-col gap-4">
             <div className='flex items-center gap-2'>

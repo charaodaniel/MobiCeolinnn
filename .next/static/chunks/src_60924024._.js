@@ -4164,6 +4164,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$list$2d$collapse$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ListCollapse$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/list-collapse.js [app-client] (ecmascript) <export default as ListCollapse>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$clock$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Clock$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/clock.js [app-client] (ecmascript) <export default as Clock>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$key$2d$round$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__KeyRound$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/key-round.js [app-client] (ecmascript) <export default as KeyRound>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$rocket$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Rocket$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/rocket.js [app-client] (ecmascript) <export default as Rocket>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/ui/button.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/ui/dialog.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/ui/input.tsx [app-client] (ecmascript)");
@@ -4349,6 +4350,7 @@ function UserManagementTable({ onReportGenerated }) {
             })
     }["UserManagementTable.useState"], {}));
     const [isAddUserDialogOpen, setIsAddUserDialogOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [isNewRideDialogOpen, setIsNewRideDialogOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [isLogDialogOpen, setIsLogDialogOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [isPasswordDialogOpen, setIsPasswordDialogOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [selectedUser, setSelectedUser] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
@@ -4358,6 +4360,13 @@ function UserManagementTable({ onReportGenerated }) {
         role: 'Passageiro',
         password: '',
         confirmPassword: ''
+    });
+    const [newRide, setNewRide] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
+        passenger: 'Passageiro Anônimo',
+        origin: '',
+        destination: '',
+        value: '',
+        driverId: ''
     });
     const [newPassword, setNewPassword] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
         password: '',
@@ -4428,6 +4437,30 @@ function UserManagementTable({ onReportGenerated }) {
             role: 'Passageiro',
             password: '',
             confirmPassword: ''
+        });
+    };
+    const handleAddNewRide = (e)=>{
+        e.preventDefault();
+        if (!newRide.origin || !newRide.destination || !newRide.value || !newRide.driverId) {
+            toast({
+                variant: 'destructive',
+                title: 'Campos obrigatórios',
+                description: 'Por favor, preencha todos os campos para registrar a corrida, incluindo o motorista.'
+            });
+            return;
+        }
+        const driver = users.find((u)=>u.id === newRide.driverId);
+        toast({
+            title: 'Corrida Registrada!',
+            description: `A nova corrida foi registrada e atribuída a ${driver?.name}.`
+        });
+        setIsNewRideDialogOpen(false);
+        setNewRide({
+            passenger: 'Passageiro Anônimo',
+            origin: '',
+            destination: '',
+            value: '',
+            driverId: ''
         });
     };
     const handleChangePassword = (e)=>{
@@ -4558,329 +4591,638 @@ function UserManagementTable({ onReportGenerated }) {
         setIsPasswordDialogOpen(true);
     };
     const selectedUserLogs = selectedUser ? mockStatusLogs[selectedUser.id] || [] : [];
+    const availableDrivers = users.filter((user)=>user.role === 'Motorista');
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "space-y-4",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "flex justify-end",
-                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Dialog"], {
-                    open: isAddUserDialogOpen,
-                    onOpenChange: setIsAddUserDialogOpen,
-                    children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogTrigger"], {
-                            asChild: true,
-                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$circle$2d$plus$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__PlusCircle$3e$__["PlusCircle"], {
-                                        className: "mr-2 h-4 w-4"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                        lineNumber: 225,
-                                        columnNumber: 29
-                                    }, this),
-                                    "Adicionar Usuário"
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                lineNumber: 224,
-                                columnNumber: 25
-                            }, this)
-                        }, void 0, false, {
-                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                            lineNumber: 223,
-                            columnNumber: 21
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogContent"], {
-                            className: "sm:max-w-md max-h-[90vh] overflow-y-auto",
-                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
-                                onSubmit: handleAddUser,
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogHeader"], {
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogTitle"], {
-                                                children: "Adicionar Novo Usuário"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                lineNumber: 232,
-                                                columnNumber: 33
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogDescription"], {
-                                                children: "Preencha as informações para criar uma nova conta de usuário."
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                lineNumber: 233,
-                                                columnNumber: 33
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                        lineNumber: 231,
-                                        columnNumber: 29
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "space-y-4 py-4",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "grid grid-cols-1 sm:grid-cols-2 gap-4",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "space-y-1",
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                                                htmlFor: `${uniqueId}-name`,
-                                                                children: "Nome"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 240,
-                                                                columnNumber: 41
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
-                                                                id: `${uniqueId}-name`,
-                                                                value: newUser.name,
-                                                                onChange: (e)=>setNewUser((prev)=>({
-                                                                            ...prev,
-                                                                            name: e.target.value
-                                                                        })),
-                                                                placeholder: "Nome Completo",
-                                                                required: true
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 241,
-                                                                columnNumber: 41
-                                                            }, this)
-                                                        ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                        lineNumber: 239,
-                                                        columnNumber: 37
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "space-y-1",
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                                                htmlFor: `${uniqueId}-email`,
-                                                                children: "Email"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 244,
-                                                                columnNumber: 41
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
-                                                                id: `${uniqueId}-email`,
-                                                                type: "email",
-                                                                value: newUser.email,
-                                                                onChange: (e)=>setNewUser((prev)=>({
-                                                                            ...prev,
-                                                                            email: e.target.value
-                                                                        })),
-                                                                placeholder: "email@exemplo.com",
-                                                                required: true
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 245,
-                                                                columnNumber: 41
-                                                            }, this)
-                                                        ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                        lineNumber: 243,
-                                                        columnNumber: 37
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                lineNumber: 238,
-                                                columnNumber: 33
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "space-y-1",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                                        htmlFor: `${uniqueId}-role`,
-                                                        children: "Perfil"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                        lineNumber: 249,
-                                                        columnNumber: 37
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Select"], {
-                                                        value: newUser.role,
-                                                        onValueChange: (value)=>setNewUser((prev)=>({
-                                                                    ...prev,
-                                                                    role: value
-                                                                })),
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectTrigger"], {
-                                                                id: `${uniqueId}-role`,
-                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectValue"], {
-                                                                    placeholder: "Selecione um perfil"
-                                                                }, void 0, false, {
-                                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                    lineNumber: 252,
-                                                                    columnNumber: 45
-                                                                }, this)
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 251,
-                                                                columnNumber: 41
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectContent"], {
-                                                                children: [
-                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectItem"], {
-                                                                        value: "Passageiro",
-                                                                        children: "Passageiro"
-                                                                    }, void 0, false, {
-                                                                        fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                        lineNumber: 255,
-                                                                        columnNumber: 45
-                                                                    }, this),
-                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectItem"], {
-                                                                        value: "Motorista",
-                                                                        children: "Motorista"
-                                                                    }, void 0, false, {
-                                                                        fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                        lineNumber: 256,
-                                                                        columnNumber: 45
-                                                                    }, this),
-                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectItem"], {
-                                                                        value: "Administrador",
-                                                                        children: "Administrador"
-                                                                    }, void 0, false, {
-                                                                        fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                        lineNumber: 257,
-                                                                        columnNumber: 45
-                                                                    }, this)
-                                                                ]
-                                                            }, void 0, true, {
-                                                                fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 254,
-                                                                columnNumber: 41
-                                                            }, this)
-                                                        ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                        lineNumber: 250,
-                                                        columnNumber: 37
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                lineNumber: 248,
-                                                columnNumber: 33
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "grid grid-cols-1 sm:grid-cols-2 gap-4",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "space-y-1",
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                                                htmlFor: `${uniqueId}-password`,
-                                                                children: "Senha"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 263,
-                                                                columnNumber: 41
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
-                                                                id: `${uniqueId}-password`,
-                                                                type: "password",
-                                                                value: newUser.password,
-                                                                onChange: (e)=>setNewUser((prev)=>({
-                                                                            ...prev,
-                                                                            password: e.target.value
-                                                                        })),
-                                                                placeholder: "********",
-                                                                required: true
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 264,
-                                                                columnNumber: 41
-                                                            }, this)
-                                                        ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                        lineNumber: 262,
-                                                        columnNumber: 37
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "space-y-1",
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                                                htmlFor: `${uniqueId}-confirm-password`,
-                                                                children: "Confirmar Senha"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 267,
-                                                                columnNumber: 41
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
-                                                                id: `${uniqueId}-confirm-password`,
-                                                                type: "password",
-                                                                value: newUser.confirmPassword,
-                                                                onChange: (e)=>setNewUser((prev)=>({
-                                                                            ...prev,
-                                                                            confirmPassword: e.target.value
-                                                                        })),
-                                                                placeholder: "********",
-                                                                required: true
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 268,
-                                                                columnNumber: 41
-                                                            }, this)
-                                                        ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                        lineNumber: 266,
-                                                        columnNumber: 37
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                lineNumber: 261,
-                                                columnNumber: 33
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                        lineNumber: 237,
-                                        columnNumber: 29
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogFooter"], {
-                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                            type: "submit",
-                                            children: "Salvar Usuário"
+                className: "flex flex-col sm:flex-row justify-end gap-2",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Dialog"], {
+                        open: isNewRideDialogOpen,
+                        onOpenChange: setIsNewRideDialogOpen,
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogTrigger"], {
+                                asChild: true,
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                    variant: "outline",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$rocket$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Rocket$3e$__["Rocket"], {
+                                            className: "mr-2 h-4 w-4"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                            lineNumber: 273,
-                                            columnNumber: 33
-                                        }, this)
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                        lineNumber: 272,
-                                        columnNumber: 29
-                                    }, this)
-                                ]
-                            }, void 0, true, {
+                                            lineNumber: 250,
+                                            columnNumber: 29
+                                        }, this),
+                                        "Iniciar Corrida Manualmente"
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                    lineNumber: 249,
+                                    columnNumber: 26
+                                }, this)
+                            }, void 0, false, {
                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                lineNumber: 230,
-                                columnNumber: 25
+                                lineNumber: 248,
+                                columnNumber: 21
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogContent"], {
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
+                                    onSubmit: handleAddNewRide,
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogHeader"], {
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogTitle"], {
+                                                    children: "Registrar Nova Corrida"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                    lineNumber: 257,
+                                                    columnNumber: 33
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogDescription"], {
+                                                    children: "Preencha os dados para uma corrida iniciada presencialmente e atribua a um motorista."
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                    lineNumber: 258,
+                                                    columnNumber: 33
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                            lineNumber: 256,
+                                            columnNumber: 29
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "space-y-4 py-4",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "space-y-1",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                            htmlFor: "driver-select",
+                                                            children: "Atribuir ao Motorista"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                            lineNumber: 264,
+                                                            columnNumber: 37
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Select"], {
+                                                            value: newRide.driverId,
+                                                            onValueChange: (value)=>setNewRide((prev)=>({
+                                                                        ...prev,
+                                                                        driverId: value
+                                                                    })),
+                                                            required: true,
+                                                            children: [
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectTrigger"], {
+                                                                    id: "driver-select",
+                                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectValue"], {
+                                                                        placeholder: "Selecione um motorista"
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                                        lineNumber: 267,
+                                                                        columnNumber: 45
+                                                                    }, this)
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                                    lineNumber: 266,
+                                                                    columnNumber: 41
+                                                                }, this),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectContent"], {
+                                                                    children: availableDrivers.map((driver)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectItem"], {
+                                                                            value: driver.id,
+                                                                            children: driver.name
+                                                                        }, driver.id, false, {
+                                                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                                            lineNumber: 271,
+                                                                            columnNumber: 49
+                                                                        }, this))
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                                    lineNumber: 269,
+                                                                    columnNumber: 41
+                                                                }, this)
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                            lineNumber: 265,
+                                                            columnNumber: 37
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                    lineNumber: 263,
+                                                    columnNumber: 33
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "space-y-1",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                            htmlFor: "passenger-name-admin",
+                                                            children: "Nome do Passageiro (Opcional)"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                            lineNumber: 277,
+                                                            columnNumber: 37
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
+                                                            id: "passenger-name-admin",
+                                                            value: newRide.passenger,
+                                                            onChange: (e)=>setNewRide((prev)=>({
+                                                                        ...prev,
+                                                                        passenger: e.target.value
+                                                                    })),
+                                                            placeholder: "Passageiro Anônimo"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                            lineNumber: 278,
+                                                            columnNumber: 37
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                    lineNumber: 276,
+                                                    columnNumber: 33
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "grid grid-cols-1 sm:grid-cols-2 gap-4",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "space-y-1",
+                                                            children: [
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                                    htmlFor: "origin-location-admin",
+                                                                    children: "Local de Partida"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                                    lineNumber: 282,
+                                                                    columnNumber: 41
+                                                                }, this),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
+                                                                    id: "origin-location-admin",
+                                                                    value: newRide.origin,
+                                                                    onChange: (e)=>setNewRide((prev)=>({
+                                                                                ...prev,
+                                                                                origin: e.target.value
+                                                                            })),
+                                                                    required: true,
+                                                                    placeholder: "Ex: Rua Principal, 123"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                                    lineNumber: 283,
+                                                                    columnNumber: 41
+                                                                }, this)
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                            lineNumber: 281,
+                                                            columnNumber: 37
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "space-y-1",
+                                                            children: [
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                                    htmlFor: "destination-location-admin",
+                                                                    children: "Local de Destino"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                                    lineNumber: 286,
+                                                                    columnNumber: 41
+                                                                }, this),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
+                                                                    id: "destination-location-admin",
+                                                                    value: newRide.destination,
+                                                                    onChange: (e)=>setNewRide((prev)=>({
+                                                                                ...prev,
+                                                                                destination: e.target.value
+                                                                            })),
+                                                                    required: true,
+                                                                    placeholder: "Ex: Shopping Center"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                                    lineNumber: 287,
+                                                                    columnNumber: 41
+                                                                }, this)
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                            lineNumber: 285,
+                                                            columnNumber: 38
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                    lineNumber: 280,
+                                                    columnNumber: 33
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "space-y-1",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                            htmlFor: "ride-value-admin",
+                                                            children: "Valor da Corrida (R$)"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                            lineNumber: 291,
+                                                            columnNumber: 37
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
+                                                            id: "ride-value-admin",
+                                                            type: "number",
+                                                            step: "0.01",
+                                                            value: newRide.value,
+                                                            onChange: (e)=>setNewRide((prev)=>({
+                                                                        ...prev,
+                                                                        value: e.target.value
+                                                                    })),
+                                                            required: true,
+                                                            placeholder: "25.50"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                            lineNumber: 292,
+                                                            columnNumber: 37
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                    lineNumber: 290,
+                                                    columnNumber: 33
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                            lineNumber: 262,
+                                            columnNumber: 29
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogFooter"], {
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogClose"], {
+                                                    asChild: true,
+                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                                        type: "button",
+                                                        variant: "secondary",
+                                                        id: "close-new-ride-dialog-admin",
+                                                        children: "Cancelar"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                        lineNumber: 297,
+                                                        columnNumber: 37
+                                                    }, this)
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                    lineNumber: 296,
+                                                    columnNumber: 33
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                                    type: "submit",
+                                                    children: "Registrar e Atribuir"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                    lineNumber: 299,
+                                                    columnNumber: 33
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                            lineNumber: 295,
+                                            columnNumber: 29
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                    lineNumber: 255,
+                                    columnNumber: 25
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                lineNumber: 254,
+                                columnNumber: 21
                             }, this)
-                        }, void 0, false, {
-                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                            lineNumber: 229,
-                            columnNumber: 21
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                    lineNumber: 222,
-                    columnNumber: 17
-                }, this)
-            }, void 0, false, {
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                        lineNumber: 247,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Dialog"], {
+                        open: isAddUserDialogOpen,
+                        onOpenChange: setIsAddUserDialogOpen,
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogTrigger"], {
+                                asChild: true,
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$circle$2d$plus$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__PlusCircle$3e$__["PlusCircle"], {
+                                            className: "mr-2 h-4 w-4"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                            lineNumber: 307,
+                                            columnNumber: 29
+                                        }, this),
+                                        "Adicionar Usuário"
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                    lineNumber: 306,
+                                    columnNumber: 25
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                lineNumber: 305,
+                                columnNumber: 21
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogContent"], {
+                                className: "sm:max-w-md max-h-[90vh] overflow-y-auto",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
+                                    onSubmit: handleAddUser,
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogHeader"], {
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogTitle"], {
+                                                    children: "Adicionar Novo Usuário"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                    lineNumber: 314,
+                                                    columnNumber: 33
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogDescription"], {
+                                                    children: "Preencha as informações para criar uma nova conta de usuário."
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                    lineNumber: 315,
+                                                    columnNumber: 33
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                            lineNumber: 313,
+                                            columnNumber: 29
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "space-y-4 py-4",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "grid grid-cols-1 sm:grid-cols-2 gap-4",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "space-y-1",
+                                                            children: [
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                                    htmlFor: `${uniqueId}-name`,
+                                                                    children: "Nome"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                                    lineNumber: 322,
+                                                                    columnNumber: 41
+                                                                }, this),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
+                                                                    id: `${uniqueId}-name`,
+                                                                    value: newUser.name,
+                                                                    onChange: (e)=>setNewUser((prev)=>({
+                                                                                ...prev,
+                                                                                name: e.target.value
+                                                                            })),
+                                                                    placeholder: "Nome Completo",
+                                                                    required: true
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                                    lineNumber: 323,
+                                                                    columnNumber: 41
+                                                                }, this)
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                            lineNumber: 321,
+                                                            columnNumber: 37
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "space-y-1",
+                                                            children: [
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                                    htmlFor: `${uniqueId}-email`,
+                                                                    children: "Email"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                                    lineNumber: 326,
+                                                                    columnNumber: 41
+                                                                }, this),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
+                                                                    id: `${uniqueId}-email`,
+                                                                    type: "email",
+                                                                    value: newUser.email,
+                                                                    onChange: (e)=>setNewUser((prev)=>({
+                                                                                ...prev,
+                                                                                email: e.target.value
+                                                                            })),
+                                                                    placeholder: "email@exemplo.com",
+                                                                    required: true
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                                    lineNumber: 327,
+                                                                    columnNumber: 41
+                                                                }, this)
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                            lineNumber: 325,
+                                                            columnNumber: 37
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                    lineNumber: 320,
+                                                    columnNumber: 33
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "space-y-1",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                            htmlFor: `${uniqueId}-role`,
+                                                            children: "Perfil"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                            lineNumber: 331,
+                                                            columnNumber: 37
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Select"], {
+                                                            value: newUser.role,
+                                                            onValueChange: (value)=>setNewUser((prev)=>({
+                                                                        ...prev,
+                                                                        role: value
+                                                                    })),
+                                                            children: [
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectTrigger"], {
+                                                                    id: `${uniqueId}-role`,
+                                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectValue"], {
+                                                                        placeholder: "Selecione um perfil"
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                                        lineNumber: 334,
+                                                                        columnNumber: 45
+                                                                    }, this)
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                                    lineNumber: 333,
+                                                                    columnNumber: 41
+                                                                }, this),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectContent"], {
+                                                                    children: [
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectItem"], {
+                                                                            value: "Passageiro",
+                                                                            children: "Passageiro"
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                                            lineNumber: 337,
+                                                                            columnNumber: 45
+                                                                        }, this),
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectItem"], {
+                                                                            value: "Motorista",
+                                                                            children: "Motorista"
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                                            lineNumber: 338,
+                                                                            columnNumber: 45
+                                                                        }, this),
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectItem"], {
+                                                                            value: "Administrador",
+                                                                            children: "Administrador"
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                                            lineNumber: 339,
+                                                                            columnNumber: 45
+                                                                        }, this)
+                                                                    ]
+                                                                }, void 0, true, {
+                                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                                    lineNumber: 336,
+                                                                    columnNumber: 41
+                                                                }, this)
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                            lineNumber: 332,
+                                                            columnNumber: 37
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                    lineNumber: 330,
+                                                    columnNumber: 33
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "grid grid-cols-1 sm:grid-cols-2 gap-4",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "space-y-1",
+                                                            children: [
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                                    htmlFor: `${uniqueId}-password`,
+                                                                    children: "Senha"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                                    lineNumber: 345,
+                                                                    columnNumber: 41
+                                                                }, this),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
+                                                                    id: `${uniqueId}-password`,
+                                                                    type: "password",
+                                                                    value: newUser.password,
+                                                                    onChange: (e)=>setNewUser((prev)=>({
+                                                                                ...prev,
+                                                                                password: e.target.value
+                                                                            })),
+                                                                    placeholder: "********",
+                                                                    required: true
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                                    lineNumber: 346,
+                                                                    columnNumber: 41
+                                                                }, this)
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                            lineNumber: 344,
+                                                            columnNumber: 37
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "space-y-1",
+                                                            children: [
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                                    htmlFor: `${uniqueId}-confirm-password`,
+                                                                    children: "Confirmar Senha"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                                    lineNumber: 349,
+                                                                    columnNumber: 41
+                                                                }, this),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
+                                                                    id: `${uniqueId}-confirm-password`,
+                                                                    type: "password",
+                                                                    value: newUser.confirmPassword,
+                                                                    onChange: (e)=>setNewUser((prev)=>({
+                                                                                ...prev,
+                                                                                confirmPassword: e.target.value
+                                                                            })),
+                                                                    placeholder: "********",
+                                                                    required: true
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                                    lineNumber: 350,
+                                                                    columnNumber: 41
+                                                                }, this)
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                            lineNumber: 348,
+                                                            columnNumber: 37
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                    lineNumber: 343,
+                                                    columnNumber: 33
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                            lineNumber: 319,
+                                            columnNumber: 29
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogFooter"], {
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                                type: "submit",
+                                                children: "Salvar Usuário"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                                lineNumber: 355,
+                                                columnNumber: 33
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                            lineNumber: 354,
+                                            columnNumber: 29
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                    lineNumber: 312,
+                                    columnNumber: 25
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                                lineNumber: 311,
+                                columnNumber: 21
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/admin/UserManagementTable.tsx",
+                        lineNumber: 304,
+                        columnNumber: 17
+                    }, this)
+                ]
+            }, void 0, true, {
                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                lineNumber: 221,
+                lineNumber: 246,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4898,20 +5240,20 @@ function UserManagementTable({ onReportGenerated }) {
                                                 "data-ai-hint": `${user.avatar} face`
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                lineNumber: 286,
+                                                lineNumber: 368,
                                                 columnNumber: 32
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$avatar$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AvatarFallback"], {
                                                 children: user.name.charAt(0)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                lineNumber: 287,
+                                                lineNumber: 369,
                                                 columnNumber: 32
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                        lineNumber: 285,
+                                        lineNumber: 367,
                                         columnNumber: 28
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4921,7 +5263,7 @@ function UserManagementTable({ onReportGenerated }) {
                                                 children: user.name
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                lineNumber: 290,
+                                                lineNumber: 372,
                                                 columnNumber: 32
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4929,19 +5271,19 @@ function UserManagementTable({ onReportGenerated }) {
                                                 children: user.email
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                lineNumber: 291,
+                                                lineNumber: 373,
                                                 columnNumber: 32
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                        lineNumber: 289,
+                                        lineNumber: 371,
                                         columnNumber: 28
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                lineNumber: 284,
+                                lineNumber: 366,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4952,7 +5294,7 @@ function UserManagementTable({ onReportGenerated }) {
                                         children: "Perfil:"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                        lineNumber: 295,
+                                        lineNumber: 377,
                                         columnNumber: 28
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Badge"], {
@@ -4963,26 +5305,26 @@ function UserManagementTable({ onReportGenerated }) {
                                                 className: "h-3 w-3"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                lineNumber: 297,
+                                                lineNumber: 379,
                                                 columnNumber: 61
                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$user$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__User$3e$__["User"], {
                                                 className: "h-3 w-3"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                lineNumber: 297,
+                                                lineNumber: 379,
                                                 columnNumber: 91
                                             }, this),
                                             user.role
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                        lineNumber: 296,
+                                        lineNumber: 378,
                                         columnNumber: 28
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                lineNumber: 294,
+                                lineNumber: 376,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4993,7 +5335,7 @@ function UserManagementTable({ onReportGenerated }) {
                                         children: "Status:"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                        lineNumber: 302,
+                                        lineNumber: 384,
                                         columnNumber: 28
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Badge"], {
@@ -5001,13 +5343,13 @@ function UserManagementTable({ onReportGenerated }) {
                                         children: userStatuses[user.id] ? 'Ativo' : 'Inativo'
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                        lineNumber: 303,
+                                        lineNumber: 385,
                                         columnNumber: 28
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                lineNumber: 301,
+                                lineNumber: 383,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5018,7 +5360,7 @@ function UserManagementTable({ onReportGenerated }) {
                                         children: "Ações:"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                        lineNumber: 308,
+                                        lineNumber: 390,
                                         columnNumber: 29
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5035,7 +5377,7 @@ function UserManagementTable({ onReportGenerated }) {
                                                                 className: "h-4 w-4"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 313,
+                                                                lineNumber: 395,
                                                                 columnNumber: 45
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5043,13 +5385,13 @@ function UserManagementTable({ onReportGenerated }) {
                                                                 children: "Ver Log de Status"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 314,
+                                                                lineNumber: 396,
                                                                 columnNumber: 45
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                        lineNumber: 312,
+                                                        lineNumber: 394,
                                                         columnNumber: 41
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -5061,7 +5403,7 @@ function UserManagementTable({ onReportGenerated }) {
                                                                 className: "h-4 w-4"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 317,
+                                                                lineNumber: 399,
                                                                 columnNumber: 45
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5069,13 +5411,13 @@ function UserManagementTable({ onReportGenerated }) {
                                                                 children: "Gerar Relatório"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 318,
+                                                                lineNumber: 400,
                                                                 columnNumber: 45
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                        lineNumber: 316,
+                                                        lineNumber: 398,
                                                         columnNumber: 41
                                                     }, this)
                                                 ]
@@ -5089,7 +5431,7 @@ function UserManagementTable({ onReportGenerated }) {
                                                         className: "h-4 w-4"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                        lineNumber: 323,
+                                                        lineNumber: 405,
                                                         columnNumber: 37
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5097,13 +5439,13 @@ function UserManagementTable({ onReportGenerated }) {
                                                         children: "Alterar Senha"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                        lineNumber: 324,
+                                                        lineNumber: 406,
                                                         columnNumber: 37
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                lineNumber: 322,
+                                                lineNumber: 404,
                                                 columnNumber: 33
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$switch$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Switch"], {
@@ -5112,7 +5454,7 @@ function UserManagementTable({ onReportGenerated }) {
                                                 "aria-label": `Toggle status for ${user.name}`
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                lineNumber: 326,
+                                                lineNumber: 408,
                                                 columnNumber: 33
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AlertDialog"], {
@@ -5126,17 +5468,17 @@ function UserManagementTable({ onReportGenerated }) {
                                                                 className: "h-4 w-4 text-destructive"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 334,
+                                                                lineNumber: 416,
                                                                 columnNumber: 45
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                            lineNumber: 333,
+                                                            lineNumber: 415,
                                                             columnNumber: 41
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                        lineNumber: 332,
+                                                        lineNumber: 414,
                                                         columnNumber: 37
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AlertDialogContent"], {
@@ -5147,7 +5489,7 @@ function UserManagementTable({ onReportGenerated }) {
                                                                         children: "Você tem certeza absoluta?"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                        lineNumber: 339,
+                                                                        lineNumber: 421,
                                                                         columnNumber: 45
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AlertDialogDescription"], {
@@ -5158,20 +5500,20 @@ function UserManagementTable({ onReportGenerated }) {
                                                                                 children: user.name
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                                lineNumber: 341,
+                                                                                lineNumber: 423,
                                                                                 columnNumber: 123
                                                                             }, this),
                                                                             "."
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                        lineNumber: 340,
+                                                                        lineNumber: 422,
                                                                         columnNumber: 45
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 338,
+                                                                lineNumber: 420,
                                                                 columnNumber: 41
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AlertDialogFooter"], {
@@ -5180,7 +5522,7 @@ function UserManagementTable({ onReportGenerated }) {
                                                                         children: "Cancelar"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                        lineNumber: 345,
+                                                                        lineNumber: 427,
                                                                         columnNumber: 45
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AlertDialogAction"], {
@@ -5188,48 +5530,48 @@ function UserManagementTable({ onReportGenerated }) {
                                                                         children: "Excluir"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                        lineNumber: 346,
+                                                                        lineNumber: 428,
                                                                         columnNumber: 45
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 344,
+                                                                lineNumber: 426,
                                                                 columnNumber: 41
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                        lineNumber: 337,
+                                                        lineNumber: 419,
                                                         columnNumber: 37
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                lineNumber: 331,
+                                                lineNumber: 413,
                                                 columnNumber: 33
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                        lineNumber: 309,
+                                        lineNumber: 391,
                                         columnNumber: 30
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                lineNumber: 307,
+                                lineNumber: 389,
                                 columnNumber: 25
                             }, this)
                         ]
                     }, user.id, true, {
                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                        lineNumber: 283,
+                        lineNumber: 365,
                         columnNumber: 21
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                lineNumber: 281,
+                lineNumber: 363,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5243,14 +5585,14 @@ function UserManagementTable({ onReportGenerated }) {
                                         children: "Usuário"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                        lineNumber: 361,
+                                        lineNumber: 443,
                                         columnNumber: 29
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableHead"], {
                                         children: "Perfil"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                        lineNumber: 362,
+                                        lineNumber: 444,
                                         columnNumber: 29
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableHead"], {
@@ -5258,7 +5600,7 @@ function UserManagementTable({ onReportGenerated }) {
                                         children: "Status"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                        lineNumber: 363,
+                                        lineNumber: 445,
                                         columnNumber: 29
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableHead"], {
@@ -5266,18 +5608,18 @@ function UserManagementTable({ onReportGenerated }) {
                                         children: "Ações"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                        lineNumber: 364,
+                                        lineNumber: 446,
                                         columnNumber: 29
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                lineNumber: 360,
+                                lineNumber: 442,
                                 columnNumber: 25
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                            lineNumber: 359,
+                            lineNumber: 441,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableBody"], {
@@ -5294,20 +5636,20 @@ function UserManagementTable({ onReportGenerated }) {
                                                                 "data-ai-hint": `${user.avatar} face`
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 373,
+                                                                lineNumber: 455,
                                                                 columnNumber: 45
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$avatar$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AvatarFallback"], {
                                                                 children: user.name.charAt(0)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 374,
+                                                                lineNumber: 456,
                                                                 columnNumber: 45
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                        lineNumber: 372,
+                                                        lineNumber: 454,
                                                         columnNumber: 41
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5317,7 +5659,7 @@ function UserManagementTable({ onReportGenerated }) {
                                                                 children: user.name
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 377,
+                                                                lineNumber: 459,
                                                                 columnNumber: 45
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5325,24 +5667,24 @@ function UserManagementTable({ onReportGenerated }) {
                                                                 children: user.email
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 378,
+                                                                lineNumber: 460,
                                                                 columnNumber: 45
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                        lineNumber: 376,
+                                                        lineNumber: 458,
                                                         columnNumber: 41
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                lineNumber: 371,
+                                                lineNumber: 453,
                                                 columnNumber: 37
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                            lineNumber: 370,
+                                            lineNumber: 452,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableCell"], {
@@ -5354,31 +5696,31 @@ function UserManagementTable({ onReportGenerated }) {
                                                         className: "h-3 w-3"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                        lineNumber: 384,
+                                                        lineNumber: 466,
                                                         columnNumber: 70
                                                     }, this) : user.role === 'Administrador' ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$user$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__User$3e$__["User"], {
                                                         className: "h-3 w-3"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                        lineNumber: 384,
+                                                        lineNumber: 466,
                                                         columnNumber: 132
                                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$user$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__User$3e$__["User"], {
                                                         className: "h-3 w-3"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                        lineNumber: 384,
+                                                        lineNumber: 466,
                                                         columnNumber: 163
                                                     }, this),
                                                     user.role
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                lineNumber: 383,
+                                                lineNumber: 465,
                                                 columnNumber: 37
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                            lineNumber: 382,
+                                            lineNumber: 464,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableCell"], {
@@ -5388,12 +5730,12 @@ function UserManagementTable({ onReportGenerated }) {
                                                 children: userStatuses[user.id] ? 'Ativo' : 'Inativo'
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                lineNumber: 389,
+                                                lineNumber: 471,
                                                 columnNumber: 37
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                            lineNumber: 388,
+                                            lineNumber: 470,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableCell"], {
@@ -5412,7 +5754,7 @@ function UserManagementTable({ onReportGenerated }) {
                                                                         className: "h-4 w-4"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                        lineNumber: 398,
+                                                                        lineNumber: 480,
                                                                         columnNumber: 53
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5420,13 +5762,13 @@ function UserManagementTable({ onReportGenerated }) {
                                                                         children: "Ver Log de Status"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                        lineNumber: 399,
+                                                                        lineNumber: 481,
                                                                         columnNumber: 53
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 397,
+                                                                lineNumber: 479,
                                                                 columnNumber: 49
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -5438,7 +5780,7 @@ function UserManagementTable({ onReportGenerated }) {
                                                                         className: "h-4 w-4"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                        lineNumber: 402,
+                                                                        lineNumber: 484,
                                                                         columnNumber: 53
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5446,13 +5788,13 @@ function UserManagementTable({ onReportGenerated }) {
                                                                         children: "Gerar Relatório"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                        lineNumber: 403,
+                                                                        lineNumber: 485,
                                                                         columnNumber: 53
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 401,
+                                                                lineNumber: 483,
                                                                 columnNumber: 49
                                                             }, this)
                                                         ]
@@ -5466,7 +5808,7 @@ function UserManagementTable({ onReportGenerated }) {
                                                                 className: "h-4 w-4"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 408,
+                                                                lineNumber: 490,
                                                                 columnNumber: 45
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5474,13 +5816,13 @@ function UserManagementTable({ onReportGenerated }) {
                                                                 children: "Alterar Senha"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 409,
+                                                                lineNumber: 491,
                                                                 columnNumber: 45
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                        lineNumber: 407,
+                                                        lineNumber: 489,
                                                         columnNumber: 41
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$switch$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Switch"], {
@@ -5489,7 +5831,7 @@ function UserManagementTable({ onReportGenerated }) {
                                                         "aria-label": `Toggle status for ${user.name}`
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                        lineNumber: 411,
+                                                        lineNumber: 493,
                                                         columnNumber: 41
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AlertDialog"], {
@@ -5503,17 +5845,17 @@ function UserManagementTable({ onReportGenerated }) {
                                                                         className: "h-4 w-4 text-destructive"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                        lineNumber: 419,
+                                                                        lineNumber: 501,
                                                                         columnNumber: 53
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                    lineNumber: 418,
+                                                                    lineNumber: 500,
                                                                     columnNumber: 49
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 417,
+                                                                lineNumber: 499,
                                                                 columnNumber: 45
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AlertDialogContent"], {
@@ -5524,7 +5866,7 @@ function UserManagementTable({ onReportGenerated }) {
                                                                                 children: "Você tem certeza absoluta?"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                                lineNumber: 424,
+                                                                                lineNumber: 506,
                                                                                 columnNumber: 53
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AlertDialogDescription"], {
@@ -5535,20 +5877,20 @@ function UserManagementTable({ onReportGenerated }) {
                                                                                         children: user.name
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                                        lineNumber: 426,
+                                                                                        lineNumber: 508,
                                                                                         columnNumber: 131
                                                                                     }, this),
                                                                                     "."
                                                                                 ]
                                                                             }, void 0, true, {
                                                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                                lineNumber: 425,
+                                                                                lineNumber: 507,
                                                                                 columnNumber: 53
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                        lineNumber: 423,
+                                                                        lineNumber: 505,
                                                                         columnNumber: 49
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AlertDialogFooter"], {
@@ -5557,7 +5899,7 @@ function UserManagementTable({ onReportGenerated }) {
                                                                                 children: "Cancelar"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                                lineNumber: 430,
+                                                                                lineNumber: 512,
                                                                                 columnNumber: 53
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AlertDialogAction"], {
@@ -5565,58 +5907,58 @@ function UserManagementTable({ onReportGenerated }) {
                                                                                 children: "Excluir"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                                lineNumber: 431,
+                                                                                lineNumber: 513,
                                                                                 columnNumber: 53
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                        lineNumber: 429,
+                                                                        lineNumber: 511,
                                                                         columnNumber: 49
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                                lineNumber: 422,
+                                                                lineNumber: 504,
                                                                 columnNumber: 45
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                        lineNumber: 416,
+                                                        lineNumber: 498,
                                                         columnNumber: 41
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                lineNumber: 394,
+                                                lineNumber: 476,
                                                 columnNumber: 38
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                            lineNumber: 393,
+                                            lineNumber: 475,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, user.id, true, {
                                     fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                    lineNumber: 369,
+                                    lineNumber: 451,
                                     columnNumber: 29
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                            lineNumber: 367,
+                            lineNumber: 449,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                    lineNumber: 358,
+                    lineNumber: 440,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                lineNumber: 357,
+                lineNumber: 439,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Dialog"], {
@@ -5634,20 +5976,20 @@ function UserManagementTable({ onReportGenerated }) {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                    lineNumber: 446,
+                                    lineNumber: 528,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogDescription"], {
                                     children: "Histórico de quando o motorista ficou online, offline ou em viagem."
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                    lineNumber: 447,
+                                    lineNumber: 529,
                                     columnNumber: 25
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                            lineNumber: 445,
+                            lineNumber: 527,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$scroll$2d$area$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ScrollArea"], {
@@ -5665,12 +6007,12 @@ function UserManagementTable({ onReportGenerated }) {
                                                         className: "h-4 w-4 text-muted-foreground"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                        lineNumber: 458,
+                                                        lineNumber: 540,
                                                         columnNumber: 49
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                    lineNumber: 457,
+                                                    lineNumber: 539,
                                                     columnNumber: 45
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5681,7 +6023,7 @@ function UserManagementTable({ onReportGenerated }) {
                                                             children: log.status
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                            lineNumber: 461,
+                                                            lineNumber: 543,
                                                             columnNumber: 49
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -5689,13 +6031,13 @@ function UserManagementTable({ onReportGenerated }) {
                                                             children: new Date(log.timestamp).toLocaleString('pt-BR')
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                            lineNumber: 462,
+                                                            lineNumber: 544,
                                                             columnNumber: 49
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                    lineNumber: 460,
+                                                    lineNumber: 542,
                                                     columnNumber: 45
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Badge"], {
@@ -5703,18 +6045,18 @@ function UserManagementTable({ onReportGenerated }) {
                                                     children: log.status
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                    lineNumber: 464,
+                                                    lineNumber: 546,
                                                     columnNumber: 45
                                                 }, this)
                                             ]
                                         }, index, true, {
                                             fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                            lineNumber: 456,
+                                            lineNumber: 538,
                                             columnNumber: 41
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                    lineNumber: 454,
+                                    lineNumber: 536,
                                     columnNumber: 33
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "text-center text-muted-foreground py-10",
@@ -5722,22 +6064,22 @@ function UserManagementTable({ onReportGenerated }) {
                                         children: "Nenhum registro de log encontrado para este motorista."
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                        lineNumber: 475,
+                                        lineNumber: 557,
                                         columnNumber: 37
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                    lineNumber: 474,
+                                    lineNumber: 556,
                                     columnNumber: 33
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                lineNumber: 452,
+                                lineNumber: 534,
                                 columnNumber: 25
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                            lineNumber: 451,
+                            lineNumber: 533,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogFooter"], {
@@ -5747,23 +6089,23 @@ function UserManagementTable({ onReportGenerated }) {
                                 children: "Fechar"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                lineNumber: 481,
+                                lineNumber: 563,
                                 columnNumber: 25
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                            lineNumber: 480,
+                            lineNumber: 562,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                    lineNumber: 444,
+                    lineNumber: 526,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                lineNumber: 443,
+                lineNumber: 525,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Dialog"], {
@@ -5780,7 +6122,7 @@ function UserManagementTable({ onReportGenerated }) {
                                         children: "Alterar Senha"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                        lineNumber: 490,
+                                        lineNumber: 572,
                                         columnNumber: 29
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogDescription"], {
@@ -5791,20 +6133,20 @@ function UserManagementTable({ onReportGenerated }) {
                                                 children: selectedUser?.name
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                lineNumber: 492,
+                                                lineNumber: 574,
                                                 columnNumber: 60
                                             }, this),
                                             "."
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                        lineNumber: 491,
+                                        lineNumber: 573,
                                         columnNumber: 29
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                lineNumber: 489,
+                                lineNumber: 571,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5818,7 +6160,7 @@ function UserManagementTable({ onReportGenerated }) {
                                                 children: "Nova Senha"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                lineNumber: 497,
+                                                lineNumber: 579,
                                                 columnNumber: 33
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -5833,13 +6175,13 @@ function UserManagementTable({ onReportGenerated }) {
                                                 required: true
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                lineNumber: 498,
+                                                lineNumber: 580,
                                                 columnNumber: 33
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                        lineNumber: 496,
+                                        lineNumber: 578,
                                         columnNumber: 29
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5850,7 +6192,7 @@ function UserManagementTable({ onReportGenerated }) {
                                                 children: "Confirmar Nova Senha"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                lineNumber: 501,
+                                                lineNumber: 583,
                                                 columnNumber: 33
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -5865,19 +6207,19 @@ function UserManagementTable({ onReportGenerated }) {
                                                 required: true
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                                lineNumber: 502,
+                                                lineNumber: 584,
                                                 columnNumber: 33
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                        lineNumber: 500,
+                                        lineNumber: 582,
                                         columnNumber: 29
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                lineNumber: 495,
+                                lineNumber: 577,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogFooter"], {
@@ -5889,7 +6231,7 @@ function UserManagementTable({ onReportGenerated }) {
                                         children: "Cancelar"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                        lineNumber: 506,
+                                        lineNumber: 588,
                                         columnNumber: 30
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -5897,39 +6239,39 @@ function UserManagementTable({ onReportGenerated }) {
                                         children: "Salvar Nova Senha"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                        lineNumber: 507,
+                                        lineNumber: 589,
                                         columnNumber: 29
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                                lineNumber: 505,
+                                lineNumber: 587,
                                 columnNumber: 25
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                        lineNumber: 488,
+                        lineNumber: 570,
                         columnNumber: 21
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                    lineNumber: 487,
+                    lineNumber: 569,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-                lineNumber: 486,
+                lineNumber: 568,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/admin/UserManagementTable.tsx",
-        lineNumber: 220,
+        lineNumber: 245,
         columnNumber: 9
     }, this);
 }
-_s(UserManagementTable, "ipM2gYTr0PrT9ra6LKsqhKcfqek=", false, function() {
+_s(UserManagementTable, "tOmyd3FSbthx+xcd+O92GcZDfOk=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$use$2d$toast$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useToast"],
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useId"]

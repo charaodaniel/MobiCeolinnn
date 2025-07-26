@@ -5,7 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Car, User, Trash2, PlusCircle, FileText, ListCollapse, Clock, KeyRound, Rocket } from 'lucide-react';
+import { Car, User, Trash2, PlusCircle, FileText, ListCollapse, Clock, KeyRound, Rocket, Settings, UserCheck } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger, DialogClose } from '../ui/dialog';
 import { Input } from '../ui/input';
@@ -16,6 +16,13 @@ import { useToast } from '@/hooks/use-toast';
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { ScrollArea } from '../ui/scroll-area';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Card } from '../ui/card';
 
 const initialUsers = [
   { id: '0', name: 'Admin User', email: 'admin@mobiceolin.com', role: 'Administrador', status: true, avatar: 'shield' },
@@ -69,6 +76,7 @@ export function UserManagementTable({ onReportGenerated }: { onReportGenerated: 
     const [newUser, setNewUser] = useState({ name: '', email: '', role: 'Passageiro', password: '', confirmPassword: '' });
     const [newRide, setNewRide] = useState({ passenger: 'Passageiro Anônimo', origin: '', destination: '', value: '', driverId: '' });
     const [newPassword, setNewPassword] = useState({ password: '', confirmPassword: '' });
+    const [allowAnonymousRides, setAllowAnonymousRides] = useState(true);
     const uniqueId = useId();
 
     const handleStatusChange = (userId: string, newStatus: boolean) => {
@@ -242,238 +250,159 @@ export function UserManagementTable({ onReportGenerated }: { onReportGenerated: 
     const availableDrivers = users.filter(user => user.role === 'Motorista');
 
     return (
-        <div className="space-y-4">
-            <div className="flex flex-col sm:flex-row justify-end gap-2">
-                <Dialog open={isNewRideDialogOpen} onOpenChange={setIsNewRideDialogOpen}>
-                    <DialogTrigger asChild>
-                         <Button variant="outline">
-                            <Rocket className="mr-2 h-4 w-4" />
-                            Iniciar Corrida Manualmente
-                        </Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                        <form onSubmit={handleAddNewRide}>
-                            <DialogHeader>
-                                <DialogTitle>Registrar Nova Corrida</DialogTitle>
-                                <DialogDescription>
-                                    Preencha os dados para uma corrida iniciada presencialmente e atribua a um motorista.
-                                </DialogDescription>
-                            </DialogHeader>
-                            <div className="space-y-4 py-4">
-                                <div className="space-y-1">
-                                    <Label htmlFor="driver-select">Atribuir ao Motorista</Label>
-                                    <Select value={newRide.driverId} onValueChange={(value) => setNewRide(prev => ({...prev, driverId: value}))} required>
-                                        <SelectTrigger id="driver-select">
-                                            <SelectValue placeholder="Selecione um motorista" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            {availableDrivers.map(driver => (
-                                                <SelectItem key={driver.id} value={driver.id}>{driver.name}</SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-                                <div className="space-y-1">
-                                    <Label htmlFor="passenger-name-admin">Nome do Passageiro (Opcional)</Label>
-                                    <Input id="passenger-name-admin" value={newRide.passenger} onChange={(e) => setNewRide(prev => ({ ...prev, passenger: e.target.value }))} placeholder="Passageiro Anônimo" />
-                                </div>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div className="space-y-1">
-                                        <Label htmlFor="origin-location-admin">Local de Partida</Label>
-                                        <Input id="origin-location-admin" value={newRide.origin} onChange={(e) => setNewRide(prev => ({ ...prev, origin: e.target.value }))} required placeholder="Ex: Rua Principal, 123" />
-                                    </div>
-                                     <div className="space-y-1">
-                                        <Label htmlFor="destination-location-admin">Local de Destino</Label>
-                                        <Input id="destination-location-admin" value={newRide.destination} onChange={(e) => setNewRide(prev => ({ ...prev, destination: e.target.value }))} required placeholder="Ex: Shopping Center" />
-                                    </div>
-                                </div>
-                                <div className="space-y-1">
-                                    <Label htmlFor="ride-value-admin">Valor da Corrida (R$)</Label>
-                                    <Input id="ride-value-admin" type="number" step="0.01" value={newRide.value} onChange={(e) => setNewRide(prev => ({ ...prev, value: e.target.value }))} required placeholder="25.50" />
-                                </div>
-                            </div>
-                            <DialogFooter>
-                                <DialogClose asChild>
-                                    <Button type="button" variant="secondary" id="close-new-ride-dialog-admin">Cancelar</Button>
-                                </DialogClose>
-                                <Button type="submit">Registrar e Atribuir</Button>
-                            </DialogFooter>
-                        </form>
-                    </DialogContent>
-                </Dialog>
-                <Dialog open={isAddUserDialogOpen} onOpenChange={setIsAddUserDialogOpen}>
-                    <DialogTrigger asChild>
-                        <Button>
-                            <PlusCircle className="mr-2 h-4 w-4" />
-                            Adicionar Usuário
-                        </Button>
-                    </DialogTrigger>
-                    <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
-                        <form onSubmit={handleAddUser}>
-                            <DialogHeader>
-                                <DialogTitle>Adicionar Novo Usuário</DialogTitle>
-                                <DialogDescription>
-                                    Preencha as informações para criar uma nova conta de usuário.
-                                </DialogDescription>
-                            </DialogHeader>
-                            <div className="space-y-4 py-4">
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div className="space-y-1">
-                                        <Label htmlFor={`${uniqueId}-name`}>Nome</Label>
-                                        <Input id={`${uniqueId}-name`} value={newUser.name} onChange={(e) => setNewUser(prev => ({ ...prev, name: e.target.value }))} placeholder="Nome Completo" required />
-                                    </div>
-                                    <div className="space-y-1">
-                                        <Label htmlFor={`${uniqueId}-email`}>Email</Label>
-                                        <Input id={`${uniqueId}-email`} type="email" value={newUser.email} onChange={(e) => setNewUser(prev => ({ ...prev, email: e.target.value }))} placeholder="email@exemplo.com" required />
-                                    </div>
-                                </div>
-                                <div className="space-y-1">
-                                    <Label htmlFor={`${uniqueId}-role`}>Perfil</Label>
-                                    <Select value={newUser.role} onValueChange={(value) => setNewUser(prev => ({...prev, role: value}))}>
-                                        <SelectTrigger id={`${uniqueId}-role`}>
-                                            <SelectValue placeholder="Selecione um perfil" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem value="Passageiro">Passageiro</SelectItem>
-                                            <SelectItem value="Motorista">Motorista</SelectItem>
-                                            <SelectItem value="Administrador">Administrador</SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div className="space-y-1">
-                                        <Label htmlFor={`${uniqueId}-password`}>Senha</Label>
-                                        <Input id={`${uniqueId}-password`} type="password" value={newUser.password} onChange={(e) => setNewUser(prev => ({ ...prev, password: e.target.value }))} placeholder="********" required />
-                                    </div>
-                                    <div className="space-y-1">
-                                        <Label htmlFor={`${uniqueId}-confirm-password`}>Confirmar Senha</Label>
-                                        <Input id={`${uniqueId}-confirm-password`} type="password" value={newUser.confirmPassword} onChange={(e) => setNewUser(prev => ({ ...prev, confirmPassword: e.target.value }))} placeholder="********" required />
-                                    </div>
-                                </div>
-                            </div>
-                            <DialogFooter>
-                                <Button type="submit">Salvar Usuário</Button>
-                            </DialogFooter>
-                        </form>
-                    </DialogContent>
-                </Dialog>
-            </div>
-
-            {/* Mobile View */}
-            <div className="grid gap-4 md:hidden">
-                {users.map((user) => (
-                    <div key={user.id} className="rounded-lg border bg-card p-4 space-y-3">
-                        <div className="flex items-center gap-3">
-                           <Avatar>
-                               <AvatarImage src={`https://placehold.co/40x40.png`} data-ai-hint={`${user.avatar} face`} />
-                               <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
-                           </Avatar>
-                           <div>
-                               <div className="font-medium">{user.name}</div>
-                               <div className="text-sm text-muted-foreground">{user.email}</div>
-                           </div>
-                        </div>
-                        <div className="flex justify-between items-center text-sm">
-                           <span className="text-muted-foreground">Perfil:</span>
-                           <Badge variant={user.role === 'Motorista' ? 'default' : user.role === 'Administrador' ? 'destructive' : 'secondary'} className="gap-1">
-                               {user.role === 'Motorista' ? <Car className="h-3 w-3" /> : <User className="h-3 w-3" />}
-                               {user.role}
-                           </Badge>
-                        </div>
-                        <div className="flex justify-between items-center text-sm">
-                           <span className="text-muted-foreground">Status:</span>
-                           <Badge variant={userStatuses[user.id] ? 'secondary' : 'destructive'}>
-                               {userStatuses[user.id] ? 'Ativo' : 'Inativo'}
-                           </Badge>
-                        </div>
-                        <div className="border-t pt-3">
-                            <p className="text-sm text-muted-foreground mb-2">Ações:</p>
-                             <div className="flex flex-wrap items-center justify-start gap-2">
-                                {user.role === 'Motorista' && (
-                                    <>
-                                        <Button variant="outline" size="icon" onClick={() => openLogDialog(user)}>
-                                            <ListCollapse className="h-4 w-4" />
-                                            <span className="sr-only">Ver Log de Status</span>
-                                        </Button>
-                                        <Button variant="outline" size="icon" onClick={() => handleGenerateReport(user)}>
-                                            <FileText className="h-4 w-4" />
-                                            <span className="sr-only">Gerar Relatório</span>
-                                        </Button>
-                                    </>
-                                )}
-                                <Button variant="outline" size="icon" onClick={() => openPasswordDialog(user)}>
-                                    <KeyRound className="h-4 w-4" />
-                                    <span className="sr-only">Alterar Senha</span>
+        <Card>
+            <CardHeader>
+                <CardTitle className="font-headline">Gerenciamento de Usuários</CardTitle>
+                <CardDescription>Adicione, remova, ative ou desative contas de passageiros e motoristas.</CardDescription>
+            </CardHeader>
+            <CardContent>
+                <div className="space-y-4">
+                    <div className="flex flex-col sm:flex-row justify-end gap-2">
+                        <Dialog open={isNewRideDialogOpen} onOpenChange={setIsNewRideDialogOpen}>
+                            <DialogTrigger asChild>
+                                 <Button variant="outline">
+                                    <Rocket className="mr-2 h-4 w-4" />
+                                    Iniciar Corrida Manualmente
                                 </Button>
-                                <Switch
-                                    checked={userStatuses[user.id]}
-                                    onCheckedChange={(checked) => handleStatusChange(user.id, checked)}
-                                    aria-label={`Toggle status for ${user.name}`}
-                                />
-                                <AlertDialog>
-                                    <AlertDialogTrigger asChild>
-                                        <Button variant="ghost" size="icon">
-                                            <Trash2 className="h-4 w-4 text-destructive" />
-                                        </Button>
-                                    </AlertDialogTrigger>
-                                    <AlertDialogContent>
-                                        <AlertDialogHeader>
-                                            <AlertDialogTitle>Você tem certeza absoluta?</AlertDialogTitle>
-                                            <AlertDialogDescription>
-                                                Essa ação não pode ser desfeita. Isso excluirá permanentemente a conta de <span className="font-bold">{user.name}</span>.
-                                            </AlertDialogDescription>
-                                        </AlertDialogHeader>
-                                        <AlertDialogFooter>
-                                            <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                                            <AlertDialogAction onClick={() => handleRemoveUser(user.id)}>Excluir</AlertDialogAction>
-                                        </AlertDialogFooter>
-                                    </AlertDialogContent>
-                                </AlertDialog>
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
-            
-            {/* Desktop View */}
-            <div className="hidden md:block overflow-x-auto rounded-md border">
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Usuário</TableHead>
-                            <TableHead>Perfil</TableHead>
-                            <TableHead className="text-center">Status</TableHead>
-                            <TableHead className="text-right">Ações</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {users.map((user) => (
-                            <TableRow key={user.id}>
-                                <TableCell>
-                                    <div className="flex items-center gap-3">
-                                        <Avatar>
-                                            <AvatarImage src={`https://placehold.co/40x40.png`} data-ai-hint={`${user.avatar} face`} />
-                                            <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
-                                        </Avatar>
-                                        <div>
-                                            <div className="font-medium">{user.name}</div>
-                                            <div className="text-sm text-muted-foreground">{user.email}</div>
+                            </DialogTrigger>
+                            <DialogContent>
+                                <form onSubmit={handleAddNewRide}>
+                                    <DialogHeader>
+                                        <DialogTitle>Registrar Nova Corrida</DialogTitle>
+                                        <DialogDescription>
+                                            Preencha os dados para uma corrida iniciada presencialmente e atribua a um motorista.
+                                        </DialogDescription>
+                                    </DialogHeader>
+                                    <div className="space-y-4 py-4">
+                                        <div className="space-y-1">
+                                            <Label htmlFor="driver-select">Atribuir ao Motorista</Label>
+                                            <Select value={newRide.driverId} onValueChange={(value) => setNewRide(prev => ({...prev, driverId: value}))} required>
+                                                <SelectTrigger id="driver-select">
+                                                    <SelectValue placeholder="Selecione um motorista" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    {availableDrivers.map(driver => (
+                                                        <SelectItem key={driver.id} value={driver.id}>{driver.name}</SelectItem>
+                                                    ))}
+                                                </SelectContent>
+                                            </Select>
+                                        </div>
+                                        <div className="space-y-1">
+                                            <Label htmlFor="passenger-name-admin">Nome do Passageiro (Opcional)</Label>
+                                            <Input id="passenger-name-admin" value={newRide.passenger} onChange={(e) => setNewRide(prev => ({ ...prev, passenger: e.target.value }))} placeholder="Passageiro Anônimo" />
+                                        </div>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <div className="space-y-1">
+                                                <Label htmlFor="origin-location-admin">Local de Partida</Label>
+                                                <Input id="origin-location-admin" value={newRide.origin} onChange={(e) => setNewRide(prev => ({ ...prev, origin: e.target.value }))} required placeholder="Ex: Rua Principal, 123" />
+                                            </div>
+                                             <div className="space-y-1">
+                                                <Label htmlFor="destination-location-admin">Local de Destino</Label>
+                                                <Input id="destination-location-admin" value={newRide.destination} onChange={(e) => setNewRide(prev => ({ ...prev, destination: e.target.value }))} required placeholder="Ex: Shopping Center" />
+                                            </div>
+                                        </div>
+                                        <div className="space-y-1">
+                                            <Label htmlFor="ride-value-admin">Valor da Corrida (R$)</Label>
+                                            <Input id="ride-value-admin" type="number" step="0.01" value={newRide.value} onChange={(e) => setNewRide(prev => ({ ...prev, value: e.target.value }))} required placeholder="25.50" />
                                         </div>
                                     </div>
-                                </TableCell>
-                                <TableCell>
-                                    <Badge variant={user.role === 'Motorista' ? 'default' : user.role === 'Administrador' ? 'destructive' : 'secondary'} className="gap-1">
-                                        {user.role === 'Motorista' ? <Car className="h-3 w-3" /> : user.role === 'Administrador' ? <User className="h-3 w-3" /> : <User className="h-3 w-3" />}
-                                        {user.role}
-                                    </Badge>
-                                </TableCell>
-                                <TableCell className="text-center">
-                                    <Badge variant={userStatuses[user.id] ? 'secondary' : 'destructive'}>
-                                        {userStatuses[user.id] ? 'Ativo' : 'Inativo'}
-                                    </Badge>
-                                </TableCell>
-                                <TableCell className="text-right">
-                                     <div className="flex flex-wrap items-center justify-end gap-1">
+                                    <DialogFooter>
+                                        <DialogClose asChild>
+                                            <Button type="button" variant="secondary" id="close-new-ride-dialog-admin">Cancelar</Button>
+                                        </DialogClose>
+                                        <Button type="submit">Registrar e Atribuir</Button>
+                                    </DialogFooter>
+                                </form>
+                            </DialogContent>
+                        </Dialog>
+                        <Dialog open={isAddUserDialogOpen} onOpenChange={setIsAddUserDialogOpen}>
+                            <DialogTrigger asChild>
+                                <Button>
+                                    <PlusCircle className="mr-2 h-4 w-4" />
+                                    Adicionar Usuário
+                                </Button>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
+                                <form onSubmit={handleAddUser}>
+                                    <DialogHeader>
+                                        <DialogTitle>Adicionar Novo Usuário</DialogTitle>
+                                        <DialogDescription>
+                                            Preencha as informações para criar uma nova conta de usuário.
+                                        </DialogDescription>
+                                    </DialogHeader>
+                                    <div className="space-y-4 py-4">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <div className="space-y-1">
+                                                <Label htmlFor={`${uniqueId}-name`}>Nome</Label>
+                                                <Input id={`${uniqueId}-name`} value={newUser.name} onChange={(e) => setNewUser(prev => ({ ...prev, name: e.target.value }))} placeholder="Nome Completo" required />
+                                            </div>
+                                            <div className="space-y-1">
+                                                <Label htmlFor={`${uniqueId}-email`}>Email</Label>
+                                                <Input id={`${uniqueId}-email`} type="email" value={newUser.email} onChange={(e) => setNewUser(prev => ({ ...prev, email: e.target.value }))} placeholder="email@exemplo.com" required />
+                                            </div>
+                                        </div>
+                                        <div className="space-y-1">
+                                            <Label htmlFor={`${uniqueId}-role`}>Perfil</Label>
+                                            <Select value={newUser.role} onValueChange={(value) => setNewUser(prev => ({...prev, role: value}))}>
+                                                <SelectTrigger id={`${uniqueId}-role`}>
+                                                    <SelectValue placeholder="Selecione um perfil" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectItem value="Passageiro">Passageiro</SelectItem>
+                                                    <SelectItem value="Motorista">Motorista</SelectItem>
+                                                    <SelectItem value="Administrador">Administrador</SelectItem>
+                                                </SelectContent>
+                                            </Select>
+                                        </div>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <div className="space-y-1">
+                                                <Label htmlFor={`${uniqueId}-password`}>Senha</Label>
+                                                <Input id={`${uniqueId}-password`} type="password" value={newUser.password} onChange={(e) => setNewUser(prev => ({ ...prev, password: e.target.value }))} placeholder="********" required />
+                                            </div>
+                                            <div className="space-y-1">
+                                                <Label htmlFor={`${uniqueId}-confirm-password`}>Confirmar Senha</Label>
+                                                <Input id={`${uniqueId}-confirm-password`} type="password" value={newUser.confirmPassword} onChange={(e) => setNewUser(prev => ({ ...prev, confirmPassword: e.target.value }))} placeholder="********" required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <DialogFooter>
+                                        <Button type="submit">Salvar Usuário</Button>
+                                    </DialogFooter>
+                                </form>
+                            </DialogContent>
+                        </Dialog>
+                    </div>
+
+                    {/* Mobile View */}
+                    <div className="grid gap-4 md:hidden">
+                        {users.map((user) => (
+                            <div key={user.id} className="rounded-lg border bg-card p-4 space-y-3">
+                                <div className="flex items-center gap-3">
+                                   <Avatar>
+                                       <AvatarImage src={`https://placehold.co/40x40.png`} data-ai-hint={`${user.avatar} face`} />
+                                       <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                                   </Avatar>
+                                   <div>
+                                       <div className="font-medium">{user.name}</div>
+                                       <div className="text-sm text-muted-foreground">{user.email}</div>
+                                   </div>
+                                </div>
+                                <div className="flex justify-between items-center text-sm">
+                                   <span className="text-muted-foreground">Perfil:</span>
+                                   <Badge variant={user.role === 'Motorista' ? 'default' : user.role === 'Administrador' ? 'destructive' : 'secondary'} className="gap-1">
+                                       {user.role === 'Motorista' ? <Car className="h-3 w-3" /> : <User className="h-3 w-3" />}
+                                       {user.role}
+                                   </Badge>
+                                </div>
+                                <div className="flex justify-between items-center text-sm">
+                                   <span className="text-muted-foreground">Status:</span>
+                                   <Badge variant={userStatuses[user.id] ? 'secondary' : 'destructive'}>
+                                       {userStatuses[user.id] ? 'Ativo' : 'Inativo'}
+                                   </Badge>
+                                </div>
+                                <div className="border-t pt-3">
+                                    <p className="text-sm text-muted-foreground mb-2">Ações:</p>
+                                     <div className="flex flex-wrap items-center justify-start gap-2">
                                         {user.role === 'Motorista' && (
                                             <>
                                                 <Button variant="outline" size="icon" onClick={() => openLogDialog(user)}>
@@ -515,87 +444,169 @@ export function UserManagementTable({ onReportGenerated }: { onReportGenerated: 
                                             </AlertDialogContent>
                                         </AlertDialog>
                                     </div>
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </div>
-            
-            <Dialog open={isLogDialogOpen} onOpenChange={setIsLogDialogOpen}>
-                <DialogContent className="sm:max-w-md">
-                    <DialogHeader>
-                        <DialogTitle>Log de Status - {selectedUser?.name}</DialogTitle>
-                        <DialogDescription>
-                            Histórico de quando o motorista ficou online, offline ou em viagem.
-                        </DialogDescription>
-                    </DialogHeader>
-                    <ScrollArea className="h-72 w-full rounded-md border">
-                        <div className="p-4">
-                            {selectedUserLogs.length > 0 ? (
-                                <ul className="space-y-4">
-                                    {selectedUserLogs.map((log, index) => (
-                                        <li key={index} className="flex items-center gap-4">
-                                            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-muted">
-                                                <Clock className="h-4 w-4 text-muted-foreground" />
-                                            </div>
-                                            <div className="flex-1">
-                                                <p className="font-medium">{log.status}</p>
-                                                <p className="text-sm text-muted-foreground">{new Date(log.timestamp).toLocaleString('pt-BR')}</p>
-                                            </div>
-                                            <Badge variant={
-                                                log.status === 'Online' ? 'secondary' : 
-                                                log.status === 'Offline' ? 'destructive' :
-                                                log.status === 'Em Viagem (Interior/Intermunicipal)' ? 'default' :
-                                                'outline'
-                                            }>{log.status}</Badge>
-                                        </li>
-                                    ))}
-                                </ul>
-                            ) : (
-                                <div className="text-center text-muted-foreground py-10">
-                                    <p>Nenhum registro de log encontrado para este motorista.</p>
                                 </div>
-                            )}
-                        </div>
-                    </ScrollArea>
-                    <DialogFooter>
-                        <Button variant="outline" onClick={() => setIsLogDialogOpen(false)}>Fechar</Button>
-                    </DialogFooter>
-                </DialogContent>
-            </Dialog>
-
-            <Dialog open={isPasswordDialogOpen} onOpenChange={setIsPasswordDialogOpen}>
-                <DialogContent className="sm:max-w-md">
-                    <form onSubmit={handleChangePassword}>
-                        <DialogHeader>
-                            <DialogTitle>Alterar Senha</DialogTitle>
-                            <DialogDescription>
-                                Defina uma nova senha para <span className="font-bold">{selectedUser?.name}</span>.
-                            </DialogDescription>
-                        </DialogHeader>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4">
-                            <div className="space-y-1">
-                                <Label htmlFor="new-password">Nova Senha</Label>
-                                <Input id="new-password" type="password" value={newPassword.password} onChange={(e) => setNewPassword(prev => ({...prev, password: e.target.value}))} placeholder="Nova senha forte" required />
                             </div>
-                            <div className="space-y-1">
-                                <Label htmlFor="confirm-new-password">Confirmar Nova Senha</Label>
-                                <Input id="confirm-new-password" type="password" value={newPassword.confirmPassword} onChange={(e) => setNewPassword(prev => ({...prev, confirmPassword: e.target.value}))} placeholder="Repita a nova senha" required />
-                            </div>
-                        </div>
-                        <DialogFooter>
-                             <Button type="button" variant="secondary" onClick={() => setIsPasswordDialogOpen(false)}>Cancelar</Button>
-                            <Button type="submit">Salvar Nova Senha</Button>
-                        </DialogFooter>
-                    </form>
-                </DialogContent>
-            </Dialog>
+                        ))}
+                    </div>
+                    
+                    {/* Desktop View */}
+                    <div className="hidden md:block overflow-x-auto rounded-md border">
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Usuário</TableHead>
+                                    <TableHead>Perfil</TableHead>
+                                    <TableHead className="text-center">Status</TableHead>
+                                    <TableHead className="text-right">Ações</TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {users.map((user) => (
+                                    <TableRow key={user.id}>
+                                        <TableCell>
+                                            <div className="flex items-center gap-3">
+                                                <Avatar>
+                                                    <AvatarImage src={`https://placehold.co/40x40.png`} data-ai-hint={`${user.avatar} face`} />
+                                                    <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                                                </Avatar>
+                                                <div>
+                                                    <div className="font-medium">{user.name}</div>
+                                                    <div className="text-sm text-muted-foreground">{user.email}</div>
+                                                </div>
+                                            </div>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Badge variant={user.role === 'Motorista' ? 'default' : user.role === 'Administrador' ? 'destructive' : 'secondary'} className="gap-1">
+                                                {user.role === 'Motorista' ? <Car className="h-3 w-3" /> : user.role === 'Administrador' ? <User className="h-3 w-3" /> : <User className="h-3 w-3" />}
+                                                {user.role}
+                                            </Badge>
+                                        </TableCell>
+                                        <TableCell className="text-center">
+                                            <Badge variant={userStatuses[user.id] ? 'secondary' : 'destructive'}>
+                                                {userStatuses[user.id] ? 'Ativo' : 'Inativo'}
+                                            </Badge>
+                                        </TableCell>
+                                        <TableCell className="text-right">
+                                             <div className="flex flex-wrap items-center justify-end gap-1">
+                                                {user.role === 'Motorista' && (
+                                                    <>
+                                                        <Button variant="outline" size="icon" onClick={() => openLogDialog(user)}>
+                                                            <ListCollapse className="h-4 w-4" />
+                                                            <span className="sr-only">Ver Log de Status</span>
+                                                        </Button>
+                                                        <Button variant="outline" size="icon" onClick={() => handleGenerateReport(user)}>
+                                                            <FileText className="h-4 w-4" />
+                                                            <span className="sr-only">Gerar Relatório</span>
+                                                        </Button>
+                                                    </>
+                                                )}
+                                                <Button variant="outline" size="icon" onClick={() => openPasswordDialog(user)}>
+                                                    <KeyRound className="h-4 w-4" />
+                                                    <span className="sr-only">Alterar Senha</span>
+                                                </Button>
+                                                <Switch
+                                                    checked={userStatuses[user.id]}
+                                                    onCheckedChange={(checked) => handleStatusChange(user.id, checked)}
+                                                    aria-label={`Toggle status for ${user.name}`}
+                                                />
+                                                <AlertDialog>
+                                                    <AlertDialogTrigger asChild>
+                                                        <Button variant="ghost" size="icon">
+                                                            <Trash2 className="h-4 w-4 text-destructive" />
+                                                        </Button>
+                                                    </AlertDialogTrigger>
+                                                    <AlertDialogContent>
+                                                        <AlertDialogHeader>
+                                                            <AlertDialogTitle>Você tem certeza absoluta?</AlertDialogTitle>
+                                                            <AlertDialogDescription>
+                                                                Essa ação não pode ser desfeita. Isso excluirá permanentemente a conta de <span className="font-bold">{user.name}</span>.
+                                                            </AlertDialogDescription>
+                                                        </AlertDialogHeader>
+                                                        <AlertDialogFooter>
+                                                            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                                                            <AlertDialogAction onClick={() => handleRemoveUser(user.id)}>Excluir</AlertDialogAction>
+                                                        </AlertDialogFooter>
+                                                    </AlertDialogContent>
+                                                </AlertDialog>
+                                            </div>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </div>
+                    
+                    <Dialog open={isLogDialogOpen} onOpenChange={setIsLogDialogOpen}>
+                        <DialogContent className="sm:max-w-md">
+                            <DialogHeader>
+                                <DialogTitle>Log de Status - {selectedUser?.name}</DialogTitle>
+                                <DialogDescription>
+                                    Histórico de quando o motorista ficou online, offline ou em viagem.
+                                </DialogDescription>
+                            </DialogHeader>
+                            <ScrollArea className="h-72 w-full rounded-md border">
+                                <div className="p-4">
+                                    {selectedUserLogs.length > 0 ? (
+                                        <ul className="space-y-4">
+                                            {selectedUserLogs.map((log, index) => (
+                                                <li key={index} className="flex items-center gap-4">
+                                                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-muted">
+                                                        <Clock className="h-4 w-4 text-muted-foreground" />
+                                                    </div>
+                                                    <div className="flex-1">
+                                                        <p className="font-medium">{log.status}</p>
+                                                        <p className="text-sm text-muted-foreground">{new Date(log.timestamp).toLocaleString('pt-BR')}</p>
+                                                    </div>
+                                                    <Badge variant={
+                                                        log.status === 'Online' ? 'secondary' : 
+                                                        log.status === 'Offline' ? 'destructive' :
+                                                        log.status === 'Em Viagem (Interior/Intermunicipal)' ? 'default' :
+                                                        'outline'
+                                                    }>{log.status}</Badge>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    ) : (
+                                        <div className="text-center text-muted-foreground py-10">
+                                            <p>Nenhum registro de log encontrado para este motorista.</p>
+                                        </div>
+                                    )}
+                                </div>
+                            </ScrollArea>
+                            <DialogFooter>
+                                <Button variant="outline" onClick={() => setIsLogDialogOpen(false)}>Fechar</Button>
+                            </DialogFooter>
+                        </DialogContent>
+                    </Dialog>
 
-        </div>
+                    <Dialog open={isPasswordDialogOpen} onOpenChange={setIsPasswordDialogOpen}>
+                        <DialogContent className="sm:max-w-md">
+                            <form onSubmit={handleChangePassword}>
+                                <DialogHeader>
+                                    <DialogTitle>Alterar Senha</DialogTitle>
+                                    <DialogDescription>
+                                        Defina uma nova senha para <span className="font-bold">{selectedUser?.name}</span>.
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4">
+                                    <div className="space-y-1">
+                                        <Label htmlFor="new-password">Nova Senha</Label>
+                                        <Input id="new-password" type="password" value={newPassword.password} onChange={(e) => setNewPassword(prev => ({...prev, password: e.target.value}))} placeholder="Nova senha forte" required />
+                                    </div>
+                                    <div className="space-y-1">
+                                        <Label htmlFor="confirm-new-password">Confirmar Nova Senha</Label>
+                                        <Input id="confirm-new-password" type="password" value={newPassword.confirmPassword} onChange={(e) => setNewPassword(prev => ({...prev, confirmPassword: e.target.value}))} placeholder="Repita a nova senha" required />
+                                    </div>
+                                </div>
+                                <DialogFooter>
+                                     <Button type="button" variant="secondary" onClick={() => setIsPasswordDialogOpen(false)}>Cancelar</Button>
+                                    <Button type="submit">Salvar Nova Senha</Button>
+                                </DialogFooter>
+                            </form>
+                        </DialogContent>
+                    </Dialog>
+                </div>
+            </CardContent>
+        </Card>
     );
 }
-
-    
-
-    

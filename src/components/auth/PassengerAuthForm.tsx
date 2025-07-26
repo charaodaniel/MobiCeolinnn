@@ -13,9 +13,14 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { CameraCaptureDialog } from '../shared/CameraCaptureDialog';
 import { Separator } from '../ui/separator';
 import { ChatHistory } from '../passenger/ChatHistory';
-import { Card, CardContent, CardFooter } from '../ui/card';
+import { Card, CardContent, CardHeader } from '../ui/card';
 
-export function PassengerAuthForm() {
+
+interface PassengerAuthFormProps {
+  onLoginSuccess?: () => void;
+}
+
+export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
   const { toast } = useToast();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [email, setEmail] = useState('');
@@ -34,6 +39,9 @@ export function PassengerAuthForm() {
             description: 'Bem-vindo de volta, João!',
         });
         setIsLoggedIn(true);
+        if (onLoginSuccess) {
+          onLoginSuccess();
+        }
     } else {
         toast({
             variant: 'destructive',
@@ -194,7 +202,7 @@ export function PassengerAuthForm() {
             </div>
         </div>
       </CardContent>
-      <CardFooter className="flex flex-col sm:flex-row gap-2">
+      <div className="flex flex-col sm:flex-row gap-2 p-6 pt-0">
         <Button onClick={handleLogin} className="w-full">
             <LogIn className="mr-2 h-4 w-4" />
             Entrar
@@ -203,7 +211,7 @@ export function PassengerAuthForm() {
             <UserPlus className="mr-2 h-4 w-4" />
             Registrar
         </Button>
-      </CardFooter>
+      </div>
     </Card>
   );
 }
