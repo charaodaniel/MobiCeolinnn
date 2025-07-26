@@ -1,7 +1,7 @@
 
 'use client';
 import { Button } from '@/components/ui/button';
-import { KeyRound, Car, Settings, UserCircle, ChevronRight, Upload, Camera, Eye } from 'lucide-react';
+import { KeyRound, Car, Settings, UserCircle, ChevronRight, Upload, Camera, Eye, Edit, X } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
 import { useState } from 'react';
@@ -13,7 +13,7 @@ import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Switch } from '../ui/switch';
 import Image from 'next/image';
 
-const DocumentUploader = ({ label, docId, value, onFileChange }: { label: string, docId: string, value: string | null, onFileChange: (file: string | null) => void }) => {
+const DocumentUploader = ({ label, docId, value, onFileChange, isEditing }: { label: string, docId: string, value: string | null, onFileChange: (file: string | null) => void, isEditing: boolean }) => {
     const { toast } = useToast();
     const [isCameraDialogOpen, setIsCameraDialogOpen] = useState(false);
 
@@ -57,28 +57,30 @@ const DocumentUploader = ({ label, docId, value, onFileChange }: { label: string
                         <p className="text-xs text-muted-foreground">Sem imagem</p>
                     </div>
                 )}
-                <div className="flex flex-col sm:flex-row w-full gap-2">
-                    <Button variant="secondary" className="w-full" asChild>
-                        <label htmlFor={`upload-${docId}`} className="cursor-pointer">
-                            <Upload className="mr-2" />
-                            Carregar
-                        </label>
-                    </Button>
-                    <input id={`upload-${docId}`} type="file" accept="image/*" className="hidden" onChange={handleFileSelect} />
-                    <Dialog open={isCameraDialogOpen} onOpenChange={setIsCameraDialogOpen}>
-                      <DialogTrigger asChild>
-                        <Button variant="outline" className="w-full">
-                          <Camera className="mr-2" />
-                          Câmera
+                {isEditing && (
+                    <div className="flex flex-col sm:flex-row w-full gap-2">
+                        <Button variant="secondary" className="w-full" asChild>
+                            <label htmlFor={`upload-${docId}`} className="cursor-pointer">
+                                <Upload className="mr-2" />
+                                Carregar
+                            </label>
                         </Button>
-                      </DialogTrigger>
-                      <CameraCaptureDialog 
-                        isOpen={isCameraDialogOpen}
-                        onImageSave={(image) => onFileChange(image)}
-                        onDialogClose={() => setIsCameraDialogOpen(false)}
-                      />
-                    </Dialog>
-                </div>
+                        <input id={`upload-${docId}`} type="file" accept="image/*" className="hidden" onChange={handleFileSelect} />
+                        <Dialog open={isCameraDialogOpen} onOpenChange={setIsCameraDialogOpen}>
+                          <DialogTrigger asChild>
+                            <Button variant="outline" className="w-full">
+                              <Camera className="mr-2" />
+                              Câmera
+                            </Button>
+                          </DialogTrigger>
+                          <CameraCaptureDialog 
+                            isOpen={isCameraDialogOpen}
+                            onImageSave={(image) => onFileChange(image)}
+                            onDialogClose={() => setIsCameraDialogOpen(false)}
+                          />
+                        </Dialog>
+                    </div>
+                )}
             </div>
         </div>
     );
@@ -90,10 +92,14 @@ export function ProfileForm() {
   const [isPersonalInfoOpen, setIsPersonalInfoOpen] = useState(false);
   const [isVehicleOpen, setIsVehicleOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
+  const [isEditingPersonalInfo, setIsEditingPersonalInfo] = useState(false);
+  const [isEditingVehicleInfo, setIsEditingVehicleInfo] = useState(false);
+  const [isEditingSettings, setIsEditingSettings] = useState(false);
   
   // States for Personal Info
   const [name, setName] = useState('Carlos Motorista');
-  const [pixKey, setPixKey] = useState('');
+  const [pixKey, setPixKey] = useState('carlos.motorista@email.com');
   const [newPassword, setNewPassword] = useState({ password: '', confirmPassword: '' });
 
   // States for Vehicle & Docs
@@ -105,18 +111,18 @@ export function ProfileForm() {
   
   // States for Settings
   const [fareType, setFareType] = useState('fixed');
-  const [fixedRate, setFixedRate] = useState('');
-  const [kmRate, setKmRate] = useState('');
+  const [fixedRate, setFixedRate] = useState('25.50');
+  const [kmRate, setKmRate] = useState('3.50');
   const [acceptsRural, setAcceptsRural] = useState(true);
 
-  const handleSaveChanges = (section: string) => {
+  const handleSave = (section: string) => {
     toast({
       title: 'Sucesso!',
       description: `Suas alterações na seção de ${section} foram salvas.`,
     });
-    setIsPersonalInfoOpen(false);
-    setIsVehicleOpen(false);
-    setIsSettingsOpen(false);
+    setIsEditingPersonalInfo(false);
+    setIsEditingVehicleInfo(false);
+    setIsEditingSettings(false);
   };
   
   const handleChangePassword = (e: React.FormEvent) => {
@@ -131,14 +137,21 @@ export function ProfileForm() {
     }
     toast({ title: 'Senha Alterada!', description: 'Sua senha foi alterada com sucesso.' });
     setNewPassword({ password: '', confirmPassword: '' });
-    // In a real app, you would close the password part of the dialog
   };
+  
+  const handleCancelEdit = (section: string) => {
+      // Here you would typically reset the state to its original values
+      // For this prototype, we just switch back to view mode
+      if (section === 'personal') setIsEditingPersonalInfo(false);
+      if (section === 'vehicle') setIsEditingVehicleInfo(false);
+      if (section === 'settings') setIsEditingSettings(false);
+  }
 
   return (
     <div className="bg-card rounded-lg">
       <ul>
         {/* Personal Info */}
-        <Dialog open={isPersonalInfoOpen} onOpenChange={setIsPersonalInfoOpen}>
+        <Dialog open={isPersonalInfoOpen} onOpenChange={(open) => { setIsPersonalInfoOpen(open); if(!open) setIsEditingPersonalInfo(false); }}>
             <DialogTrigger asChild>
                  <li className="flex items-center justify-between p-4 cursor-pointer hover:bg-muted/50">
                     <div className="flex items-center gap-4">
@@ -152,39 +165,64 @@ export function ProfileForm() {
                 <DialogHeader>
                     <DialogTitle>Informações Pessoais</DialogTitle>
                     <DialogDescription>
-                        Gerencie seus dados pessoais e de pagamento.
+                        {isEditingPersonalInfo ? 'Edite seus dados pessoais e de pagamento.' : 'Gerencie seus dados pessoais e de pagamento.'}
                     </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-4 py-4">
                     <div className="space-y-1">
                         <Label htmlFor="name">Nome Completo</Label>
-                        <Input id="name" value={name} onChange={e => setName(e.target.value)} />
+                        {isEditingPersonalInfo ? (
+                            <Input id="name" value={name} onChange={e => setName(e.target.value)} />
+                        ) : (
+                            <p className="text-sm font-medium p-2">{name}</p>
+                        )}
                     </div>
                     <div className="space-y-1">
                         <Label htmlFor="email">Email</Label>
-                        <Input id="email" type="email" value="carlos@email.com" readOnly />
+                        <p className="text-sm text-muted-foreground p-2">carlos@email.com</p>
                     </div>
                     <div className="space-y-1">
                         <Label htmlFor="pix-key">Chave PIX</Label>
-                        <Input id="pix-key" value={pixKey} onChange={e => setPixKey(e.target.value)} placeholder="Insira sua chave PIX" />
+                        {isEditingPersonalInfo ? (
+                            <Input id="pix-key" value={pixKey} onChange={e => setPixKey(e.target.value)} placeholder="Insira sua chave PIX" />
+                        ) : (
+                            <p className="text-sm font-medium p-2">{pixKey || 'Não informada'}</p>
+                        )}
                     </div>
-                    <Separator />
-                    <form onSubmit={handleChangePassword} className="space-y-4">
-                        <h3 className="font-medium">Alterar Senha</h3>
-                        <div className="space-y-1">
-                            <Label htmlFor="new-password">Nova Senha</Label>
-                            <Input id="new-password" type="password" value={newPassword.password} onChange={(e) => setNewPassword(prev => ({...prev, password: e.target.value}))} required />
-                        </div>
-                        <div className="space-y-1">
-                            <Label htmlFor="confirm-new-password">Confirmar Nova Senha</Label>
-                            <Input id="confirm-new-password" type="password" value={newPassword.confirmPassword} onChange={(e) => setNewPassword(prev => ({...prev, confirmPassword: e.target.value}))} required />
-                        </div>
-                        <Button type="submit" variant="secondary" className="w-full">Confirmar Nova Senha</Button>
-                    </form>
+
+                    {isEditingPersonalInfo && (
+                        <>
+                            <Separator />
+                            <form onSubmit={handleChangePassword} className="space-y-4">
+                                <h3 className="font-medium">Alterar Senha</h3>
+                                <div className="space-y-1">
+                                    <Label htmlFor="new-password">Nova Senha</Label>
+                                    <Input id="new-password" type="password" value={newPassword.password} onChange={(e) => setNewPassword(prev => ({...prev, password: e.target.value}))} required />
+                                </div>
+                                <div className="space-y-1">
+                                    <Label htmlFor="confirm-new-password">Confirmar Nova Senha</Label>
+                                    <Input id="confirm-new-password" type="password" value={newPassword.confirmPassword} onChange={(e) => setNewPassword(prev => ({...prev, confirmPassword: e.target.value}))} required />
+                                </div>
+                                <Button type="submit" variant="secondary" className="w-full">Confirmar Nova Senha</Button>
+                            </form>
+                        </>
+                    )}
                 </div>
                 <DialogFooter>
-                    <Button variant="outline" onClick={() => setIsPersonalInfoOpen(false)}>Cancelar</Button>
-                    <Button onClick={() => handleSaveChanges('Informações Pessoais')}>Salvar</Button>
+                    {isEditingPersonalInfo ? (
+                        <>
+                           <Button variant="outline" onClick={() => handleCancelEdit('personal')}>
+                                <X className="mr-2" />
+                                Cancelar
+                            </Button>
+                           <Button onClick={() => handleSave('Informações Pessoais')}>Salvar Alterações</Button>
+                        </>
+                    ) : (
+                        <Button onClick={() => setIsEditingPersonalInfo(true)}>
+                            <Edit className="mr-2" />
+                            Editar
+                        </Button>
+                    )}
                 </DialogFooter>
             </DialogContent>
         </Dialog>
@@ -192,7 +230,7 @@ export function ProfileForm() {
         <Separator />
         
         {/* Vehicle and Documents */}
-        <Dialog open={isVehicleOpen} onOpenChange={setIsVehicleOpen}>
+        <Dialog open={isVehicleOpen} onOpenChange={(open) => { setIsVehicleOpen(open); if(!open) setIsEditingVehicleInfo(false); }}>
             <DialogTrigger asChild>
                  <li className="flex items-center justify-between p-4 cursor-pointer hover:bg-muted/50">
                     <div className="flex items-center gap-4">
@@ -206,23 +244,32 @@ export function ProfileForm() {
                  <DialogHeader>
                     <DialogTitle>Veículo e Documentos</DialogTitle>
                     <DialogDescription>
-                        Mantenha as informações e fotos do seu veículo e documentos atualizadas.
+                        {isEditingVehicleInfo ? 'Edite as informações do seu veículo e atualize os documentos.' : 'Mantenha as informações e fotos do seu veículo e documentos atualizadas.'}
                     </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-4 py-4">
                     <div className="space-y-1">
                         <Label htmlFor="vehicle-model">Modelo do Veículo</Label>
-                        <Input id="vehicle-model" value={vehicleModel} onChange={e => setVehicleModel(e.target.value)} />
+                        {isEditingVehicleInfo ? (
+                           <Input id="vehicle-model" value={vehicleModel} onChange={e => setVehicleModel(e.target.value)} />
+                        ) : (
+                           <p className="text-sm font-medium p-2">{vehicleModel}</p>
+                        )}
                     </div>
                     <div className="space-y-1">
                         <Label htmlFor="license-plate">Placa</Label>
-                        <Input id="license-plate" value={licensePlate} onChange={e => setLicensePlate(e.target.value)} />
+                        {isEditingVehicleInfo ? (
+                           <Input id="license-plate" value={licensePlate} onChange={e => setLicensePlate(e.target.value)} />
+                        ) : (
+                           <p className="text-sm font-medium p-2">{licensePlate}</p>
+                        )}
                     </div>
                     <DocumentUploader
                         label="Foto do Veículo"
                         docId="vehicle-photo"
                         value={vehiclePhoto}
                         onFileChange={setVehiclePhoto}
+                        isEditing={isEditingVehicleInfo}
                     />
                     <Separator />
                     <DocumentUploader
@@ -230,17 +277,31 @@ export function ProfileForm() {
                         docId="cnh-doc"
                         value={cnhDocument}
                         onFileChange={setCnhDocument}
+                        isEditing={isEditingVehicleInfo}
                     />
                     <DocumentUploader
                         label="Documento do Veículo (CRLV)"
                         docId="crlv-doc"
                         value={crlvDocument}
                         onFileChange={setCrlvDocument}
+                        isEditing={isEditingVehicleInfo}
                     />
                 </div>
                 <DialogFooter>
-                    <Button variant="outline" onClick={() => setIsVehicleOpen(false)}>Cancelar</Button>
-                    <Button onClick={() => handleSaveChanges('Veículo e Documentos')}>Salvar</Button>
+                    {isEditingVehicleInfo ? (
+                        <>
+                           <Button variant="outline" onClick={() => handleCancelEdit('vehicle')}>
+                               <X className="mr-2" />
+                               Cancelar
+                           </Button>
+                           <Button onClick={() => handleSave('Veículo e Documentos')}>Salvar Alterações</Button>
+                        </>
+                    ) : (
+                        <Button onClick={() => setIsEditingVehicleInfo(true)}>
+                            <Edit className="mr-2" />
+                            Editar
+                        </Button>
+                    )}
                 </DialogFooter>
             </DialogContent>
         </Dialog>
@@ -248,7 +309,7 @@ export function ProfileForm() {
         <Separator />
 
         {/* Ride Settings */}
-        <Dialog open={isSettingsOpen} onOpenChange={setIsSettingsOpen}>
+        <Dialog open={isSettingsOpen} onOpenChange={(open) => { setIsSettingsOpen(open); if(!open) setIsEditingSettings(false); }}>
             <DialogTrigger asChild>
                 <li className="flex items-center justify-between p-4 cursor-pointer hover:bg-muted/50">
                     <div className="flex items-center gap-4">
@@ -262,13 +323,13 @@ export function ProfileForm() {
                  <DialogHeader>
                     <DialogTitle>Configurações de Corrida</DialogTitle>
                     <DialogDescription>
-                        Defina suas preferências de tarifa para corridas urbanas.
+                         {isEditingSettings ? 'Defina suas preferências de tarifa para corridas urbanas.' : 'Gerencie suas preferências de tarifa para corridas.'}
                     </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-4 py-4">
                     <div className="space-y-2">
                         <Label>Tipo de Tarifa (Urbano)</Label>
-                        <RadioGroup value={fareType} onValueChange={setFareType} className="flex items-center gap-4 pt-2">
+                        <RadioGroup value={fareType} onValueChange={setFareType} className="flex items-center gap-4 pt-2" disabled={!isEditingSettings}>
                             <div className="flex items-center space-x-2">
                                 <RadioGroupItem value="fixed" id="r-fixed" />
                                 <Label htmlFor="r-fixed">Valor Fixo</Label>
@@ -282,12 +343,20 @@ export function ProfileForm() {
                     {fareType === 'fixed' ? (
                         <div className="space-y-1">
                             <Label htmlFor="fixed-rate">Tarifa Fixa (R$)</Label>
-                            <Input id="fixed-rate" type="number" value={fixedRate} onChange={e => setFixedRate(e.target.value)} placeholder="25,50" />
+                            {isEditingSettings ? (
+                               <Input id="fixed-rate" type="number" value={fixedRate} onChange={e => setFixedRate(e.target.value)} placeholder="25,50" />
+                            ) : (
+                                <p className="text-sm font-medium p-2">R$ {fixedRate}</p>
+                            )}
                         </div>
                     ) : (
                         <div className="space-y-1">
                             <Label htmlFor="km-rate">Tarifa por KM (R$)</Label>
-                            <Input id="km-rate" type="number" value={kmRate} onChange={e => setKmRate(e.target.value)} placeholder="3,50" />
+                            {isEditingSettings ? (
+                                <Input id="km-rate" type="number" value={kmRate} onChange={e => setKmRate(e.target.value)} placeholder="3,50" />
+                            ) : (
+                                <p className="text-sm font-medium p-2">R$ {kmRate} / km</p>
+                            )}
                         </div>
                     )}
                     <Separator />
@@ -298,12 +367,24 @@ export function ProfileForm() {
                                 Permite que passageiros negociem valores para fora da cidade.
                             </p>
                         </div>
-                        <Switch id="negotiate-rural" checked={acceptsRural} onCheckedChange={setAcceptsRural} />
+                        <Switch id="negotiate-rural" checked={acceptsRural} onCheckedChange={setAcceptsRural} disabled={!isEditingSettings} />
                     </div>
                 </div>
                  <DialogFooter>
-                    <Button variant="outline" onClick={() => setIsSettingsOpen(false)}>Cancelar</Button>
-                    <Button onClick={() => handleSaveChanges('Configurações')}>Salvar</Button>
+                    {isEditingSettings ? (
+                        <>
+                           <Button variant="outline" onClick={() => handleCancelEdit('settings')}>
+                                <X className="mr-2" />
+                               Cancelar
+                           </Button>
+                           <Button onClick={() => handleSave('Configurações')}>Salvar Alterações</Button>
+                        </>
+                    ) : (
+                        <Button onClick={() => setIsEditingSettings(true)}>
+                            <Edit className="mr-2" />
+                            Editar
+                        </Button>
+                    )}
                 </DialogFooter>
             </DialogContent>
         </Dialog>
@@ -311,3 +392,5 @@ export function ProfileForm() {
     </div>
   );
 }
+
+    
