@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -83,7 +84,7 @@ export function PassengerAuthForm() {
   if (isLoggedIn) {
       return (
         <Card className="w-full border-0 shadow-none">
-            <CardHeader className="text-center">
+            <CardHeader className="text-center p-6 pt-0">
                 <div className="flex flex-col items-center gap-4">
                     <Dialog open={isCameraDialogOpen} onOpenChange={setIsCameraDialogOpen}>
                         <DialogTrigger asChild>
@@ -109,7 +110,7 @@ export function PassengerAuthForm() {
                     </div>
                 </div>
             </CardHeader>
-            <CardContent className="space-y-4 p-6">
+            <CardContent className="space-y-4 p-6 pt-0">
                  <Dialog open={isPasswordDialogOpen} onOpenChange={setIsPasswordDialogOpen}>
                     <DialogTrigger asChild>
                         <Button variant="outline" className="w-full">
