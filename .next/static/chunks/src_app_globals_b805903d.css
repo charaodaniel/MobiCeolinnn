@@ -712,12 +712,20 @@ body {
   height: 1px;
 }
 
+.h-24 {
+  height: 6rem;
+}
+
 .max-h-96 {
   max-height: 24rem;
 }
 
 .max-h-screen {
   max-height: 100vh;
+}
+
+.max-h-\[80vh\] {
+  max-height: 80vh;
 }
 
 .min-h-\[80px\] {
@@ -820,6 +828,10 @@ body {
   width: 100%;
 }
 
+.w-32 {
+  width: 8rem;
+}
+
 .min-w-0 {
   min-width: 0;
 }
@@ -854,6 +866,10 @@ body {
 
 .max-w-none {
   max-width: none;
+}
+
+.max-w-3xl {
+  max-width: 48rem;
 }
 
 .flex-1 {
@@ -1309,6 +1325,10 @@ body {
   background-color: #0000;
 }
 
+.bg-black\/50 {
+  background-color: #00000080;
+}
+
 .bg-gradient-to-br {
   background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
 }
@@ -1333,6 +1353,10 @@ body {
 
 .fill-yellow-400 {
   fill: #facc15;
+}
+
+.object-contain {
+  object-fit: contain;
 }
 
 .object-cover {
@@ -1653,6 +1677,11 @@ body {
 .text-yellow-400 {
   --tw-text-opacity: 1;
   color: rgb(250 204 21 / var(--tw-text-opacity, 1));
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
 .underline-offset-4 {

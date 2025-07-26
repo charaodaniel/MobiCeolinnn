@@ -1,11 +1,10 @@
-
 'use client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Star, KeyRound, DollarSign, Camera, Upload } from 'lucide-react';
+import { Star, KeyRound, DollarSign, Camera, Upload, Eye } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog';
@@ -16,7 +15,7 @@ import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Alert, AlertTitle, AlertDescription } from '../ui/alert';
 import { cn } from '@/lib/utils';
 
-function CameraCaptureDialog({ setAvatarImage }: { setAvatarImage: (image: string) => void }) {
+function CameraCaptureDialog({ onImageSave, onDialogClose }: { onImageSave: (image: string) => void, onDialogClose: () => void }) {
     const { toast } = useToast();
     const videoRef = useRef<HTMLVideoElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -25,12 +24,10 @@ function CameraCaptureDialog({ setAvatarImage }: { setAvatarImage: (image: strin
     const [stream, setStream] = useState<MediaStream | null>(null);
 
     const getCameraPermission = async () => {
-      // Clean up previous stream if it exists
       if (stream) {
           stream.getTracks().forEach(track => track.stop());
       }
-
-      setCapturedImage(null); // Reset captured image
+      setCapturedImage(null);
 
       try {
         const newStream = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -63,8 +60,6 @@ function CameraCaptureDialog({ setAvatarImage }: { setAvatarImage: (image: strin
                 context.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
                 const dataUrl = canvas.toDataURL('image/png');
                 setCapturedImage(dataUrl);
-
-                // Stop the camera stream after capturing
                 if (stream) {
                     stream.getTracks().forEach(track => track.stop());
                     setStream(null);
@@ -75,13 +70,12 @@ function CameraCaptureDialog({ setAvatarImage }: { setAvatarImage: (image: strin
 
     const handleSavePhoto = () => {
         if (capturedImage) {
-            setAvatarImage(capturedImage);
-            // In a real app, you would upload `capturedImage` to your server
-            toast({ title: 'Foto Salva!', description: 'Sua nova foto de perfil foi salva com sucesso!' });
+            onImageSave(capturedImage);
+            toast({ title: 'Foto Salva!', description: 'A imagem foi salva com sucesso!' });
+            onDialogClose();
         }
     }
 
-    // Effect to clean up the stream when the component unmounts or the dialog closes
     useEffect(() => {
         return () => {
             if (stream) {
@@ -93,9 +87,9 @@ function CameraCaptureDialog({ setAvatarImage }: { setAvatarImage: (image: strin
     return (
         <DialogContent className="max-w-md">
             <DialogHeader>
-                <DialogTitle>Atualizar Foto de Perfil</DialogTitle>
+                <DialogTitle>Capturar Imagem</DialogTitle>
                 <DialogDescription>
-                    Tire uma nova foto ou envie um arquivo.
+                    Tire uma foto para o documento.
                 </DialogDescription>
             </DialogHeader>
             <div className="space-y-4">
@@ -140,15 +134,6 @@ function CameraCaptureDialog({ setAvatarImage }: { setAvatarImage: (image: strin
                                 Abrir Câmera
                             </Button>
                         )}
-                        <div className="relative w-full">
-                            <Button variant="secondary" className="w-full" asChild>
-                                <label htmlFor="upload-button">
-                                    <Upload className="mr-2 h-4 w-4" />
-                                    Enviar Arquivo
-                                </label>
-                            </Button>
-                            <input id="upload-button" type="file" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
-                        </div>
                     </>
                 )}
             </DialogFooter>
@@ -156,12 +141,84 @@ function CameraCaptureDialog({ setAvatarImage }: { setAvatarImage: (image: strin
     );
 }
 
+const DocumentUploader = ({ label, docId, value, onFileChange }: { label: string, docId: string, value: string | null, onFileChange: (file: string | null) => void }) => {
+    const { toast } = useToast();
+    const [isCameraDialogOpen, setIsCameraDialogOpen] = useState(false);
+
+    const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                onFileChange(e.target?.result as string);
+                toast({ title: "Arquivo Carregado", description: `O arquivo para ${label} foi carregado.` });
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+    
+    return (
+        <div className="space-y-2">
+            <Label htmlFor={docId}>{label}</Label>
+            <div className="flex flex-col items-center gap-4 p-4 border rounded-lg">
+                {value ? (
+                    <Dialog>
+                        <DialogTrigger asChild>
+                            <div className="relative cursor-pointer group">
+                                <Image src={value} alt={`Pré-visualização de ${label}`} width={128} height={96} className="rounded-lg object-cover" />
+                                <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded-lg">
+                                    <Eye className="h-8 w-8 text-white" />
+                                </div>
+                            </div>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-3xl">
+                             <DialogHeader>
+                                <DialogTitle>{label}</DialogTitle>
+                            </DialogHeader>
+                            <div className="flex justify-center">
+                                <Image src={value} alt={`Visualização de ${label}`} width={800} height={600} className="rounded-lg object-contain max-h-[80vh]" />
+                            </div>
+                        </DialogContent>
+                    </Dialog>
+                ) : (
+                    <div className="h-24 w-32 bg-muted rounded-lg flex items-center justify-center">
+                        <p className="text-xs text-muted-foreground">Sem imagem</p>
+                    </div>
+                )}
+                <div className="flex w-full gap-2">
+                    <Button variant="secondary" className="w-full" asChild>
+                        <label htmlFor={`upload-${docId}`} className="cursor-pointer">
+                            <Upload className="mr-2" />
+                            Carregar
+                        </label>
+                    </Button>
+                    <input id={`upload-${docId}`} type="file" accept="image/*" className="hidden" onChange={handleFileSelect} />
+                    <Dialog open={isCameraDialogOpen} onOpenChange={setIsCameraDialogOpen}>
+                      <DialogTrigger asChild>
+                        <Button variant="outline" className="w-full">
+                          <Camera className="mr-2" />
+                          Câmera
+                        </Button>
+                      </DialogTrigger>
+                      <CameraCaptureDialog 
+                        onImageSave={(image) => onFileChange(image)}
+                        onDialogClose={() => setIsCameraDialogOpen(false)}
+                      />
+                    </Dialog>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 export function ProfileForm() {
   const { toast } = useToast();
   const [status, setStatus] = useState('online');
   const [fareType, setFareType] = useState('fixed');
   const [avatarImage, setAvatarImage] = useState('https://placehold.co/128x128.png');
+  const [isAvatarCameraOpen, setIsAvatarCameraOpen] = useState(false);
+  const [cnhDocument, setCnhDocument] = useState<string | null>(null);
+  const [crlvDocument, setCrlvDocument] = useState<string | null>(null);
 
   const handleSave = () => {
     toast({
@@ -183,14 +240,17 @@ export function ProfileForm() {
       <CardHeader>
         <div className="flex items-start justify-between gap-4">
             <div className="flex items-center gap-4">
-                <Dialog>
+                <Dialog open={isAvatarCameraOpen} onOpenChange={setIsAvatarCameraOpen}>
                   <DialogTrigger asChild>
                     <Avatar className="h-16 w-16 cursor-pointer">
                         <AvatarImage src={avatarImage} data-ai-hint="person portrait" />
                         <AvatarFallback>CM</AvatarFallback>
                     </Avatar>
                   </DialogTrigger>
-                  <CameraCaptureDialog setAvatarImage={setAvatarImage} />
+                  <CameraCaptureDialog 
+                    onImageSave={setAvatarImage} 
+                    onDialogClose={() => setIsAvatarCameraOpen(false)}
+                  />
                 </Dialog>
                 <div>
                     <CardTitle className="font-headline text-2xl">Carlos Motorista</CardTitle>
@@ -239,18 +299,18 @@ export function ProfileForm() {
         <div className="space-y-4">
             <h3 className="font-headline text-lg">Documentos</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                 <div className="space-y-1">
-                    <Label htmlFor="profile-picture">Foto de Perfil</Label>
-                    <Input id="profile-picture" type="file" />
-                </div>
-                <div className="space-y-1">
-                    <Label htmlFor="cnh-document">Carteira de Habilitação (CNH)</Label>
-                    <Input id="cnh-document" type="file" />
-                </div>
-                <div className="space-y-1">
-                    <Label htmlFor="crlv-document">Documento do Veículo (CRLV)</Label>
-                    <Input id="crlv-document" type="file" />
-                </div>
+                <DocumentUploader
+                  label="Carteira de Habilitação (CNH)"
+                  docId="cnh-doc"
+                  value={cnhDocument}
+                  onFileChange={setCnhDocument}
+                />
+                <DocumentUploader
+                  label="Documento do Veículo (CRLV)"
+                  docId="crlv-doc"
+                  value={crlvDocument}
+                  onFileChange={setCrlvDocument}
+                />
             </div>
         </div>
         <div className="space-y-4">
@@ -312,6 +372,3 @@ export function ProfileForm() {
     </Card>
   );
 }
-
-
-    

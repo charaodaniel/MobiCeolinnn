@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 
 export default function DriverDashboard() {
   return (
-    <AppLayout title="Painel do Motorista">
+    <AppLayout title="Painel do Motorista" showDriverAvatar={true}>
       <div className="grid lg:grid-cols-2 gap-8 p-4 md:p-6 lg:p-8">
         <div className="space-y-8">
           <ProfileForm />
