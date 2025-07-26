@@ -186,7 +186,7 @@ const DocumentUploader = ({ label, docId, value, onFileChange }: { label: string
                         <p className="text-xs text-muted-foreground">Sem imagem</p>
                     </div>
                 )}
-                <div className="flex w-full gap-2">
+                <div className="flex flex-col w-full gap-2">
                     <Button variant="secondary" className="w-full" asChild>
                         <label htmlFor={`upload-${docId}`} className="cursor-pointer">
                             <Upload className="mr-2" />
@@ -421,9 +421,9 @@ export function ProfileForm() {
                         </div>
                     </div>
                 )}
-                 <div className="flex items-center space-x-2 pt-5">
+                 <div className="flex items-start gap-3 pt-5">
                     <Switch id="negotiate-rural" />
-                    <Label htmlFor="negotiate-rural">Aceitar negociação para interior/intermunicipal</Label>
+                    <Label htmlFor="negotiate-rural" className="flex-1 cursor-pointer">Aceitar negociação para interior/intermunicipal</Label>
                 </div>
             </div>
         </div>

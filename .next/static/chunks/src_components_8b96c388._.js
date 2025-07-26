@@ -3077,7 +3077,7 @@ function ProfileForm() {
                                                     columnNumber: 25
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogContent"], {
-                                                    className: "sm:max-w-[425px] max-h-[90vh] overflow-y-auto",
+                                                    className: "sm:max-w-md",
                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
                                                         onSubmit: handleChangePassword,
                                                         children: [
@@ -3104,7 +3104,7 @@ function ProfileForm() {
                                                                 columnNumber: 33
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                className: "grid gap-4 py-4",
+                                                                className: "grid grid-cols-1 sm:grid-cols-2 gap-4 py-4",
                                                                 children: [
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                         className: "space-y-1",
@@ -5207,20 +5207,20 @@ function DriverRideHistory() {
                             children: "Histórico de Viagens"
                         }, void 0, false, {
                             fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                            lineNumber: 151,
+                            lineNumber: 152,
                             columnNumber: 17
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardDescription"], {
                             children: "Visualize suas corridas concluídas."
                         }, void 0, false, {
                             fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                            lineNumber: 152,
+                            lineNumber: 153,
                             columnNumber: 17
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                    lineNumber: 150,
+                    lineNumber: 151,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -5231,7 +5231,7 @@ function DriverRideHistory() {
                                 className: "h-10 w-10 mb-4"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                lineNumber: 156,
+                                lineNumber: 157,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -5239,7 +5239,7 @@ function DriverRideHistory() {
                                 children: "Nenhuma corrida encontrada"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                lineNumber: 157,
+                                lineNumber: 158,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -5247,24 +5247,24 @@ function DriverRideHistory() {
                                 children: "Seu histórico de corridas aparecerá aqui."
                             }, void 0, false, {
                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                lineNumber: 158,
+                                lineNumber: 159,
                                 columnNumber: 25
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                        lineNumber: 155,
+                        lineNumber: 156,
                         columnNumber: 17
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                    lineNumber: 154,
+                    lineNumber: 155,
                     columnNumber: 13
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-            lineNumber: 149,
+            lineNumber: 150,
             columnNumber: 9
         }, this);
     }
@@ -5281,20 +5281,20 @@ function DriverRideHistory() {
                                 children: "Histórico de Viagens"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                lineNumber: 169,
+                                lineNumber: 170,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardDescription"], {
                                 children: "Visualize suas corridas concluídas."
                             }, void 0, false, {
                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                lineNumber: 170,
+                                lineNumber: 171,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                        lineNumber: 168,
+                        lineNumber: 169,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5312,19 +5312,19 @@ function DriverRideHistory() {
                                                     className: "mr-2 h-4 w-4"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                    lineNumber: 176,
+                                                    lineNumber: 177,
                                                     columnNumber: 29
                                                 }, this),
                                                 "Iniciar Nova Corrida"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                            lineNumber: 175,
+                                            lineNumber: 176,
                                             columnNumber: 25
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                        lineNumber: 174,
+                                        lineNumber: 175,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogContent"], {
@@ -5337,24 +5337,24 @@ function DriverRideHistory() {
                                                             children: "Registrar Nova Corrida"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                            lineNumber: 183,
+                                                            lineNumber: 184,
                                                             columnNumber: 33
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogDescription"], {
                                                             children: "Preencha os dados para uma corrida iniciada presencialmente."
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                            lineNumber: 184,
+                                                            lineNumber: 185,
                                                             columnNumber: 33
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                    lineNumber: 182,
+                                                    lineNumber: 183,
                                                     columnNumber: 29
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "grid gap-4 py-4",
+                                                    className: "space-y-4 py-4",
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                             className: "space-y-1",
@@ -5364,7 +5364,7 @@ function DriverRideHistory() {
                                                                     children: "Nome do Passageiro (Opcional)"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                                    lineNumber: 190,
+                                                                    lineNumber: 191,
                                                                     columnNumber: 37
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -5377,76 +5377,85 @@ function DriverRideHistory() {
                                                                     placeholder: "Passageiro Anônimo"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                                    lineNumber: 191,
+                                                                    lineNumber: 192,
                                                                     columnNumber: 37
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                            lineNumber: 189,
+                                                            lineNumber: 190,
                                                             columnNumber: 33
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "space-y-1",
+                                                            className: "grid grid-cols-1 sm:grid-cols-2 gap-4",
                                                             children: [
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                                                    htmlFor: "origin-location",
-                                                                    children: "Local de Partida"
-                                                                }, void 0, false, {
-                                                                    fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                                    lineNumber: 194,
-                                                                    columnNumber: 37
-                                                                }, this),
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
-                                                                    id: "origin-location",
-                                                                    value: newRide.origin,
-                                                                    onChange: (e)=>setNewRide((prev)=>({
-                                                                                ...prev,
-                                                                                origin: e.target.value
-                                                                            })),
-                                                                    required: true,
-                                                                    placeholder: "Ex: Rua Principal, 123"
-                                                                }, void 0, false, {
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    className: "space-y-1",
+                                                                    children: [
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                                            htmlFor: "origin-location",
+                                                                            children: "Local de Partida"
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
+                                                                            lineNumber: 196,
+                                                                            columnNumber: 41
+                                                                        }, this),
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
+                                                                            id: "origin-location",
+                                                                            value: newRide.origin,
+                                                                            onChange: (e)=>setNewRide((prev)=>({
+                                                                                        ...prev,
+                                                                                        origin: e.target.value
+                                                                                    })),
+                                                                            required: true,
+                                                                            placeholder: "Ex: Rua Principal, 123"
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
+                                                                            lineNumber: 197,
+                                                                            columnNumber: 41
+                                                                        }, this)
+                                                                    ]
+                                                                }, void 0, true, {
                                                                     fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
                                                                     lineNumber: 195,
                                                                     columnNumber: 37
-                                                                }, this)
-                                                            ]
-                                                        }, void 0, true, {
-                                                            fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                            lineNumber: 193,
-                                                            columnNumber: 33
-                                                        }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "space-y-1",
-                                                            children: [
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                                                    htmlFor: "destination-location",
-                                                                    children: "Local de Destino"
-                                                                }, void 0, false, {
-                                                                    fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                                    lineNumber: 198,
-                                                                    columnNumber: 37
                                                                 }, this),
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
-                                                                    id: "destination-location",
-                                                                    value: newRide.destination,
-                                                                    onChange: (e)=>setNewRide((prev)=>({
-                                                                                ...prev,
-                                                                                destination: e.target.value
-                                                                            })),
-                                                                    required: true,
-                                                                    placeholder: "Ex: Shopping Center"
-                                                                }, void 0, false, {
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    className: "space-y-1",
+                                                                    children: [
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                                            htmlFor: "destination-location",
+                                                                            children: "Local de Destino"
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
+                                                                            lineNumber: 200,
+                                                                            columnNumber: 41
+                                                                        }, this),
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
+                                                                            id: "destination-location",
+                                                                            value: newRide.destination,
+                                                                            onChange: (e)=>setNewRide((prev)=>({
+                                                                                        ...prev,
+                                                                                        destination: e.target.value
+                                                                                    })),
+                                                                            required: true,
+                                                                            placeholder: "Ex: Shopping Center"
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
+                                                                            lineNumber: 201,
+                                                                            columnNumber: 41
+                                                                        }, this)
+                                                                    ]
+                                                                }, void 0, true, {
                                                                     fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
                                                                     lineNumber: 199,
-                                                                    columnNumber: 37
+                                                                    columnNumber: 38
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                            lineNumber: 197,
-                                                            columnNumber: 34
+                                                            lineNumber: 194,
+                                                            columnNumber: 33
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                             className: "space-y-1",
@@ -5456,7 +5465,7 @@ function DriverRideHistory() {
                                                                     children: "Valor da Corrida (R$)"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                                    lineNumber: 202,
+                                                                    lineNumber: 205,
                                                                     columnNumber: 37
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -5472,19 +5481,19 @@ function DriverRideHistory() {
                                                                     placeholder: "25.50"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                                    lineNumber: 203,
+                                                                    lineNumber: 206,
                                                                     columnNumber: 37
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                            lineNumber: 201,
+                                                            lineNumber: 204,
                                                             columnNumber: 33
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                    lineNumber: 188,
+                                                    lineNumber: 189,
                                                     columnNumber: 29
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogFooter"], {
@@ -5498,12 +5507,12 @@ function DriverRideHistory() {
                                                                 children: "Cancelar"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                                lineNumber: 208,
+                                                                lineNumber: 211,
                                                                 columnNumber: 37
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                            lineNumber: 207,
+                                                            lineNumber: 210,
                                                             columnNumber: 33
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -5511,30 +5520,30 @@ function DriverRideHistory() {
                                                             children: "Registrar Corrida"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                            lineNumber: 210,
+                                                            lineNumber: 213,
                                                             columnNumber: 33
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                    lineNumber: 206,
+                                                    lineNumber: 209,
                                                     columnNumber: 29
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                            lineNumber: 181,
+                                            lineNumber: 182,
                                             columnNumber: 25
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                        lineNumber: 180,
+                                        lineNumber: 181,
                                         columnNumber: 21
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                lineNumber: 173,
+                                lineNumber: 174,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AlertDialog"], {
@@ -5552,19 +5561,19 @@ function DriverRideHistory() {
                                                             className: "mr-2 h-4 w-4"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                            lineNumber: 220,
+                                                            lineNumber: 223,
                                                             columnNumber: 33
                                                         }, this),
                                                         "Exportar"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                    lineNumber: 219,
+                                                    lineNumber: 222,
                                                     columnNumber: 29
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                lineNumber: 218,
+                                                lineNumber: 221,
                                                 columnNumber: 25
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dropdown$2d$menu$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DropdownMenuContent"], {
@@ -5577,14 +5586,14 @@ function DriverRideHistory() {
                                                                 className: "mr-2 h-4 w-4"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                                lineNumber: 226,
+                                                                lineNumber: 229,
                                                                 columnNumber: 33
                                                             }, this),
                                                             "Exportar Relatório (PDF)"
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                        lineNumber: 225,
+                                                        lineNumber: 228,
                                                         columnNumber: 29
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dropdown$2d$menu$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DropdownMenuItem"], {
@@ -5594,14 +5603,14 @@ function DriverRideHistory() {
                                                                 className: "mr-2 h-4 w-4"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                                lineNumber: 230,
+                                                                lineNumber: 233,
                                                                 columnNumber: 33
                                                             }, this),
                                                             "Exportar Histórico (CSV)"
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                        lineNumber: 229,
+                                                        lineNumber: 232,
                                                         columnNumber: 29
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dropdown$2d$menu$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DropdownMenuItem"], {
@@ -5611,26 +5620,26 @@ function DriverRideHistory() {
                                                                 className: "mr-2 h-4 w-4"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                                lineNumber: 234,
+                                                                lineNumber: 237,
                                                                 columnNumber: 33
                                                             }, this),
                                                             "Ver Resumo de Ganhos"
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                        lineNumber: 233,
+                                                        lineNumber: 236,
                                                         columnNumber: 29
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                lineNumber: 224,
+                                                lineNumber: 227,
                                                 columnNumber: 25
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                        lineNumber: 217,
+                                        lineNumber: 220,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AlertDialogContent"], {
@@ -5642,20 +5651,20 @@ function DriverRideHistory() {
                                                         children: "Resumo de Ganhos"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                        lineNumber: 242,
+                                                        lineNumber: 245,
                                                         columnNumber: 25
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AlertDialogDescription"], {
                                                         children: "Este é um resumo dos seus ganhos com base nas corridas concluídas no seu histórico."
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                        lineNumber: 243,
+                                                        lineNumber: 246,
                                                         columnNumber: 25
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                lineNumber: 241,
+                                                lineNumber: 244,
                                                 columnNumber: 25
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5669,7 +5678,7 @@ function DriverRideHistory() {
                                                                 children: "Total de Corridas Concluídas:"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                                lineNumber: 249,
+                                                                lineNumber: 252,
                                                                 columnNumber: 33
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5677,13 +5686,13 @@ function DriverRideHistory() {
                                                                 children: summary.totalRides
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                                lineNumber: 250,
+                                                                lineNumber: 253,
                                                                 columnNumber: 33
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                        lineNumber: 248,
+                                                        lineNumber: 251,
                                                         columnNumber: 29
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5694,7 +5703,7 @@ function DriverRideHistory() {
                                                                 children: "Valor Total Arrecadado:"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                                lineNumber: 253,
+                                                                lineNumber: 256,
                                                                 columnNumber: 33
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5705,19 +5714,19 @@ function DriverRideHistory() {
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                                lineNumber: 254,
+                                                                lineNumber: 257,
                                                                 columnNumber: 33
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                        lineNumber: 252,
+                                                        lineNumber: 255,
                                                         columnNumber: 29
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                lineNumber: 247,
+                                                lineNumber: 250,
                                                 columnNumber: 25
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AlertDialogFooter"], {
@@ -5725,36 +5734,36 @@ function DriverRideHistory() {
                                                     children: "Fechar"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                    lineNumber: 258,
+                                                    lineNumber: 261,
                                                     columnNumber: 25
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                lineNumber: 257,
+                                                lineNumber: 260,
                                                 columnNumber: 25
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                        lineNumber: 240,
+                                        lineNumber: 243,
                                         columnNumber: 21
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                lineNumber: 216,
+                                lineNumber: 219,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                        lineNumber: 172,
+                        lineNumber: 173,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                lineNumber: 167,
+                lineNumber: 168,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -5769,14 +5778,14 @@ function DriverRideHistory() {
                                             children: "Passageiro/Data"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                            lineNumber: 269,
+                                            lineNumber: 272,
                                             columnNumber: 21
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableHead"], {
                                             children: "Trajeto"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                            lineNumber: 270,
+                                            lineNumber: 273,
                                             columnNumber: 21
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableHead"], {
@@ -5784,18 +5793,18 @@ function DriverRideHistory() {
                                             children: "Valor"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                            lineNumber: 271,
+                                            lineNumber: 274,
                                             columnNumber: 21
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                    lineNumber: 268,
+                                    lineNumber: 271,
                                     columnNumber: 17
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                lineNumber: 267,
+                                lineNumber: 270,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableBody"], {
@@ -5810,7 +5819,7 @@ function DriverRideHistory() {
                                                                 className: "h-3 w-3"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                                lineNumber: 279,
+                                                                lineNumber: 282,
                                                                 columnNumber: 28
                                                             }, this),
                                                             ride.passenger,
@@ -5822,12 +5831,12 @@ function DriverRideHistory() {
                                                                                 className: "h-4 w-4 text-muted-foreground"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                                                lineNumber: 285,
+                                                                                lineNumber: 288,
                                                                                 columnNumber: 44
                                                                             }, this)
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                                            lineNumber: 284,
+                                                                            lineNumber: 287,
                                                                             columnNumber: 40
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$tooltip$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TooltipContent"], {
@@ -5839,29 +5848,29 @@ function DriverRideHistory() {
                                                                                 ]
                                                                             }, void 0, true, {
                                                                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                                                lineNumber: 288,
+                                                                                lineNumber: 291,
                                                                                 columnNumber: 44
                                                                             }, this)
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                                            lineNumber: 287,
+                                                                            lineNumber: 290,
                                                                             columnNumber: 40
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                                    lineNumber: 283,
+                                                                    lineNumber: 286,
                                                                     columnNumber: 36
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                                lineNumber: 282,
+                                                                lineNumber: 285,
                                                                 columnNumber: 32
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                        lineNumber: 278,
+                                                        lineNumber: 281,
                                                         columnNumber: 25
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5869,13 +5878,13 @@ function DriverRideHistory() {
                                                         children: ride.date
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                        lineNumber: 294,
+                                                        lineNumber: 297,
                                                         columnNumber: 25
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                lineNumber: 277,
+                                                lineNumber: 280,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableCell"], {
@@ -5887,7 +5896,7 @@ function DriverRideHistory() {
                                                                 className: "h-3 w-3 text-primary"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                                lineNumber: 297,
+                                                                lineNumber: 300,
                                                                 columnNumber: 74
                                                             }, this),
                                                             " ",
@@ -5895,7 +5904,7 @@ function DriverRideHistory() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                        lineNumber: 297,
+                                                        lineNumber: 300,
                                                         columnNumber: 25
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5905,7 +5914,7 @@ function DriverRideHistory() {
                                                                 className: "h-3 w-3 text-accent"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                                lineNumber: 298,
+                                                                lineNumber: 301,
                                                                 columnNumber: 74
                                                             }, this),
                                                             " ",
@@ -5913,13 +5922,13 @@ function DriverRideHistory() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                        lineNumber: 298,
+                                                        lineNumber: 301,
                                                         columnNumber: 25
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                lineNumber: 296,
+                                                lineNumber: 299,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableCell"], {
@@ -5930,40 +5939,40 @@ function DriverRideHistory() {
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                                lineNumber: 300,
+                                                lineNumber: 303,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, ride.id, true, {
                                         fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                        lineNumber: 276,
+                                        lineNumber: 279,
                                         columnNumber: 21
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                                lineNumber: 274,
+                                lineNumber: 277,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                        lineNumber: 266,
+                        lineNumber: 269,
                         columnNumber: 13
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                    lineNumber: 265,
+                    lineNumber: 268,
                     columnNumber: 13
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-                lineNumber: 264,
+                lineNumber: 267,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/driver/DriverRideHistory.tsx",
-        lineNumber: 166,
+        lineNumber: 167,
         columnNumber: 5
     }, this);
 }
