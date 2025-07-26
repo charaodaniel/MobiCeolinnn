@@ -15,7 +15,7 @@ const rides = [
 export function RideHistory() {
   if (rides.length === 0) {
       return (
-          <div className="flex flex-col items-center justify-center text-center text-muted-foreground p-8 border rounded-lg mx-6">
+          <div className="flex flex-col items-center justify-center text-center text-muted-foreground p-8 border rounded-lg mx-6 h-full">
                 <History className="h-10 w-10 mb-4" />
                 <p className="font-semibold">Nenhuma corrida encontrada</p>
                 <p className="text-sm">Seu histórico de corridas aparecerá aqui.</p>
@@ -24,7 +24,7 @@ export function RideHistory() {
   }
     
   return (
-    <ScrollArea className="h-72 w-full px-6">
+    <ScrollArea className="h-full w-full px-6">
       {/* Mobile View - Cards */}
       <div className="grid gap-4 md:hidden">
         {rides.map((ride) => (
@@ -57,7 +57,7 @@ export function RideHistory() {
       </div>
 
       {/* Desktop View - Table */}
-      <div className="hidden md:block rounded-md border">
+      <div className="hidden md:block rounded-md border h-full">
         <Table>
           <TableHeader>
             <TableRow>
