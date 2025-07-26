@@ -322,7 +322,7 @@ export function ProfileForm() {
                                 Trocar Senha
                             </Button>
                         </DialogTrigger>
-                        <DialogContent className="sm:max-w-[425px]">
+                        <DialogContent className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto">
                             <form onSubmit={handleChangePassword}>
                                 <DialogHeader>
                                     <DialogTitle>Alterar Senha</DialogTitle>

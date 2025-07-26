@@ -2262,20 +2262,20 @@ function CameraCaptureDialog({ onImageSave, onDialogClose }) {
                         children: "Capturar Imagem"
                     }, void 0, false, {
                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                        lineNumber: 90,
+                        lineNumber: 91,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogDescription"], {
                         children: "Tire uma foto para o documento."
                     }, void 0, false, {
                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                        lineNumber: 91,
+                        lineNumber: 92,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                lineNumber: 89,
+                lineNumber: 90,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2289,7 +2289,7 @@ function CameraCaptureDialog({ onImageSave, onDialogClose }) {
                                 children: "Pré-visualização"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                lineNumber: 98,
+                                lineNumber: 99,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -2300,13 +2300,13 @@ function CameraCaptureDialog({ onImageSave, onDialogClose }) {
                                 className: "rounded-lg object-cover"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                lineNumber: 99,
+                                lineNumber: 100,
                                 columnNumber: 25
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                        lineNumber: 97,
+                        lineNumber: 98,
                         columnNumber: 21
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
                         children: [
@@ -2319,7 +2319,7 @@ function CameraCaptureDialog({ onImageSave, onDialogClose }) {
                                 muted: true
                             }, void 0, false, {
                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                lineNumber: 103,
+                                lineNumber: 104,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("canvas", {
@@ -2327,7 +2327,7 @@ function CameraCaptureDialog({ onImageSave, onDialogClose }) {
                                 className: "hidden"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                lineNumber: 104,
+                                lineNumber: 105,
                                 columnNumber: 25
                             }, this)
                         ]
@@ -2339,26 +2339,26 @@ function CameraCaptureDialog({ onImageSave, onDialogClose }) {
                                 children: "Câmera não encontrada"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                lineNumber: 110,
+                                lineNumber: 111,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$alert$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AlertDescription"], {
                                 children: "Não foi possível acessar a câmera. Verifique as permissões do seu navegador e tente novamente."
                             }, void 0, false, {
                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                lineNumber: 111,
+                                lineNumber: 112,
                                 columnNumber: 25
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                        lineNumber: 109,
+                        lineNumber: 110,
                         columnNumber: 21
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                lineNumber: 95,
+                lineNumber: 96,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogFooter"], {
@@ -2371,7 +2371,7 @@ function CameraCaptureDialog({ onImageSave, onDialogClose }) {
                             children: "Tirar Outra Foto"
                         }, void 0, false, {
                             fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                            lineNumber: 121,
+                            lineNumber: 122,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -2379,7 +2379,7 @@ function CameraCaptureDialog({ onImageSave, onDialogClose }) {
                             children: "Salvar Foto"
                         }, void 0, false, {
                             fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                            lineNumber: 122,
+                            lineNumber: 123,
                             columnNumber: 25
                         }, this)
                     ]
@@ -2392,14 +2392,14 @@ function CameraCaptureDialog({ onImageSave, onDialogClose }) {
                                 className: "mr-2 h-4 w-4"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                lineNumber: 128,
+                                lineNumber: 129,
                                 columnNumber: 33
                             }, this),
                             "Capturar Foto"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                        lineNumber: 127,
+                        lineNumber: 128,
                         columnNumber: 29
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                         onClick: getCameraPermission,
@@ -2409,26 +2409,26 @@ function CameraCaptureDialog({ onImageSave, onDialogClose }) {
                                 className: "mr-2 h-4 w-4"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                lineNumber: 133,
+                                lineNumber: 134,
                                 columnNumber: 33
                             }, this),
                             "Abrir Câmera"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                        lineNumber: 132,
+                        lineNumber: 133,
                         columnNumber: 29
                     }, this)
                 }, void 0, false)
             }, void 0, false, {
                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                lineNumber: 118,
+                lineNumber: 119,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-        lineNumber: 88,
+        lineNumber: 89,
         columnNumber: 9
     }, this);
 }
@@ -2464,7 +2464,7 @@ const DocumentUploader = ({ label, docId, value, onFileChange })=>{
                 children: label
             }, void 0, false, {
                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                lineNumber: 162,
+                lineNumber: 163,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2485,7 +2485,7 @@ const DocumentUploader = ({ label, docId, value, onFileChange })=>{
                                             className: "rounded-lg object-cover"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                            lineNumber: 168,
+                                            lineNumber: 169,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2494,23 +2494,23 @@ const DocumentUploader = ({ label, docId, value, onFileChange })=>{
                                                 className: "h-8 w-8 text-white"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                lineNumber: 170,
+                                                lineNumber: 171,
                                                 columnNumber: 37
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                            lineNumber: 169,
+                                            lineNumber: 170,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                    lineNumber: 167,
+                                    lineNumber: 168,
                                     columnNumber: 29
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                lineNumber: 166,
+                                lineNumber: 167,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogContent"], {
@@ -2521,12 +2521,12 @@ const DocumentUploader = ({ label, docId, value, onFileChange })=>{
                                             children: label
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                            lineNumber: 176,
+                                            lineNumber: 177,
                                             columnNumber: 33
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                        lineNumber: 175,
+                                        lineNumber: 176,
                                         columnNumber: 30
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2539,24 +2539,24 @@ const DocumentUploader = ({ label, docId, value, onFileChange })=>{
                                             className: "rounded-lg object-contain max-h-[80vh]"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                            lineNumber: 179,
+                                            lineNumber: 180,
                                             columnNumber: 33
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                        lineNumber: 178,
+                                        lineNumber: 179,
                                         columnNumber: 29
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                lineNumber: 174,
+                                lineNumber: 175,
                                 columnNumber: 25
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                        lineNumber: 165,
+                        lineNumber: 166,
                         columnNumber: 21
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "h-24 w-32 bg-muted rounded-lg flex items-center justify-center",
@@ -2565,12 +2565,12 @@ const DocumentUploader = ({ label, docId, value, onFileChange })=>{
                             children: "Sem imagem"
                         }, void 0, false, {
                             fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                            lineNumber: 185,
+                            lineNumber: 186,
                             columnNumber: 25
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                        lineNumber: 184,
+                        lineNumber: 185,
                         columnNumber: 21
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2588,19 +2588,19 @@ const DocumentUploader = ({ label, docId, value, onFileChange })=>{
                                             className: "mr-2"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                            lineNumber: 191,
+                                            lineNumber: 192,
                                             columnNumber: 29
                                         }, this),
                                         "Carregar"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                    lineNumber: 190,
+                                    lineNumber: 191,
                                     columnNumber: 25
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                lineNumber: 189,
+                                lineNumber: 190,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2611,7 +2611,7 @@ const DocumentUploader = ({ label, docId, value, onFileChange })=>{
                                 onChange: handleFileSelect
                             }, void 0, false, {
                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                lineNumber: 195,
+                                lineNumber: 196,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Dialog"], {
@@ -2628,19 +2628,19 @@ const DocumentUploader = ({ label, docId, value, onFileChange })=>{
                                                     className: "mr-2"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                    lineNumber: 199,
+                                                    lineNumber: 200,
                                                     columnNumber: 27
                                                 }, this),
                                                 "Câmera"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                            lineNumber: 198,
+                                            lineNumber: 199,
                                             columnNumber: 25
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                        lineNumber: 197,
+                                        lineNumber: 198,
                                         columnNumber: 23
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(CameraCaptureDialog, {
@@ -2648,31 +2648,31 @@ const DocumentUploader = ({ label, docId, value, onFileChange })=>{
                                         onDialogClose: ()=>setIsCameraDialogOpen(false)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                        lineNumber: 203,
+                                        lineNumber: 204,
                                         columnNumber: 23
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                lineNumber: 196,
+                                lineNumber: 197,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                        lineNumber: 188,
+                        lineNumber: 189,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                lineNumber: 163,
+                lineNumber: 164,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-        lineNumber: 161,
+        lineNumber: 162,
         columnNumber: 9
     }, this);
 };
@@ -2692,6 +2692,11 @@ function ProfileForm() {
     const [cnhDocument, setCnhDocument] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [crlvDocument, setCrlvDocument] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [vehiclePhoto, setVehiclePhoto] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [isPasswordDialogOpen, setIsPasswordDialogOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [newPassword, setNewPassword] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
+        password: '',
+        confirmPassword: ''
+    });
     const handleSave = ()=>{
         toast({
             title: 'Sucesso!',
@@ -2703,6 +2708,34 @@ function ProfileForm() {
         toast({
             title: 'Status Atualizado',
             description: `Seu status foi alterado para ${newStatus === 'online' ? 'Online' : newStatus === 'offline' ? 'Offline' : newStatus === 'urban-trip' ? 'Em Viagem (Urbano)' : 'Em Viagem (Interior/Intermunicipal)'}.`
+        });
+    };
+    const handleChangePassword = (e)=>{
+        e.preventDefault();
+        if (newPassword.password !== newPassword.confirmPassword) {
+            toast({
+                variant: 'destructive',
+                title: 'Erro',
+                description: 'As senhas não coincidem.'
+            });
+            return;
+        }
+        if (newPassword.password.length < 6) {
+            toast({
+                variant: 'destructive',
+                title: 'Erro',
+                description: 'A senha deve ter pelo menos 6 caracteres.'
+            });
+            return;
+        }
+        toast({
+            title: 'Senha Alterada!',
+            description: 'Sua senha foi alterada com sucesso.'
+        });
+        setIsPasswordDialogOpen(false);
+        setNewPassword({
+            password: '',
+            confirmPassword: ''
         });
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
@@ -2729,25 +2762,25 @@ function ProfileForm() {
                                                         "data-ai-hint": "person portrait"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                        lineNumber: 247,
+                                                        lineNumber: 265,
                                                         columnNumber: 25
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$avatar$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AvatarFallback"], {
                                                         children: "CM"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                        lineNumber: 248,
+                                                        lineNumber: 266,
                                                         columnNumber: 25
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                lineNumber: 246,
+                                                lineNumber: 264,
                                                 columnNumber: 21
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                            lineNumber: 245,
+                                            lineNumber: 263,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(CameraCaptureDialog, {
@@ -2755,13 +2788,13 @@ function ProfileForm() {
                                             onDialogClose: ()=>setIsAvatarCameraOpen(false)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                            lineNumber: 251,
+                                            lineNumber: 269,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                    lineNumber: 244,
+                                    lineNumber: 262,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2771,7 +2804,7 @@ function ProfileForm() {
                                             children: "Carlos Motorista"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                            lineNumber: 257,
+                                            lineNumber: 275,
                                             columnNumber: 21
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2781,32 +2814,32 @@ function ProfileForm() {
                                                     className: "w-4 h-4 fill-primary text-primary"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                    lineNumber: 259,
+                                                    lineNumber: 277,
                                                     columnNumber: 25
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     children: "4.9 (238 corridas)"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                    lineNumber: 260,
+                                                    lineNumber: 278,
                                                     columnNumber: 25
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                            lineNumber: 258,
+                                            lineNumber: 276,
                                             columnNumber: 21
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                    lineNumber: 256,
+                                    lineNumber: 274,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                            lineNumber: 243,
+                            lineNumber: 261,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2817,7 +2850,7 @@ function ProfileForm() {
                                     children: "Status"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                    lineNumber: 265,
+                                    lineNumber: 283,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Select"], {
@@ -2830,12 +2863,12 @@ function ProfileForm() {
                                                 placeholder: "Selecione o status"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                lineNumber: 268,
+                                                lineNumber: 286,
                                                 columnNumber: 23
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                            lineNumber: 267,
+                                            lineNumber: 285,
                                             columnNumber: 21
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectContent"], {
@@ -2845,7 +2878,7 @@ function ProfileForm() {
                                                     children: "Online"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                    lineNumber: 271,
+                                                    lineNumber: 289,
                                                     columnNumber: 23
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectItem"], {
@@ -2853,7 +2886,7 @@ function ProfileForm() {
                                                     children: "Offline"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                    lineNumber: 272,
+                                                    lineNumber: 290,
                                                     columnNumber: 23
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectItem"], {
@@ -2861,7 +2894,7 @@ function ProfileForm() {
                                                     children: "Em Viagem (Urbano)"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                    lineNumber: 273,
+                                                    lineNumber: 291,
                                                     columnNumber: 23
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectItem"], {
@@ -2869,36 +2902,36 @@ function ProfileForm() {
                                                     children: "Em Viagem (Interior/Intermunicipal)"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                    lineNumber: 274,
+                                                    lineNumber: 292,
                                                     columnNumber: 23
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                            lineNumber: 270,
+                                            lineNumber: 288,
                                             columnNumber: 21
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                    lineNumber: 266,
+                                    lineNumber: 284,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                            lineNumber: 264,
+                            lineNumber: 282,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                    lineNumber: 242,
+                    lineNumber: 260,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                lineNumber: 241,
+                lineNumber: 259,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -2912,7 +2945,7 @@ function ProfileForm() {
                                 children: "Informações Pessoais"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                lineNumber: 282,
+                                lineNumber: 300,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2926,7 +2959,7 @@ function ProfileForm() {
                                                 children: "Nome Completo"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                lineNumber: 285,
+                                                lineNumber: 303,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -2934,13 +2967,13 @@ function ProfileForm() {
                                                 defaultValue: "Carlos Motorista"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                lineNumber: 286,
+                                                lineNumber: 304,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                        lineNumber: 284,
+                                        lineNumber: 302,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2951,7 +2984,7 @@ function ProfileForm() {
                                                 children: "Email"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                lineNumber: 289,
+                                                lineNumber: 307,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -2961,13 +2994,13 @@ function ProfileForm() {
                                                 readOnly: true
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                lineNumber: 290,
+                                                lineNumber: 308,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                        lineNumber: 288,
+                                        lineNumber: 306,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2978,7 +3011,7 @@ function ProfileForm() {
                                                 children: "Chave PIX"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                lineNumber: 293,
+                                                lineNumber: 311,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2988,7 +3021,7 @@ function ProfileForm() {
                                                         className: "absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                        lineNumber: 295,
+                                                        lineNumber: 313,
                                                         columnNumber: 26
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -2997,31 +3030,210 @@ function ProfileForm() {
                                                         className: "pl-10"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                        lineNumber: 296,
+                                                        lineNumber: 314,
                                                         columnNumber: 25
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                lineNumber: 294,
+                                                lineNumber: 312,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                        lineNumber: 292,
+                                        lineNumber: 310,
                                         columnNumber: 18
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "md:col-span-2",
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Dialog"], {
+                                            open: isPasswordDialogOpen,
+                                            onOpenChange: setIsPasswordDialogOpen,
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogTrigger"], {
+                                                    asChild: true,
+                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                                        variant: "outline",
+                                                        className: "w-full sm:w-auto",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$key$2d$round$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__KeyRound$3e$__["KeyRound"], {
+                                                                className: "mr-2 h-4 w-4"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/components/driver/ProfileForm.tsx",
+                                                                lineNumber: 321,
+                                                                columnNumber: 33
+                                                            }, this),
+                                                            "Trocar Senha"
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "[project]/src/components/driver/ProfileForm.tsx",
+                                                        lineNumber: 320,
+                                                        columnNumber: 29
+                                                    }, this)
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/driver/ProfileForm.tsx",
+                                                    lineNumber: 319,
+                                                    columnNumber: 25
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogContent"], {
+                                                    className: "sm:max-w-[425px]",
+                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
+                                                        onSubmit: handleChangePassword,
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogHeader"], {
+                                                                children: [
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogTitle"], {
+                                                                        children: "Alterar Senha"
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/components/driver/ProfileForm.tsx",
+                                                                        lineNumber: 328,
+                                                                        columnNumber: 37
+                                                                    }, this),
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogDescription"], {
+                                                                        children: "Crie uma nova senha segura para sua conta."
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/components/driver/ProfileForm.tsx",
+                                                                        lineNumber: 329,
+                                                                        columnNumber: 37
+                                                                    }, this)
+                                                                ]
+                                                            }, void 0, true, {
+                                                                fileName: "[project]/src/components/driver/ProfileForm.tsx",
+                                                                lineNumber: 327,
+                                                                columnNumber: 33
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                className: "grid gap-4 py-4",
+                                                                children: [
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                        className: "space-y-1",
+                                                                        children: [
+                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                                                htmlFor: "new-password",
+                                                                                children: "Nova Senha"
+                                                                            }, void 0, false, {
+                                                                                fileName: "[project]/src/components/driver/ProfileForm.tsx",
+                                                                                lineNumber: 335,
+                                                                                columnNumber: 41
+                                                                            }, this),
+                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
+                                                                                id: "new-password",
+                                                                                type: "password",
+                                                                                value: newPassword.password,
+                                                                                onChange: (e)=>setNewPassword((prev)=>({
+                                                                                            ...prev,
+                                                                                            password: e.target.value
+                                                                                        })),
+                                                                                placeholder: "Nova senha forte",
+                                                                                required: true
+                                                                            }, void 0, false, {
+                                                                                fileName: "[project]/src/components/driver/ProfileForm.tsx",
+                                                                                lineNumber: 336,
+                                                                                columnNumber: 41
+                                                                            }, this)
+                                                                        ]
+                                                                    }, void 0, true, {
+                                                                        fileName: "[project]/src/components/driver/ProfileForm.tsx",
+                                                                        lineNumber: 334,
+                                                                        columnNumber: 37
+                                                                    }, this),
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                        className: "space-y-1",
+                                                                        children: [
+                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                                                htmlFor: "confirm-new-password",
+                                                                                children: "Confirmar Nova Senha"
+                                                                            }, void 0, false, {
+                                                                                fileName: "[project]/src/components/driver/ProfileForm.tsx",
+                                                                                lineNumber: 339,
+                                                                                columnNumber: 41
+                                                                            }, this),
+                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
+                                                                                id: "confirm-new-password",
+                                                                                type: "password",
+                                                                                value: newPassword.confirmPassword,
+                                                                                onChange: (e)=>setNewPassword((prev)=>({
+                                                                                            ...prev,
+                                                                                            confirmPassword: e.target.value
+                                                                                        })),
+                                                                                placeholder: "Repita a nova senha",
+                                                                                required: true
+                                                                            }, void 0, false, {
+                                                                                fileName: "[project]/src/components/driver/ProfileForm.tsx",
+                                                                                lineNumber: 340,
+                                                                                columnNumber: 41
+                                                                            }, this)
+                                                                        ]
+                                                                    }, void 0, true, {
+                                                                        fileName: "[project]/src/components/driver/ProfileForm.tsx",
+                                                                        lineNumber: 338,
+                                                                        columnNumber: 37
+                                                                    }, this)
+                                                                ]
+                                                            }, void 0, true, {
+                                                                fileName: "[project]/src/components/driver/ProfileForm.tsx",
+                                                                lineNumber: 333,
+                                                                columnNumber: 33
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogFooter"], {
+                                                                children: [
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                                                        type: "button",
+                                                                        variant: "secondary",
+                                                                        onClick: ()=>setIsPasswordDialogOpen(false),
+                                                                        children: "Cancelar"
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/components/driver/ProfileForm.tsx",
+                                                                        lineNumber: 344,
+                                                                        columnNumber: 38
+                                                                    }, this),
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                                                        type: "submit",
+                                                                        children: "Salvar Nova Senha"
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/components/driver/ProfileForm.tsx",
+                                                                        lineNumber: 345,
+                                                                        columnNumber: 37
+                                                                    }, this)
+                                                                ]
+                                                            }, void 0, true, {
+                                                                fileName: "[project]/src/components/driver/ProfileForm.tsx",
+                                                                lineNumber: 343,
+                                                                columnNumber: 33
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "[project]/src/components/driver/ProfileForm.tsx",
+                                                        lineNumber: 326,
+                                                        columnNumber: 29
+                                                    }, this)
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/driver/ProfileForm.tsx",
+                                                    lineNumber: 325,
+                                                    columnNumber: 25
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/src/components/driver/ProfileForm.tsx",
+                                            lineNumber: 318,
+                                            columnNumber: 21
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/driver/ProfileForm.tsx",
+                                        lineNumber: 317,
+                                        columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                lineNumber: 283,
+                                lineNumber: 301,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                        lineNumber: 281,
+                        lineNumber: 299,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3032,7 +3244,7 @@ function ProfileForm() {
                                 children: "Documentos"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                lineNumber: 302,
+                                lineNumber: 354,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3045,7 +3257,7 @@ function ProfileForm() {
                                         onFileChange: setCnhDocument
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                        lineNumber: 304,
+                                        lineNumber: 356,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(DocumentUploader, {
@@ -3055,19 +3267,19 @@ function ProfileForm() {
                                         onFileChange: setCrlvDocument
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                        lineNumber: 310,
+                                        lineNumber: 362,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                lineNumber: 303,
+                                lineNumber: 355,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                        lineNumber: 301,
+                        lineNumber: 353,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3078,7 +3290,7 @@ function ProfileForm() {
                                 children: "Veículo"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                lineNumber: 319,
+                                lineNumber: 371,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3095,7 +3307,7 @@ function ProfileForm() {
                                                         children: "Modelo do Veículo"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                        lineNumber: 323,
+                                                        lineNumber: 375,
                                                         columnNumber: 25
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -3103,13 +3315,13 @@ function ProfileForm() {
                                                         defaultValue: "Toyota Corolla"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                        lineNumber: 324,
+                                                        lineNumber: 376,
                                                         columnNumber: 25
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                lineNumber: 322,
+                                                lineNumber: 374,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3120,7 +3332,7 @@ function ProfileForm() {
                                                         children: "Placa"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                        lineNumber: 327,
+                                                        lineNumber: 379,
                                                         columnNumber: 25
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -3128,19 +3340,19 @@ function ProfileForm() {
                                                         defaultValue: "BRA2E19"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                        lineNumber: 328,
+                                                        lineNumber: 380,
                                                         columnNumber: 25
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                lineNumber: 326,
+                                                lineNumber: 378,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                        lineNumber: 321,
+                                        lineNumber: 373,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(DocumentUploader, {
@@ -3150,19 +3362,19 @@ function ProfileForm() {
                                         onFileChange: setVehiclePhoto
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                        lineNumber: 331,
+                                        lineNumber: 383,
                                         columnNumber: 18
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                lineNumber: 320,
+                                lineNumber: 372,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                        lineNumber: 318,
+                        lineNumber: 370,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3173,7 +3385,7 @@ function ProfileForm() {
                                 children: "Configurações de Corrida"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                lineNumber: 340,
+                                lineNumber: 392,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3183,7 +3395,7 @@ function ProfileForm() {
                                         children: "Tipo de Tarifa (Urbano)"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                        lineNumber: 342,
+                                        lineNumber: 394,
                                         columnNumber: 18
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$radio$2d$group$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RadioGroup"], {
@@ -3200,7 +3412,7 @@ function ProfileForm() {
                                                         id: "r-fixed"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                        lineNumber: 345,
+                                                        lineNumber: 397,
                                                         columnNumber: 25
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
@@ -3208,13 +3420,13 @@ function ProfileForm() {
                                                         children: "Valor Fixo"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                        lineNumber: 346,
+                                                        lineNumber: 398,
                                                         columnNumber: 25
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                lineNumber: 344,
+                                                lineNumber: 396,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3225,7 +3437,7 @@ function ProfileForm() {
                                                         id: "r-km"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                        lineNumber: 349,
+                                                        lineNumber: 401,
                                                         columnNumber: 25
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
@@ -3233,25 +3445,25 @@ function ProfileForm() {
                                                         children: "Tarifa por KM"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                        lineNumber: 350,
+                                                        lineNumber: 402,
                                                         columnNumber: 25
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                lineNumber: 348,
+                                                lineNumber: 400,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                        lineNumber: 343,
+                                        lineNumber: 395,
                                         columnNumber: 18
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                lineNumber: 341,
+                                lineNumber: 393,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3265,7 +3477,7 @@ function ProfileForm() {
                                                 children: "Tarifa Fixa (R$)"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                lineNumber: 357,
+                                                lineNumber: 409,
                                                 columnNumber: 25
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3275,7 +3487,7 @@ function ProfileForm() {
                                                         className: "absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                        lineNumber: 359,
+                                                        lineNumber: 411,
                                                         columnNumber: 29
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -3285,19 +3497,19 @@ function ProfileForm() {
                                                         className: "pl-10"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                        lineNumber: 360,
+                                                        lineNumber: 412,
                                                         columnNumber: 29
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                lineNumber: 358,
+                                                lineNumber: 410,
                                                 columnNumber: 25
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                        lineNumber: 356,
+                                        lineNumber: 408,
                                         columnNumber: 21
                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "space-y-1",
@@ -3307,7 +3519,7 @@ function ProfileForm() {
                                                 children: "Tarifa por KM (R$)"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                lineNumber: 365,
+                                                lineNumber: 417,
                                                 columnNumber: 25
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3317,7 +3529,7 @@ function ProfileForm() {
                                                         className: "absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                        lineNumber: 367,
+                                                        lineNumber: 419,
                                                         columnNumber: 30
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -3327,19 +3539,19 @@ function ProfileForm() {
                                                         className: "pl-10"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                        lineNumber: 368,
+                                                        lineNumber: 420,
                                                         columnNumber: 29
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                lineNumber: 366,
+                                                lineNumber: 418,
                                                 columnNumber: 25
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                        lineNumber: 364,
+                                        lineNumber: 416,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3349,7 +3561,7 @@ function ProfileForm() {
                                                 id: "negotiate-rural"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                lineNumber: 373,
+                                                lineNumber: 425,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
@@ -3357,31 +3569,31 @@ function ProfileForm() {
                                                 children: "Aceitar negociação para interior/intermunicipal"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                                lineNumber: 374,
+                                                lineNumber: 426,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                        lineNumber: 372,
+                                        lineNumber: 424,
                                         columnNumber: 18
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                                lineNumber: 354,
+                                lineNumber: 406,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                        lineNumber: 339,
+                        lineNumber: 391,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                lineNumber: 280,
+                lineNumber: 298,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardFooter"], {
@@ -3392,22 +3604,22 @@ function ProfileForm() {
                     children: "Salvar Alterações"
                 }, void 0, false, {
                     fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                    lineNumber: 380,
+                    lineNumber: 432,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/driver/ProfileForm.tsx",
-                lineNumber: 379,
+                lineNumber: 431,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/driver/ProfileForm.tsx",
-        lineNumber: 240,
+        lineNumber: 258,
         columnNumber: 5
     }, this);
 }
-_s2(ProfileForm, "g1MHHdobkcLqacTy0um/dDugyIs=", false, function() {
+_s2(ProfileForm, "oUwX0RuL10pOWXXlYH+gg0V+HuA=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$use$2d$toast$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useToast"]
     ];

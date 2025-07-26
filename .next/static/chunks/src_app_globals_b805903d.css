@@ -724,6 +724,10 @@ body {
   max-height: 100vh;
 }
 
+.max-h-\[90vh\] {
+  max-height: 90vh;
+}
+
 .min-h-\[80px\] {
   min-height: 80px;
 }
@@ -1138,6 +1142,10 @@ body {
 
 .overflow-x-auto {
   overflow-x: auto;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
 }
 
 .whitespace-nowrap {

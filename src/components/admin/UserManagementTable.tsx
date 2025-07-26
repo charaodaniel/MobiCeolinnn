@@ -226,7 +226,7 @@ export function UserManagementTable({ onReportGenerated }: { onReportGenerated: 
                             Adicionar Usuário
                         </Button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-[425px]">
+                    <DialogContent className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto">
                         <form onSubmit={handleAddUser}>
                             <DialogHeader>
                                 <DialogTitle>Adicionar Novo Usuário</DialogTitle>
@@ -480,7 +480,7 @@ export function UserManagementTable({ onReportGenerated }: { onReportGenerated: 
             </Dialog>
 
             <Dialog open={isPasswordDialogOpen} onOpenChange={setIsPasswordDialogOpen}>
-                <DialogContent className="sm:max-w-[425px]">
+                <DialogContent className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto">
                     <form onSubmit={handleChangePassword}>
                         <DialogHeader>
                             <DialogTitle>Alterar Senha</DialogTitle>
