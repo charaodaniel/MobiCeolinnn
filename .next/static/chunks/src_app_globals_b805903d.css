@@ -1512,6 +1512,10 @@ body {
   padding-top: 1.25rem;
 }
 
+.pb-2 {
+  padding-bottom: .5rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -2430,6 +2434,18 @@ body {
 
   .sm\:ml-auto {
     margin-left: auto;
+  }
+
+  .sm\:block {
+    display: block;
+  }
+
+  .sm\:inline {
+    display: inline;
+  }
+
+  .sm\:hidden {
+    display: none;
   }
 
   .sm\:w-40 {
