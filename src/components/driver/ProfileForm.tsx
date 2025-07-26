@@ -16,7 +16,7 @@ import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Alert, AlertTitle, AlertDescription } from '../ui/alert';
 import { cn } from '@/lib/utils';
 
-function CameraCaptureDialog() {
+function CameraCaptureDialog({ setAvatarImage }: { setAvatarImage: (image: string) => void }) {
     const { toast } = useToast();
     const videoRef = useRef<HTMLVideoElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -74,8 +74,11 @@ function CameraCaptureDialog() {
     };
 
     const handleSavePhoto = () => {
-        // In a real app, you would upload `capturedImage` to your server
-        toast({ title: 'Foto Salva!', description: 'Sua nova foto de perfil foi salva com sucesso!' });
+        if (capturedImage) {
+            setAvatarImage(capturedImage);
+            // In a real app, you would upload `capturedImage` to your server
+            toast({ title: 'Foto Salva!', description: 'Sua nova foto de perfil foi salva com sucesso!' });
+        }
     }
 
     // Effect to clean up the stream when the component unmounts or the dialog closes
@@ -158,6 +161,7 @@ export function ProfileForm() {
   const { toast } = useToast();
   const [status, setStatus] = useState('online');
   const [fareType, setFareType] = useState('fixed');
+  const [avatarImage, setAvatarImage] = useState('https://placehold.co/128x128.png');
 
   const handleSave = () => {
     toast({
@@ -182,11 +186,11 @@ export function ProfileForm() {
                 <Dialog>
                   <DialogTrigger asChild>
                     <Avatar className="h-16 w-16 cursor-pointer">
-                        <AvatarImage src="https://placehold.co/128x128.png" data-ai-hint="person portrait" />
+                        <AvatarImage src={avatarImage} data-ai-hint="person portrait" />
                         <AvatarFallback>CM</AvatarFallback>
                     </Avatar>
                   </DialogTrigger>
-                  <CameraCaptureDialog />
+                  <CameraCaptureDialog setAvatarImage={setAvatarImage} />
                 </Dialog>
                 <div>
                     <CardTitle className="font-headline text-2xl">Carlos Motorista</CardTitle>
