@@ -55,7 +55,7 @@ const mockStatusLogs: Record<string, { status: string, timestamp: string }[]> = 
 };
 
 
-export function UserManagementTable() {
+export function UserManagementTable({ onReportGenerated }: { onReportGenerated: (reportId: string) => void }) {
     const { toast } = useToast();
     const [users, setUsers] = useState(initialUsers);
     const [userStatuses, setUserStatuses] = useState<Record<string, boolean>>(
@@ -133,6 +133,8 @@ export function UserManagementTable() {
             return;
         }
 
+        const reportId = `REL-${driver.name.split(' ')[0].toUpperCase()}-${Date.now()}`;
+
         const doc = new jsPDF();
         const tableColumn = ["Data", "Passageiro", "Trajeto", "Valor (R$)", "Status"];
         const tableRows: (string | null)[][] = [];
@@ -156,13 +158,15 @@ export function UserManagementTable() {
         doc.text("Relatório de Corridas", 14, 30);
         
         doc.setFont("Poppins", "normal");
+        doc.setFontSize(10);
+        doc.text(`ID do Relatório: ${reportId}`, 14, 38);
         doc.setFontSize(12);
-        doc.text(`Motorista: ${driver.name}`, 14, 40);
-        doc.text(`Data de Geração: ${new Date().toLocaleDateString('pt-BR')}`, 14, 46);
+        doc.text(`Motorista: ${driver.name}`, 14, 46);
+        doc.text(`Data de Geração: ${new Date().toLocaleDateString('pt-BR')}`, 14, 52);
 
         // Table
         (doc as any).autoTable({
-            startY: 55,
+            startY: 60,
             head: [tableColumn],
             body: tableRows,
             theme: 'striped',
@@ -186,8 +190,18 @@ export function UserManagementTable() {
         doc.text(`Total de Corridas Concluídas: ${summary.totalRides}`, 14, finalY + 22);
         doc.text(`Valor Total Arrecadado: R$ ${summary.totalValue.toFixed(2).replace('.', ',')}`, 14, finalY + 29);
 
-        doc.save(`relatorio_${driver.name.replace(/\s/g, '_')}.pdf`);
-        toast({ title: 'Relatório Gerado!', description: `O relatório para ${driver.name} foi gerado com sucesso.` });
+        // Footer
+        const pageCount = (doc as any).internal.getNumberOfPages();
+        for (let i = 1; i <= pageCount; i++) {
+            doc.setPage(i);
+            doc.setFontSize(8);
+            doc.text(`Página ${i} de ${pageCount}`, doc.internal.pageSize.width - 25, doc.internal.pageSize.height - 10);
+            doc.text(`ID: ${reportId}`, 14, doc.internal.pageSize.height - 10);
+        }
+
+        doc.save(`relatorio_${driver.name.replace(/\s/g, '_')}_${reportId}.pdf`);
+        onReportGenerated(reportId);
+        toast({ title: 'Relatório Gerado!', description: `O relatório para ${driver.name} foi gerado com o ID: ${reportId}` });
     };
 
     const openLogDialog = (user: typeof initialUsers[0]) => {
