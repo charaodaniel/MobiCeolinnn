@@ -258,7 +258,85 @@ export function UserManagementTable() {
                     </DialogContent>
                 </Dialog>
             </div>
-            <div className="overflow-x-auto rounded-md border">
+
+            {/* Mobile View */}
+            <div className="grid gap-4 md:hidden">
+                {users.map((user) => (
+                    <div key={user.id} className="rounded-lg border bg-card p-4 space-y-3">
+                        <div className="flex items-center gap-3">
+                           <Avatar>
+                               <AvatarImage src={`https://placehold.co/40x40.png`} data-ai-hint={`${user.avatar} face`} />
+                               <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                           </Avatar>
+                           <div>
+                               <div className="font-medium">{user.name}</div>
+                               <div className="text-sm text-muted-foreground">{user.email}</div>
+                           </div>
+                        </div>
+                        <div className="flex justify-between items-center text-sm">
+                           <span className="text-muted-foreground">Perfil:</span>
+                           <Badge variant={user.role === 'Motorista' ? 'default' : user.role === 'Administrador' ? 'destructive' : 'secondary'} className="gap-1">
+                               {user.role === 'Motorista' ? <Car className="h-3 w-3" /> : <User className="h-3 w-3" />}
+                               {user.role}
+                           </Badge>
+                        </div>
+                        <div className="flex justify-between items-center text-sm">
+                           <span className="text-muted-foreground">Status:</span>
+                           <Badge variant={userStatuses[user.id] ? 'secondary' : 'destructive'}>
+                               {userStatuses[user.id] ? 'Ativo' : 'Inativo'}
+                           </Badge>
+                        </div>
+                        <div className="border-t pt-3">
+                            <p className="text-sm text-muted-foreground mb-2">Ações:</p>
+                             <div className="flex flex-wrap items-center justify-start gap-2">
+                                {user.role === 'Motorista' && (
+                                    <>
+                                        <Button variant="outline" size="icon" onClick={() => openLogDialog(user)}>
+                                            <ListCollapse className="h-4 w-4" />
+                                            <span className="sr-only">Ver Log de Status</span>
+                                        </Button>
+                                        <Button variant="outline" size="icon" onClick={() => handleGenerateReport(user)}>
+                                            <FileText className="h-4 w-4" />
+                                            <span className="sr-only">Gerar Relatório</span>
+                                        </Button>
+                                    </>
+                                )}
+                                <Button variant="outline" size="icon" onClick={() => openPasswordDialog(user)}>
+                                    <KeyRound className="h-4 w-4" />
+                                    <span className="sr-only">Alterar Senha</span>
+                                </Button>
+                                <Switch
+                                    checked={userStatuses[user.id]}
+                                    onCheckedChange={(checked) => handleStatusChange(user.id, checked)}
+                                    aria-label={`Toggle status for ${user.name}`}
+                                />
+                                <AlertDialog>
+                                    <AlertDialogTrigger asChild>
+                                        <Button variant="ghost" size="icon">
+                                            <Trash2 className="h-4 w-4 text-destructive" />
+                                        </Button>
+                                    </AlertDialogTrigger>
+                                    <AlertDialogContent>
+                                        <AlertDialogHeader>
+                                            <AlertDialogTitle>Você tem certeza absoluta?</AlertDialogTitle>
+                                            <AlertDialogDescription>
+                                                Essa ação não pode ser desfeita. Isso excluirá permanentemente a conta de <span className="font-bold">{user.name}</span>.
+                                            </AlertDialogDescription>
+                                        </AlertDialogHeader>
+                                        <AlertDialogFooter>
+                                            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                                            <AlertDialogAction onClick={() => handleRemoveUser(user.id)}>Excluir</AlertDialogAction>
+                                        </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                </AlertDialog>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+            
+            {/* Desktop View */}
+            <div className="hidden md:block overflow-x-auto rounded-md border">
                 <Table>
                     <TableHeader>
                         <TableRow>
@@ -277,7 +355,7 @@ export function UserManagementTable() {
                                             <AvatarImage src={`https://placehold.co/40x40.png`} data-ai-hint={`${user.avatar} face`} />
                                             <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
                                         </Avatar>
-                                        <div className="block md:flex md:flex-col">
+                                        <div>
                                             <div className="font-medium">{user.name}</div>
                                             <div className="text-sm text-muted-foreground">{user.email}</div>
                                         </div>
