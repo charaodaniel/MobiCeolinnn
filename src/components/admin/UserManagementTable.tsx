@@ -292,47 +292,49 @@ export function UserManagementTable() {
                                         {userStatuses[user.id] ? 'Ativo' : 'Inativo'}
                                     </Badge>
                                 </TableCell>
-                                <TableCell className="text-right space-x-1 whitespace-nowrap">
-                                    {user.role === 'Motorista' && (
-                                        <>
-                                            <Button variant="outline" size="icon" onClick={() => openLogDialog(user)}>
-                                                <ListCollapse className="h-4 w-4" />
-                                                <span className="sr-only">Ver Log de Status</span>
-                                            </Button>
-                                            <Button variant="outline" size="icon" onClick={() => handleGenerateReport(user)}>
-                                                <FileText className="h-4 w-4" />
-                                                <span className="sr-only">Gerar Relatório</span>
-                                            </Button>
-                                        </>
-                                    )}
-                                     <Button variant="outline" size="icon" onClick={() => openPasswordDialog(user)}>
-                                        <KeyRound className="h-4 w-4" />
-                                        <span className="sr-only">Alterar Senha</span>
-                                    </Button>
-                                    <Switch
-                                        checked={userStatuses[user.id]}
-                                        onCheckedChange={(checked) => handleStatusChange(user.id, checked)}
-                                        aria-label={`Toggle status for ${user.name}`}
-                                    />
-                                    <AlertDialog>
-                                        <AlertDialogTrigger asChild>
-                                            <Button variant="ghost" size="icon">
-                                                <Trash2 className="h-4 w-4 text-destructive" />
-                                            </Button>
-                                        </AlertDialogTrigger>
-                                        <AlertDialogContent>
-                                            <AlertDialogHeader>
-                                                <AlertDialogTitle>Você tem certeza absoluta?</AlertDialogTitle>
-                                                <AlertDialogDescription>
-                                                    Essa ação não pode ser desfeita. Isso excluirá permanentemente a conta de <span className="font-bold">{user.name}</span>.
-                                                </AlertDialogDescription>
-                                            </AlertDialogHeader>
-                                            <AlertDialogFooter>
-                                                <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                                                <AlertDialogAction onClick={() => handleRemoveUser(user.id)}>Excluir</AlertDialogAction>
-                                            </AlertDialogFooter>
-                                        </AlertDialogContent>
-                                    </AlertDialog>
+                                <TableCell className="text-right">
+                                    <div className='inline-flex gap-1'>
+                                        {user.role === 'Motorista' && (
+                                            <>
+                                                <Button variant="outline" size="icon" onClick={() => openLogDialog(user)}>
+                                                    <ListCollapse className="h-4 w-4" />
+                                                    <span className="sr-only">Ver Log de Status</span>
+                                                </Button>
+                                                <Button variant="outline" size="icon" onClick={() => handleGenerateReport(user)}>
+                                                    <FileText className="h-4 w-4" />
+                                                    <span className="sr-only">Gerar Relatório</span>
+                                                </Button>
+                                            </>
+                                        )}
+                                        <Button variant="outline" size="icon" onClick={() => openPasswordDialog(user)}>
+                                            <KeyRound className="h-4 w-4" />
+                                            <span className="sr-only">Alterar Senha</span>
+                                        </Button>
+                                        <Switch
+                                            checked={userStatuses[user.id]}
+                                            onCheckedChange={(checked) => handleStatusChange(user.id, checked)}
+                                            aria-label={`Toggle status for ${user.name}`}
+                                        />
+                                        <AlertDialog>
+                                            <AlertDialogTrigger asChild>
+                                                <Button variant="ghost" size="icon">
+                                                    <Trash2 className="h-4 w-4 text-destructive" />
+                                                </Button>
+                                            </AlertDialogTrigger>
+                                            <AlertDialogContent>
+                                                <AlertDialogHeader>
+                                                    <AlertDialogTitle>Você tem certeza absoluta?</AlertDialogTitle>
+                                                    <AlertDialogDescription>
+                                                        Essa ação não pode ser desfeita. Isso excluirá permanentemente a conta de <span className="font-bold">{user.name}</span>.
+                                                    </AlertDialogDescription>
+                                                </AlertDialogHeader>
+                                                <AlertDialogFooter>
+                                                    <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                                                    <AlertDialogAction onClick={() => handleRemoveUser(user.id)}>Excluir</AlertDialogAction>
+                                                </AlertDialogFooter>
+                                            </AlertDialogContent>
+                                        </AlertDialog>
+                                    </div>
                                 </TableCell>
                             </TableRow>
                         ))}
@@ -413,5 +415,3 @@ export function UserManagementTable() {
         </div>
     );
 }
-
-    

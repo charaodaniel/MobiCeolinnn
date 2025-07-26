@@ -317,7 +317,7 @@ export function ProfileForm() {
         </div>
         <div className="space-y-4">
             <h3 className="font-headline text-lg">Veículo</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className='space-y-4'>
                     <div className="space-y-1">
                         <Label htmlFor="vehicle-model">Modelo do Veículo</Label>

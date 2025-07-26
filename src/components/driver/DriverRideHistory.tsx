@@ -164,7 +164,7 @@ export function DriverRideHistory() {
     
   return (
     <Card className="shadow-lg">
-        <CardHeader className="flex flex-row items-start md:items-center justify-between gap-2">
+        <CardHeader className="flex flex-col md:flex-row items-start md:items-center justify-between gap-2">
             <div>
                 <CardTitle className="font-headline">Histórico de Viagens</CardTitle>
                 <CardDescription>Visualize suas corridas concluídas.</CardDescription>
