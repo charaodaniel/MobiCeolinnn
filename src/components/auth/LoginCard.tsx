@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -7,7 +8,7 @@ import { User, Car, Shield, Rocket } from 'lucide-react';
 
 export function LoginCard() {
   return (
-    <Card className="w-full max-w-md shadow-2xl animate-fade-in-up">
+    <Card className="w-full max-w-md shadow-none border-0 animate-fade-in-up">
       <CardHeader className="text-center">
         <div className="flex justify-center items-center mb-4">
             <Rocket className="h-12 w-12 text-primary" />

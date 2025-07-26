@@ -2364,7 +2364,6 @@ __turbopack_context__.s({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/image.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/ui/card.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/ui/button.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$car$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Car$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/car.js [app-client] (ecmascript) <export default as Car>");
@@ -2377,7 +2376,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$use$2d$toast
 ;
 var _s = __turbopack_context__.k.signature();
 'use client';
-;
 ;
 ;
 ;
@@ -2422,24 +2420,78 @@ function MapPlaceholder({ drivers }) {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
         className: "h-full w-full shadow-lg overflow-hidden",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
-            className: "p-0 h-full w-full relative",
+            className: "p-0 h-full w-full relative bg-muted flex items-center justify-center",
             children: [
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                    src: "https://placehold.co/800x600.png",
-                    alt: "Map view showing user location and nearby drivers",
-                    fill: true,
-                    className: "object-cover",
-                    "data-ai-hint": "city map"
-                }, void 0, false, {
-                    fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                    lineNumber: 52,
-                    columnNumber: 9
-                }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "absolute inset-0 bg-black/10"
-                }, void 0, false, {
+                    className: "relative flex h-[300px] w-[300px] items-center justify-center rounded-full",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "absolute h-full w-full animate-spin [animation-duration:3s]",
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "absolute h-full w-full rounded-full bg-gradient-to-t from-transparent to-primary/50"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
+                                lineNumber: 59,
+                                columnNumber: 17
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
+                            lineNumber: 58,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "absolute h-full w-full animate-ping rounded-full border-2 border-primary/50 [animation-delay:-0.2s]"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
+                            lineNumber: 63,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "absolute h-3/4 w-3/4 animate-ping rounded-full border-2 border-primary/50 [animation-delay:-0.4s]"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
+                            lineNumber: 64,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "absolute h-1/2 w-1/2 animate-ping rounded-full border-2 border-primary/50 [animation-delay:-0.6s]"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
+                            lineNumber: 65,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "absolute h-1/4 w-1/4 rounded-full border-2 border-dashed border-primary/30"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
+                            lineNumber: 68,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "absolute h-1/2 w-1/2 rounded-full border-2 border-dashed border-primary/30"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
+                            lineNumber: 69,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "absolute h-3/4 w-3/4 rounded-full border-2 border-dashed border-primary/30"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
+                            lineNumber: 70,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "absolute h-full w-full rounded-full border-2 border-dashed border-primary/30"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
+                            lineNumber: 71,
+                            columnNumber: 13
+                        }, this)
+                    ]
+                }, void 0, true, {
                     fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                    lineNumber: 59,
+                    lineNumber: 56,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2447,40 +2499,40 @@ function MapPlaceholder({ drivers }) {
                     title: "Sua Localização",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$map$2d$pin$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__MapPin$3e$__["MapPin"], {
-                            className: "h-12 w-12 text-primary drop-shadow-lg",
-                            fill: "hsl(var(--primary))"
+                            className: "h-10 w-10 text-accent drop-shadow-lg",
+                            fill: "hsl(var(--accent))"
                         }, void 0, false, {
                             fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                            lineNumber: 63,
+                            lineNumber: 77,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "relative flex h-3 w-3 mt-2",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"
+                                    className: "animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                                    lineNumber: 65,
+                                    lineNumber: 79,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "relative inline-flex rounded-full h-3 w-3 bg-primary/90"
+                                    className: "relative inline-flex rounded-full h-3 w-3 bg-accent/90"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                                    lineNumber: 66,
+                                    lineNumber: 80,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                            lineNumber: 64,
+                            lineNumber: 78,
                             columnNumber: 12
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                    lineNumber: 62,
+                    lineNumber: 76,
                     columnNumber: 9
                 }, this),
                 driverPositions.map(({ id, top, left, driver })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$popover$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Popover"], {
@@ -2497,17 +2549,17 @@ function MapPlaceholder({ drivers }) {
                                         className: "h-8 w-8 text-foreground bg-background/80 p-1 rounded-full shadow-md animate-pulse"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                                        lineNumber: 78,
+                                        lineNumber: 92,
                                         columnNumber: 25
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                                    lineNumber: 74,
+                                    lineNumber: 88,
                                     columnNumber: 21
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                                lineNumber: 73,
+                                lineNumber: 87,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$popover$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PopoverContent"], {
@@ -2526,20 +2578,20 @@ function MapPlaceholder({ drivers }) {
                                                             "data-ai-hint": `${driver.avatar} face`
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                                                            lineNumber: 85,
+                                                            lineNumber: 99,
                                                             columnNumber: 33
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$avatar$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AvatarFallback"], {
                                                             children: driver.name.charAt(0)
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                                                            lineNumber: 86,
+                                                            lineNumber: 100,
                                                             columnNumber: 33
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                                                    lineNumber: 84,
+                                                    lineNumber: 98,
                                                     columnNumber: 29
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2550,7 +2602,7 @@ function MapPlaceholder({ drivers }) {
                                                             children: driver.name
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                                                            lineNumber: 89,
+                                                            lineNumber: 103,
                                                             columnNumber: 33
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2563,13 +2615,13 @@ function MapPlaceholder({ drivers }) {
                                                                     children: driver.licensePlate
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                                                                    lineNumber: 90,
+                                                                    lineNumber: 104,
                                                                     columnNumber: 97
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                                                            lineNumber: 90,
+                                                            lineNumber: 104,
                                                             columnNumber: 33
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2579,7 +2631,7 @@ function MapPlaceholder({ drivers }) {
                                                                     className: "w-4 h-4 mr-1 fill-primary text-primary"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                                                                    lineNumber: 92,
+                                                                    lineNumber: 106,
                                                                     columnNumber: 37
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2591,25 +2643,25 @@ function MapPlaceholder({ drivers }) {
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                                                                    lineNumber: 93,
+                                                                    lineNumber: 107,
                                                                     columnNumber: 37
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                                                            lineNumber: 91,
+                                                            lineNumber: 105,
                                                             columnNumber: 33
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                                                    lineNumber: 88,
+                                                    lineNumber: 102,
                                                     columnNumber: 29
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                                            lineNumber: 83,
+                                            lineNumber: 97,
                                             columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -2620,42 +2672,42 @@ function MapPlaceholder({ drivers }) {
                                                     className: "mr-2 h-4 w-4"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                                                    lineNumber: 98,
+                                                    lineNumber: 112,
                                                     columnNumber: 29
                                                 }, this),
                                                 "Chamar Motorista"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                                            lineNumber: 97,
+                                            lineNumber: 111,
                                             columnNumber: 25
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                                    lineNumber: 82,
+                                    lineNumber: 96,
                                     columnNumber: 21
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                                lineNumber: 81,
+                                lineNumber: 95,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, id, true, {
                         fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-                        lineNumber: 72,
+                        lineNumber: 86,
                         columnNumber: 13
                     }, this))
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-            lineNumber: 51,
-            columnNumber: 7
+            lineNumber: 53,
+            columnNumber: 9
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
-        lineNumber: 50,
+        lineNumber: 52,
         columnNumber: 5
     }, this);
 }
@@ -2694,7 +2746,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 ;
 function LoginCard() {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
-        className: "w-full max-w-md shadow-2xl animate-fade-in-up",
+        className: "w-full max-w-md shadow-none border-0 animate-fade-in-up",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardHeader"], {
                 className: "text-center",
@@ -2706,7 +2758,7 @@ function LoginCard() {
                                 className: "h-12 w-12 text-primary"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/auth/LoginCard.tsx",
-                                lineNumber: 13,
+                                lineNumber: 14,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardTitle"], {
@@ -2714,13 +2766,13 @@ function LoginCard() {
                                 children: "CEOLIN"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/auth/LoginCard.tsx",
-                                lineNumber: 14,
+                                lineNumber: 15,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/auth/LoginCard.tsx",
-                        lineNumber: 12,
+                        lineNumber: 13,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardDescription"], {
@@ -2728,13 +2780,13 @@ function LoginCard() {
                         children: "Selecione seu perfil para continuar"
                     }, void 0, false, {
                         fileName: "[project]/src/components/auth/LoginCard.tsx",
-                        lineNumber: 16,
+                        lineNumber: 17,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/auth/LoginCard.tsx",
-                lineNumber: 11,
+                lineNumber: 12,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -2751,7 +2803,7 @@ function LoginCard() {
                                     className: "text-primary-foreground"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/auth/LoginCard.tsx",
-                                    lineNumber: 21,
+                                    lineNumber: 22,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2759,18 +2811,18 @@ function LoginCard() {
                                     children: "Pedir uma Viagem"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/auth/LoginCard.tsx",
-                                    lineNumber: 22,
+                                    lineNumber: 23,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/auth/LoginCard.tsx",
-                            lineNumber: 20,
+                            lineNumber: 21,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/auth/LoginCard.tsx",
-                        lineNumber: 19,
+                        lineNumber: 20,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -2784,7 +2836,7 @@ function LoginCard() {
                                     className: "text-primary"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/auth/LoginCard.tsx",
-                                    lineNumber: 27,
+                                    lineNumber: 28,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2792,30 +2844,30 @@ function LoginCard() {
                                     children: "Sou Motorista"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/auth/LoginCard.tsx",
-                                    lineNumber: 28,
+                                    lineNumber: 29,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/auth/LoginCard.tsx",
-                            lineNumber: 26,
+                            lineNumber: 27,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/auth/LoginCard.tsx",
-                        lineNumber: 25,
+                        lineNumber: 26,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/auth/LoginCard.tsx",
-                lineNumber: 18,
+                lineNumber: 19,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/auth/LoginCard.tsx",
-        lineNumber: 10,
+        lineNumber: 11,
         columnNumber: 5
     }, this);
 }

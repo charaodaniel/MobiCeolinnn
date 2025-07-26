@@ -1,7 +1,7 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Car, MapPin, Star, Phone } from 'lucide-react';
@@ -9,6 +9,8 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import type { RideRequestFormProps } from './RideRequestForm';
 import { useToast } from '@/hooks/use-toast';
+import { cn } from '@/lib/utils';
+
 
 interface DriverPosition {
   id: string;
@@ -48,22 +50,34 @@ export function MapPlaceholder({ drivers }: { drivers: RideRequestFormProps['ava
 
   return (
     <Card className="h-full w-full shadow-lg overflow-hidden">
-      <CardContent className="p-0 h-full w-full relative">
-        <Image
-          src="https://placehold.co/800x600.png"
-          alt="Map view showing user location and nearby drivers"
-          fill
-          className="object-cover"
-          data-ai-hint="city map"
-        />
-        <div className="absolute inset-0 bg-black/10"></div>
+        <CardContent className="p-0 h-full w-full relative bg-muted flex items-center justify-center">
         
+        {/* Radar Animation */}
+        <div className="relative flex h-[300px] w-[300px] items-center justify-center rounded-full">
+            {/* Radar Sweep */}
+            <div className="absolute h-full w-full animate-spin [animation-duration:3s]">
+                <div className="absolute h-full w-full rounded-full bg-gradient-to-t from-transparent to-primary/50"></div>
+            </div>
+
+            {/* Radar Pulses */}
+            <div className="absolute h-full w-full animate-ping rounded-full border-2 border-primary/50 [animation-delay:-0.2s]"></div>
+            <div className="absolute h-3/4 w-3/4 animate-ping rounded-full border-2 border-primary/50 [animation-delay:-0.4s]"></div>
+            <div className="absolute h-1/2 w-1/2 animate-ping rounded-full border-2 border-primary/50 [animation-delay:-0.6s]"></div>
+            
+            {/* Static Radar Grid */}
+            <div className="absolute h-1/4 w-1/4 rounded-full border-2 border-dashed border-primary/30"></div>
+            <div className="absolute h-1/2 w-1/2 rounded-full border-2 border-dashed border-primary/30"></div>
+            <div className="absolute h-3/4 w-3/4 rounded-full border-2 border-dashed border-primary/30"></div>
+            <div className="absolute h-full w-full rounded-full border-2 border-dashed border-primary/30"></div>
+        </div>
+
+
         {/* User's Location */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center" title="Sua Localização">
-          <MapPin className="h-12 w-12 text-primary drop-shadow-lg" fill="hsl(var(--primary))" />
+          <MapPin className="h-10 w-10 text-accent drop-shadow-lg" fill="hsl(var(--accent))" />
            <div className="relative flex h-3 w-3 mt-2">
-            <div className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></div>
-            <div className="relative inline-flex rounded-full h-3 w-3 bg-primary/90"></div>
+            <div className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></div>
+            <div className="relative inline-flex rounded-full h-3 w-3 bg-accent/90"></div>
           </div>
         </div>
 
@@ -106,3 +120,4 @@ export function MapPlaceholder({ drivers }: { drivers: RideRequestFormProps['ava
     </Card>
   );
 }
+
