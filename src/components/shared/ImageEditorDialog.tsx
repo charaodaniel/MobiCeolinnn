@@ -4,9 +4,9 @@
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { useToast } from '@/hooks/use-toast';
-import { DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Camera, Upload, RotateCw, ZoomIn, ZoomOut, Save } from 'lucide-react';
+import { Camera, Upload, RotateCw, ZoomIn, ZoomOut, Save, Eye } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Alert, AlertTitle, AlertDescription } from '../ui/alert';
 import { Slider } from '../ui/slider';
@@ -16,11 +16,12 @@ interface ImageEditorDialogProps {
   onImageSave: (image: string) => void;
   onDialogClose: () => void;
   isOpen: boolean;
+  currentImage: string;
 }
 
-type View = 'choice' | 'camera' | 'preview';
+type View = 'choice' | 'camera' | 'preview' | 'view_photo';
 
-export function ImageEditorDialog({ onImageSave, onDialogClose, isOpen }: ImageEditorDialogProps) {
+export function ImageEditorDialog({ onImageSave, onDialogClose, isOpen, currentImage }: ImageEditorDialogProps) {
   const { toast } = useToast();
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -126,19 +127,39 @@ export function ImageEditorDialog({ onImageSave, onDialogClose, isOpen }: ImageE
             <DialogTitle>Alterar Foto</DialogTitle>
             <DialogDescription>Escolha como você quer fornecer uma nova foto.</DialogDescription>
         </DialogHeader>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 py-4">
+            <Button variant="outline" onClick={() => setView('view_photo')}>
+                <Eye className="mr-2" />
+                Ver Foto
+            </Button>
             <Button variant="outline" onClick={getCameraPermission}>
                 <Camera className="mr-2" />
                 Tirar Foto
             </Button>
             <Button variant="outline" onClick={() => fileInputRef.current?.click()}>
                 <Upload className="mr-2" />
-                Escolher Arquivo
+                Arquivo
             </Button>
             <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleFileSelect} />
         </div>
     </>
   );
+  
+  const renderViewPhotoView = () => (
+    <>
+      <DialogHeader>
+          <DialogTitle>Foto de Perfil</DialogTitle>
+          <DialogDescription>Esta é a sua foto de perfil atual.</DialogDescription>
+      </DialogHeader>
+      <div className="flex justify-center items-center py-4">
+          <Image src={currentImage} alt="Foto de Perfil Atual" width={400} height={400} className="rounded-lg object-contain max-h-[60vh]" />
+      </div>
+      <DialogFooter>
+        <Button variant="outline" onClick={() => setView('choice')}>Voltar</Button>
+      </DialogFooter>
+    </>
+  );
+
 
   const renderCameraView = () => (
      <>
@@ -236,6 +257,7 @@ export function ImageEditorDialog({ onImageSave, onDialogClose, isOpen }: ImageE
       {view === 'choice' && renderChoiceView()}
       {view === 'camera' && renderCameraView()}
       {view === 'preview' && renderPreviewView()}
+      {view === 'view_photo' && renderViewPhotoView()}
     </DialogContent>
   );
 }

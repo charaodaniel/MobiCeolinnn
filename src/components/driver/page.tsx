@@ -49,6 +49,7 @@ export function DriverProfilePage() {
             </DialogTrigger>
             <ImageEditorDialog 
                 isOpen={isCameraDialogOpen}
+                currentImage={avatarImage}
                 onImageSave={setAvatarImage} 
                 onDialogClose={() => setIsCameraDialogOpen(false)}
             />

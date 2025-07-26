@@ -101,6 +101,7 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
                     </DialogTrigger>
                     <ImageEditorDialog 
                         isOpen={isCameraDialogOpen}
+                        currentImage={avatarImage}
                         onImageSave={setAvatarImage} 
                         onDialogClose={() => setIsCameraDialogOpen(false)}
                     />
