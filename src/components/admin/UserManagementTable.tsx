@@ -22,7 +22,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Card } from '../ui/card';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/card';
 
 const initialUsers = [
   { id: '0', name: 'Admin User', email: 'admin@mobiceolin.com', role: 'Administrador', status: true, avatar: 'shield' },
