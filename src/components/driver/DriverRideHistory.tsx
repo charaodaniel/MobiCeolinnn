@@ -2,12 +2,15 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { History, User, MapPin, Download, FileText, BarChart2 } from "lucide-react";
+import { History, User, MapPin, Download, FileText, BarChart2, FileType } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "../ui/alert-dialog";
 import { useState } from "react";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+
 
 const rides = [
   { id: '1', date: '25/07/2024', passenger: 'João Passageiro', origin: 'Shopping Pátio', destination: 'Centro', value: '25.50', status: 'Concluída' },
@@ -44,10 +47,62 @@ export function DriverRideHistory() {
         return {
             totalRides: completedRides.length,
             totalValue: totalValue.toFixed(2).replace('.', ','),
+            totalValueRaw: totalValue,
         }
     };
 
     const summary = calculateSummary();
+
+    const handleExportPDF = () => {
+        const doc = new jsPDF();
+        const tableColumn = ["Data", "Passageiro", "Trajeto", "Valor (R$)", "Status"];
+        const tableRows: (string | null)[][] = [];
+
+        rides.forEach(ride => {
+            const rideData = [
+                ride.date,
+                ride.passenger,
+                `${ride.origin} -> ${ride.destination}`,
+                `R$ ${ride.value.replace('.', ',')}`,
+                ride.status,
+            ];
+            tableRows.push(rideData);
+        });
+
+        // Header
+        doc.setFont("Poppins", "bold");
+        doc.setFontSize(22);
+        doc.text("CEOLIN Mobilidade urbana", 14, 22);
+        doc.setFontSize(16);
+        doc.text("Relatório de Corridas", 14, 30);
+        
+        doc.setFont("Poppins", "normal");
+        doc.setFontSize(12);
+        doc.text(`Motorista: Carlos Motorista`, 14, 40);
+        doc.text(`Data de Geração: ${new Date().toLocaleDateString('pt-BR')}`, 14, 46);
+
+        // Table
+        (doc as any).autoTable({
+            startY: 55,
+            head: [tableColumn],
+            body: tableRows,
+            theme: 'striped',
+            headStyles: { fillColor: [22, 163, 74] }, // Cor primária
+        });
+
+        // Footer / Summary
+        const finalY = (doc as any).lastAutoTable.finalY;
+        doc.setFontSize(14);
+        doc.setFont("Poppins", "bold");
+        doc.text("Resumo de Ganhos", 14, finalY + 15);
+        doc.setFontSize(12);
+        doc.setFont("Poppins", "normal");
+        doc.text(`Total de Corridas Concluídas: ${summary.totalRides}`, 14, finalY + 22);
+        doc.text(`Valor Total Arrecadado: R$ ${summary.totalValue}`, 14, finalY + 29);
+        
+
+        doc.save("relatorio_corridas_ceolin.pdf");
+    }
 
   if (rides.length === 0) {
       return (
@@ -83,6 +138,10 @@ export function DriverRideHistory() {
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
+                        <DropdownMenuItem onClick={handleExportPDF}>
+                            <FileType className="mr-2 h-4 w-4" />
+                            Exportar Relatório (PDF)
+                        </DropdownMenuItem>
                         <DropdownMenuItem onClick={handleExportCSV}>
                             <FileText className="mr-2 h-4 w-4" />
                             Exportar Histórico (CSV)
