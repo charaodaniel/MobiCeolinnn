@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useId } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
@@ -66,6 +66,7 @@ export function UserManagementTable() {
     const [selectedUser, setSelectedUser] = useState<(typeof initialUsers[0]) | null>(null);
     const [newUser, setNewUser] = useState({ name: '', email: '', role: 'Passageiro', password: '', confirmPassword: '' });
     const [newPassword, setNewPassword] = useState({ password: '', confirmPassword: '' });
+    const uniqueId = useId();
 
     const handleStatusChange = (userId: string, newStatus: boolean) => {
         setUserStatuses(prev => ({ ...prev, [userId]: newStatus }));
@@ -88,7 +89,7 @@ export function UserManagementTable() {
             return;
         }
 
-        const newId = (Math.max(...users.map(u => parseInt(u.id))) + 1).toString();
+        const newId = (Math.max(...users.map(u => parseInt(u.id, 10))) + 1).toString();
         const userToAdd = {
             id: newId,
             name: newUser.name,
@@ -220,17 +221,17 @@ export function UserManagementTable() {
                             </DialogHeader>
                             <div className="grid gap-4 py-4">
                                 <div className="space-y-1">
-                                    <Label htmlFor="name">Nome</Label>
-                                    <Input id="name" value={newUser.name} onChange={(e) => setNewUser(prev => ({ ...prev, name: e.target.value }))} placeholder="Nome Completo" required />
+                                    <Label htmlFor={`${uniqueId}-name`}>Nome</Label>
+                                    <Input id={`${uniqueId}-name`} value={newUser.name} onChange={(e) => setNewUser(prev => ({ ...prev, name: e.target.value }))} placeholder="Nome Completo" required />
                                 </div>
                                  <div className="space-y-1">
-                                    <Label htmlFor="email">Email</Label>
-                                    <Input id="email" type="email" value={newUser.email} onChange={(e) => setNewUser(prev => ({ ...prev, email: e.target.value }))} placeholder="email@exemplo.com" required />
+                                    <Label htmlFor={`${uniqueId}-email`}>Email</Label>
+                                    <Input id={`${uniqueId}-email`} type="email" value={newUser.email} onChange={(e) => setNewUser(prev => ({ ...prev, email: e.target.value }))} placeholder="email@exemplo.com" required />
                                 </div>
                                 <div className="space-y-1">
-                                    <Label htmlFor="role">Perfil</Label>
+                                    <Label htmlFor={`${uniqueId}-role`}>Perfil</Label>
                                     <Select value={newUser.role} onValueChange={(value) => setNewUser(prev => ({...prev, role: value}))}>
-                                        <SelectTrigger>
+                                        <SelectTrigger id={`${uniqueId}-role`}>
                                             <SelectValue placeholder="Selecione um perfil" />
                                         </SelectTrigger>
                                         <SelectContent>
@@ -241,12 +242,12 @@ export function UserManagementTable() {
                                     </Select>
                                 </div>
                                 <div className="space-y-1">
-                                    <Label htmlFor="password">Senha</Label>
-                                    <Input id="password" type="password" value={newUser.password} onChange={(e) => setNewUser(prev => ({ ...prev, password: e.target.value }))} placeholder="********" required />
+                                    <Label htmlFor={`${uniqueId}-password`}>Senha</Label>
+                                    <Input id={`${uniqueId}-password`} type="password" value={newUser.password} onChange={(e) => setNewUser(prev => ({ ...prev, password: e.target.value }))} placeholder="********" required />
                                 </div>
                                 <div className="space-y-1">
-                                    <Label htmlFor="confirm-password">Confirmar Senha</Label>
-                                    <Input id="confirm-password" type="password" value={newUser.confirmPassword} onChange={(e) => setNewUser(prev => ({ ...prev, confirmPassword: e.target.value }))} placeholder="********" required />
+                                    <Label htmlFor={`${uniqueId}-confirm-password`}>Confirmar Senha</Label>
+                                    <Input id={`${uniqueId}-confirm-password`} type="password" value={newUser.confirmPassword} onChange={(e) => setNewUser(prev => ({ ...prev, confirmPassword: e.target.value }))} placeholder="********" required />
                                 </div>
                             </div>
                             <DialogFooter>
@@ -293,7 +294,7 @@ export function UserManagementTable() {
                                     </Badge>
                                 </TableCell>
                                 <TableCell className="text-right">
-                                    <div className='inline-flex gap-1'>
+                                     <div className="inline-flex items-center gap-1">
                                         {user.role === 'Motorista' && (
                                             <>
                                                 <Button variant="outline" size="icon" onClick={() => openLogDialog(user)}>
