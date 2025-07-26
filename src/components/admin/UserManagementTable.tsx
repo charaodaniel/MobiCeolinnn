@@ -4,7 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Car, User, Trash2, PlusCircle, FileText } from 'lucide-react';
+import { Car, User, Trash2, PlusCircle, FileText, ListCollapse, Clock } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger } from '../ui/dialog';
 import { Input } from '../ui/input';
@@ -14,6 +14,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { useToast } from '@/hooks/use-toast';
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import { ScrollArea } from '../ui/scroll-area';
 
 const initialUsers = [
   { id: '1', name: 'João Passageiro', email: 'joao@email.com', role: 'Passageiro', status: true, avatar: 'person' },
@@ -31,6 +32,23 @@ const mockRides = [
     { id: '4', date: '20/07/2024', passenger: 'Fernanda Lima', origin: 'Centro', destination: 'Hospital Regional', value: '15.00', status: 'Concluída', driverId: '5' },
 ];
 
+// Mock de dados de log de status
+const mockStatusLogs: Record<string, { status: string, timestamp: string }[]> = {
+  '2': [ // Corresponds to Carlos Motorista's ID
+    { status: 'Online', timestamp: '2024-07-29 08:00:15' },
+    { status: 'Offline', timestamp: '2024-07-29 12:30:05' },
+    { status: 'Online', timestamp: '2024-07-29 14:00:22' },
+    { status: 'Em Viagem (Interior)', timestamp: '2024-07-29 16:10:00' },
+    { status: 'Online', timestamp: '2024-07-29 18:45:30' },
+    { status: 'Offline', timestamp: '2024-07-29 22:05:11' },
+  ],
+  '4': [ // Roberto Freire
+    { status: 'Online', timestamp: '2024-07-29 09:15:00' },
+    { status: 'Offline', timestamp: '2024-07-29 19:00:00' },
+  ],
+  '5': [], // Fernanda Lima - no logs
+};
+
 
 export function UserManagementTable() {
     const { toast } = useToast();
@@ -39,6 +57,8 @@ export function UserManagementTable() {
         users.reduce((acc, user) => ({ ...acc, [user.id]: user.status }), {})
     );
     const [isAddUserDialogOpen, setIsAddUserDialogOpen] = useState(false);
+    const [isLogDialogOpen, setIsLogDialogOpen] = useState(false);
+    const [selectedUserForLog, setSelectedUserForLog] = useState<(typeof initialUsers[0]) | null>(null);
     const [newUser, setNewUser] = useState({ name: '', email: '', role: 'Passageiro' });
 
     const handleStatusChange = (userId: string, newStatus: boolean) => {
@@ -137,7 +157,14 @@ export function UserManagementTable() {
 
         doc.save(`relatorio_${driver.name.replace(/\s/g, '_')}.pdf`);
         toast({ title: 'Relatório Gerado!', description: `O relatório para ${driver.name} foi gerado com sucesso.` });
-    }
+    };
+
+    const handleShowLog = (user: typeof initialUsers[0]) => {
+        setSelectedUserForLog(user);
+        setIsLogDialogOpen(true);
+    };
+
+    const selectedUserLogs = selectedUserForLog ? mockStatusLogs[selectedUserForLog.id] || [] : [];
 
     return (
         <div className="space-y-4">
@@ -222,12 +249,18 @@ export function UserManagementTable() {
                                         {userStatuses[user.id] ? 'Ativo' : 'Inativo'}
                                     </Badge>
                                 </TableCell>
-                                <TableCell className="text-right space-x-2">
+                                <TableCell className="text-right space-x-1">
                                     {user.role === 'Motorista' && (
-                                        <Button variant="outline" size="icon" onClick={() => handleGenerateReport(user)}>
-                                            <FileText className="h-4 w-4" />
-                                            <span className="sr-only">Gerar Relatório</span>
-                                        </Button>
+                                        <>
+                                            <Button variant="outline" size="icon" onClick={() => handleShowLog(user)}>
+                                                <ListCollapse className="h-4 w-4" />
+                                                <span className="sr-only">Ver Log de Status</span>
+                                            </Button>
+                                            <Button variant="outline" size="icon" onClick={() => handleGenerateReport(user)}>
+                                                <FileText className="h-4 w-4" />
+                                                <span className="sr-only">Gerar Relatório</span>
+                                            </Button>
+                                        </>
                                     )}
                                     <Switch
                                         checked={userStatuses[user.id]}
@@ -259,6 +292,49 @@ export function UserManagementTable() {
                     </TableBody>
                 </Table>
             </div>
+            
+            <Dialog open={isLogDialogOpen} onOpenChange={setIsLogDialogOpen}>
+                <DialogContent className="sm:max-w-md">
+                    <DialogHeader>
+                        <DialogTitle>Log de Status - {selectedUserForLog?.name}</DialogTitle>
+                        <DialogDescription>
+                            Histórico de quando o motorista ficou online, offline ou em viagem.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <ScrollArea className="h-72 w-full rounded-md border">
+                        <div className="p-4">
+                            {selectedUserLogs.length > 0 ? (
+                                <ul className="space-y-4">
+                                    {selectedUserLogs.map((log, index) => (
+                                        <li key={index} className="flex items-center gap-4">
+                                            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-muted">
+                                                <Clock className="h-4 w-4 text-muted-foreground" />
+                                            </div>
+                                            <div className="flex-1">
+                                                <p className="font-medium">{log.status}</p>
+                                                <p className="text-sm text-muted-foreground">{new Date(log.timestamp).toLocaleString('pt-BR')}</p>
+                                            </div>
+                                            <Badge variant={
+                                                log.status === 'Online' ? 'secondary' : 
+                                                log.status === 'Offline' ? 'destructive' :
+                                                'default'
+                                            }>{log.status}</Badge>
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <div className="text-center text-muted-foreground py-10">
+                                    <p>Nenhum registro de log encontrado para este motorista.</p>
+                                </div>
+                            )}
+                        </div>
+                    </ScrollArea>
+                    <DialogFooter>
+                        <Button variant="outline" onClick={() => setIsLogDialogOpen(false)}>Fechar</Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+
         </div>
     );
 }
