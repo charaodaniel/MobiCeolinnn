@@ -376,7 +376,7 @@ export function ProfileForm() {
             </div>
         </div>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="flex flex-col sm:flex-row items-stretch">
         <Button className="w-full sm:w-auto sm:ml-auto" onClick={handleSave}>Salvar Alterações</Button>
       </CardFooter>
     </Card>
