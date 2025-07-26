@@ -34,7 +34,6 @@ export interface RideRequestFormProps {
 
 export function RideRequestForm({ availableDrivers }: RideRequestFormProps) {
   const [isRural, setIsRural] = useState(false);
-  const [showEstimate, setShowEstimate] = useState(false);
   const [showDrivers, setShowDrivers] = useState(false);
   const [destination, setDestination] = useState('');
   const [origin, setOrigin] = useState('');
@@ -198,10 +197,8 @@ export function RideRequestForm({ availableDrivers }: RideRequestFormProps) {
              </>
           )}
 
-          {showDrivers && (
-            <div className="space-y-4 pt-4 border-t">
-              <h3 className="font-headline text-lg font-semibold">Motoristas Disponíveis</h3>
-              <Accordion type="single" collapsible className="w-full">
+          {showDrivers && !isRural && (
+              <Accordion type="single" collapsible className="w-full pt-4">
                 {availableDrivers.map((driver) => (
                   <AccordionItem value={driver.id} key={driver.id} className="border-b-0">
                      <Card className="mb-2">
@@ -267,7 +264,6 @@ export function RideRequestForm({ availableDrivers }: RideRequestFormProps) {
                   </AccordionItem>
                 ))}
               </Accordion>
-            </div>
           )}
         </div>
       </CardContent>
