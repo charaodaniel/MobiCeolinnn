@@ -2,7 +2,8 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "../ui/scroll-area";
-import { History } from "lucide-react";
+import { History, Star } from "lucide-react";
+import { RideRatingDialog } from "./RideRatingDialog";
 
 const rides = [
   { id: '1', date: '25/07/2024', driver: 'Carlos Motorista', origin: 'Shopping Pátio', destination: 'Centro', value: 'R$ 25,50', status: 'Concluída' },
@@ -31,6 +32,7 @@ export function RideHistory() {
             <TableHead>Destino</TableHead>
             <TableHead className="text-right">Valor</TableHead>
             <TableHead className="text-center">Status</TableHead>
+            <TableHead className="text-right">Ação</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -43,6 +45,11 @@ export function RideHistory() {
                 <Badge variant={ride.status === 'Concluída' ? 'secondary' : 'destructive'}>
                   {ride.status}
                 </Badge>
+              </TableCell>
+               <TableCell className="text-right">
+                {ride.status === 'Concluída' && (
+                  <RideRatingDialog ride={ride} />
+                )}
               </TableCell>
             </TableRow>
           ))}
