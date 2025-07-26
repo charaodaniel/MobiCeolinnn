@@ -1,3 +1,4 @@
+
 'use client';
 import { useState, useId } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -89,7 +90,7 @@ export function UserManagementTable() {
             return;
         }
 
-        const newId = (Math.max(...users.map(u => parseInt(u.id, 10))) + 1).toString();
+        const newId = (Math.max(...users.map(u => parseInt(u.id, 10)), 0) + 1).toString();
         const userToAdd = {
             id: newId,
             name: newUser.name,
@@ -276,7 +277,7 @@ export function UserManagementTable() {
                                             <AvatarImage src={`https://placehold.co/40x40.png`} data-ai-hint={`${user.avatar} face`} />
                                             <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
                                         </Avatar>
-                                        <div>
+                                        <div className="block md:flex md:flex-col">
                                             <div className="font-medium">{user.name}</div>
                                             <div className="text-sm text-muted-foreground">{user.email}</div>
                                         </div>
@@ -294,7 +295,7 @@ export function UserManagementTable() {
                                     </Badge>
                                 </TableCell>
                                 <TableCell className="text-right">
-                                     <div className="inline-flex items-center gap-1">
+                                     <div className="flex flex-wrap items-center justify-end gap-1">
                                         {user.role === 'Motorista' && (
                                             <>
                                                 <Button variant="outline" size="icon" onClick={() => openLogDialog(user)}>

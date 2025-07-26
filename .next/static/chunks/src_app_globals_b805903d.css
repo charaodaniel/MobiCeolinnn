@@ -2451,6 +2451,10 @@ body {
     display: inline;
   }
 
+  .md\:flex {
+    display: flex;
+  }
+
   .md\:h-full {
     height: 100%;
   }
@@ -2469,6 +2473,10 @@ body {
 
   .md\:flex-row {
     flex-direction: row;
+  }
+
+  .md\:flex-col {
+    flex-direction: column;
   }
 
   .md\:items-center {

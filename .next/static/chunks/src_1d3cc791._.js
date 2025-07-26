@@ -2158,7 +2158,7 @@ function DocsPage() {
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                children: "Os passageiros podem solicitar corridas, visualizar motoristas disponíveis, negociar tarifas para áreas rurais e gerenciar seu histórico de viagens. A autenticação é opcional, oferecendo flexibilidade para quem deseja apenas uma corrida rápida."
+                                children: "Os passageiros podem solicitar corridas, visualizar motoristas disponíveis, negociar tarifas e gerenciar seu histórico de viagens. A autenticação é opcional, oferecendo flexibilidade."
                             }, void 0, false, {
                                 fileName: "[project]/src/app/docs/page.tsx",
                                 lineNumber: 23,
@@ -2169,13 +2169,13 @@ function DocsPage() {
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                                                children: "Solicitação de Corrida:"
+                                                children: "Solicitação de Corrida Flexível:"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/docs/page.tsx",
                                                 lineNumber: 27,
                                                 columnNumber: 33
                                             }, this),
-                                            " Interface intuitiva para definir partida e destino."
+                                            " Interface intuitiva para definir partida (manualmente ou via geolocalização) e destino (campo opcional)."
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/docs/page.tsx",
@@ -2201,13 +2201,13 @@ function DocsPage() {
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                                                children: "Negociação (Rural):"
+                                                children: "Negociação (Rural/Intermunicipal):"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/docs/page.tsx",
                                                 lineNumber: 29,
                                                 columnNumber: 33
                                             }, this),
-                                            " Sistema de chat e propostas para combinar valores em corridas para o interior."
+                                            " Sistema de chat e propostas para combinar valores em corridas para o interior ou outras cidades."
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/docs/page.tsx",
@@ -2240,7 +2240,7 @@ function DocsPage() {
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                                                children: "Painel de Controle:"
+                                                children: "Painel de Controle Completo:"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/docs/page.tsx",
                                                 lineNumber: 37,
@@ -2262,7 +2262,7 @@ function DocsPage() {
                                                 lineNumber: 38,
                                                 columnNumber: 33
                                             }, this),
-                                            ' Alterne entre "Online", "Offline" e "Em Viagem (Interior)".'
+                                            ' Alterne entre "Online", "Offline", "Em Viagem (Urbano)" e "Em Viagem (Interior)".'
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/docs/page.tsx",
@@ -2272,17 +2272,49 @@ function DocsPage() {
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                                                children: "Gerenciamento de Perfil:"
+                                                children: "Iniciar Corrida Manualmente:"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/docs/page.tsx",
                                                 lineNumber: 39,
                                                 columnNumber: 33
                                             }, this),
-                                            " Mantenha suas informações sempre atualizadas."
+                                            " Registre corridas para passageiros que não fizeram o pedido pelo app."
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/docs/page.tsx",
                                         lineNumber: 39,
+                                        columnNumber: 29
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                                children: "Exportação de Relatórios:"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/docs/page.tsx",
+                                                lineNumber: 40,
+                                                columnNumber: 33
+                                            }, this),
+                                            " Gere relatórios detalhados em PDF e CSV do seu histórico de corridas."
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/docs/page.tsx",
+                                        lineNumber: 40,
+                                        columnNumber: 29
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                                children: "Gerenciamento de Perfil:"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/docs/page.tsx",
+                                                lineNumber: 41,
+                                                columnNumber: 33
+                                            }, this),
+                                            " Mantenha suas informações, fotos do veículo e documentos sempre atualizados."
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/docs/page.tsx",
+                                        lineNumber: 41,
                                         columnNumber: 29
                                     }, this)
                                 ]
@@ -2293,10 +2325,97 @@ function DocsPage() {
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                                 className: "font-headline",
+                                children: "Funcionalidades para Administradores"
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/docs/page.tsx",
+                                lineNumber: 44,
+                                columnNumber: 25
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                children: "Uma área restrita com ferramentas poderosas para gerenciar toda a operação da plataforma."
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/docs/page.tsx",
+                                lineNumber: 45,
+                                columnNumber: 25
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                                children: "Gerenciamento de Usuários:"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/docs/page.tsx",
+                                                lineNumber: 49,
+                                                columnNumber: 33
+                                            }, this),
+                                            " Adicione, remova, ative ou desative contas de passageiros, motoristas e outros administradores."
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/docs/page.tsx",
+                                        lineNumber: 49,
+                                        columnNumber: 29
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                                children: "Controle de Senhas:"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/docs/page.tsx",
+                                                lineNumber: 50,
+                                                columnNumber: 33
+                                            }, this),
+                                            " Defina e altere senhas para qualquer usuário do sistema."
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/docs/page.tsx",
+                                        lineNumber: 50,
+                                        columnNumber: 29
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                                children: "Relatórios Individuais:"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/docs/page.tsx",
+                                                lineNumber: 51,
+                                                columnNumber: 33
+                                            }, this),
+                                            " Exporte relatórios de corrida em PDF para cada motorista."
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/docs/page.tsx",
+                                        lineNumber: 51,
+                                        columnNumber: 29
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                                children: "Log de Status:"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/docs/page.tsx",
+                                                lineNumber: 52,
+                                                columnNumber: 33
+                                            }, this),
+                                            " Visualize o histórico detalhado de quando um motorista ficou online, offline ou em viagem."
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/docs/page.tsx",
+                                        lineNumber: 52,
+                                        columnNumber: 29
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/app/docs/page.tsx",
+                                lineNumber: 48,
+                                columnNumber: 25
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                className: "font-headline",
                                 children: "Guia de Início Rápido"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/docs/page.tsx",
-                                lineNumber: 41,
+                                lineNumber: 55,
                                 columnNumber: 26
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2306,7 +2425,7 @@ function DocsPage() {
                                         children: "npm install"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/docs/page.tsx",
-                                        lineNumber: 43,
+                                        lineNumber: 57,
                                         columnNumber: 111
                                     }, this),
                                     " e inicie o servidor com ",
@@ -2314,7 +2433,7 @@ function DocsPage() {
                                         children: "npm run dev"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/docs/page.tsx",
-                                        lineNumber: 43,
+                                        lineNumber: 57,
                                         columnNumber: 160
                                     }, this),
                                     ". A aplicação estará disponível em ",
@@ -2322,14 +2441,14 @@ function DocsPage() {
                                         children: "http://localhost:9002"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/docs/page.tsx",
-                                        lineNumber: 43,
+                                        lineNumber: 57,
                                         columnNumber: 219
                                     }, this),
                                     "."
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/docs/page.tsx",
-                                lineNumber: 42,
+                                lineNumber: 56,
                                 columnNumber: 25
                             }, this)
                         ]
