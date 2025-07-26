@@ -8,6 +8,7 @@ import { Check, X, MapPin, DollarSign, MessageSquareQuote } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { RideChat } from './NegotiationChat';
 import { useState } from 'react';
+import { ScrollArea } from '../ui/scroll-area';
 
 const RideRequestCard = ({ id, passenger, from, to, price, negotiated, onAccept }: { id: string, passenger: string, from: string, to: string, price: string, negotiated?: boolean, onAccept: (id: string) => void }) => {
     const { toast } = useToast();
@@ -99,57 +100,52 @@ export function RideRequests() {
 
     if (acceptedRide) {
          return (
-             <Card className="shadow-lg h-full">
+             <Card className="shadow-lg border-primary">
                  <CardHeader>
                     <CardTitle className="font-headline">Corrida em Andamento</CardTitle>
                     <CardDescription>Comunique-se com seu passageiro.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <Card className="border-primary">
-                        <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-4">
-                            <Avatar>
-                                <AvatarImage src="https://placehold.co/40x40.png" data-ai-hint="person face" />
-                                <AvatarFallback>{acceptedRide.passenger.charAt(0)}</AvatarFallback>
-                            </Avatar>
-                            <div>
-                                <p className="font-semibold">{acceptedRide.passenger}</p>
-                                <p className="text-xs text-green-600 font-bold">EM ANDAMENTO</p>
-                            </div>
-                        </CardHeader>
-                        <CardContent>
-                            <RideChat passengerName={acceptedRide.passenger} isNegotiation={false}>
-                                <Button className="w-full">
-                                    <MessageSquareQuote className="mr-2 h-4 w-4" />
-                                    Abrir Chat com {acceptedRide.passenger}
-                                </Button>
-                            </RideChat>
-                        </CardContent>
-                    </Card>
+                    <div className="flex flex-row items-center gap-4 space-y-0 pb-4">
+                        <Avatar>
+                            <AvatarImage src="https://placehold.co/40x40.png" data-ai-hint="person face" />
+                            <AvatarFallback>{acceptedRide.passenger.charAt(0)}</AvatarFallback>
+                        </Avatar>
+                        <div>
+                            <p className="font-semibold">{acceptedRide.passenger}</p>
+                            <p className="text-xs text-green-600 font-bold">EM ANDAMENTO</p>
+                        </div>
+                    </div>
+                    <RideChat passengerName={acceptedRide.passenger} isNegotiation={false}>
+                        <Button className="w-full">
+                            <MessageSquareQuote className="mr-2 h-4 w-4" />
+                            Abrir Chat com {acceptedRide.passenger}
+                        </Button>
+                    </RideChat>
                 </CardContent>
             </Card>
          )
     }
 
     return (
-        <Card className="shadow-lg h-full">
-            <CardHeader>
-                <CardTitle className="font-headline">Solicitações de Corrida</CardTitle>
-                <CardDescription>Você tem {requests.length} novas solicitações.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-                {requests.map((req) => (
-                    <RideRequestCard 
-                        key={req.id}
-                        id={req.id}
-                        passenger={req.passenger}
-                        from={req.from}
-                        to={req.to}
-                        price={req.price}
-                        negotiated={req.negotiated}
-                        onAccept={handleAccept}
-                    />
-                ))}
-            </CardContent>
-        </Card>
+        <div className="space-y-4">
+            <h3 className="font-headline text-lg">Você tem {requests.length} novas solicitações.</h3>
+            <ScrollArea className="h-96">
+                <div className="space-y-4 pr-4">
+                    {requests.map((req) => (
+                        <RideRequestCard 
+                            key={req.id}
+                            id={req.id}
+                            passenger={req.passenger}
+                            from={req.from}
+                            to={req.to}
+                            price={req.price}
+                            negotiated={req.negotiated}
+                            onAccept={handleAccept}
+                        />
+                    ))}
+                </div>
+            </ScrollArea>
+        </div>
     );
 }

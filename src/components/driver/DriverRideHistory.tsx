@@ -147,28 +147,22 @@ export function DriverRideHistory() {
 
   if (rides.length === 0) {
       return (
-        <Card className="shadow-lg">
-            <CardHeader>
-                <CardTitle className="font-headline">Histórico de Viagens</CardTitle>
-                <CardDescription>Visualize suas corridas concluídas.</CardDescription>
-            </CardHeader>
-            <CardContent>
-                <div className="flex flex-col items-center justify-center text-center text-muted-foreground p-8 border rounded-lg">
-                        <History className="h-10 w-10 mb-4" />
-                        <p className="font-semibold">Nenhuma corrida encontrada</p>
-                        <p className="text-sm">Seu histórico de corridas aparecerá aqui.</p>
-                </div>
-            </CardContent>
-        </Card>
+        <div>
+            <div className="flex flex-col items-center justify-center text-center text-muted-foreground p-8 border rounded-lg bg-card">
+                    <History className="h-10 w-10 mb-4" />
+                    <p className="font-semibold">Nenhuma corrida encontrada</p>
+                    <p className="text-sm">Seu histórico de corridas aparecerá aqui.</p>
+            </div>
+        </div>
       )
   }
     
   return (
-    <Card className="shadow-lg">
-        <CardHeader className="flex flex-col md:flex-row items-start md:items-center justify-between gap-2">
+    <div className="bg-card p-4 rounded-lg">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-2 mb-4">
             <div>
-                <CardTitle className="font-headline">Histórico de Viagens</CardTitle>
-                <CardDescription>Visualize suas corridas concluídas.</CardDescription>
+                <h3 className="font-headline text-lg">Suas Viagens</h3>
+                <p className="text-sm text-muted-foreground">Visualize e gerencie suas corridas concluídas.</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
                 <Dialog>
@@ -263,52 +257,50 @@ export function DriverRideHistory() {
                     </AlertDialogContent>
                 </AlertDialog>
             </div>
-        </CardHeader>
-        <CardContent>
-            <ScrollArea className="h-72 w-full rounded-md border">
-            <Table>
-                <TableHeader>
-                <TableRow>
-                    <TableHead>Passageiro/Data</TableHead>
-                    <TableHead>Trajeto</TableHead>
-                    <TableHead className="text-right">Valor</TableHead>
-                </TableRow>
-                </TableHeader>
-                <TableBody>
-                {rides.map((ride) => (
-                    <TableRow key={ride.id}>
-                    <TableCell>
-                        <div className="font-medium flex items-center gap-2">
-                           <User className="h-3 w-3" />
-                           {ride.passenger}
-                           {ride.startedBy !== 'passenger' && (
-                               <TooltipProvider>
-                                   <Tooltip>
-                                       <TooltipTrigger>
-                                           <AlertCircle className="h-4 w-4 text-muted-foreground" />
-                                       </TooltipTrigger>
-                                       <TooltipContent>
-                                           <p>Corrida iniciada pelo {ride.startedBy}.</p>
-                                       </TooltipContent>
-                                   </Tooltip>
-                               </TooltipProvider>
-                           )}
-                        </div>
-                        <div className="text-sm text-muted-foreground">{ride.date}</div>
-                    </TableCell>
-                    <TableCell>
-                        <div className="flex items-center gap-2 text-xs"><MapPin className="h-3 w-3 text-primary" /> {ride.origin}</div>
-                        <div className="flex items-center gap-2 text-xs"><MapPin className="h-3 w-3 text-accent" /> {ride.destination}</div>
-                    </TableCell>
-                    <TableCell className="text-right font-semibold">R$ {ride.value.replace('.', ',')}</TableCell>
+        </div>
+        <div>
+            <ScrollArea className="h-96 w-full">
+                <Table>
+                    <TableHeader>
+                    <TableRow>
+                        <TableHead>Passageiro/Data</TableHead>
+                        <TableHead>Trajeto</TableHead>
+                        <TableHead className="text-right">Valor</TableHead>
                     </TableRow>
-                ))}
-                </TableBody>
-            </Table>
+                    </TableHeader>
+                    <TableBody>
+                    {rides.map((ride) => (
+                        <TableRow key={ride.id}>
+                        <TableCell>
+                            <div className="font-medium flex items-center gap-2">
+                               <User className="h-3 w-3" />
+                               {ride.passenger}
+                               {ride.startedBy !== 'passenger' && (
+                                   <TooltipProvider>
+                                       <Tooltip>
+                                           <TooltipTrigger>
+                                               <AlertCircle className="h-4 w-4 text-muted-foreground" />
+                                           </TooltipTrigger>
+                                           <TooltipContent>
+                                               <p>Corrida iniciada pelo motorista.</p>
+                                           </TooltipContent>
+                                       </Tooltip>
+                                   </TooltipProvider>
+                               )}
+                            </div>
+                            <div className="text-sm text-muted-foreground">{ride.date}</div>
+                        </TableCell>
+                        <TableCell>
+                            <div className="flex items-center gap-2 text-xs"><MapPin className="h-3 w-3 text-primary" /> {ride.origin}</div>
+                            <div className="flex items-center gap-2 text-xs"><MapPin className="h-3 w-3 text-accent" /> {ride.destination}</div>
+                        </TableCell>
+                        <TableCell className="text-right font-semibold">R$ {ride.value.replace('.', ',')}</TableCell>
+                        </TableRow>
+                    ))}
+                    </TableBody>
+                </Table>
             </ScrollArea>
-        </CardContent>
-    </Card>
+        </div>
+    </div>
   );
 }
-
-    

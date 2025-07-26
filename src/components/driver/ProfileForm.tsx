@@ -1,19 +1,17 @@
 
 'use client';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Star, KeyRound, DollarSign, Camera, Upload, Eye } from 'lucide-react';
-import { Switch } from '@/components/ui/switch';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { KeyRound, Car, Settings, UserCircle, ChevronRight, Upload, Camera, Eye } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog';
-import Image from 'next/image';
 import { useToast } from '@/hooks/use-toast';
-import { useState, useRef, useEffect } from 'react';
-import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
+import { useState } from 'react';
+import { Input } from '../ui/input';
+import { Label } from '../ui/label';
+import { Separator } from '../ui/separator';
 import { CameraCaptureDialog } from '../shared/CameraCaptureDialog';
+import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
+import { Switch } from '../ui/switch';
+import Image from 'next/image';
 
 const DocumentUploader = ({ label, docId, value, onFileChange }: { label: string, docId: string, value: string | null, onFileChange: (file: string | null) => void }) => {
     const { toast } = useToast();
@@ -86,33 +84,41 @@ const DocumentUploader = ({ label, docId, value, onFileChange }: { label: string
     );
 };
 
+
 export function ProfileForm() {
   const { toast } = useToast();
-  const [status, setStatus] = useState('online');
-  const [fareType, setFareType] = useState('fixed');
-  const [avatarImage, setAvatarImage] = useState('https://placehold.co/128x128.png');
-  const [isAvatarCameraOpen, setIsAvatarCameraOpen] = useState(false);
+  const [isPersonalInfoOpen, setIsPersonalInfoOpen] = useState(false);
+  const [isVehicleOpen, setIsVehicleOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  
+  // States for Personal Info
+  const [name, setName] = useState('Carlos Motorista');
+  const [pixKey, setPixKey] = useState('');
+  const [newPassword, setNewPassword] = useState({ password: '', confirmPassword: '' });
+
+  // States for Vehicle & Docs
+  const [vehicleModel, setVehicleModel] = useState('Toyota Corolla');
+  const [licensePlate, setLicensePlate] = useState('BRA2E19');
   const [cnhDocument, setCnhDocument] = useState<string | null>(null);
   const [crlvDocument, setCrlvDocument] = useState<string | null>(null);
   const [vehiclePhoto, setVehiclePhoto] = useState<string | null>(null);
-  const [isPasswordDialogOpen, setIsPasswordDialogOpen] = useState(false);
-  const [newPassword, setNewPassword] = useState({ password: '', confirmPassword: '' });
+  
+  // States for Settings
+  const [fareType, setFareType] = useState('fixed');
+  const [fixedRate, setFixedRate] = useState('');
+  const [kmRate, setKmRate] = useState('');
+  const [acceptsRural, setAcceptsRural] = useState(true);
 
-  const handleSave = () => {
+  const handleSaveChanges = (section: string) => {
     toast({
       title: 'Sucesso!',
-      description: 'Suas alterações foram salvas.',
+      description: `Suas alterações na seção de ${section} foram salvas.`,
     });
+    setIsPersonalInfoOpen(false);
+    setIsVehicleOpen(false);
+    setIsSettingsOpen(false);
   };
-
-  const handleStatusChange = (newStatus: string) => {
-    setStatus(newStatus);
-    toast({
-      title: 'Status Atualizado',
-      description: `Seu status foi alterado para ${newStatus === 'online' ? 'Online' : newStatus === 'offline' ? 'Offline' : newStatus === 'urban-trip' ? 'Em Viagem (Urbano)' : 'Em Viagem (Interior/Intermunicipal)'}.`,
-    });
-  }
-
+  
   const handleChangePassword = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newPassword.password || !newPassword.confirmPassword) {
@@ -124,190 +130,184 @@ export function ProfileForm() {
         return;
     }
     toast({ title: 'Senha Alterada!', description: 'Sua senha foi alterada com sucesso.' });
-    setIsPasswordDialogOpen(false);
     setNewPassword({ password: '', confirmPassword: '' });
+    // In a real app, you would close the password part of the dialog
   };
 
   return (
-    <Card className="shadow-lg">
-      <CardHeader>
-        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-            <div className="flex items-center gap-4">
-                <Dialog open={isAvatarCameraOpen} onOpenChange={setIsAvatarCameraOpen}>
-                  <DialogTrigger asChild>
-                    <Avatar className="h-16 w-16 cursor-pointer">
-                        <AvatarImage src={avatarImage} data-ai-hint="person portrait" />
-                        <AvatarFallback>CM</AvatarFallback>
-                    </Avatar>
-                  </DialogTrigger>
-                  <CameraCaptureDialog 
-                    isOpen={isAvatarCameraOpen}
-                    onImageSave={setAvatarImage} 
-                    onDialogClose={() => setIsAvatarCameraOpen(false)}
-                  />
-                </Dialog>
-                <div>
-                    <CardTitle className="font-headline text-2xl">Carlos Motorista</CardTitle>
-                    <div className="flex items-center gap-1 text-muted-foreground">
-                        <Star className="w-4 h-4 fill-primary text-primary" />
-                        <span>4.9 (238 corridas)</span>
+    <div className="bg-card rounded-lg">
+      <ul>
+        {/* Personal Info */}
+        <Dialog open={isPersonalInfoOpen} onOpenChange={setIsPersonalInfoOpen}>
+            <DialogTrigger asChild>
+                 <li className="flex items-center justify-between p-4 cursor-pointer hover:bg-muted/50">
+                    <div className="flex items-center gap-4">
+                        <UserCircle className="h-6 w-6 text-primary" />
+                        <span className="font-medium">Informações Pessoais</span>
                     </div>
-                </div>
-            </div>
-            <div className="space-y-1 w-full sm:w-48 pt-2 sm:pt-0">
-                <Label htmlFor="driver-status">Status</Label>
-                <Select value={status} onValueChange={handleStatusChange}>
-                    <SelectTrigger id="driver-status">
-                      <SelectValue placeholder="Selecione o status" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="online">Online</SelectItem>
-                      <SelectItem value="offline">Offline</SelectItem>
-                      <SelectItem value="urban-trip">Em Viagem (Urbano)</SelectItem>
-                      <SelectItem value="rural-trip">Em Viagem (Interior/Intermunicipal)</SelectItem>
-                    </SelectContent>
-                </Select>
-            </div>
-        </div>
-      </CardHeader>
-      <CardContent className="space-y-6">
-        <div className="space-y-4">
-            <h3 className="font-headline text-lg">Informações Pessoais</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-1">
-                    <Label htmlFor="name">Nome Completo</Label>
-                    <Input id="name" defaultValue="Carlos Motorista" />
-                </div>
-                <div className="space-y-1">
-                    <Label htmlFor="email">Email</Label>
-                    <Input id="email" type="email" defaultValue="carlos@email.com" readOnly />
-                </div>
-                 <div className="space-y-1 md:col-span-2">
-                    <Label htmlFor="pix-key">Chave PIX</Label>
-                    <div className="relative">
-                         <KeyRound className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                        <Input id="pix-key" placeholder="Insira sua chave PIX (CPF, e-mail, etc.)" className="pl-10" />
+                    <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                </li>
+            </DialogTrigger>
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>Informações Pessoais</DialogTitle>
+                    <DialogDescription>
+                        Gerencie seus dados pessoais e de pagamento.
+                    </DialogDescription>
+                </DialogHeader>
+                <div className="space-y-4 py-4">
+                    <div className="space-y-1">
+                        <Label htmlFor="name">Nome Completo</Label>
+                        <Input id="name" value={name} onChange={e => setName(e.target.value)} />
                     </div>
+                    <div className="space-y-1">
+                        <Label htmlFor="email">Email</Label>
+                        <Input id="email" type="email" value="carlos@email.com" readOnly />
+                    </div>
+                    <div className="space-y-1">
+                        <Label htmlFor="pix-key">Chave PIX</Label>
+                        <Input id="pix-key" value={pixKey} onChange={e => setPixKey(e.target.value)} placeholder="Insira sua chave PIX" />
+                    </div>
+                    <Separator />
+                    <form onSubmit={handleChangePassword} className="space-y-4">
+                        <h3 className="font-medium">Alterar Senha</h3>
+                        <div className="space-y-1">
+                            <Label htmlFor="new-password">Nova Senha</Label>
+                            <Input id="new-password" type="password" value={newPassword.password} onChange={(e) => setNewPassword(prev => ({...prev, password: e.target.value}))} required />
+                        </div>
+                        <div className="space-y-1">
+                            <Label htmlFor="confirm-new-password">Confirmar Nova Senha</Label>
+                            <Input id="confirm-new-password" type="password" value={newPassword.confirmPassword} onChange={(e) => setNewPassword(prev => ({...prev, confirmPassword: e.target.value}))} required />
+                        </div>
+                        <Button type="submit" variant="secondary" className="w-full">Confirmar Nova Senha</Button>
+                    </form>
                 </div>
-                <div className="md:col-span-2">
-                    <Dialog open={isPasswordDialogOpen} onOpenChange={setIsPasswordDialogOpen}>
-                        <DialogTrigger asChild>
-                            <Button variant="outline" className="w-full sm:w-auto">
-                                <KeyRound className="mr-2 h-4 w-4" />
-                                Trocar Senha
-                            </Button>
-                        </DialogTrigger>
-                        <DialogContent className="sm:max-w-md">
-                            <form onSubmit={handleChangePassword}>
-                                <DialogHeader>
-                                    <DialogTitle>Alterar Senha</DialogTitle>
-                                    <DialogDescription>
-                                        Crie uma nova senha segura para sua conta.
-                                    </DialogDescription>
-                                </DialogHeader>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4">
-                                    <div className="space-y-1">
-                                        <Label htmlFor="new-password">Nova Senha</Label>
-                                        <Input id="new-password" type="password" value={newPassword.password} onChange={(e) => setNewPassword(prev => ({...prev, password: e.target.value}))} placeholder="Nova senha forte" required />
-                                    </div>
-                                    <div className="space-y-1">
-                                        <Label htmlFor="confirm-new-password">Confirmar Nova Senha</Label>
-                                        <Input id="confirm-new-password" type="password" value={newPassword.confirmPassword} onChange={(e) => setNewPassword(prev => ({...prev, confirmPassword: e.target.value}))} placeholder="Repita a nova senha" required />
-                                    </div>
-                                </div>
-                                <DialogFooter>
-                                     <Button type="button" variant="secondary" onClick={() => setIsPasswordDialogOpen(false)}>Cancelar</Button>
-                                    <Button type="submit">Salvar Nova Senha</Button>
-                                </DialogFooter>
-                            </form>
-                        </DialogContent>
-                    </Dialog>
-                </div>
-            </div>
-        </div>
-        <div className="space-y-4">
-            <h3 className="font-headline text-lg">Documentos</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <DocumentUploader
-                  label="Carteira de Habilitação (CNH)"
-                  docId="cnh-doc"
-                  value={cnhDocument}
-                  onFileChange={setCnhDocument}
-                />
-                <DocumentUploader
-                  label="Documento do Veículo (CRLV)"
-                  docId="crlv-doc"
-                  value={crlvDocument}
-                  onFileChange={setCrlvDocument}
-                />
-            </div>
-        </div>
-        <div className="space-y-4">
-            <h3 className="font-headline text-lg">Veículo</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className='space-y-4'>
+                <DialogFooter>
+                    <Button variant="outline" onClick={() => setIsPersonalInfoOpen(false)}>Cancelar</Button>
+                    <Button onClick={() => handleSaveChanges('Informações Pessoais')}>Salvar</Button>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
+
+        <Separator />
+        
+        {/* Vehicle and Documents */}
+        <Dialog open={isVehicleOpen} onOpenChange={setIsVehicleOpen}>
+            <DialogTrigger asChild>
+                 <li className="flex items-center justify-between p-4 cursor-pointer hover:bg-muted/50">
+                    <div className="flex items-center gap-4">
+                        <Car className="h-6 w-6 text-primary" />
+                        <span className="font-medium">Veículo e Documentos</span>
+                    </div>
+                    <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                </li>
+            </DialogTrigger>
+            <DialogContent className="max-h-[90vh] overflow-y-auto">
+                 <DialogHeader>
+                    <DialogTitle>Veículo e Documentos</DialogTitle>
+                    <DialogDescription>
+                        Mantenha as informações e fotos do seu veículo e documentos atualizadas.
+                    </DialogDescription>
+                </DialogHeader>
+                <div className="space-y-4 py-4">
                     <div className="space-y-1">
                         <Label htmlFor="vehicle-model">Modelo do Veículo</Label>
-                        <Input id="vehicle-model" defaultValue="Toyota Corolla" />
+                        <Input id="vehicle-model" value={vehicleModel} onChange={e => setVehicleModel(e.target.value)} />
                     </div>
                     <div className="space-y-1">
                         <Label htmlFor="license-plate">Placa</Label>
-                        <Input id="license-plate" defaultValue="BRA2E19" />
+                        <Input id="license-plate" value={licensePlate} onChange={e => setLicensePlate(e.target.value)} />
+                    </div>
+                    <DocumentUploader
+                        label="Foto do Veículo"
+                        docId="vehicle-photo"
+                        value={vehiclePhoto}
+                        onFileChange={setVehiclePhoto}
+                    />
+                    <Separator />
+                    <DocumentUploader
+                        label="Carteira de Habilitação (CNH)"
+                        docId="cnh-doc"
+                        value={cnhDocument}
+                        onFileChange={setCnhDocument}
+                    />
+                    <DocumentUploader
+                        label="Documento do Veículo (CRLV)"
+                        docId="crlv-doc"
+                        value={crlvDocument}
+                        onFileChange={setCrlvDocument}
+                    />
+                </div>
+                <DialogFooter>
+                    <Button variant="outline" onClick={() => setIsVehicleOpen(false)}>Cancelar</Button>
+                    <Button onClick={() => handleSaveChanges('Veículo e Documentos')}>Salvar</Button>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
+
+        <Separator />
+
+        {/* Ride Settings */}
+        <Dialog open={isSettingsOpen} onOpenChange={setIsSettingsOpen}>
+            <DialogTrigger asChild>
+                <li className="flex items-center justify-between p-4 cursor-pointer hover:bg-muted/50">
+                    <div className="flex items-center gap-4">
+                        <Settings className="h-6 w-6 text-primary" />
+                        <span className="font-medium">Configurações de Corrida</span>
+                    </div>
+                    <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                </li>
+            </DialogTrigger>
+            <DialogContent>
+                 <DialogHeader>
+                    <DialogTitle>Configurações de Corrida</DialogTitle>
+                    <DialogDescription>
+                        Defina suas preferências de tarifa para corridas urbanas.
+                    </DialogDescription>
+                </DialogHeader>
+                <div className="space-y-4 py-4">
+                    <div className="space-y-2">
+                        <Label>Tipo de Tarifa (Urbano)</Label>
+                        <RadioGroup value={fareType} onValueChange={setFareType} className="flex items-center gap-4 pt-2">
+                            <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="fixed" id="r-fixed" />
+                                <Label htmlFor="r-fixed">Valor Fixo</Label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="km" id="r-km" />
+                                <Label htmlFor="r-km">Tarifa por KM</Label>
+                            </div>
+                        </RadioGroup>
+                    </div>
+                    {fareType === 'fixed' ? (
+                        <div className="space-y-1">
+                            <Label htmlFor="fixed-rate">Tarifa Fixa (R$)</Label>
+                            <Input id="fixed-rate" type="number" value={fixedRate} onChange={e => setFixedRate(e.target.value)} placeholder="25,50" />
+                        </div>
+                    ) : (
+                        <div className="space-y-1">
+                            <Label htmlFor="km-rate">Tarifa por KM (R$)</Label>
+                            <Input id="km-rate" type="number" value={kmRate} onChange={e => setKmRate(e.target.value)} placeholder="3,50" />
+                        </div>
+                    )}
+                    <Separator />
+                     <div className="flex items-center justify-between rounded-lg border p-3">
+                        <div className="space-y-0.5">
+                            <Label htmlFor="negotiate-rural">Aceitar negociação para interior</Label>
+                            <p className="text-xs text-muted-foreground">
+                                Permite que passageiros negociem valores para fora da cidade.
+                            </p>
+                        </div>
+                        <Switch id="negotiate-rural" checked={acceptsRural} onCheckedChange={setAcceptsRural} />
                     </div>
                 </div>
-                 <DocumentUploader
-                  label="Foto do Veículo"
-                  docId="vehicle-photo"
-                  value={vehiclePhoto}
-                  onFileChange={setVehiclePhoto}
-                />
-            </div>
-        </div>
-        <div className="space-y-4">
-            <h3 className="font-headline text-lg">Configurações de Corrida</h3>
-            <div className="space-y-1">
-                 <Label>Tipo de Tarifa (Urbano)</Label>
-                 <RadioGroup defaultValue="fixed" value={fareType} onValueChange={setFareType} className="flex items-center gap-4 pt-2">
-                    <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="fixed" id="r-fixed" />
-                        <Label htmlFor="r-fixed">Valor Fixo</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="km" id="r-km" />
-                        <Label htmlFor="r-km">Tarifa por KM</Label>
-                    </div>
-                 </RadioGroup>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
-                {fareType === 'fixed' ? (
-                    <div className="space-y-1">
-                        <Label htmlFor="fixed-rate">Tarifa Fixa (R$)</Label>
-                        <div className="relative">
-                            <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                            <Input id="fixed-rate" type="number" placeholder="25.50" className="pl-10" />
-                        </div>
-                    </div>
-                ) : (
-                    <div className="space-y-1">
-                        <Label htmlFor="km-rate">Tarifa por KM (R$)</Label>
-                        <div className="relative">
-                             <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                            <Input id="km-rate" type="number" placeholder="3.50" className="pl-10" />
-                        </div>
-                    </div>
-                )}
-                 <div className="flex items-start gap-3 pt-5">
-                    <Switch id="negotiate-rural" />
-                    <div className="grid gap-1.5 leading-none">
-                       <Label htmlFor="negotiate-rural" className="flex-1 cursor-pointer">Aceitar negociação para interior/intermunicipal</Label>
-                    </div>
-                </div>
-            </div>
-        </div>
-      </CardContent>
-      <CardFooter className="flex flex-col sm:flex-row items-stretch">
-        <Button className="w-full sm:w-auto sm:ml-auto" onClick={handleSave}>Salvar Alterações</Button>
-      </CardFooter>
-    </Card>
+                 <DialogFooter>
+                    <Button variant="outline" onClick={() => setIsSettingsOpen(false)}>Cancelar</Button>
+                    <Button onClick={() => handleSaveChanges('Configurações')}>Salvar</Button>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
+      </ul>
+    </div>
   );
 }
