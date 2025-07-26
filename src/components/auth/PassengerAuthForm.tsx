@@ -84,9 +84,8 @@ export function PassengerAuthForm() {
   if (isLoggedIn) {
       return (
         <Card className="w-full border-0 shadow-none">
-          <div className="pt-6">
-            <CardHeader className="text-center p-0">
-                <div className="flex flex-col items-center gap-4">
+            <CardContent className="p-0 space-y-4">
+                <div className="flex flex-col items-center gap-4 pt-6">
                     <Dialog open={isCameraDialogOpen} onOpenChange={setIsCameraDialogOpen}>
                         <DialogTrigger asChild>
                              <div className="relative group">
@@ -106,45 +105,46 @@ export function PassengerAuthForm() {
                         />
                     </Dialog>
                     <div className="text-center">
-                        <CardTitle className="font-headline text-2xl">João Passageiro</CardTitle>
-                        <CardDescription className="font-body">joao@email.com</CardDescription>
+                        <h2 className="font-headline text-2xl font-semibold">João Passageiro</h2>
+                        <p className="font-body text-muted-foreground">joao@email.com</p>
                     </div>
                 </div>
-            </CardHeader>
-            <CardContent className="space-y-4 p-6">
-                 <Dialog open={isPasswordDialogOpen} onOpenChange={setIsPasswordDialogOpen}>
-                    <DialogTrigger asChild>
-                        <Button variant="outline" className="w-full">
-                            <KeyRound className="mr-2 h-4 w-4" />
-                            Trocar Senha
-                        </Button>
-                    </DialogTrigger>
-                    <DialogContent className="sm:max-w-md">
-                        <form onSubmit={handleChangePassword}>
-                            <DialogHeader>
-                                <DialogTitle>Alterar Senha</DialogTitle>
-                                <DialogDescription>
-                                    Defina uma nova senha para sua conta.
-                                </DialogDescription>
-                            </DialogHeader>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4">
-                                <div className="space-y-1">
-                                    <Label htmlFor="new-password-passenger">Nova Senha</Label>
-                                    <Input id="new-password-passenger" type="password" value={newPassword.password} onChange={(e) => setNewPassword(prev => ({...prev, password: e.target.value}))} placeholder="Nova senha forte" required />
+
+                <div className="px-6 space-y-2">
+                    <Dialog open={isPasswordDialogOpen} onOpenChange={setIsPasswordDialogOpen}>
+                        <DialogTrigger asChild>
+                            <Button variant="outline" className="w-full">
+                                <KeyRound className="mr-2 h-4 w-4" />
+                                Trocar Senha
+                            </Button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-md">
+                            <form onSubmit={handleChangePassword}>
+                                <DialogHeader>
+                                    <DialogTitle>Alterar Senha</DialogTitle>
+                                    <DialogDescription>
+                                        Defina uma nova senha para sua conta.
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4">
+                                    <div className="space-y-1">
+                                        <Label htmlFor="new-password-passenger">Nova Senha</Label>
+                                        <Input id="new-password-passenger" type="password" value={newPassword.password} onChange={(e) => setNewPassword(prev => ({...prev, password: e.target.value}))} placeholder="Nova senha forte" required />
+                                    </div>
+                                    <div className="space-y-1">
+                                        <Label htmlFor="confirm-new-password-passenger">Confirmar Nova Senha</Label>
+                                        <Input id="confirm-new-password-passenger" type="password" value={newPassword.confirmPassword} onChange={(e) => setNewPassword(prev => ({...prev, confirmPassword: e.target.value}))} placeholder="Repita a nova senha" required />
+                                    </div>
                                 </div>
-                                <div className="space-y-1">
-                                    <Label htmlFor="confirm-new-password-passenger">Confirmar Nova Senha</Label>
-                                    <Input id="confirm-new-password-passenger" type="password" value={newPassword.confirmPassword} onChange={(e) => setNewPassword(prev => ({...prev, confirmPassword: e.target.value}))} placeholder="Repita a nova senha" required />
-                                </div>
-                            </div>
-                            <DialogFooter>
-                                 <Button type="button" variant="secondary" onClick={() => setIsPasswordDialogOpen(false)}>Cancelar</Button>
-                                <Button type="submit">Salvar Nova Senha</Button>
-                            </DialogFooter>
-                        </form>
-                    </DialogContent>
-                </Dialog>
-                <Button onClick={handleSaveChanges} className="w-full">Salvar Alterações</Button>
+                                <DialogFooter>
+                                     <Button type="button" variant="secondary" onClick={() => setIsPasswordDialogOpen(false)}>Cancelar</Button>
+                                    <Button type="submit">Salvar Nova Senha</Button>
+                                </DialogFooter>
+                            </form>
+                        </DialogContent>
+                    </Dialog>
+                    <Button onClick={handleSaveChanges} className="w-full">Salvar Alterações</Button>
+                </div>
             </CardContent>
             <CardContent className="space-y-2 pt-4 p-0">
                 <h3 className="font-headline text-lg font-semibold text-center px-6">Histórico de Corridas</h3>
@@ -156,7 +156,6 @@ export function PassengerAuthForm() {
                     Sair
                 </Button>
             </CardFooter>
-          </div>
         </Card>
       );
   }
