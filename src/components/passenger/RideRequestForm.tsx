@@ -1,5 +1,3 @@
-
-
 'use client';
 
 import { useState } from 'react';
@@ -155,14 +153,14 @@ export function RideRequestForm({ availableDrivers }: RideRequestFormProps) {
             }} />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <div className={`grid gap-2 ${isRural ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2'}`}>
             {!isRural && (
                 <Button className="w-full" onClick={handleShowEstimate}>
                   Ver Tarifa do Motorista
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
             )}
-            <Button variant="outline" className={`w-full ${isRural ? 'col-span-2' : ''}`} onClick={() => { setShowDrivers(!showDrivers); setShowEstimate(false); }}>
+            <Button variant="outline" className="w-full" onClick={() => { setShowDrivers(!showDrivers); setShowEstimate(false); }}>
                 {showDrivers ? 'Ocultar Motoristas' : 'Ver Motoristas Próximos'}
             </Button>
           </div>
