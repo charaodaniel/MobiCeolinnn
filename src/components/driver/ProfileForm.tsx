@@ -371,7 +371,7 @@ export function ProfileForm() {
                 )}
                  <div className="flex items-center space-x-2 pt-5">
                     <Switch id="negotiate-rural" />
-                    <Label htmlFor="negotiate-rural">Aceitar negociação para interior</Label>
+                    <Label htmlFor="negotiate-rural">Aceitar negociação para interior/intermunicipal</Label>
                 </div>
             </div>
         </div>

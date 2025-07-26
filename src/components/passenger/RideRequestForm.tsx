@@ -145,7 +145,7 @@ export function RideRequestForm({ availableDrivers }: RideRequestFormProps) {
               <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
               <Input 
                 id="destination" 
-                placeholder="Digite o endereço ou local" 
+                placeholder="Digite o endereço ou local (opcional)" 
                 className="pl-10" 
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
@@ -155,9 +155,9 @@ export function RideRequestForm({ availableDrivers }: RideRequestFormProps) {
 
           <div className="flex items-center justify-between rounded-lg border p-3 shadow-sm">
             <div className="space-y-0.5">
-              <Label htmlFor="rural-mode" className="text-base font-medium">Destino no interior?</Label>
+              <Label htmlFor="rural-mode" className="text-base font-medium">Adicionar destino interior ou intermunicipal</Label>
               <p className="text-sm text-muted-foreground">
-                Ative para negociar o valor com o motorista.
+                Ative para negociar o valor para viagens mais longas.
               </p>
             </div>
             <Switch id="rural-mode" checked={isRural} onCheckedChange={(checked) => {
