@@ -47,7 +47,7 @@ export function FareNegotiation({ destination }: { destination: string }) {
 
   return (
     <div className="space-y-4">
-      <h3 className="font-headline text-lg font-semibold">Tarifa para o Interior</h3>
+      <h3 className="font-headline text-lg font-semibold">Tarifa para Interior/Intermunicipal</h3>
       
       {!negotiationStarted ? (
         <>
@@ -97,3 +97,5 @@ export function FareNegotiation({ destination }: { destination: string }) {
     </div>
   );
 }
+
+    

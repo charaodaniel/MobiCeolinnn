@@ -232,7 +232,7 @@ export function ProfileForm() {
     setStatus(newStatus);
     toast({
       title: 'Status Atualizado',
-      description: `Seu status foi alterado para ${newStatus === 'online' ? 'Online' : newStatus === 'offline' ? 'Offline' : newStatus === 'urban-trip' ? 'Em Viagem (Urbano)' : 'Em Viagem (Interior)'}.`,
+      description: `Seu status foi alterado para ${newStatus === 'online' ? 'Online' : newStatus === 'offline' ? 'Offline' : newStatus === 'urban-trip' ? 'Em Viagem (Urbano)' : 'Em Viagem (Interior/Intermunicipal)'}.`,
     });
   }
 
@@ -271,7 +271,7 @@ export function ProfileForm() {
                       <SelectItem value="online">Online</SelectItem>
                       <SelectItem value="offline">Offline</SelectItem>
                       <SelectItem value="urban-trip">Em Viagem (Urbano)</SelectItem>
-                      <SelectItem value="rural-trip">Em Viagem (Interior)</SelectItem>
+                      <SelectItem value="rural-trip">Em Viagem (Interior/Intermunicipal)</SelectItem>
                     </SelectContent>
                 </Select>
             </div>
@@ -382,3 +382,5 @@ export function ProfileForm() {
     </Card>
   );
 }
+
+    

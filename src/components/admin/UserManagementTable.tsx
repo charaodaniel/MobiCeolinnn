@@ -42,7 +42,7 @@ const mockStatusLogs: Record<string, { status: string, timestamp: string }[]> = 
     { status: 'Online', timestamp: '2024-07-29 10:15:00' },
     { status: 'Offline', timestamp: '2024-07-29 12:30:05' },
     { status: 'Online', timestamp: '2024-07-29 14:00:22' },
-    { status: 'Em Viagem (Interior)', timestamp: '2024-07-29 16:10:00' },
+    { status: 'Em Viagem (Interior/Intermunicipal)', timestamp: '2024-07-29 16:10:00' },
     { status: 'Online', timestamp: '2024-07-29 18:45:30' },
     { status: 'Offline', timestamp: '2024-07-29 22:05:11' },
   ],
@@ -460,7 +460,7 @@ export function UserManagementTable({ onReportGenerated }: { onReportGenerated: 
                                             <Badge variant={
                                                 log.status === 'Online' ? 'secondary' : 
                                                 log.status === 'Offline' ? 'destructive' :
-                                                log.status === 'Em Viagem (Interior)' ? 'default' :
+                                                log.status === 'Em Viagem (Interior/Intermunicipal)' ? 'default' :
                                                 'outline'
                                             }>{log.status}</Badge>
                                         </li>
@@ -509,3 +509,5 @@ export function UserManagementTable({ onReportGenerated }: { onReportGenerated: 
         </div>
     );
 }
+
+    
