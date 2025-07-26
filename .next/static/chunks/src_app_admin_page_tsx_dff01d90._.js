@@ -1,11 +1,12 @@
 (globalThis.TURBOPACK_CHUNK_LISTS = globalThis.TURBOPACK_CHUNK_LISTS || []).push({
     script: typeof document === "object" ? document.currentScript : undefined,
     chunks: [
-  "static/chunks/node_modules_55d332ac._.js",
-  "static/chunks/src_a7108bfc._.js",
+  "static/chunks/node_modules_cc9720bd._.js",
+  "static/chunks/src_60924024._.js",
+  "static/chunks/node_modules_next_997ee082._.js",
   "static/chunks/node_modules_jspdf_dist_jspdf_es_min_c277e70f.js",
   "static/chunks/node_modules_jspdf-autotable_dist_jspdf_plugin_autotable_7f09d304.js",
-  "static/chunks/node_modules_ad6168d4._.js"
+  "static/chunks/node_modules_7d32fc85._.js"
 ],
     source: "dynamic"
 });

@@ -5,9 +5,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Car, User, Trash2, PlusCircle, FileText, ListCollapse, Clock, KeyRound } from 'lucide-react';
+import { Car, User, Trash2, PlusCircle, FileText, ListCollapse, Clock, KeyRound, Rocket } from 'lucide-react';
 import { Button } from '../ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger } from '../ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger, DialogClose } from '../ui/dialog';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
@@ -62,10 +62,12 @@ export function UserManagementTable({ onReportGenerated }: { onReportGenerated: 
         users.reduce((acc, user) => ({ ...acc, [user.id]: user.status }), {})
     );
     const [isAddUserDialogOpen, setIsAddUserDialogOpen] = useState(false);
+    const [isNewRideDialogOpen, setIsNewRideDialogOpen] = useState(false);
     const [isLogDialogOpen, setIsLogDialogOpen] = useState(false);
     const [isPasswordDialogOpen, setIsPasswordDialogOpen] = useState(false);
     const [selectedUser, setSelectedUser] = useState<(typeof initialUsers[0]) | null>(null);
     const [newUser, setNewUser] = useState({ name: '', email: '', role: 'Passageiro', password: '', confirmPassword: '' });
+    const [newRide, setNewRide] = useState({ passenger: 'Passageiro Anônimo', origin: '', destination: '', value: '', driverId: '' });
     const [newPassword, setNewPassword] = useState({ password: '', confirmPassword: '' });
     const uniqueId = useId();
 
@@ -104,6 +106,28 @@ export function UserManagementTable({ onReportGenerated }: { onReportGenerated: 
         toast({ title: 'Usuário Adicionado!', description: `${newUser.name} foi adicionado como ${newUser.role}.` });
         setIsAddUserDialogOpen(false);
         setNewUser({ name: '', email: '', role: 'Passageiro', password: '', confirmPassword: '' });
+    };
+
+    const handleAddNewRide = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!newRide.origin || !newRide.destination || !newRide.value || !newRide.driverId) {
+            toast({
+                variant: 'destructive',
+                title: 'Campos obrigatórios',
+                description: 'Por favor, preencha todos os campos para registrar a corrida, incluindo o motorista.',
+            });
+            return;
+        }
+
+        const driver = users.find(u => u.id === newRide.driverId);
+
+        toast({
+            title: 'Corrida Registrada!',
+            description: `A nova corrida foi registrada e atribuída a ${driver?.name}.`,
+        });
+        
+        setIsNewRideDialogOpen(false);
+        setNewRide({ passenger: 'Passageiro Anônimo', origin: '', destination: '', value: '', driverId: '' });
     };
 
     const handleChangePassword = (e: React.FormEvent) => {
@@ -215,10 +239,68 @@ export function UserManagementTable({ onReportGenerated }: { onReportGenerated: 
     };
 
     const selectedUserLogs = selectedUser ? mockStatusLogs[selectedUser.id] || [] : [];
+    const availableDrivers = users.filter(user => user.role === 'Motorista');
 
     return (
         <div className="space-y-4">
-            <div className="flex justify-end">
+            <div className="flex flex-col sm:flex-row justify-end gap-2">
+                <Dialog open={isNewRideDialogOpen} onOpenChange={setIsNewRideDialogOpen}>
+                    <DialogTrigger asChild>
+                         <Button variant="outline">
+                            <Rocket className="mr-2 h-4 w-4" />
+                            Iniciar Corrida Manualmente
+                        </Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                        <form onSubmit={handleAddNewRide}>
+                            <DialogHeader>
+                                <DialogTitle>Registrar Nova Corrida</DialogTitle>
+                                <DialogDescription>
+                                    Preencha os dados para uma corrida iniciada presencialmente e atribua a um motorista.
+                                </DialogDescription>
+                            </DialogHeader>
+                            <div className="space-y-4 py-4">
+                                <div className="space-y-1">
+                                    <Label htmlFor="driver-select">Atribuir ao Motorista</Label>
+                                    <Select value={newRide.driverId} onValueChange={(value) => setNewRide(prev => ({...prev, driverId: value}))} required>
+                                        <SelectTrigger id="driver-select">
+                                            <SelectValue placeholder="Selecione um motorista" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            {availableDrivers.map(driver => (
+                                                <SelectItem key={driver.id} value={driver.id}>{driver.name}</SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                                <div className="space-y-1">
+                                    <Label htmlFor="passenger-name-admin">Nome do Passageiro (Opcional)</Label>
+                                    <Input id="passenger-name-admin" value={newRide.passenger} onChange={(e) => setNewRide(prev => ({ ...prev, passenger: e.target.value }))} placeholder="Passageiro Anônimo" />
+                                </div>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div className="space-y-1">
+                                        <Label htmlFor="origin-location-admin">Local de Partida</Label>
+                                        <Input id="origin-location-admin" value={newRide.origin} onChange={(e) => setNewRide(prev => ({ ...prev, origin: e.target.value }))} required placeholder="Ex: Rua Principal, 123" />
+                                    </div>
+                                     <div className="space-y-1">
+                                        <Label htmlFor="destination-location-admin">Local de Destino</Label>
+                                        <Input id="destination-location-admin" value={newRide.destination} onChange={(e) => setNewRide(prev => ({ ...prev, destination: e.target.value }))} required placeholder="Ex: Shopping Center" />
+                                    </div>
+                                </div>
+                                <div className="space-y-1">
+                                    <Label htmlFor="ride-value-admin">Valor da Corrida (R$)</Label>
+                                    <Input id="ride-value-admin" type="number" step="0.01" value={newRide.value} onChange={(e) => setNewRide(prev => ({ ...prev, value: e.target.value }))} required placeholder="25.50" />
+                                </div>
+                            </div>
+                            <DialogFooter>
+                                <DialogClose asChild>
+                                    <Button type="button" variant="secondary" id="close-new-ride-dialog-admin">Cancelar</Button>
+                                </DialogClose>
+                                <Button type="submit">Registrar e Atribuir</Button>
+                            </DialogFooter>
+                        </form>
+                    </DialogContent>
+                </Dialog>
                 <Dialog open={isAddUserDialogOpen} onOpenChange={setIsAddUserDialogOpen}>
                     <DialogTrigger asChild>
                         <Button>
@@ -513,5 +595,7 @@ export function UserManagementTable({ onReportGenerated }: { onReportGenerated: 
         </div>
     );
 }
+
+    
 
     
