@@ -4,16 +4,20 @@ import { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Star } from 'lucide-react';
+import { Camera, Star } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { RideRequests } from './RideRequests';
 import { DriverRideHistory } from './DriverRideHistory';
 import { ProfileForm } from './ProfileForm';
+import { Dialog, DialogTrigger } from '../ui/dialog';
+import { ImageEditorDialog } from '../shared/ImageEditorDialog';
 
 export function DriverProfilePage() {
   const { toast } = useToast();
   const [status, setStatus] = useState('online');
+  const [avatarImage, setAvatarImage] = useState('https://placehold.co/128x128.png');
+  const [isCameraDialogOpen, setIsCameraDialogOpen] = useState(false);
 
   const handleStatusChange = (newStatus: string) => {
     setStatus(newStatus);
@@ -31,10 +35,24 @@ export function DriverProfilePage() {
   return (
     <div className="flex flex-col bg-muted/40 min-h-[calc(100vh-4rem)]">
       <div className="flex flex-col items-center gap-4 py-8 bg-card">
-        <Avatar className="h-24 w-24 ring-4 ring-background">
-          <AvatarImage src={'https://placehold.co/128x128.png'} data-ai-hint="person portrait" />
-          <AvatarFallback>CM</AvatarFallback>
-        </Avatar>
+        <Dialog open={isCameraDialogOpen} onOpenChange={setIsCameraDialogOpen}>
+            <DialogTrigger asChild>
+                 <div className="relative group">
+                    <Avatar className="h-24 w-24 cursor-pointer ring-4 ring-background">
+                        <AvatarImage src={avatarImage} data-ai-hint="person portrait" />
+                        <AvatarFallback>CM</AvatarFallback>
+                    </Avatar>
+                    <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded-full">
+                        <Camera className="h-8 w-8 text-white" />
+                    </div>
+                </div>
+            </DialogTrigger>
+            <ImageEditorDialog 
+                isOpen={isCameraDialogOpen}
+                onImageSave={setAvatarImage} 
+                onDialogClose={() => setIsCameraDialogOpen(false)}
+            />
+        </Dialog>
         <div className="text-center">
           <h2 className="font-headline text-2xl font-semibold">Carlos Motorista</h2>
           <div className="flex items-center justify-center gap-1 text-muted-foreground">
