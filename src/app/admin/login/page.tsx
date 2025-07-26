@@ -35,7 +35,7 @@ export default function AdminLoginPage() {
     };
 
   return (
-    <main className="flex min-h-screen w-full items-center justify-center p-4 bg-gradient-to-br from-background to-secondary">
+    <main className="flex w-full items-center justify-center p-4 bg-gradient-to-br from-background to-secondary min-h-screen">
         <div className="relative">
             <Card className="w-full max-w-md shadow-2xl animate-fade-in-up">
                 <form onSubmit={handleLogin}>

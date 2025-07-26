@@ -68,7 +68,7 @@ export function AppLayout({ children, title, showAuthButtons = false, showDriver
             <h1 className="text-center font-headline text-lg font-bold text-foreground/80">{title}</h1>
         </div>
       </header>
-      <main className="flex-1">{children}</main>
+      <main>{children}</main>
       <Footer />
     </div>
   );

@@ -115,12 +115,12 @@ export function ProfileForm() {
 
   const handleChangePassword = (e: React.FormEvent) => {
     e.preventDefault();
-    if (newPassword.password !== newPassword.confirmPassword) {
-        toast({ variant: 'destructive', title: 'Erro', description: 'As senhas não coincidem.' });
+    if (!newPassword.password || !newPassword.confirmPassword) {
+        toast({ variant: 'destructive', title: 'Erro', description: 'Preencha ambos os campos de senha.' });
         return;
     }
-    if (newPassword.password.length < 6) {
-        toast({ variant: 'destructive', title: 'Erro', description: 'A senha deve ter pelo menos 6 caracteres.' });
+    if (newPassword.password !== newPassword.confirmPassword) {
+        toast({ variant: 'destructive', title: 'Erro', description: 'As senhas não coincidem.' });
         return;
     }
     toast({ title: 'Senha Alterada!', description: 'Sua senha foi alterada com sucesso.' });
@@ -244,7 +244,7 @@ export function ProfileForm() {
         </div>
         <div className="space-y-4">
             <h3 className="font-headline text-lg">Veículo</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className='space-y-4'>
                     <div className="space-y-1">
                         <Label htmlFor="vehicle-model">Modelo do Veículo</Label>
@@ -311,5 +311,3 @@ export function ProfileForm() {
     </Card>
   );
 }
-
-    

@@ -21,7 +21,7 @@ export function PassengerDashboard() {
         <div className="lg:col-span-1">
           <RideRequestForm availableDrivers={availableDrivers} />
         </div>
-        <div className="lg:col-span-2 h-[400px] md:h-[calc(100vh-10rem)] flex flex-col gap-4">
+        <div className="lg:col-span-2 h-[500px] lg:h-[calc(100vh-12rem)] flex flex-col gap-4">
             <div className='flex items-center gap-2'>
                 <Car className="h-6 w-6 text-primary" />
                 <h2 className="font-headline text-xl font-semibold">Motoristas Próximos</h2>
