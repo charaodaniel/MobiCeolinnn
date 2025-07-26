@@ -10,10 +10,10 @@ import { User, LogIn, UserPlus, LogOut, KeyRound, Camera, History, MessageSquare
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { RideHistory } from '../passenger/RideHistory';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog';
-import { CameraCaptureDialog } from '../shared/CameraCaptureDialog';
+import { ImageEditorDialog } from '../shared/ImageEditorDialog';
 import { Separator } from '../ui/separator';
 import { ChatHistory } from '../passenger/ChatHistory';
-import { Card, CardContent, CardHeader } from '../ui/card';
+import { Card, CardContent, CardFooter } from '../ui/card';
 
 
 interface PassengerAuthFormProps {
@@ -99,7 +99,7 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
                             </div>
                         </div>
                     </DialogTrigger>
-                    <CameraCaptureDialog 
+                    <ImageEditorDialog 
                         isOpen={isCameraDialogOpen}
                         onImageSave={setAvatarImage} 
                         onDialogClose={() => setIsCameraDialogOpen(false)}
@@ -202,7 +202,7 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
             </div>
         </div>
       </CardContent>
-      <div className="flex flex-col sm:flex-row gap-2 p-6 pt-0">
+      <CardFooter className="flex flex-col sm:flex-row gap-2 p-6 pt-0">
         <Button onClick={handleLogin} className="w-full">
             <LogIn className="mr-2 h-4 w-4" />
             Entrar
@@ -211,7 +211,7 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
             <UserPlus className="mr-2 h-4 w-4" />
             Registrar
         </Button>
-      </div>
+      </CardFooter>
     </Card>
   );
 }

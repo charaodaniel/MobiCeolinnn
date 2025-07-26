@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { Separator } from '../ui/separator';
-import { CameraCaptureDialog } from '../shared/CameraCaptureDialog';
+import { ImageEditorDialog } from '../shared/ImageEditorDialog';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Switch } from '../ui/switch';
 import Image from 'next/image';
@@ -59,21 +59,14 @@ const DocumentUploader = ({ label, docId, value, onFileChange, isEditing }: { la
                 )}
                 {isEditing && (
                     <div className="flex flex-col sm:flex-row w-full gap-2">
-                        <Button variant="secondary" className="w-full" asChild>
-                            <label htmlFor={`upload-${docId}`} className="cursor-pointer">
-                                <Upload className="mr-2" />
-                                Carregar
-                            </label>
-                        </Button>
-                        <input id={`upload-${docId}`} type="file" accept="image/*" className="hidden" onChange={handleFileSelect} />
                         <Dialog open={isCameraDialogOpen} onOpenChange={setIsCameraDialogOpen}>
                           <DialogTrigger asChild>
                             <Button variant="outline" className="w-full">
                               <Camera className="mr-2" />
-                              Câmera
+                              Câmera ou Upload
                             </Button>
                           </DialogTrigger>
-                          <CameraCaptureDialog 
+                          <ImageEditorDialog 
                             isOpen={isCameraDialogOpen}
                             onImageSave={(image) => onFileChange(image)}
                             onDialogClose={() => setIsCameraDialogOpen(false)}
@@ -392,5 +385,3 @@ export function ProfileForm() {
     </div>
   );
 }
-
-    
