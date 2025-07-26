@@ -14,6 +14,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useState, useRef, useEffect } from 'react';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Alert, AlertTitle, AlertDescription } from '../ui/alert';
+import { cn } from '@/lib/utils';
 
 function CameraCaptureDialog() {
     const { toast } = useToast();
