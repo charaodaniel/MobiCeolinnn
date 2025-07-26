@@ -226,7 +226,7 @@ export function UserManagementTable({ onReportGenerated }: { onReportGenerated: 
                             Adicionar Usuário
                         </Button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto">
+                    <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
                         <form onSubmit={handleAddUser}>
                             <DialogHeader>
                                 <DialogTitle>Adicionar Novo Usuário</DialogTitle>
@@ -234,14 +234,16 @@ export function UserManagementTable({ onReportGenerated }: { onReportGenerated: 
                                     Preencha as informações para criar uma nova conta de usuário.
                                 </DialogDescription>
                             </DialogHeader>
-                            <div className="grid gap-4 py-4">
-                                <div className="space-y-1">
-                                    <Label htmlFor={`${uniqueId}-name`}>Nome</Label>
-                                    <Input id={`${uniqueId}-name`} value={newUser.name} onChange={(e) => setNewUser(prev => ({ ...prev, name: e.target.value }))} placeholder="Nome Completo" required />
-                                </div>
-                                 <div className="space-y-1">
-                                    <Label htmlFor={`${uniqueId}-email`}>Email</Label>
-                                    <Input id={`${uniqueId}-email`} type="email" value={newUser.email} onChange={(e) => setNewUser(prev => ({ ...prev, email: e.target.value }))} placeholder="email@exemplo.com" required />
+                            <div className="space-y-4 py-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div className="space-y-1">
+                                        <Label htmlFor={`${uniqueId}-name`}>Nome</Label>
+                                        <Input id={`${uniqueId}-name`} value={newUser.name} onChange={(e) => setNewUser(prev => ({ ...prev, name: e.target.value }))} placeholder="Nome Completo" required />
+                                    </div>
+                                    <div className="space-y-1">
+                                        <Label htmlFor={`${uniqueId}-email`}>Email</Label>
+                                        <Input id={`${uniqueId}-email`} type="email" value={newUser.email} onChange={(e) => setNewUser(prev => ({ ...prev, email: e.target.value }))} placeholder="email@exemplo.com" required />
+                                    </div>
                                 </div>
                                 <div className="space-y-1">
                                     <Label htmlFor={`${uniqueId}-role`}>Perfil</Label>
@@ -256,13 +258,15 @@ export function UserManagementTable({ onReportGenerated }: { onReportGenerated: 
                                         </SelectContent>
                                     </Select>
                                 </div>
-                                <div className="space-y-1">
-                                    <Label htmlFor={`${uniqueId}-password`}>Senha</Label>
-                                    <Input id={`${uniqueId}-password`} type="password" value={newUser.password} onChange={(e) => setNewUser(prev => ({ ...prev, password: e.target.value }))} placeholder="********" required />
-                                </div>
-                                <div className="space-y-1">
-                                    <Label htmlFor={`${uniqueId}-confirm-password`}>Confirmar Senha</Label>
-                                    <Input id={`${uniqueId}-confirm-password`} type="password" value={newUser.confirmPassword} onChange={(e) => setNewUser(prev => ({ ...prev, confirmPassword: e.target.value }))} placeholder="********" required />
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div className="space-y-1">
+                                        <Label htmlFor={`${uniqueId}-password`}>Senha</Label>
+                                        <Input id={`${uniqueId}-password`} type="password" value={newUser.password} onChange={(e) => setNewUser(prev => ({ ...prev, password: e.target.value }))} placeholder="********" required />
+                                    </div>
+                                    <div className="space-y-1">
+                                        <Label htmlFor={`${uniqueId}-confirm-password`}>Confirmar Senha</Label>
+                                        <Input id={`${uniqueId}-confirm-password`} type="password" value={newUser.confirmPassword} onChange={(e) => setNewUser(prev => ({ ...prev, confirmPassword: e.target.value }))} placeholder="********" required />
+                                    </div>
                                 </div>
                             </div>
                             <DialogFooter>
@@ -480,7 +484,7 @@ export function UserManagementTable({ onReportGenerated }: { onReportGenerated: 
             </Dialog>
 
             <Dialog open={isPasswordDialogOpen} onOpenChange={setIsPasswordDialogOpen}>
-                <DialogContent className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto">
+                <DialogContent className="sm:max-w-md">
                     <form onSubmit={handleChangePassword}>
                         <DialogHeader>
                             <DialogTitle>Alterar Senha</DialogTitle>
@@ -488,7 +492,7 @@ export function UserManagementTable({ onReportGenerated }: { onReportGenerated: 
                                 Defina uma nova senha para <span className="font-bold">{selectedUser?.name}</span>.
                             </DialogDescription>
                         </DialogHeader>
-                        <div className="grid gap-4 py-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4">
                             <div className="space-y-1">
                                 <Label htmlFor="new-password">Nova Senha</Label>
                                 <Input id="new-password" type="password" value={newPassword.password} onChange={(e) => setNewPassword(prev => ({...prev, password: e.target.value}))} placeholder="Nova senha forte" required />

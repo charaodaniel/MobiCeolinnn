@@ -1,3 +1,4 @@
+
 'use client';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
@@ -185,18 +186,20 @@ export function DriverRideHistory() {
                                     Preencha os dados para uma corrida iniciada presencialmente.
                                 </DialogDescription>
                             </DialogHeader>
-                            <div className="grid gap-4 py-4">
+                            <div className="space-y-4 py-4">
                                 <div className="space-y-1">
                                     <Label htmlFor="passenger-name">Nome do Passageiro (Opcional)</Label>
                                     <Input id="passenger-name" value={newRide.passenger} onChange={(e) => setNewRide(prev => ({ ...prev, passenger: e.target.value }))} placeholder="Passageiro Anônimo" />
                                 </div>
-                                <div className="space-y-1">
-                                    <Label htmlFor="origin-location">Local de Partida</Label>
-                                    <Input id="origin-location" value={newRide.origin} onChange={(e) => setNewRide(prev => ({ ...prev, origin: e.target.value }))} required placeholder="Ex: Rua Principal, 123" />
-                                </div>
-                                 <div className="space-y-1">
-                                    <Label htmlFor="destination-location">Local de Destino</Label>
-                                    <Input id="destination-location" value={newRide.destination} onChange={(e) => setNewRide(prev => ({ ...prev, destination: e.target.value }))} required placeholder="Ex: Shopping Center" />
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div className="space-y-1">
+                                        <Label htmlFor="origin-location">Local de Partida</Label>
+                                        <Input id="origin-location" value={newRide.origin} onChange={(e) => setNewRide(prev => ({ ...prev, origin: e.target.value }))} required placeholder="Ex: Rua Principal, 123" />
+                                    </div>
+                                     <div className="space-y-1">
+                                        <Label htmlFor="destination-location">Local de Destino</Label>
+                                        <Input id="destination-location" value={newRide.destination} onChange={(e) => setNewRide(prev => ({ ...prev, destination: e.target.value }))} required placeholder="Ex: Shopping Center" />
+                                    </div>
                                 </div>
                                 <div className="space-y-1">
                                     <Label htmlFor="ride-value">Valor da Corrida (R$)</Label>
@@ -307,3 +310,5 @@ export function DriverRideHistory() {
     </Card>
   );
 }
+
+    

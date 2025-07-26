@@ -322,7 +322,7 @@ export function ProfileForm() {
                                 Trocar Senha
                             </Button>
                         </DialogTrigger>
-                        <DialogContent className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto">
+                        <DialogContent className="sm:max-w-md">
                             <form onSubmit={handleChangePassword}>
                                 <DialogHeader>
                                     <DialogTitle>Alterar Senha</DialogTitle>
@@ -330,7 +330,7 @@ export function ProfileForm() {
                                         Crie uma nova senha segura para sua conta.
                                     </DialogDescription>
                                 </DialogHeader>
-                                <div className="grid gap-4 py-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4">
                                     <div className="space-y-1">
                                         <Label htmlFor="new-password">Nova Senha</Label>
                                         <Input id="new-password" type="password" value={newPassword.password} onChange={(e) => setNewPassword(prev => ({...prev, password: e.target.value}))} placeholder="Nova senha forte" required />
@@ -434,3 +434,5 @@ export function ProfileForm() {
     </Card>
   );
 }
+
+    
