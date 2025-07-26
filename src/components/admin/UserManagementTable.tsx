@@ -36,6 +36,8 @@ const mockRides = [
 const mockStatusLogs: Record<string, { status: string, timestamp: string }[]> = {
   '2': [ // Corresponds to Carlos Motorista's ID
     { status: 'Online', timestamp: '2024-07-29 08:00:15' },
+    { status: 'Em Viagem (Urbano)', timestamp: '2024-07-29 09:30:00' },
+    { status: 'Online', timestamp: '2024-07-29 10:15:00' },
     { status: 'Offline', timestamp: '2024-07-29 12:30:05' },
     { status: 'Online', timestamp: '2024-07-29 14:00:22' },
     { status: 'Em Viagem (Interior)', timestamp: '2024-07-29 16:10:00' },
@@ -317,7 +319,8 @@ export function UserManagementTable() {
                                             <Badge variant={
                                                 log.status === 'Online' ? 'secondary' : 
                                                 log.status === 'Offline' ? 'destructive' :
-                                                'default'
+                                                log.status === 'Em Viagem (Interior)' ? 'default' :
+                                                'outline'
                                             }>{log.status}</Badge>
                                         </li>
                                     ))}
