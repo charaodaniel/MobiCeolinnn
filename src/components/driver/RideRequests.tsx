@@ -9,17 +9,8 @@ import { useToast } from '@/hooks/use-toast';
 import { RideChat } from './NegotiationChat';
 import { useState } from 'react';
 
-const RideRequestCard = ({ passenger, from, to, price, negotiated }: { passenger: string, from: string, to: string, price: string, negotiated?: boolean }) => {
+const RideRequestCard = ({ id, passenger, from, to, price, negotiated, onAccept }: { id: string, passenger: string, from: string, to: string, price: string, negotiated?: boolean, onAccept: (id: string) => void }) => {
     const { toast } = useToast();
-    const [isAccepted, setIsAccepted] = useState(false);
-
-    const handleAccept = () => {
-        toast({
-            title: "Corrida Aceita!",
-            description: `Você aceitou a corrida de ${passenger}.`,
-        });
-        setIsAccepted(true);
-    };
     
     const handleReject = () => {
         toast({
@@ -27,33 +18,8 @@ const RideRequestCard = ({ passenger, from, to, price, negotiated }: { passenger
             title: "Corrida Rejeitada",
             description: `Você rejeitou a corrida de ${passenger}.`,
         });
+        // In a real app, this would also update the state to remove this request
     };
-
-    if (isAccepted) {
-        return (
-             <Card className="border-primary">
-                <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-4">
-                     <Avatar>
-                        <AvatarImage src="https://placehold.co/40x40.png" data-ai-hint="person face" />
-                        <AvatarFallback>{passenger.charAt(0)}</AvatarFallback>
-                    </Avatar>
-                    <div>
-                        <p className="font-semibold">{passenger}</p>
-                         <p className="text-xs text-green-600 font-bold">CORRIDA EM ANDAMENTO</p>
-                    </div>
-                </CardHeader>
-                <CardContent>
-                    <RideChat passengerName={passenger} isNegotiation={false}>
-                        <Button className="w-full">
-                            <MessageSquareQuote className="mr-2 h-4 w-4" />
-                            Abrir Chat com {passenger}
-                        </Button>
-                    </RideChat>
-                </CardContent>
-            </Card>
-        )
-    }
-
 
     return (
         <Card className={negotiated ? 'border-primary' : ''}>
@@ -95,7 +61,7 @@ const RideRequestCard = ({ passenger, from, to, price, negotiated }: { passenger
                             <X className="mr-2 h-4 w-4" />
                             Rejeitar
                         </Button>
-                        <Button className="w-full" onClick={handleAccept}>
+                        <Button className="w-full" onClick={() => onAccept(id)}>
                             <Check className="mr-2 h-4 w-4" />
                             Aceitar
                         </Button>
@@ -107,17 +73,83 @@ const RideRequestCard = ({ passenger, from, to, price, negotiated }: { passenger
     );
 }
 
+const initialRequests = [
+    { id: 'req1', passenger: "João Passageiro", from: "Shopping Pátio", to: "Centro da Cidade", price: "R$ 25,50", negotiated: false },
+    { id: 'req2', passenger: "Maria Silva", from: "Aeroporto", to: "Zona Rural Leste", price: "A Negociar", negotiated: true },
+    { id: 'req3', passenger: "Lucas Andrade", from: "Av. Principal, 123", to: "Rua do Comércio, 456", price: "R$ 18,00", negotiated: false },
+];
+
 export function RideRequests() {
-  return (
-    <Card className="shadow-lg h-full">
-        <CardHeader>
-            <CardTitle className="font-headline">Solicitações de Corrida</CardTitle>
-            <CardDescription>Você tem 2 novas solicitações.</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-            <RideRequestCard passenger="João Passageiro" from="Shopping Pátio" to="Centro da Cidade" price="R$ 25,50" />
-            <RideRequestCard passenger="Maria Silva" from="Aeroporto" to="Zona Rural Leste" price="A Negociar" negotiated />
-        </CardContent>
-    </Card>
-  );
+    const { toast } = useToast();
+    const [requests, setRequests] = useState(initialRequests);
+    const [acceptedRideId, setAcceptedRideId] = useState<string | null>(null);
+
+    const handleAccept = (rideId: string) => {
+        const ride = requests.find(r => r.id === rideId);
+        if (!ride) return;
+
+        toast({
+            title: "Corrida Aceita!",
+            description: `Você aceitou a corrida de ${ride.passenger}.`,
+        });
+        setAcceptedRideId(rideId);
+    };
+
+    const acceptedRide = requests.find(r => r.id === acceptedRideId);
+
+    if (acceptedRide) {
+         return (
+             <Card className="shadow-lg h-full">
+                 <CardHeader>
+                    <CardTitle className="font-headline">Corrida em Andamento</CardTitle>
+                    <CardDescription>Comunique-se com seu passageiro.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <Card className="border-primary">
+                        <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-4">
+                            <Avatar>
+                                <AvatarImage src="https://placehold.co/40x40.png" data-ai-hint="person face" />
+                                <AvatarFallback>{acceptedRide.passenger.charAt(0)}</AvatarFallback>
+                            </Avatar>
+                            <div>
+                                <p className="font-semibold">{acceptedRide.passenger}</p>
+                                <p className="text-xs text-green-600 font-bold">EM ANDAMENTO</p>
+                            </div>
+                        </CardHeader>
+                        <CardContent>
+                            <RideChat passengerName={acceptedRide.passenger} isNegotiation={false}>
+                                <Button className="w-full">
+                                    <MessageSquareQuote className="mr-2 h-4 w-4" />
+                                    Abrir Chat com {acceptedRide.passenger}
+                                </Button>
+                            </RideChat>
+                        </CardContent>
+                    </Card>
+                </CardContent>
+            </Card>
+         )
+    }
+
+    return (
+        <Card className="shadow-lg h-full">
+            <CardHeader>
+                <CardTitle className="font-headline">Solicitações de Corrida</CardTitle>
+                <CardDescription>Você tem {requests.length} novas solicitações.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+                {requests.map((req) => (
+                    <RideRequestCard 
+                        key={req.id}
+                        id={req.id}
+                        passenger={req.passenger}
+                        from={req.from}
+                        to={req.to}
+                        price={req.price}
+                        negotiated={req.negotiated}
+                        onAccept={handleAccept}
+                    />
+                ))}
+            </CardContent>
+        </Card>
+    );
 }

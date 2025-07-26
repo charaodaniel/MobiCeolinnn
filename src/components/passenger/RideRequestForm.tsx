@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Separator } from '@/components/ui/separator';
-import { MapPin, ArrowRight, DollarSign, Clock, Route, Star, User, Copy, MessageSquareQuote, LocateFixed } from 'lucide-react';
+import { MapPin, ArrowRight, DollarSign, Clock, Route, Star, User, Copy, MessageSquareQuote, LocateFixed, Loader2 } from 'lucide-react';
 import { FareNegotiation } from './FareNegotiation';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useToast } from '@/hooks/use-toast';
@@ -40,6 +40,9 @@ export function RideRequestForm({ availableDrivers }: RideRequestFormProps) {
   const [origin, setOrigin] = useState('');
   const { toast } = useToast();
   const [selectedDriver, setSelectedDriver] = useState<(typeof availableDrivers)[0] | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [rideRequested, setRideRequested] = useState(false);
+
 
   const handleGetCurrentLocation = () => {
     if (navigator.geolocation) {
@@ -79,17 +82,27 @@ export function RideRequestForm({ availableDrivers }: RideRequestFormProps) {
     });
   }
 
-  const handleShowEstimate = () => {
-    if (selectedDriver) {
-      setShowEstimate(true);
-      setShowDrivers(false);
-    } else {
-      toast({
-        variant: 'destructive',
-        title: 'Selecione um Motorista',
-        description: 'Por favor, selecione um motorista na lista para ver a tarifa.',
-      });
+  const handleRequestRide = () => {
+    if (!origin || !destination) {
+        toast({
+            variant: 'destructive',
+            title: 'Campos obrigatórios',
+            description: 'Por favor, preencha a partida e o destino.',
+        });
+        return;
     }
+    setIsLoading(true);
+    setRideRequested(false);
+    setShowDrivers(false);
+    // Simulate API call to request a ride
+    setTimeout(() => {
+        setIsLoading(false);
+        setRideRequested(true);
+        toast({
+            title: 'Solicitação Enviada!',
+            description: 'Sua solicitação foi enviada para os motoristas próximos. Aguarde a confirmação.',
+        });
+    }, 2000);
   };
 
   return (
@@ -149,46 +162,46 @@ export function RideRequestForm({ availableDrivers }: RideRequestFormProps) {
             </div>
             <Switch id="rural-mode" checked={isRural} onCheckedChange={(checked) => {
                 setIsRural(checked);
-                setShowEstimate(false);
+                setRideRequested(false);
             }} />
           </div>
 
-          <div className={`grid gap-2 ${isRural ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2'}`}>
+          <div className={`grid gap-2 ${isRural ? 'grid-cols-1' : 'grid-cols-1'}`}>
             {!isRural && (
-                <Button className="w-full" onClick={handleShowEstimate}>
-                  Ver Tarifa do Motorista
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                <Button className="w-full" onClick={handleRequestRide} disabled={isLoading}>
+                  {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <ArrowRight className="mr-2 h-4 w-4" />}
+                  {isLoading ? 'Enviando Solicitação...' : 'Pedir Corrida'}
                 </Button>
             )}
-            <Button variant="outline" className="w-full" onClick={() => { setShowDrivers(!showDrivers); setShowEstimate(false); }}>
-                {showDrivers ? 'Ocultar Motoristas' : 'Ver Motoristas Próximos'}
-            </Button>
           </div>
 
-          {showEstimate && !isRural && selectedDriver && (
-            <div className="space-y-4 pt-4 border-t">
-              <h3 className="font-headline text-lg font-semibold">Tarifa Fixa (Urbana)</h3>
-              <Card>
-                  <CardContent className="p-4 flex flex-col items-center justify-center">
-                    <p className="text-sm text-muted-foreground">Motorista: {selectedDriver.name}</p>
-                    <DollarSign className="mx-auto h-8 w-8 my-2 text-primary" />
-                    <p className="font-bold text-3xl">R$ {selectedDriver.urbanFare.toFixed(2)}</p>
-                    <p className="text-xs text-muted-foreground mt-1">Este é o valor fixo para a corrida.</p>
-                  </CardContent>
-              </Card>
+           {rideRequested && !isRural && (
+            <div className="space-y-4 pt-4 border-t text-center">
+              <h3 className="font-headline text-lg font-semibold">Procurando Motorista...</h3>
+              <p className="text-sm text-muted-foreground">Sua solicitação foi enviada. Assim que um motorista aceitar, você receberá uma notificação.</p>
+              <Loader2 className="mx-auto h-8 w-8 my-2 text-primary animate-spin" />
             </div>
+          )}
+
+
+          {isRural ? (
+            <>
+                <Separator className="my-6" />
+                <FareNegotiation destination={destination} />
+            </>
+          ) : (
+             <>
+                <Separator className="my-6" />
+                <Button variant="outline" className="w-full" onClick={() => { setShowDrivers(!showDrivers); setRideRequested(false); }}>
+                    {showDrivers ? 'Ocultar Motoristas' : 'Ver Motoristas Próximos'}
+                </Button>
+             </>
           )}
 
           {showDrivers && (
             <div className="space-y-4 pt-4 border-t">
               <h3 className="font-headline text-lg font-semibold">Motoristas Disponíveis</h3>
-              <Accordion type="single" collapsible className="w-full" onValueChange={(value) => {
-                const driver = availableDrivers.find(d => d.id === value);
-                setSelectedDriver(driver || null);
-                if (driver && !isRural) {
-                  setShowEstimate(true);
-                }
-              }}>
+              <Accordion type="single" collapsible className="w-full">
                 {availableDrivers.map((driver) => (
                   <AccordionItem value={driver.id} key={driver.id} className="border-b-0">
                      <Card className="mb-2">
@@ -257,13 +270,6 @@ export function RideRequestForm({ availableDrivers }: RideRequestFormProps) {
             </div>
           )}
         </div>
-
-        {isRural && (
-          <>
-            <Separator className="my-6" />
-            <FareNegotiation destination={destination} />
-          </>
-        )}
       </CardContent>
     </Card>
   );
