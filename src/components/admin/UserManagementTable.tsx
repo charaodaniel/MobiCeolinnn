@@ -4,7 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Car, User, Trash2, PlusCircle, FileText, ListCollapse, Clock } from 'lucide-react';
+import { Car, User, Trash2, PlusCircle, FileText, ListCollapse, Clock, KeyRound } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger } from '../ui/dialog';
 import { Input } from '../ui/input';
@@ -17,6 +17,7 @@ import "jspdf-autotable";
 import { ScrollArea } from '../ui/scroll-area';
 
 const initialUsers = [
+  { id: '0', name: 'Admin User', email: 'admin@mobiceolin.com', role: 'Administrador', status: true, avatar: 'shield' },
   { id: '1', name: 'João Passageiro', email: 'joao@email.com', role: 'Passageiro', status: true, avatar: 'person' },
   { id: '2', name: 'Carlos Motorista', email: 'carlos@email.com', role: 'Motorista', status: true, avatar: 'man' },
   { id: '3', name: 'Ana Beatriz', email: 'ana.b@email.com', role: 'Passageiro', status: false, avatar: 'woman' },
@@ -46,6 +47,7 @@ const mockStatusLogs: Record<string, { status: string, timestamp: string }[]> = 
   ],
   '4': [ // Roberto Freire
     { status: 'Online', timestamp: '2024-07-29 09:15:00' },
+    { status: 'Em Viagem (Urbano)', timestamp: '2024-07-29 11:00:00'},
     { status: 'Offline', timestamp: '2024-07-29 19:00:00' },
   ],
   '5': [], // Fernanda Lima - no logs
@@ -60,8 +62,10 @@ export function UserManagementTable() {
     );
     const [isAddUserDialogOpen, setIsAddUserDialogOpen] = useState(false);
     const [isLogDialogOpen, setIsLogDialogOpen] = useState(false);
-    const [selectedUserForLog, setSelectedUserForLog] = useState<(typeof initialUsers[0]) | null>(null);
-    const [newUser, setNewUser] = useState({ name: '', email: '', role: 'Passageiro' });
+    const [isPasswordDialogOpen, setIsPasswordDialogOpen] = useState(false);
+    const [selectedUser, setSelectedUser] = useState<(typeof initialUsers[0]) | null>(null);
+    const [newUser, setNewUser] = useState({ name: '', email: '', role: 'Passageiro', password: '', confirmPassword: '' });
+    const [newPassword, setNewPassword] = useState({ password: '', confirmPassword: '' });
 
     const handleStatusChange = (userId: string, newStatus: boolean) => {
         setUserStatuses(prev => ({ ...prev, [userId]: newStatus }));
@@ -75,14 +79,21 @@ export function UserManagementTable() {
 
     const handleAddUser = (e: React.FormEvent) => {
         e.preventDefault();
-        if (!newUser.name || !newUser.email || !newUser.role) {
-            toast({ variant: 'destructive', title: 'Erro', description: 'Por favor, preencha todos os campos.' });
+        if (!newUser.name || !newUser.email || !newUser.role || !newUser.password) {
+            toast({ variant: 'destructive', title: 'Erro', description: 'Por favor, preencha todos os campos obrigatórios.' });
             return;
         }
+        if (newUser.password !== newUser.confirmPassword) {
+            toast({ variant: 'destructive', title: 'Erro', description: 'As senhas não coincidem.' });
+            return;
+        }
+
         const newId = (Math.max(...users.map(u => parseInt(u.id))) + 1).toString();
         const userToAdd = {
             id: newId,
-            ...newUser,
+            name: newUser.name,
+            email: newUser.email,
+            role: newUser.role,
             status: true,
             avatar: 'person'
         };
@@ -90,8 +101,24 @@ export function UserManagementTable() {
         setUserStatuses(prev => ({ ...prev, [newId]: true }));
         toast({ title: 'Usuário Adicionado!', description: `${newUser.name} foi adicionado como ${newUser.role}.` });
         setIsAddUserDialogOpen(false);
-        setNewUser({ name: '', email: '', role: 'Passageiro' });
+        setNewUser({ name: '', email: '', role: 'Passageiro', password: '', confirmPassword: '' });
     };
+
+    const handleChangePassword = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!newPassword.password || !newPassword.confirmPassword) {
+            toast({ variant: 'destructive', title: 'Erro', description: 'Preencha ambos os campos de senha.' });
+            return;
+        }
+        if (newPassword.password !== newPassword.confirmPassword) {
+            toast({ variant: 'destructive', title: 'Erro', description: 'As senhas não coincidem.' });
+            return;
+        }
+        toast({ title: 'Senha Alterada!', description: `A senha de ${selectedUser?.name} foi alterada com sucesso.` });
+        setIsPasswordDialogOpen(false);
+        setNewPassword({ password: '', confirmPassword: '' });
+        setSelectedUser(null);
+    }
 
     const handleGenerateReport = (driver: typeof initialUsers[0]) => {
         const driverRides = mockRides.filter(ride => ride.driverId === driver.id);
@@ -161,12 +188,17 @@ export function UserManagementTable() {
         toast({ title: 'Relatório Gerado!', description: `O relatório para ${driver.name} foi gerado com sucesso.` });
     };
 
-    const handleShowLog = (user: typeof initialUsers[0]) => {
-        setSelectedUserForLog(user);
+    const openLogDialog = (user: typeof initialUsers[0]) => {
+        setSelectedUser(user);
         setIsLogDialogOpen(true);
     };
+    
+    const openPasswordDialog = (user: typeof initialUsers[0]) => {
+        setSelectedUser(user);
+        setIsPasswordDialogOpen(true);
+    };
 
-    const selectedUserLogs = selectedUserForLog ? mockStatusLogs[selectedUserForLog.id] || [] : [];
+    const selectedUserLogs = selectedUser ? mockStatusLogs[selectedUser.id] || [] : [];
 
     return (
         <div className="space-y-4">
@@ -187,25 +219,34 @@ export function UserManagementTable() {
                                 </DialogDescription>
                             </DialogHeader>
                             <div className="grid gap-4 py-4">
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="name" className="text-right">Nome</Label>
-                                    <Input id="name" value={newUser.name} onChange={(e) => setNewUser(prev => ({ ...prev, name: e.target.value }))} className="col-span-3" placeholder="Nome Completo" required />
+                                <div className="space-y-1">
+                                    <Label htmlFor="name">Nome</Label>
+                                    <Input id="name" value={newUser.name} onChange={(e) => setNewUser(prev => ({ ...prev, name: e.target.value }))} placeholder="Nome Completo" required />
                                 </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="email" className="text-right">Email</Label>
-                                    <Input id="email" type="email" value={newUser.email} onChange={(e) => setNewUser(prev => ({ ...prev, email: e.target.value }))} className="col-span-3" placeholder="email@exemplo.com" required />
+                                 <div className="space-y-1">
+                                    <Label htmlFor="email">Email</Label>
+                                    <Input id="email" type="email" value={newUser.email} onChange={(e) => setNewUser(prev => ({ ...prev, email: e.target.value }))} placeholder="email@exemplo.com" required />
                                 </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="role" className="text-right">Perfil</Label>
+                                <div className="space-y-1">
+                                    <Label htmlFor="role">Perfil</Label>
                                     <Select value={newUser.role} onValueChange={(value) => setNewUser(prev => ({...prev, role: value}))}>
-                                        <SelectTrigger className="col-span-3">
+                                        <SelectTrigger>
                                             <SelectValue placeholder="Selecione um perfil" />
                                         </SelectTrigger>
                                         <SelectContent>
                                             <SelectItem value="Passageiro">Passageiro</SelectItem>
                                             <SelectItem value="Motorista">Motorista</SelectItem>
+                                            <SelectItem value="Administrador">Administrador</SelectItem>
                                         </SelectContent>
                                     </Select>
+                                </div>
+                                <div className="space-y-1">
+                                    <Label htmlFor="password">Senha</Label>
+                                    <Input id="password" type="password" value={newUser.password} onChange={(e) => setNewUser(prev => ({ ...prev, password: e.target.value }))} placeholder="********" required />
+                                </div>
+                                <div className="space-y-1">
+                                    <Label htmlFor="confirm-password">Confirmar Senha</Label>
+                                    <Input id="confirm-password" type="password" value={newUser.confirmPassword} onChange={(e) => setNewUser(prev => ({ ...prev, confirmPassword: e.target.value }))} placeholder="********" required />
                                 </div>
                             </div>
                             <DialogFooter>
@@ -241,8 +282,8 @@ export function UserManagementTable() {
                                     </div>
                                 </TableCell>
                                 <TableCell>
-                                    <Badge variant={user.role === 'Motorista' ? 'default' : 'secondary'} className="gap-1">
-                                        {user.role === 'Motorista' ? <Car className="h-3 w-3" /> : <User className="h-3 w-3" />}
+                                    <Badge variant={user.role === 'Motorista' ? 'default' : user.role === 'Administrador' ? 'destructive' : 'secondary'} className="gap-1">
+                                        {user.role === 'Motorista' ? <Car className="h-3 w-3" /> : user.role === 'Administrador' ? <User className="h-3 w-3" /> : <User className="h-3 w-3" />}
                                         {user.role}
                                     </Badge>
                                 </TableCell>
@@ -254,7 +295,7 @@ export function UserManagementTable() {
                                 <TableCell className="text-right space-x-1">
                                     {user.role === 'Motorista' && (
                                         <>
-                                            <Button variant="outline" size="icon" onClick={() => handleShowLog(user)}>
+                                            <Button variant="outline" size="icon" onClick={() => openLogDialog(user)}>
                                                 <ListCollapse className="h-4 w-4" />
                                                 <span className="sr-only">Ver Log de Status</span>
                                             </Button>
@@ -264,6 +305,10 @@ export function UserManagementTable() {
                                             </Button>
                                         </>
                                     )}
+                                     <Button variant="outline" size="icon" onClick={() => openPasswordDialog(user)}>
+                                        <KeyRound className="h-4 w-4" />
+                                        <span className="sr-only">Alterar Senha</span>
+                                    </Button>
                                     <Switch
                                         checked={userStatuses[user.id]}
                                         onCheckedChange={(checked) => handleStatusChange(user.id, checked)}
@@ -298,7 +343,7 @@ export function UserManagementTable() {
             <Dialog open={isLogDialogOpen} onOpenChange={setIsLogDialogOpen}>
                 <DialogContent className="sm:max-w-md">
                     <DialogHeader>
-                        <DialogTitle>Log de Status - {selectedUserForLog?.name}</DialogTitle>
+                        <DialogTitle>Log de Status - {selectedUser?.name}</DialogTitle>
                         <DialogDescription>
                             Histórico de quando o motorista ficou online, offline ou em viagem.
                         </DialogDescription>
@@ -338,6 +383,35 @@ export function UserManagementTable() {
                 </DialogContent>
             </Dialog>
 
+            <Dialog open={isPasswordDialogOpen} onOpenChange={setIsPasswordDialogOpen}>
+                <DialogContent className="sm:max-w-[425px]">
+                    <form onSubmit={handleChangePassword}>
+                        <DialogHeader>
+                            <DialogTitle>Alterar Senha</DialogTitle>
+                            <DialogDescription>
+                                Defina uma nova senha para <span className="font-bold">{selectedUser?.name}</span>.
+                            </DialogDescription>
+                        </DialogHeader>
+                        <div className="grid gap-4 py-4">
+                            <div className="space-y-1">
+                                <Label htmlFor="new-password">Nova Senha</Label>
+                                <Input id="new-password" type="password" value={newPassword.password} onChange={(e) => setNewPassword(prev => ({...prev, password: e.target.value}))} placeholder="Nova senha forte" required />
+                            </div>
+                            <div className="space-y-1">
+                                <Label htmlFor="confirm-new-password">Confirmar Nova Senha</Label>
+                                <Input id="confirm-new-password" type="password" value={newPassword.confirmPassword} onChange={(e) => setNewPassword(prev => ({...prev, confirmPassword: e.target.value}))} placeholder="Repita a nova senha" required />
+                            </div>
+                        </div>
+                        <DialogFooter>
+                             <Button type="button" variant="secondary" onClick={() => setIsPasswordDialogOpen(false)}>Cancelar</Button>
+                            <Button type="submit">Salvar Nova Senha</Button>
+                        </DialogFooter>
+                    </form>
+                </DialogContent>
+            </Dialog>
+
         </div>
     );
 }
+
+    
