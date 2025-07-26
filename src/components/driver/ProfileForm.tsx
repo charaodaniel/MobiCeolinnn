@@ -13,134 +13,7 @@ import Image from 'next/image';
 import { useToast } from '@/hooks/use-toast';
 import { useState, useRef, useEffect } from 'react';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
-import { Alert, AlertTitle, AlertDescription } from '../ui/alert';
-import { cn } from '@/lib/utils';
-
-function CameraCaptureDialog({ onImageSave, onDialogClose }: { onImageSave: (image: string) => void, onDialogClose: () => void }) {
-    const { toast } = useToast();
-    const videoRef = useRef<HTMLVideoElement>(null);
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-    const [hasCameraPermission, setHasCameraPermission] = useState<boolean | null>(null);
-    const [capturedImage, setCapturedImage] = useState<string | null>(null);
-    const [stream, setStream] = useState<MediaStream | null>(null);
-
-    const getCameraPermission = async () => {
-      if (stream) {
-          stream.getTracks().forEach(track => track.stop());
-      }
-      setCapturedImage(null);
-
-      try {
-        const newStream = await navigator.mediaDevices.getUserMedia({ video: true });
-        setStream(newStream);
-        setHasCameraPermission(true);
-
-        if (videoRef.current) {
-          videoRef.current.srcObject = newStream;
-        }
-      } catch (error) {
-        console.error('Error accessing camera:', error);
-        setHasCameraPermission(false);
-        setStream(null);
-        toast({
-          variant: 'destructive',
-          title: 'Camera Access Denied',
-          description: 'Please enable camera permissions in your browser settings.',
-        });
-      }
-    };
-
-    const handleCapture = () => {
-        if (videoRef.current && canvasRef.current) {
-            const video = videoRef.current;
-            const canvas = canvasRef.current;
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            const context = canvas.getContext('2d');
-            if (context) {
-                context.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
-                const dataUrl = canvas.toDataURL('image/png');
-                setCapturedImage(dataUrl);
-                if (stream) {
-                    stream.getTracks().forEach(track => track.stop());
-                    setStream(null);
-                }
-            }
-        }
-    };
-
-    const handleSavePhoto = () => {
-        if (capturedImage) {
-            onImageSave(capturedImage);
-            toast({ title: 'Foto Salva!', description: 'A imagem foi salva com sucesso!' });
-            onDialogClose();
-        }
-    }
-
-    useEffect(() => {
-        return () => {
-            if (stream) {
-                stream.getTracks().forEach(track => track.stop());
-            }
-        };
-    }, [stream]);
-
-    return (
-        <DialogContent className="max-w-md">
-            <DialogHeader>
-                <DialogTitle>Capturar Imagem</DialogTitle>
-                <DialogDescription>
-                    Tire uma foto para o documento.
-                </DialogDescription>
-            </DialogHeader>
-            <div className="space-y-4">
-                {capturedImage ? (
-                    <div className="flex flex-col items-center gap-4">
-                        <p className="font-semibold">Pré-visualização</p>
-                        <Image src={capturedImage} alt="Foto Capturada" width={256} height={256} className="rounded-lg object-cover" />
-                    </div>
-                ) : (
-                    <>
-                        <video ref={videoRef} className={cn("w-full aspect-video rounded-md bg-muted", { 'hidden': !hasCameraPermission })} autoPlay muted />
-                        <canvas ref={canvasRef} className="hidden" />
-                    </>
-                )}
-
-                {hasCameraPermission === false && (
-                    <Alert variant="destructive">
-                        <AlertTitle>Câmera não encontrada</AlertTitle>
-                        <AlertDescription>
-                            Não foi possível acessar a câmera. Verifique as permissões do seu navegador e tente novamente.
-                        </AlertDescription>
-                    </Alert>
-                )}
-
-            </div>
-            <DialogFooter className="sm:justify-between flex-col sm:flex-row gap-2">
-                {capturedImage ? (
-                     <>
-                        <Button variant="outline" onClick={() => setCapturedImage(null)}>Tirar Outra Foto</Button>
-                        <Button onClick={handleSavePhoto}>Salvar Foto</Button>
-                    </>
-                ) : (
-                     <>
-                        {stream ? (
-                            <Button onClick={handleCapture} className="w-full">
-                                <Camera className="mr-2 h-4 w-4" />
-                                Capturar Foto
-                            </Button>
-                        ) : (
-                            <Button onClick={getCameraPermission} className="w-full">
-                                <Camera className="mr-2 h-4 w-4" />
-                                Abrir Câmera
-                            </Button>
-                        )}
-                    </>
-                )}
-            </DialogFooter>
-        </DialogContent>
-    );
-}
+import { CameraCaptureDialog } from '../shared/CameraCaptureDialog';
 
 const DocumentUploader = ({ label, docId, value, onFileChange }: { label: string, docId: string, value: string | null, onFileChange: (file: string | null) => void }) => {
     const { toast } = useToast();
@@ -186,7 +59,7 @@ const DocumentUploader = ({ label, docId, value, onFileChange }: { label: string
                         <p className="text-xs text-muted-foreground">Sem imagem</p>
                     </div>
                 )}
-                <div className="flex flex-col w-full gap-2">
+                <div className="flex flex-col sm:flex-row w-full gap-2">
                     <Button variant="secondary" className="w-full" asChild>
                         <label htmlFor={`upload-${docId}`} className="cursor-pointer">
                             <Upload className="mr-2" />
@@ -202,6 +75,7 @@ const DocumentUploader = ({ label, docId, value, onFileChange }: { label: string
                         </Button>
                       </DialogTrigger>
                       <CameraCaptureDialog 
+                        isOpen={isCameraDialogOpen}
                         onImageSave={(image) => onFileChange(image)}
                         onDialogClose={() => setIsCameraDialogOpen(false)}
                       />
@@ -267,6 +141,7 @@ export function ProfileForm() {
                     </Avatar>
                   </DialogTrigger>
                   <CameraCaptureDialog 
+                    isOpen={isAvatarCameraOpen}
                     onImageSave={setAvatarImage} 
                     onDialogClose={() => setIsAvatarCameraOpen(false)}
                   />
@@ -423,7 +298,9 @@ export function ProfileForm() {
                 )}
                  <div className="flex items-start gap-3 pt-5">
                     <Switch id="negotiate-rural" />
-                    <Label htmlFor="negotiate-rural" className="flex-1 cursor-pointer">Aceitar negociação para interior/intermunicipal</Label>
+                    <div className="grid gap-1.5 leading-none">
+                       <Label htmlFor="negotiate-rural" className="flex-1 cursor-pointer">Aceitar negociação para interior/intermunicipal</Label>
+                    </div>
                 </div>
             </div>
         </div>
