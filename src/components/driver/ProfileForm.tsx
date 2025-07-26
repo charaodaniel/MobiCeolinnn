@@ -219,6 +219,7 @@ export function ProfileForm() {
   const [isAvatarCameraOpen, setIsAvatarCameraOpen] = useState(false);
   const [cnhDocument, setCnhDocument] = useState<string | null>(null);
   const [crlvDocument, setCrlvDocument] = useState<string | null>(null);
+  const [vehiclePhoto, setVehiclePhoto] = useState<string | null>(null);
 
   const handleSave = () => {
     toast({
@@ -315,15 +316,23 @@ export function ProfileForm() {
         </div>
         <div className="space-y-4">
             <h3 className="font-headline text-lg">Veículo</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-1">
-                    <Label htmlFor="vehicle-model">Modelo do Veículo</Label>
-                    <Input id="vehicle-model" defaultValue="Toyota Corolla" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className='space-y-4'>
+                    <div className="space-y-1">
+                        <Label htmlFor="vehicle-model">Modelo do Veículo</Label>
+                        <Input id="vehicle-model" defaultValue="Toyota Corolla" />
+                    </div>
+                    <div className="space-y-1">
+                        <Label htmlFor="license-plate">Placa</Label>
+                        <Input id="license-plate" defaultValue="BRA2E19" />
+                    </div>
                 </div>
-                <div className="space-y-1">
-                    <Label htmlFor="license-plate">Placa</Label>
-                    <Input id="license-plate" defaultValue="BRA2E19" />
-                </div>
+                 <DocumentUploader
+                  label="Foto do Veículo"
+                  docId="vehicle-photo"
+                  value={vehiclePhoto}
+                  onFileChange={setVehiclePhoto}
+                />
             </div>
         </div>
         <div className="space-y-4">
