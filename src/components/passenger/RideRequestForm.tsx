@@ -83,11 +83,11 @@ export function RideRequestForm({ availableDrivers }: RideRequestFormProps) {
   }
 
   const handleRequestRide = () => {
-    if (!origin || !destination) {
+    if (!origin) {
         toast({
             variant: 'destructive',
-            title: 'Campos obrigatórios',
-            description: 'Por favor, preencha a partida e o destino.',
+            title: 'Campo obrigatório',
+            description: 'Por favor, preencha o local de partida.',
         });
         return;
     }

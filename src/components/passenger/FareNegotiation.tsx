@@ -20,14 +20,6 @@ export function FareNegotiation({ destination }: { destination: string }) {
    const [finalFare, setFinalFare] = useState<number | null>(null);
 
   const handleRequestRide = () => {
-    if (!destination) {
-        toast({
-            variant: 'destructive',
-            title: 'Destino Necessário',
-            description: 'Por favor, preencha o destino para solicitar uma corrida.',
-        });
-        return;
-    }
     setLoading(true);
     // Simulate notifying drivers and waiting for a response
     setTimeout(() => {
@@ -62,7 +54,7 @@ export function FareNegotiation({ destination }: { destination: string }) {
             <p className="text-sm text-muted-foreground">
                 Corridas para o interior têm o valor combinado diretamente com o motorista. Clique abaixo para solicitar uma corrida e receber propostas.
             </p>
-            <Button onClick={handleRequestRide} className="w-full" disabled={loading || !destination}>
+            <Button onClick={handleRequestRide} className="w-full" disabled={loading}>
                 {loading ? (
                 <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -72,9 +64,6 @@ export function FareNegotiation({ destination }: { destination: string }) {
                 'Solicitar Corrida e Negociar'
                 )}
             </Button>
-            {!destination && (
-                <p className="text-xs text-center text-destructive">Por favor, preencha o destino para solicitar.</p>
-            )}
         </>
       ) : (
         <Alert className="mt-6 bg-secondary">
