@@ -12,6 +12,7 @@ import { DriverRideHistory } from './DriverRideHistory';
 import { ProfileForm } from './ProfileForm';
 import { Dialog, DialogTrigger } from '../ui/dialog';
 import { ImageEditorDialog } from '../shared/ImageEditorDialog';
+import { DriverChatHistory } from './DriverChatHistory';
 
 export function DriverProfilePage() {
   const { toast } = useToast();
@@ -78,14 +79,18 @@ export function DriverProfilePage() {
       </div>
 
       <Tabs defaultValue="requests" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="requests">Solicitações</TabsTrigger>
+          <TabsTrigger value="chats">Conversas</TabsTrigger>
           <TabsTrigger value="history">Histórico</TabsTrigger>
           <TabsTrigger value="profile">Perfil</TabsTrigger>
         </TabsList>
         <div className="p-4 md:p-6 lg:p-8">
             <TabsContent value="requests">
                 <RideRequests />
+            </TabsContent>
+            <TabsContent value="chats">
+                <DriverChatHistory />
             </TabsContent>
             <TabsContent value="history">
                 <DriverRideHistory />

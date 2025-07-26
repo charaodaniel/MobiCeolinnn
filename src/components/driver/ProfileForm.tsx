@@ -1,7 +1,7 @@
 
 'use client';
 import { Button } from '@/components/ui/button';
-import { KeyRound, Car, Settings, UserCircle, ChevronRight, Upload, Camera, Eye, Edit, X } from 'lucide-react';
+import { KeyRound, Car, Settings, UserCircle, ChevronRight, Upload, Camera, Eye, Edit, X, LogOut } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
 import { useState } from 'react';
@@ -12,6 +12,9 @@ import { ImageEditorDialog } from '../shared/ImageEditorDialog';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Switch } from '../ui/switch';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../ui/alert-dialog';
+
 
 const DocumentUploader = ({ label, docId, value, onFileChange, isEditing }: { label: string, docId: string, value: string | null, onFileChange: (file: string | null) => void, isEditing: boolean }) => {
     const { toast } = useToast();
@@ -68,6 +71,7 @@ const DocumentUploader = ({ label, docId, value, onFileChange, isEditing }: { la
                           </DialogTrigger>
                           <ImageEditorDialog 
                             isOpen={isCameraDialogOpen}
+                            currentImage={value || ''}
                             onImageSave={(image) => onFileChange(image)}
                             onDialogClose={() => setIsCameraDialogOpen(false)}
                           />
@@ -82,6 +86,7 @@ const DocumentUploader = ({ label, docId, value, onFileChange, isEditing }: { la
 
 export function ProfileForm() {
   const { toast } = useToast();
+  const router = useRouter();
   const [isPersonalInfoOpen, setIsPersonalInfoOpen] = useState(false);
   const [isVehicleOpen, setIsVehicleOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -118,6 +123,14 @@ export function ProfileForm() {
     setIsEditingSettings(false);
   };
   
+  const handleLogout = () => {
+    toast({
+      title: 'Logout Realizado',
+      description: 'Você foi desconectado com sucesso.',
+    });
+    router.push('/');
+  };
+
   const handleChangePassword = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newPassword.password || !newPassword.confirmPassword) {
@@ -381,6 +394,31 @@ export function ProfileForm() {
                 </DialogFooter>
             </DialogContent>
         </Dialog>
+        <Separator />
+        {/* Logout Button */}
+        <AlertDialog>
+            <AlertDialogTrigger asChild>
+                <li className="flex items-center justify-between p-4 cursor-pointer hover:bg-muted/50 text-destructive">
+                    <div className="flex items-center gap-4">
+                        <LogOut className="h-6 w-6" />
+                        <span className="font-medium">Sair</span>
+                    </div>
+                </li>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+                <AlertDialogHeader>
+                    <AlertDialogTitle>Você tem certeza que quer sair?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                        Você será redirecionado para a tela inicial e precisará fazer login novamente para acessar seu painel.
+                    </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                    <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                    <AlertDialogAction onClick={handleLogout} className="bg-destructive hover:bg-destructive/90">Sair</AlertDialogAction>
+                </AlertDialogFooter>
+            </AlertDialogContent>
+        </AlertDialog>
+
       </ul>
     </div>
   );

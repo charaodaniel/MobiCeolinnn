@@ -14,6 +14,7 @@ import { ImageEditorDialog } from '../shared/ImageEditorDialog';
 import { Separator } from '../ui/separator';
 import { ChatHistory } from '../passenger/ChatHistory';
 import { Card, CardContent, CardFooter } from '../ui/card';
+import { useRouter } from 'next/navigation';
 
 
 interface PassengerAuthFormProps {
@@ -22,6 +23,7 @@ interface PassengerAuthFormProps {
 
 export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
   const { toast } = useToast();
+  const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -66,6 +68,7 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
       title: 'Logout Realizado',
       description: 'Você foi desconectado com sucesso.',
     });
+    router.push('/');
   }
 
   const handleChangePassword = (e: React.FormEvent) => {
