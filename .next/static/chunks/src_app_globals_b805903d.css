@@ -2428,6 +2428,10 @@ body {
     margin-top: 0;
   }
 
+  .sm\:w-40 {
+    width: 10rem;
+  }
+
   .sm\:max-w-\[425px\] {
     max-width: 425px;
   }
@@ -2440,12 +2444,20 @@ body {
     max-width: 24rem;
   }
 
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .sm\:flex-row {
     flex-direction: row;
   }
 
   .sm\:flex-col {
     flex-direction: column;
+  }
+
+  .sm\:items-start {
+    align-items: flex-start;
   }
 
   .sm\:justify-end {
@@ -2476,6 +2488,10 @@ body {
 
   .sm\:rounded-lg {
     border-radius: var(--radius);
+  }
+
+  .sm\:pt-0 {
+    padding-top: 0;
   }
 
   .sm\:text-left {

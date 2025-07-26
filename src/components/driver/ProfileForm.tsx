@@ -239,7 +239,7 @@ export function ProfileForm() {
   return (
     <Card className="shadow-lg">
       <CardHeader>
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
             <div className="flex items-center gap-4">
                 <Dialog open={isAvatarCameraOpen} onOpenChange={setIsAvatarCameraOpen}>
                   <DialogTrigger asChild>
@@ -261,7 +261,7 @@ export function ProfileForm() {
                     </div>
                 </div>
             </div>
-            <div className="space-y-1 w-40">
+            <div className="space-y-1 w-full sm:w-40 pt-2 sm:pt-0">
                 <Label htmlFor="driver-status">Status</Label>
                 <Select value={status} onValueChange={handleStatusChange}>
                     <SelectTrigger id="driver-status">
@@ -300,7 +300,7 @@ export function ProfileForm() {
         </div>
         <div className="space-y-4">
             <h3 className="font-headline text-lg">Documentos</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <DocumentUploader
                   label="Carteira de Habilitação (CNH)"
                   docId="cnh-doc"
@@ -317,7 +317,7 @@ export function ProfileForm() {
         </div>
         <div className="space-y-4">
             <h3 className="font-headline text-lg">Veículo</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className='space-y-4'>
                     <div className="space-y-1">
                         <Label htmlFor="vehicle-model">Modelo do Veículo</Label>
@@ -382,5 +382,3 @@ export function ProfileForm() {
     </Card>
   );
 }
-
-    
