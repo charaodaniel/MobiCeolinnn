@@ -15,7 +15,7 @@ CEOLIN Mobilidade urbana é uma plataforma de transporte que conecta passageiros
 ### Para Motoristas
 - **Painel de Controle:** Acesse um painel exclusivo após o login.
 - **Gerenciamento de Perfil:** Atualize informações pessoais, do veículo, documentos (CNH, CRLV) e chave PIX.
-- **Status de Disponibilidade:** Alterne facilmente entre os status "Online", "Offline", "Em Viagem (Urbano)" e "Em Viagem (Interior)".
+- **Status de Disponibilidade:** Alterne facilmente entre os status "Online", "Offline", "Em Viagem (Urbano)" e "Em Viagem (Interior/Intermunicipal)".
 - **Recebimento de Solicitações:** Aceite ou recuse corridas urbanas e propostas de negociação.
 - **Iniciar Corrida Manualmente:** Registre corridas para passageiros captados na rua, sem a necessidade de um pedido via app.
 - **Histórico e Relatórios:** Visualize um registro de todas as corridas realizadas e exporte relatórios detalhados em PDF e CSV.
@@ -44,7 +44,8 @@ CEOLIN Mobilidade urbana é uma plataforma de transporte que conecta passageiros
   - **Senha:** `123456`
 
 - **Passageiro:**
-  - Não é necessário login para solicitar uma corrida. A autenticação é opcional.
+  - **Email:** `joao@email.com`
+  - **Senha:** `123456`
 
 ## Documentação Adicional
 

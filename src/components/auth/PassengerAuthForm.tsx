@@ -17,12 +17,20 @@ export function PassengerAuthForm() {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // Mock login
-    toast({
-      title: 'Login bem-sucedido!',
-      description: 'Bem-vindo de volta!',
-    });
-    setIsLoggedIn(true);
+    // Mock login with test credentials
+    if (email === 'joao@email.com' && password === '123456') {
+        toast({
+            title: 'Login bem-sucedido!',
+            description: 'Bem-vindo de volta, João!',
+        });
+        setIsLoggedIn(true);
+    } else {
+        toast({
+            variant: 'destructive',
+            title: 'Credenciais Inválidas',
+            description: 'Por favor, verifique seu e-mail e senha.',
+        });
+    }
   };
 
   const handleRegister = () => {
@@ -35,6 +43,8 @@ export function PassengerAuthForm() {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
+    setEmail('');
+    setPassword('');
      toast({
       title: 'Logout Realizado',
       description: 'Você foi desconectado com sucesso.',
@@ -48,11 +58,11 @@ export function PassengerAuthForm() {
                 <div className="flex flex-col items-center gap-4">
                     <Avatar className="h-20 w-20">
                         <AvatarImage src={`https://placehold.co/128x128.png`} data-ai-hint="person face" />
-                        <AvatarFallback>P</AvatarFallback>
+                        <AvatarFallback>JP</AvatarFallback>
                     </Avatar>
                     <div className="text-center">
-                        <CardTitle className="font-headline text-2xl">Passageiro Exemplo</CardTitle>
-                        <CardDescription className="font-body">passageiro@email.com</CardDescription>
+                        <CardTitle className="font-headline text-2xl">João Passageiro</CardTitle>
+                        <CardDescription className="font-body">joao@email.com</CardDescription>
                     </div>
                 </div>
             </CardHeader>
@@ -82,11 +92,11 @@ export function PassengerAuthForm() {
       <CardContent className="space-y-4 p-6">
         <div className="space-y-1">
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="seu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
+            <Input id="email" type="email" placeholder="joao@email.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
         </div>
         <div className="space-y-1">
             <Label htmlFor="password">Senha</Label>
-            <Input id="password" type="password" placeholder="********" value={password} onChange={(e) => setPassword(e.target.value)} required />
+            <Input id="password" type="password" placeholder="123456" value={password} onChange={(e) => setPassword(e.target.value)} required />
         </div>
       </CardContent>
       <CardFooter className="flex flex-col sm:flex-row gap-2">

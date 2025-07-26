@@ -3300,12 +3300,20 @@ function PassengerAuthForm() {
     const [email, setEmail] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('');
     const [password, setPassword] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('');
     const handleLogin = ()=>{
-        // Mock login
-        toast({
-            title: 'Login bem-sucedido!',
-            description: 'Bem-vindo de volta!'
-        });
-        setIsLoggedIn(true);
+        // Mock login with test credentials
+        if (email === 'joao@email.com' && password === '123456') {
+            toast({
+                title: 'Login bem-sucedido!',
+                description: 'Bem-vindo de volta, João!'
+            });
+            setIsLoggedIn(true);
+        } else {
+            toast({
+                variant: 'destructive',
+                title: 'Credenciais Inválidas',
+                description: 'Por favor, verifique seu e-mail e senha.'
+            });
+        }
     };
     const handleRegister = ()=>{
         // Mock register
@@ -3316,6 +3324,8 @@ function PassengerAuthForm() {
     };
     const handleLogout = ()=>{
         setIsLoggedIn(false);
+        setEmail('');
+        setPassword('');
         toast({
             title: 'Logout Realizado',
             description: 'Você foi desconectado com sucesso.'
@@ -3338,20 +3348,20 @@ function PassengerAuthForm() {
                                         "data-ai-hint": "person face"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                                        lineNumber: 50,
+                                        lineNumber: 60,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$avatar$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AvatarFallback"], {
-                                        children: "P"
+                                        children: "JP"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                                        lineNumber: 51,
+                                        lineNumber: 61,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                                lineNumber: 49,
+                                lineNumber: 59,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3359,35 +3369,35 @@ function PassengerAuthForm() {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardTitle"], {
                                         className: "font-headline text-2xl",
-                                        children: "Passageiro Exemplo"
+                                        children: "João Passageiro"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                                        lineNumber: 54,
+                                        lineNumber: 64,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardDescription"], {
                                         className: "font-body",
-                                        children: "passageiro@email.com"
+                                        children: "joao@email.com"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                                        lineNumber: 55,
+                                        lineNumber: 65,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                                lineNumber: 53,
+                                lineNumber: 63,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                        lineNumber: 48,
+                        lineNumber: 58,
                         columnNumber: 17
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                    lineNumber: 47,
+                    lineNumber: 57,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -3398,18 +3408,18 @@ function PassengerAuthForm() {
                             children: "Histórico de Corridas"
                         }, void 0, false, {
                             fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                            lineNumber: 60,
+                            lineNumber: 70,
                             columnNumber: 17
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$passenger$2f$RideHistory$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["RideHistory"], {}, void 0, false, {
                             fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                            lineNumber: 61,
+                            lineNumber: 71,
                             columnNumber: 17
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                    lineNumber: 59,
+                    lineNumber: 69,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardFooter"], {
@@ -3422,25 +3432,25 @@ function PassengerAuthForm() {
                                 className: "mr-2 h-4 w-4"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                                lineNumber: 65,
+                                lineNumber: 75,
                                 columnNumber: 21
                             }, this),
                             "Sair"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                        lineNumber: 64,
+                        lineNumber: 74,
                         columnNumber: 17
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                    lineNumber: 63,
+                    lineNumber: 73,
                     columnNumber: 13
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-            lineNumber: 46,
+            lineNumber: 56,
             columnNumber: 9
         }, this);
     }
@@ -3457,7 +3467,7 @@ function PassengerAuthForm() {
                                 className: "h-10 w-10 text-primary"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                                lineNumber: 77,
+                                lineNumber: 87,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardTitle"], {
@@ -3465,13 +3475,13 @@ function PassengerAuthForm() {
                                 children: "Área do Passageiro"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                                lineNumber: 78,
+                                lineNumber: 88,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                        lineNumber: 76,
+                        lineNumber: 86,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardDescription"], {
@@ -3479,13 +3489,13 @@ function PassengerAuthForm() {
                         children: "Faça login ou registre-se para salvar suas viagens."
                     }, void 0, false, {
                         fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                        lineNumber: 80,
+                        lineNumber: 90,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                lineNumber: 75,
+                lineNumber: 85,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -3499,25 +3509,25 @@ function PassengerAuthForm() {
                                 children: "Email"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                                lineNumber: 84,
+                                lineNumber: 94,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
                                 id: "email",
                                 type: "email",
-                                placeholder: "seu@email.com",
+                                placeholder: "joao@email.com",
                                 value: email,
                                 onChange: (e)=>setEmail(e.target.value),
                                 required: true
                             }, void 0, false, {
                                 fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                                lineNumber: 85,
+                                lineNumber: 95,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                        lineNumber: 83,
+                        lineNumber: 93,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3528,31 +3538,31 @@ function PassengerAuthForm() {
                                 children: "Senha"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                                lineNumber: 88,
+                                lineNumber: 98,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
                                 id: "password",
                                 type: "password",
-                                placeholder: "********",
+                                placeholder: "123456",
                                 value: password,
                                 onChange: (e)=>setPassword(e.target.value),
                                 required: true
                             }, void 0, false, {
                                 fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                                lineNumber: 89,
+                                lineNumber: 99,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                        lineNumber: 87,
+                        lineNumber: 97,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                lineNumber: 82,
+                lineNumber: 92,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardFooter"], {
@@ -3566,14 +3576,14 @@ function PassengerAuthForm() {
                                 className: "mr-2 h-4 w-4"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                                lineNumber: 94,
+                                lineNumber: 104,
                                 columnNumber: 13
                             }, this),
                             "Entrar"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                        lineNumber: 93,
+                        lineNumber: 103,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -3585,26 +3595,26 @@ function PassengerAuthForm() {
                                 className: "mr-2 h-4 w-4"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                                lineNumber: 98,
+                                lineNumber: 108,
                                 columnNumber: 13
                             }, this),
                             "Registrar"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                        lineNumber: 97,
+                        lineNumber: 107,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-                lineNumber: 92,
+                lineNumber: 102,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
-        lineNumber: 74,
+        lineNumber: 84,
         columnNumber: 5
     }, this);
 }
