@@ -652,6 +652,10 @@ body {
   height: 5rem;
 }
 
+.h-24 {
+  height: 6rem;
+}
+
 .h-3 {
   height: .75rem;
 }
@@ -712,20 +716,16 @@ body {
   height: 1px;
 }
 
-.h-24 {
-  height: 6rem;
-}
-
 .max-h-96 {
   max-height: 24rem;
 }
 
-.max-h-screen {
-  max-height: 100vh;
-}
-
 .max-h-\[80vh\] {
   max-height: 80vh;
+}
+
+.max-h-screen {
+  max-height: 100vh;
 }
 
 .min-h-\[80px\] {
@@ -784,6 +784,10 @@ body {
   width: 75%;
 }
 
+.w-32 {
+  width: 8rem;
+}
+
 .w-4 {
   width: 1rem;
 }
@@ -828,10 +832,6 @@ body {
   width: 100%;
 }
 
-.w-32 {
-  width: 8rem;
-}
-
 .min-w-0 {
   min-width: 0;
 }
@@ -846,6 +846,10 @@ body {
 
 .min-w-\[var\(--radix-select-trigger-width\)\] {
   min-width: var(--radix-select-trigger-width);
+}
+
+.max-w-3xl {
+  max-width: 48rem;
 }
 
 .max-w-4xl {
@@ -866,10 +870,6 @@ body {
 
 .max-w-none {
   max-width: none;
-}
-
-.max-w-3xl {
-  max-width: 48rem;
 }
 
 .flex-1 {
@@ -1276,6 +1276,10 @@ body {
   background-color: #0000001a;
 }
 
+.bg-black\/50 {
+  background-color: #00000080;
+}
+
 .bg-black\/80 {
   background-color: #000c;
 }
@@ -1323,10 +1327,6 @@ body {
 
 .bg-transparent {
   background-color: #0000;
-}
-
-.bg-black\/50 {
-  background-color: #00000080;
 }
 
 .bg-gradient-to-br {
@@ -1674,14 +1674,14 @@ body {
   color: hsl(var(--secondary-foreground));
 }
 
-.text-yellow-400 {
-  --tw-text-opacity: 1;
-  color: rgb(250 204 21 / var(--tw-text-opacity, 1));
-}
-
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+.text-yellow-400 {
+  --tw-text-opacity: 1;
+  color: rgb(250 204 21 / var(--tw-text-opacity, 1));
 }
 
 .underline-offset-4 {
@@ -2406,10 +2406,6 @@ body {
     flex-direction: column;
   }
 
-  .sm\:justify-start {
-    justify-content: flex-start;
-  }
-
   .sm\:justify-end {
     justify-content: flex-end;
   }
@@ -2482,6 +2478,10 @@ body {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
+  .md\:items-center {
+    align-items: center;
+  }
+
   .md\:p-6 {
     padding: 1.5rem;
   }
@@ -2490,32 +2490,11 @@ body {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
-
-  .md\:text-sm {
-    font-size: .875rem;
-    line-height: 1.25rem;
-  }
 }
 
 @media (width >= 1024px) {
-  .lg\:col-span-2 {
-    grid-column: span 2 / span 2;
-  }
-
-  .lg\:col-span-3 {
-    grid-column: span 3 / span 3;
-  }
-
-  .lg\:h-full {
-    height: 100%;
-  }
-
   .lg\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .lg\:grid-cols-5 {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .lg\:p-8 {

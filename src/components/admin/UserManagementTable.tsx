@@ -4,7 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Car, User, Trash2, PlusCircle } from 'lucide-react';
+import { Car, User, Trash2, PlusCircle, FileText } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger } from '../ui/dialog';
 import { Input } from '../ui/input';
@@ -12,6 +12,8 @@ import { Label } from '../ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../ui/alert-dialog';
 import { useToast } from '@/hooks/use-toast';
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 const initialUsers = [
   { id: '1', name: 'João Passageiro', email: 'joao@email.com', role: 'Passageiro', status: true, avatar: 'person' },
@@ -20,6 +22,15 @@ const initialUsers = [
   { id: '4', name: 'Roberto Freire', email: 'roberto.f@email.com', role: 'Motorista', status: true, avatar: 'person' },
   { id: '5', name: 'Fernanda Lima', email: 'fernanda@email.com', role: 'Motorista', status: false, avatar: 'woman' },
 ];
+
+// Mock de dados de corrida para os relatórios
+const mockRides = [
+    { id: '1', date: '25/07/2024', passenger: 'João Passageiro', origin: 'Shopping Pátio', destination: 'Centro', value: '25.50', status: 'Concluída', driverId: '2' },
+    { id: '2', date: '24/07/2024', passenger: 'Maria Silva', origin: 'Aeroporto', destination: 'Zona Rural Leste', value: '150.00', status: 'Concluída', driverId: '2' },
+    { id: '3', date: '22/07/2024', passenger: 'Passageiro Anônimo', origin: 'Rodoviária', destination: 'Bairro Universitário', value: '18.00', status: 'Concluída', driverId: '4' },
+    { id: '4', date: '20/07/2024', passenger: 'Fernanda Lima', origin: 'Centro', destination: 'Hospital Regional', value: '15.00', status: 'Concluída', driverId: '5' },
+];
+
 
 export function UserManagementTable() {
     const { toast } = useToast();
@@ -59,6 +70,74 @@ export function UserManagementTable() {
         setIsAddUserDialogOpen(false);
         setNewUser({ name: '', email: '', role: 'Passageiro' });
     };
+
+    const handleGenerateReport = (driver: typeof initialUsers[0]) => {
+        const driverRides = mockRides.filter(ride => ride.driverId === driver.id);
+
+        if (driverRides.length === 0) {
+            toast({
+                title: 'Nenhuma corrida encontrada',
+                description: `O motorista ${driver.name} não possui corridas no histórico para gerar um relatório.`,
+            });
+            return;
+        }
+
+        const doc = new jsPDF();
+        const tableColumn = ["Data", "Passageiro", "Trajeto", "Valor (R$)", "Status"];
+        const tableRows: (string | null)[][] = [];
+
+        driverRides.forEach(ride => {
+            const rideData = [
+                ride.date,
+                ride.passenger,
+                `${ride.origin} -> ${ride.destination}`,
+                `R$ ${ride.value.replace('.', ',')}`,
+                ride.status,
+            ];
+            tableRows.push(rideData);
+        });
+
+        // Header
+        doc.setFont("Poppins", "bold");
+        doc.setFontSize(22);
+        doc.text("CEOLIN Mobilidade urbana", 14, 22);
+        doc.setFontSize(16);
+        doc.text("Relatório de Corridas", 14, 30);
+        
+        doc.setFont("Poppins", "normal");
+        doc.setFontSize(12);
+        doc.text(`Motorista: ${driver.name}`, 14, 40);
+        doc.text(`Data de Geração: ${new Date().toLocaleDateString('pt-BR')}`, 14, 46);
+
+        // Table
+        (doc as any).autoTable({
+            startY: 55,
+            head: [tableColumn],
+            body: tableRows,
+            theme: 'striped',
+            headStyles: { fillColor: [22, 163, 74] },
+        });
+
+        const finalY = (doc as any).lastAutoTable.finalY;
+        const summary = driverRides.reduce((acc, ride) => {
+            if (ride.status === 'Concluída') {
+                acc.totalRides += 1;
+                acc.totalValue += parseFloat(ride.value);
+            }
+            return acc;
+        }, { totalRides: 0, totalValue: 0});
+
+        doc.setFontSize(14);
+        doc.setFont("Poppins", "bold");
+        doc.text("Resumo de Ganhos", 14, finalY + 15);
+        doc.setFontSize(12);
+        doc.setFont("Poppins", "normal");
+        doc.text(`Total de Corridas Concluídas: ${summary.totalRides}`, 14, finalY + 22);
+        doc.text(`Valor Total Arrecadado: R$ ${summary.totalValue.toFixed(2).replace('.', ',')}`, 14, finalY + 29);
+
+        doc.save(`relatorio_${driver.name.replace(/\s/g, '_')}.pdf`);
+        toast({ title: 'Relatório Gerado!', description: `O relatório para ${driver.name} foi gerado com sucesso.` });
+    }
 
     return (
         <div className="space-y-4">
@@ -144,6 +223,12 @@ export function UserManagementTable() {
                                     </Badge>
                                 </TableCell>
                                 <TableCell className="text-right space-x-2">
+                                    {user.role === 'Motorista' && (
+                                        <Button variant="outline" size="icon" onClick={() => handleGenerateReport(user)}>
+                                            <FileText className="h-4 w-4" />
+                                            <span className="sr-only">Gerar Relatório</span>
+                                        </Button>
+                                    )}
                                     <Switch
                                         checked={userStatuses[user.id]}
                                         onCheckedChange={(checked) => handleStatusChange(user.id, checked)}
