@@ -2,7 +2,7 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "../ui/scroll-area";
-import { History, Star } from "lucide-react";
+import { History, Star, Calendar, MapPin, DollarSign } from "lucide-react";
 import { RideRatingDialog } from "./RideRatingDialog";
 
 const rides = [
@@ -15,7 +15,7 @@ const rides = [
 export function RideHistory() {
   if (rides.length === 0) {
       return (
-          <div className="flex flex-col items-center justify-center text-center text-muted-foreground p-8 border rounded-lg">
+          <div className="flex flex-col items-center justify-center text-center text-muted-foreground p-8 border rounded-lg mx-6">
                 <History className="h-10 w-10 mb-4" />
                 <p className="font-semibold">Nenhuma corrida encontrada</p>
                 <p className="text-sm">Seu histórico de corridas aparecerá aqui.</p>
@@ -24,37 +24,71 @@ export function RideHistory() {
   }
     
   return (
-    <ScrollArea className="h-64 w-full rounded-md border">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Data</TableHead>
-            <TableHead>Destino</TableHead>
-            <TableHead className="text-right">Valor</TableHead>
-            <TableHead className="text-center">Status</TableHead>
-            <TableHead className="text-right">Ação</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {rides.map((ride) => (
-            <TableRow key={ride.id}>
-              <TableCell className="font-medium">{ride.date}</TableCell>
-              <TableCell>{ride.destination}</TableCell>
-              <TableCell className="text-right">{ride.value}</TableCell>
-              <TableCell className="text-center">
-                <Badge variant={ride.status === 'Concluída' ? 'secondary' : 'destructive'}>
-                  {ride.status}
-                </Badge>
-              </TableCell>
-               <TableCell className="text-right">
-                {ride.status === 'Concluída' && (
-                  <RideRatingDialog ride={ride} />
-                )}
-              </TableCell>
+    <ScrollArea className="h-72 w-full px-6">
+      {/* Mobile View - Cards */}
+      <div className="grid gap-4 md:hidden">
+        {rides.map((ride) => (
+          <div key={ride.id} className="rounded-lg border bg-card p-4 space-y-3">
+             <div className="flex justify-between items-start">
+              <div>
+                <p className="font-semibold flex items-center gap-2">
+                  <MapPin className="h-4 w-4 text-primary" />
+                  {ride.destination}
+                </p>
+                 <p className="text-xs text-muted-foreground flex items-center gap-2 mt-1">
+                  <Calendar className="h-3 w-3" />
+                  {ride.date}
+                </p>
+              </div>
+               <Badge variant={ride.status === 'Concluída' ? 'secondary' : 'destructive'}>
+                {ride.status}
+              </Badge>
+            </div>
+
+            <div className="flex justify-between items-center pt-2 border-t">
+              <p className="flex items-center gap-2 font-semibold">
+                <DollarSign className="h-4 w-4 text-accent" />
+                {ride.value}
+              </p>
+              {ride.status === 'Concluída' && <RideRatingDialog ride={ride} />}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop View - Table */}
+      <div className="hidden md:block rounded-md border">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Data</TableHead>
+              <TableHead>Destino</TableHead>
+              <TableHead className="text-right">Valor</TableHead>
+              <TableHead className="text-center">Status</TableHead>
+              <TableHead className="text-right">Ação</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {rides.map((ride) => (
+              <TableRow key={ride.id}>
+                <TableCell className="font-medium">{ride.date}</TableCell>
+                <TableCell>{ride.destination}</TableCell>
+                <TableCell className="text-right">{ride.value}</TableCell>
+                <TableCell className="text-center">
+                  <Badge variant={ride.status === 'Concluída' ? 'secondary' : 'destructive'}>
+                    {ride.status}
+                  </Badge>
+                </TableCell>
+                <TableCell className="text-right">
+                  {ride.status === 'Concluída' && (
+                    <RideRatingDialog ride={ride} />
+                  )}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </ScrollArea>
   );
 }

@@ -143,12 +143,12 @@ export function PassengerAuthForm() {
                     </DialogContent>
                 </Dialog>
                 <Button onClick={handleSaveChanges} className="w-full">Salvar Alterações</Button>
-                <div className="space-y-2 pt-4">
-                    <h3 className="font-headline text-lg font-semibold text-center">Histórico de Corridas</h3>
-                    <RideHistory />
-                </div>
             </CardContent>
-            <CardFooter>
+            <CardContent className="space-y-2 pt-4 p-0">
+                <h3 className="font-headline text-lg font-semibold text-center px-6">Histórico de Corridas</h3>
+                <RideHistory />
+            </CardContent>
+            <CardFooter className="p-6">
                 <Button onClick={handleLogout} variant="outline" className="w-full">
                     <LogOut className="mr-2 h-4 w-4" />
                     Sair
