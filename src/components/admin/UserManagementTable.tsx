@@ -292,7 +292,7 @@ export function UserManagementTable() {
                                         {userStatuses[user.id] ? 'Ativo' : 'Inativo'}
                                     </Badge>
                                 </TableCell>
-                                <TableCell className="text-right space-x-1">
+                                <TableCell className="text-right space-x-1 whitespace-nowrap">
                                     {user.role === 'Motorista' && (
                                         <>
                                             <Button variant="outline" size="icon" onClick={() => openLogDialog(user)}>
