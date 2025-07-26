@@ -5,17 +5,19 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Star, Upload, KeyRound } from 'lucide-react';
+import { Star, Upload, KeyRound, DollarSign } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog';
 import Image from 'next/image';
 import { useToast } from '@/hooks/use-toast';
 import { useState } from 'react';
+import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 
 export function ProfileForm() {
   const { toast } = useToast();
   const [status, setStatus] = useState('online');
+  const [fareType, setFareType] = useState('fixed');
 
   const handleSave = () => {
     toast({
@@ -136,11 +138,37 @@ export function ProfileForm() {
         </div>
         <div className="space-y-4">
             <h3 className="font-headline text-lg">Configurações de Corrida</h3>
+            <div className="space-y-1">
+                 <Label>Tipo de Tarifa (Urbano)</Label>
+                 <RadioGroup defaultValue="fixed" value={fareType} onValueChange={setFareType} className="flex items-center gap-4 pt-2">
+                    <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="fixed" id="r-fixed" />
+                        <Label htmlFor="r-fixed">Valor Fixo</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="km" id="r-km" />
+                        <Label htmlFor="r-km">Tarifa por KM</Label>
+                    </div>
+                 </RadioGroup>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
-                <div className="space-y-1">
-                    <Label htmlFor="fixed-rate">Tarifa Fixa (Urbano)</Label>
-                    <Input id="fixed-rate" type="number" placeholder="25.50" />
-                </div>
+                {fareType === 'fixed' ? (
+                    <div className="space-y-1">
+                        <Label htmlFor="fixed-rate">Tarifa Fixa (R$)</Label>
+                        <div className="relative">
+                            <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                            <Input id="fixed-rate" type="number" placeholder="25.50" className="pl-10" />
+                        </div>
+                    </div>
+                ) : (
+                    <div className="space-y-1">
+                        <Label htmlFor="km-rate">Tarifa por KM (R$)</Label>
+                        <div className="relative">
+                             <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                            <Input id="km-rate" type="number" placeholder="3.50" className="pl-10" />
+                        </div>
+                    </div>
+                )}
                  <div className="flex items-center space-x-2 pt-5">
                     <Switch id="negotiate-rural" />
                     <Label htmlFor="negotiate-rural">Aceitar negociação para interior</Label>
