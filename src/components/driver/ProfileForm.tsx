@@ -1,3 +1,4 @@
+
 'use client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -220,6 +221,8 @@ export function ProfileForm() {
   const [cnhDocument, setCnhDocument] = useState<string | null>(null);
   const [crlvDocument, setCrlvDocument] = useState<string | null>(null);
   const [vehiclePhoto, setVehiclePhoto] = useState<string | null>(null);
+  const [isPasswordDialogOpen, setIsPasswordDialogOpen] = useState(false);
+  const [newPassword, setNewPassword] = useState({ password: '', confirmPassword: '' });
 
   const handleSave = () => {
     toast({
@@ -235,6 +238,21 @@ export function ProfileForm() {
       description: `Seu status foi alterado para ${newStatus === 'online' ? 'Online' : newStatus === 'offline' ? 'Offline' : newStatus === 'urban-trip' ? 'Em Viagem (Urbano)' : 'Em Viagem (Interior/Intermunicipal)'}.`,
     });
   }
+
+  const handleChangePassword = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newPassword.password !== newPassword.confirmPassword) {
+        toast({ variant: 'destructive', title: 'Erro', description: 'As senhas não coincidem.' });
+        return;
+    }
+    if (newPassword.password.length < 6) {
+        toast({ variant: 'destructive', title: 'Erro', description: 'A senha deve ter pelo menos 6 caracteres.' });
+        return;
+    }
+    toast({ title: 'Senha Alterada!', description: 'Sua senha foi alterada com sucesso.' });
+    setIsPasswordDialogOpen(false);
+    setNewPassword({ password: '', confirmPassword: '' });
+  };
 
   return (
     <Card className="shadow-lg">
@@ -295,6 +313,40 @@ export function ProfileForm() {
                          <KeyRound className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                         <Input id="pix-key" placeholder="Insira sua chave PIX (CPF, e-mail, etc.)" className="pl-10" />
                     </div>
+                </div>
+                <div className="md:col-span-2">
+                    <Dialog open={isPasswordDialogOpen} onOpenChange={setIsPasswordDialogOpen}>
+                        <DialogTrigger asChild>
+                            <Button variant="outline" className="w-full sm:w-auto">
+                                <KeyRound className="mr-2 h-4 w-4" />
+                                Trocar Senha
+                            </Button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[425px]">
+                            <form onSubmit={handleChangePassword}>
+                                <DialogHeader>
+                                    <DialogTitle>Alterar Senha</DialogTitle>
+                                    <DialogDescription>
+                                        Crie uma nova senha segura para sua conta.
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <div className="grid gap-4 py-4">
+                                    <div className="space-y-1">
+                                        <Label htmlFor="new-password">Nova Senha</Label>
+                                        <Input id="new-password" type="password" value={newPassword.password} onChange={(e) => setNewPassword(prev => ({...prev, password: e.target.value}))} placeholder="Nova senha forte" required />
+                                    </div>
+                                    <div className="space-y-1">
+                                        <Label htmlFor="confirm-new-password">Confirmar Nova Senha</Label>
+                                        <Input id="confirm-new-password" type="password" value={newPassword.confirmPassword} onChange={(e) => setNewPassword(prev => ({...prev, confirmPassword: e.target.value}))} placeholder="Repita a nova senha" required />
+                                    </div>
+                                </div>
+                                <DialogFooter>
+                                     <Button type="button" variant="secondary" onClick={() => setIsPasswordDialogOpen(false)}>Cancelar</Button>
+                                    <Button type="submit">Salvar Nova Senha</Button>
+                                </DialogFooter>
+                            </form>
+                        </DialogContent>
+                    </Dialog>
                 </div>
             </div>
         </div>
