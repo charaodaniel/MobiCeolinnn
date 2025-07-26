@@ -261,7 +261,7 @@ export function ProfileForm() {
                     </div>
                 </div>
             </div>
-            <div className="space-y-1 w-full sm:w-40 pt-2 sm:pt-0">
+            <div className="space-y-1 w-full sm:w-48 pt-2 sm:pt-0">
                 <Label htmlFor="driver-status">Status</Label>
                 <Select value={status} onValueChange={handleStatusChange}>
                     <SelectTrigger id="driver-status">
@@ -377,7 +377,7 @@ export function ProfileForm() {
         </div>
       </CardContent>
       <CardFooter>
-        <Button className="w-full md:w-auto ml-auto" onClick={handleSave}>Salvar Alterações</Button>
+        <Button className="w-full sm:w-auto sm:ml-auto" onClick={handleSave}>Salvar Alterações</Button>
       </CardFooter>
     </Card>
   );

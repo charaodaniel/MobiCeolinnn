@@ -2428,8 +2428,20 @@ body {
     margin-top: 0;
   }
 
+  .sm\:ml-auto {
+    margin-left: auto;
+  }
+
   .sm\:w-40 {
     width: 10rem;
+  }
+
+  .sm\:w-48 {
+    width: 12rem;
+  }
+
+  .sm\:w-auto {
+    width: auto;
   }
 
   .sm\:max-w-\[425px\] {
