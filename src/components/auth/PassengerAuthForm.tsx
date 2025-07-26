@@ -7,11 +7,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { User, LogIn, UserPlus, LogOut, KeyRound, Camera } from 'lucide-react';
+import { User, LogIn, UserPlus, LogOut, KeyRound, Camera, History, MessageSquare, ChevronRight } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { RideHistory } from '../passenger/RideHistory';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog';
 import { CameraCaptureDialog } from '../shared/CameraCaptureDialog';
+import { Separator } from '../ui/separator';
+import { ChatHistory } from '../passenger/ChatHistory';
 
 export function PassengerAuthForm() {
   const { toast } = useToast();
@@ -22,10 +24,10 @@ export function PassengerAuthForm() {
   const [newPassword, setNewPassword] = useState({ password: '', confirmPassword: '' });
   const [isCameraDialogOpen, setIsCameraDialogOpen] = useState(false);
   const [avatarImage, setAvatarImage] = useState('https://placehold.co/128x128.png');
+  const [activeTab, setActiveTab] = useState<'rides' | 'chats'>('rides');
 
 
   const handleLogin = () => {
-    // Mock login with test credentials
     if (email === 'joao@email.com' && password === '123456') {
         toast({
             title: 'Login bem-sucedido!',
@@ -42,7 +44,6 @@ export function PassengerAuthForm() {
   };
 
   const handleRegister = () => {
-    // Mock register
     toast({
       title: 'Registro bem-sucedido!',
       description: 'Sua conta foi criada. Você já pode fazer o login.',
@@ -74,49 +75,61 @@ export function PassengerAuthForm() {
     setNewPassword({ password: '', confirmPassword: '' });
   }
 
-  const handleSaveChanges = () => {
-    toast({
-        title: 'Perfil Atualizado!',
-        description: 'Suas informações foram salvas com sucesso.',
-    });
-  }
-
   if (isLoggedIn) {
       return (
-        <Card className="flex flex-col h-full border-0 shadow-none">
-            <CardContent className="flex-1 flex flex-col pt-6">
-                <div className="flex flex-col items-center gap-4">
-                    <Dialog open={isCameraDialogOpen} onOpenChange={setIsCameraDialogOpen}>
-                        <DialogTrigger asChild>
-                             <div className="relative group">
-                                <Avatar className="h-20 w-20 cursor-pointer">
-                                    <AvatarImage src={avatarImage} data-ai-hint="person face" />
-                                    <AvatarFallback>JP</AvatarFallback>
-                                </Avatar>
-                                <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded-full">
-                                    <Camera className="h-8 w-8 text-white" />
-                                </div>
+        <div className="flex flex-col h-full bg-muted/40">
+            <div className="flex flex-col items-center gap-4 py-8 bg-card">
+                <Dialog open={isCameraDialogOpen} onOpenChange={setIsCameraDialogOpen}>
+                    <DialogTrigger asChild>
+                         <div className="relative group">
+                            <Avatar className="h-24 w-24 cursor-pointer ring-4 ring-background">
+                                <AvatarImage src={avatarImage} data-ai-hint="person face" />
+                                <AvatarFallback>JP</AvatarFallback>
+                            </Avatar>
+                            <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded-full">
+                                <Camera className="h-8 w-8 text-white" />
                             </div>
-                        </DialogTrigger>
-                        <CameraCaptureDialog 
-                            isOpen={isCameraDialogOpen}
-                            onImageSave={setAvatarImage} 
-                            onDialogClose={() => setIsCameraDialogOpen(false)}
-                        />
-                    </Dialog>
-                    <div className="text-center">
-                        <h2 className="font-headline text-2xl font-semibold">João Passageiro</h2>
-                        <p className="font-body text-muted-foreground">joao@email.com</p>
-                    </div>
+                        </div>
+                    </DialogTrigger>
+                    <CameraCaptureDialog 
+                        isOpen={isCameraDialogOpen}
+                        onImageSave={setAvatarImage} 
+                        onDialogClose={() => setIsCameraDialogOpen(false)}
+                    />
+                </Dialog>
+                <div className="text-center">
+                    <h2 className="font-headline text-2xl font-semibold">João Passageiro</h2>
+                    <p className="font-body text-muted-foreground">joao@email.com</p>
                 </div>
+            </div>
 
-                <div className="px-6 space-y-2 mt-4">
+            <div className="flex-1 flex flex-col pt-6 bg-muted/40">
+                 <div className="bg-card">
+                    <button onClick={() => setActiveTab('rides')} className="flex items-center justify-between w-full p-4 text-left">
+                        <div className="flex items-center gap-4">
+                            <History className="h-6 w-6 text-primary" />
+                            <span className="font-medium">Histórico de Corridas</span>
+                        </div>
+                        <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                    </button>
+                    <Separator />
+                     <button onClick={() => setActiveTab('chats')} className="flex items-center justify-between w-full p-4 text-left">
+                        <div className="flex items-center gap-4">
+                            <MessageSquare className="h-6 w-6 text-primary" />
+                            <span className="font-medium">Conversas</span>
+                        </div>
+                        <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                    </button>
+                    <Separator />
                     <Dialog open={isPasswordDialogOpen} onOpenChange={setIsPasswordDialogOpen}>
                         <DialogTrigger asChild>
-                            <Button variant="outline" className="w-full">
-                                <KeyRound className="mr-2 h-4 w-4" />
-                                Trocar Senha
-                            </Button>
+                           <button className="flex items-center justify-between w-full p-4 text-left">
+                                <div className="flex items-center gap-4">
+                                    <KeyRound className="h-6 w-6 text-primary" />
+                                    <span className="font-medium">Trocar Senha</span>
+                                </div>
+                                <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                            </button>
                         </DialogTrigger>
                         <DialogContent className="sm:max-w-md">
                             <form onSubmit={handleChangePassword}>
@@ -143,24 +156,20 @@ export function PassengerAuthForm() {
                             </form>
                         </DialogContent>
                     </Dialog>
-                    <Button onClick={handleSaveChanges} className="w-full">Salvar Alterações</Button>
+                    <Separator />
+                     <button onClick={handleLogout} className="flex items-center justify-between w-full p-4 text-left text-destructive">
+                        <div className="flex items-center gap-4">
+                            <LogOut className="h-6 w-6" />
+                            <span className="font-medium">Sair</span>
+                        </div>
+                    </button>
+                 </div>
+                 
+                <div className="flex-1 flex flex-col mt-4 bg-card">
+                    {activeTab === 'rides' ? <RideHistory /> : <ChatHistory />}
                 </div>
-            
-                <div className="flex-1 flex flex-col mt-4">
-                    <h3 className="font-headline text-lg font-semibold text-center px-6 mb-2">Histórico de Corridas</h3>
-                    <div className="flex-1 min-h-0">
-                        <RideHistory />
-                    </div>
-                </div>
-            </CardContent>
-            
-            <CardFooter className="p-6">
-                <Button onClick={handleLogout} variant="outline" className="w-full">
-                    <LogOut className="mr-2 h-4 w-4" />
-                    Sair
-                </Button>
-            </CardFooter>
-        </Card>
+            </div>
+        </div>
       );
   }
 

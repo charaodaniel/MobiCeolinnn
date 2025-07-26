@@ -24,11 +24,12 @@ export function RideHistory() {
   }
     
   return (
-    <ScrollArea className="h-full w-full px-6">
+    <ScrollArea className="h-full w-full">
+        <h3 className="font-headline text-lg font-semibold text-center p-4">Histórico de Corridas</h3>
       {/* Mobile View - Cards */}
-      <div className="grid gap-4 md:hidden">
+      <div className="grid gap-4 md:hidden px-4 pb-4">
         {rides.map((ride) => (
-          <div key={ride.id} className="rounded-lg border bg-card p-4 space-y-3">
+          <div key={ride.id} className="rounded-lg border bg-card p-4 space-y-3 shadow-sm">
              <div className="flex justify-between items-start">
               <div>
                 <p className="font-semibold flex items-center gap-2">
