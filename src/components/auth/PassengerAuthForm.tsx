@@ -3,7 +3,6 @@
 
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -14,6 +13,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { CameraCaptureDialog } from '../shared/CameraCaptureDialog';
 import { Separator } from '../ui/separator';
 import { ChatHistory } from '../passenger/ChatHistory';
+import { Card, CardContent } from '../ui/card';
 
 export function PassengerAuthForm() {
   const { toast } = useToast();
@@ -77,7 +77,7 @@ export function PassengerAuthForm() {
 
   if (isLoggedIn) {
       return (
-        <div className="flex flex-col h-full bg-muted/40">
+        <div className="flex flex-col bg-muted/40 max-h-[85vh] overflow-y-auto">
             <div className="flex flex-col items-center gap-4 py-8 bg-card">
                 <Dialog open={isCameraDialogOpen} onOpenChange={setIsCameraDialogOpen}>
                     <DialogTrigger asChild>
@@ -165,7 +165,7 @@ export function PassengerAuthForm() {
                     </button>
                  </div>
                  
-                <div className="flex-1 flex flex-col mt-4 bg-card">
+                <div className="flex-1 flex flex-col mt-4 bg-card pb-4">
                     {activeTab === 'rides' ? <RideHistory /> : <ChatHistory />}
                 </div>
             </div>
@@ -175,21 +175,23 @@ export function PassengerAuthForm() {
 
   return (
     <Card className="w-full border-0 shadow-none">
-      <CardHeader className="text-center">
-        <div className="flex justify-center items-center mb-4">
-            <User className="h-10 w-10 text-primary" />
-            <CardTitle className="font-headline text-3xl ml-2">Área do Passageiro</CardTitle>
-        </div>
-        <CardDescription className="font-body">Faça login ou registre-se para salvar suas viagens.</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4 p-6">
-        <div className="space-y-1">
-            <Label htmlFor="email-passenger">Email</Label>
-            <Input id="email-passenger" type="email" placeholder="joao@email.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        </div>
-        <div className="space-y-1">
-            <Label htmlFor="password-passenger">Senha</Label>
-            <Input id="password-passenger" type="password" placeholder="123456" value={password} onChange={(e) => setPassword(e.target.value)} required />
+      <CardContent className="pt-6">
+          <div className="text-center mb-6">
+            <div className="flex justify-center items-center mb-4">
+                <User className="h-10 w-10 text-primary" />
+                <h2 className="font-headline text-3xl ml-2">Área do Passageiro</h2>
+            </div>
+            <p className="font-body text-muted-foreground">Faça login ou registre-se para salvar suas viagens.</p>
+          </div>
+        <div className="space-y-4">
+            <div className="space-y-1">
+                <Label htmlFor="email-passenger">Email</Label>
+                <Input id="email-passenger" type="email" placeholder="joao@email.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
+            </div>
+            <div className="space-y-1">
+                <Label htmlFor="password-passenger">Senha</Label>
+                <Input id="password-passenger" type="password" placeholder="123456" value={password} onChange={(e) => setPassword(e.target.value)} required />
+            </div>
         </div>
       </CardContent>
       <CardFooter className="flex flex-col sm:flex-row gap-2">

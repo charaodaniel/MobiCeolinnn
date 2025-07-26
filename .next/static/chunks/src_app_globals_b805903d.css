@@ -589,6 +589,10 @@ body {
   margin-top: 1.5rem;
 }
 
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
 .block {
   display: block;
 }
@@ -735,6 +739,10 @@ body {
 
 .max-h-\[90vh\] {
   max-height: 90vh;
+}
+
+.max-h-\[85vh\] {
+  max-height: 85vh;
 }
 
 .min-h-\[80px\] {

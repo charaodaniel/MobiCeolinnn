@@ -10,6 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Send, ThumbsUp, DollarSign } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
+import { Alert, AlertTitle } from '../ui/alert';
 
 interface Message {
     sender: 'driver' | 'passenger';
@@ -27,14 +28,14 @@ const regularMessages: Message[] = [
 ];
 
 
-export function RideChat({ passengerName, children, isNegotiation }: { passengerName: string; children: React.ReactNode, isNegotiation: boolean }) {
+export function RideChat({ passengerName, children, isNegotiation, isReadOnly = false }: { passengerName: string; children: React.ReactNode, isNegotiation: boolean, isReadOnly?: boolean }) {
     const { toast } = useToast();
     const [messages, setMessages] = useState<Message[]>(isNegotiation ? negotiationMessages : regularMessages);
     const [newMessage, setNewMessage] = useState('');
     const [offer, setOffer] = useState('');
 
     const handleSendMessage = (type: 'text' | 'offer', content: string) => {
-        if (content.trim() === '') return;
+        if (content.trim() === '' || isReadOnly) return;
         
         const text = type === 'offer' ? `Minha proposta de valor é R$${content}.` : content;
 
@@ -115,39 +116,47 @@ export function RideChat({ passengerName, children, isNegotiation }: { passenger
                             ))}
                         </div>
                     </ScrollArea>
-                                        
-                    <div className="flex gap-2">
-                        <Input
-                            placeholder="Digite sua mensagem..."
-                            value={newMessage}
-                            onChange={(e) => setNewMessage(e.target.value)}
-                            onKeyDown={(e) => e.key === 'Enter' && handleSendMessage('text', newMessage)}
-                        />
-                        <Button onClick={() => handleSendMessage('text', newMessage)} disabled={!newMessage.trim()}>
-                            <Send className="h-4 w-4" />
-                            <span className="sr-only">Enviar</span>
-                        </Button>
-                    </div>
-                     {isNegotiation && (
-                        <div className="flex gap-2">
-                            <div className="relative flex-1">
-                                <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+
+                    {isReadOnly ? (
+                        <Alert>
+                            <AlertTitle className="text-center">Corrida Finalizada</AlertTitle>
+                        </Alert>
+                    ) : (
+                        <>
+                            <div className="flex gap-2">
                                 <Input
-                                    type="number"
-                                    placeholder="Propor valor (ex: 150.00)"
-                                    className="pl-10"
-                                    value={offer}
-                                    onChange={(e) => setOffer(e.target.value)}
-                                    onKeyDown={(e) => e.key === 'Enter' && handleSendMessage('offer', offer)}
+                                    placeholder="Digite sua mensagem..."
+                                    value={newMessage}
+                                    onChange={(e) => setNewMessage(e.target.value)}
+                                    onKeyDown={(e) => e.key === 'Enter' && handleSendMessage('text', newMessage)}
                                 />
+                                <Button onClick={() => handleSendMessage('text', newMessage)} disabled={!newMessage.trim()}>
+                                    <Send className="h-4 w-4" />
+                                    <span className="sr-only">Enviar</span>
+                                </Button>
                             </div>
-                            <Button onClick={() => handleSendMessage('offer', offer)} disabled={!offer.trim()} variant="secondary">
-                                Enviar Proposta
-                            </Button>
-                        </div>
+                            {isNegotiation && (
+                                <div className="flex gap-2">
+                                    <div className="relative flex-1">
+                                        <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                                        <Input
+                                            type="number"
+                                            placeholder="Propor valor (ex: 150.00)"
+                                            className="pl-10"
+                                            value={offer}
+                                            onChange={(e) => setOffer(e.target.value)}
+                                            onKeyDown={(e) => e.key === 'Enter' && handleSendMessage('offer', offer)}
+                                        />
+                                    </div>
+                                    <Button onClick={() => handleSendMessage('offer', offer)} disabled={!offer.trim()} variant="secondary">
+                                        Enviar Proposta
+                                    </Button>
+                                </div>
+                            )}
+                        </>
                     )}
                 </div>
-                 {isNegotiation && (
+                 {isNegotiation && !isReadOnly && (
                     <DialogFooter>
                         <Button onClick={handleAcceptRide} className="w-full">
                             <ThumbsUp className="mr-2 h-4 w-4" />

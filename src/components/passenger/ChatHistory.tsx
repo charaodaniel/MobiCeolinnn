@@ -4,6 +4,7 @@ import { ScrollArea } from "../ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Separator } from "../ui/separator";
 import { MessageSquare } from "lucide-react";
+import { RideChat } from "../driver/NegotiationChat";
 
 const chats = [
   { id: '1', driverName: 'Carlos Motorista', lastMessage: 'Olá! Faço a corrida por R$ 150,00.', timestamp: '10:35', avatar: 'man' },
@@ -28,21 +29,27 @@ export function ChatHistory() {
         <ul className="px-4">
             {chats.map((chat, index) => (
                 <li key={chat.id}>
-                    <button className="w-full text-left py-4">
-                        <div className="flex items-center gap-4">
-                            <Avatar className="h-12 w-12">
-                                <AvatarImage src={`https://placehold.co/48x48.png`} data-ai-hint={`${chat.avatar} face`} />
-                                <AvatarFallback>{chat.driverName.charAt(0)}</AvatarFallback>
-                            </Avatar>
-                            <div className="flex-1">
-                                <div className="flex justify-between items-center">
-                                    <p className="font-semibold">{chat.driverName}</p>
-                                    <p className="text-xs text-muted-foreground">{chat.timestamp}</p>
+                    <RideChat 
+                        passengerName="João Passageiro" 
+                        isNegotiation={false}
+                        isReadOnly={true}
+                    >
+                         <button className="w-full text-left py-4">
+                            <div className="flex items-center gap-4">
+                                <Avatar className="h-12 w-12">
+                                    <AvatarImage src={`https://placehold.co/48x48.png`} data-ai-hint={`${chat.avatar} face`} />
+                                    <AvatarFallback>{chat.driverName.charAt(0)}</AvatarFallback>
+                                </Avatar>
+                                <div className="flex-1">
+                                    <div className="flex justify-between items-center">
+                                        <p className="font-semibold">{chat.driverName}</p>
+                                        <p className="text-xs text-muted-foreground">{chat.timestamp}</p>
+                                    </div>
+                                    <p className="text-sm text-muted-foreground truncate">{chat.lastMessage}</p>
                                 </div>
-                                <p className="text-sm text-muted-foreground truncate">{chat.lastMessage}</p>
                             </div>
-                        </div>
-                    </button>
+                        </button>
+                    </RideChat>
                     {index < chats.length - 1 && <Separator />}
                 </li>
             ))}
@@ -50,4 +57,3 @@ export function ChatHistory() {
     </ScrollArea>
   );
 }
-
