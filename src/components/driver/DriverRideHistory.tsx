@@ -169,10 +169,10 @@ export function DriverRideHistory() {
                 <CardTitle className="font-headline">Histórico de Viagens</CardTitle>
                 <CardDescription>Visualize suas corridas concluídas.</CardDescription>
             </div>
-            <div className="flex flex-col sm:flex-row gap-2">
+            <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
                 <Dialog>
                     <DialogTrigger asChild>
-                        <Button variant="outline">
+                        <Button variant="outline" className="w-full sm:w-auto">
                             <PlusCircle className="mr-2 h-4 w-4" />
                             Iniciar Nova Corrida
                         </Button>
@@ -216,7 +216,7 @@ export function DriverRideHistory() {
                 <AlertDialog open={isSummaryOpen} onOpenChange={setIsSummaryOpen}>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <Button>
+                            <Button className="w-full sm:w-auto">
                                 <Download className="mr-2 h-4 w-4" />
                                 Exportar
                             </Button>
