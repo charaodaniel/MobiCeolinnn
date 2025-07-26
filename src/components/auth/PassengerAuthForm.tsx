@@ -13,7 +13,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { CameraCaptureDialog } from '../shared/CameraCaptureDialog';
 import { Separator } from '../ui/separator';
 import { ChatHistory } from '../passenger/ChatHistory';
-import { Card, CardContent } from '../ui/card';
+import { Card, CardContent, CardFooter } from '../ui/card';
 
 export function PassengerAuthForm() {
   const { toast } = useToast();
