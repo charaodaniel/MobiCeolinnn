@@ -263,7 +263,7 @@ export function RideRequestForm({ availableDrivers, origin, setOrigin, isRural, 
                         </div>
                     </div>
                      <div className="grid grid-cols-1 sm:grid-cols-1 gap-2 mt-4">
-                        <RideChat passengerName="Passageiro" isNegotiation={false} onAcceptRide={() => {}}>
+                        <RideChat passengerName="Passageiro" isNegotiation={false} onAcceptRide={() => {}} autoShowMessage="Seu motorista está a caminho.">
                            <Button variant="outline" className="w-full">
                                 <MessageSquareQuote className="mr-2 h-4 w-4" />
                                 Abrir Chat

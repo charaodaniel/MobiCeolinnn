@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from '@/components/ui/input';
@@ -29,11 +29,37 @@ const initialMessages = (isNegotiation: boolean): Message[] => {
     ];
 };
 
-export function RideChat({ passengerName, children, isNegotiation, isReadOnly = false, onAcceptRide }: { passengerName: string; children: React.ReactNode, isNegotiation: boolean, isReadOnly?: boolean, onAcceptRide?: () => void; }) {
+export function RideChat({ passengerName, children, isNegotiation, isReadOnly = false, onAcceptRide, autoShowMessage }: { passengerName: string; children: React.ReactNode, isNegotiation: boolean, isReadOnly?: boolean, onAcceptRide?: () => void; autoShowMessage?: string }) {
     const { toast } = useToast();
     const [messages, setMessages] = useState<Message[]>(initialMessages(isNegotiation));
     const [newMessage, setNewMessage] = useState('');
     const [offer, setOffer] = useState('');
+
+    useEffect(() => {
+        // Simulate driver sending an initial offer in negotiation mode
+        if (isNegotiation && !isReadOnly && passengerName === "Passageiro") {
+            setTimeout(() => {
+                setMessages(prev => [...prev, {
+                    sender: 'driver',
+                    text: 'Olá! Faço a corrida para esta região por R$ 150,00.',
+                    timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                    type: 'offer'
+                }]);
+            }, 2000);
+        }
+
+        // Auto-show a message if provided (e.g., when ride is accepted)
+        if (autoShowMessage) {
+             setTimeout(() => {
+                setMessages(prev => [...prev, {
+                    sender: 'system',
+                    text: autoShowMessage,
+                    timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                    type: 'text'
+                }]);
+            }, 1000);
+        }
+    }, [isNegotiation, isReadOnly, passengerName, autoShowMessage]);
 
     const handleSendMessage = (type: 'text' | 'offer', content: string) => {
         if (content.trim() === '' || isReadOnly) return;
@@ -67,19 +93,6 @@ export function RideChat({ passengerName, children, isNegotiation, isReadOnly = 
         }, 1500);
     };
 
-    // Simulate driver sending an initial offer in negotiation mode
-    useState(() => {
-        if (isNegotiation && !isReadOnly && passengerName === "Passageiro") {
-            setTimeout(() => {
-                setMessages(prev => [...prev, {
-                    sender: 'driver',
-                    text: 'Olá! Faço a corrida para esta região por R$ 150,00.',
-                    timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                    type: 'offer'
-                }]);
-            }, 2000);
-        }
-    });
     
     const isPassengerView = passengerName === "Passageiro";
 
