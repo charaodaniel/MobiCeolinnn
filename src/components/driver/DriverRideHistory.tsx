@@ -3,7 +3,7 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { History, User, MapPin, Download, FileText, BarChart2, FileType, PlusCircle, AlertCircle } from "lucide-react";
+import { History, User, MapPin, Download, FileText, BarChart2, FileType, PlusCircle, AlertCircle, CloudOff, RefreshCw } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
@@ -19,10 +19,10 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/
 
 
 const initialRides = [
-  { id: '1', date: '25/07/2024', passenger: 'João Passageiro', origin: 'Shopping Pátio', destination: 'Centro', value: '25.50', status: 'Concluída', startedBy: 'passenger' },
-  { id: '2', date: '24/07/2024', passenger: 'Maria Silva', origin: 'Aeroporto', destination: 'Zona Rural Leste', value: '150.00', status: 'Concluída', startedBy: 'passenger' },
-  { id: '3', date: '22/07/2024', passenger: 'Passageiro Anônimo', origin: 'Rodoviária', destination: 'Bairro Universitário', value: '18.00', status: 'Concluída', startedBy: 'driver' },
-  { id: '4', date: '20/07/2024', passenger: 'Fernanda Lima', origin: 'Centro', destination: 'Hospital Regional', value: '15.00', status: 'Cancelada', startedBy: 'passenger' },
+  { id: '1', date: '25/07/2024', passenger: 'João Passageiro', origin: 'Shopping Pátio', destination: 'Centro', value: '25.50', status: 'Concluída', startedBy: 'passenger', synced: true },
+  { id: '2', date: '24/07/2024', passenger: 'Maria Silva', origin: 'Aeroporto', destination: 'Zona Rural Leste', value: '150.00', status: 'Concluída', startedBy: 'passenger', synced: true },
+  { id: '3', date: '22/07/2024', passenger: 'Passageiro Anônimo', origin: 'Rodoviária', destination: 'Bairro Universitário', value: '18.00', status: 'Concluída', startedBy: 'driver', synced: true },
+  { id: '4', date: '20/07/2024', passenger: 'Fernanda Lima', origin: 'Centro', destination: 'Hospital Regional', value: '15.00', status: 'Cancelada', startedBy: 'passenger', synced: true },
 ];
 
 export function DriverRideHistory() {
@@ -30,6 +30,7 @@ export function DriverRideHistory() {
     const [rides, setRides] = useState(initialRides);
     const [newRide, setNewRide] = useState({ passenger: 'Passageiro Anônimo', origin: '', destination: '', value: '' });
     const { toast } = useToast();
+    const [isOffline, setIsOffline] = useState(false); // Simula o estado da rede
 
     const handleExportCSV = () => {
         const headers = ["ID", "Data", "Passageiro", "Origem", "Destino", "Valor (R$)", "Status", "Iniciada Por"];
@@ -131,12 +132,15 @@ export function DriverRideHistory() {
             value: parseFloat(newRide.value).toFixed(2),
             status: 'Concluída',
             startedBy: 'driver' as const,
+            synced: !isOffline,
         };
 
         setRides(prevRides => [newRideData, ...prevRides]);
         toast({
-            title: 'Corrida Registrada!',
-            description: 'A nova corrida foi adicionada ao seu histórico.',
+            title: isOffline ? 'Corrida Salva Localmente!' : 'Corrida Registrada!',
+            description: isOffline 
+                ? 'A corrida será enviada ao servidor assim que a conexão for restaurada.'
+                : 'A nova corrida foi adicionada ao seu histórico.',
         });
         
         // Reset form and close dialog
@@ -144,6 +148,20 @@ export function DriverRideHistory() {
         // This is a workaround to close the dialog. A better approach is to control the open state.
         document.getElementById('close-new-ride-dialog')?.click();
     };
+
+    const handleSync = () => {
+        toast({
+            title: "Sincronizando...",
+            description: "Enviando dados de corridas offline para o servidor."
+        });
+        setTimeout(() => {
+            setRides(prevRides => prevRides.map(r => ({ ...r, synced: true })));
+            toast({
+                title: "Sincronização Concluída!",
+                description: "Todos os dados foram enviados com sucesso."
+            });
+        }, 2000);
+    }
 
   if (rides.length === 0) {
       return (
@@ -198,6 +216,15 @@ export function DriverRideHistory() {
                                 <div className="space-y-1">
                                     <Label htmlFor="ride-value">Valor da Corrida (R$)</Label>
                                     <Input id="ride-value" type="number" step="0.01" value={newRide.value} onChange={(e) => setNewRide(prev => ({ ...prev, value: e.target.value }))} required placeholder="25.50" />
+                                </div>
+                                <div className="text-xs text-muted-foreground p-2 text-center border rounded-md">
+                                    Status da Rede: 
+                                    <span className={isOffline ? 'text-destructive font-bold' : 'text-green-600 font-bold'}>
+                                        {isOffline ? ' OFFLINE' : ' ONLINE'}
+                                    </span>.
+                                    <Button type="button" variant="link" size="sm" className="h-auto p-0 ml-1" onClick={() => setIsOffline(!isOffline)}>
+                                        (Simular {isOffline ? 'Online' : 'Offline'})
+                                    </Button>
                                 </div>
                             </div>
                             <DialogFooter>
@@ -259,6 +286,14 @@ export function DriverRideHistory() {
             </div>
         </div>
         <div>
+            {rides.some(r => !r.synced) && (
+                <div className="mb-4">
+                    <Button onClick={handleSync} className="w-full" variant="secondary">
+                        <RefreshCw className="mr-2 h-4 w-4" />
+                        Sincronizar Corridas Offline ({rides.filter(r => !r.synced).length})
+                    </Button>
+                </div>
+            )}
             <ScrollArea className="h-96 w-full">
                 <Table>
                     <TableHeader>
@@ -287,6 +322,18 @@ export function DriverRideHistory() {
                                        </Tooltip>
                                    </TooltipProvider>
                                )}
+                               {!ride.synced && (
+                                    <TooltipProvider>
+                                       <Tooltip>
+                                           <TooltipTrigger>
+                                                <CloudOff className="h-4 w-4 text-destructive" />
+                                           </TooltipTrigger>
+                                           <TooltipContent>
+                                               <p>Esta corrida foi salva localmente e ainda não foi sincronizada com o servidor.</p>
+                                           </TooltipContent>
+                                       </Tooltip>
+                                   </TooltipProvider>
+                               )}
                             </div>
                             <div className="text-sm text-muted-foreground">{ride.date}</div>
                         </TableCell>
@@ -304,3 +351,5 @@ export function DriverRideHistory() {
     </div>
   );
 }
+
+    

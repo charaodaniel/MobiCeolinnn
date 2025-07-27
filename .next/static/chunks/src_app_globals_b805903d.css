@@ -597,6 +597,10 @@ body {
   margin-top: 1.5rem;
 }
 
+.ml-1 {
+  margin-left: .25rem;
+}
+
 .block {
   display: block;
 }
@@ -739,6 +743,10 @@ body {
 
 .h-px {
   height: 1px;
+}
+
+.h-auto {
+  height: auto;
 }
 
 .max-h-96 {
