@@ -9,13 +9,14 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Separator } from '@/components/ui/separator';
-import { MapPin, ArrowRight, DollarSign, Clock, Route, Star, User, Copy, MessageSquareQuote, LocateFixed, Loader2 } from 'lucide-react';
+import { MapPin, ArrowRight, DollarSign, Clock, Route, Star, User, Copy, MessageSquareQuote, LocateFixed, Loader2, CheckCircle } from 'lucide-react';
 import { FareNegotiation } from './FareNegotiation';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useToast } from '@/hooks/use-toast';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { RideChat } from '@/components/driver/NegotiationChat';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Alert, AlertTitle, AlertDescription } from '../ui/alert';
 
 export interface RideRequestFormProps {
   availableDrivers: {
@@ -43,6 +44,8 @@ export function RideRequestForm({ availableDrivers, origin, setOrigin }: RideReq
   const [selectedDriver, setSelectedDriver] = useState<(typeof availableDrivers)[0] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [rideRequested, setRideRequested] = useState(false);
+  const [rideAccepted, setRideAccepted] = useState(false);
+  const [acceptedDriver, setAcceptedDriver] = useState<(typeof availableDrivers)[0] | null>(null);
 
 
   const handleGetCurrentLocation = () => {
@@ -93,18 +96,34 @@ export function RideRequestForm({ availableDrivers, origin, setOrigin }: RideReq
         return;
     }
     setIsLoading(true);
-    setRideRequested(false);
+    setRideRequested(true);
     setShowDrivers(false);
+    setRideAccepted(false);
+
     // Simulate API call to request a ride
     setTimeout(() => {
         setIsLoading(false);
-        setRideRequested(true);
-        toast({
-            title: 'Solicitação Enviada!',
-            description: 'Sua solicitação foi enviada para os motoristas próximos. Aguarde a confirmação.',
-        });
+        // Simulate a driver accepting
+        setTimeout(() => {
+            const driver = availableDrivers.find(d => d.id === '1'); // Simulate Carlos accepting
+            if (driver) {
+                setAcceptedDriver(driver);
+                setRideAccepted(true);
+                toast({
+                    title: 'Corrida Aceita!',
+                    description: `${driver.name} está a caminho.`,
+                });
+            }
+        }, 3000);
     }, 2000);
   };
+
+  const resetRideState = () => {
+      setRideRequested(false);
+      setRideAccepted(false);
+      setAcceptedDriver(null);
+      setIsLoading(false);
+  }
 
   return (
     <Card className="shadow-lg h-full">
@@ -163,14 +182,14 @@ export function RideRequestForm({ availableDrivers, origin, setOrigin }: RideReq
             </div>
             <Switch id="rural-mode" checked={isRural} onCheckedChange={(checked) => {
                 setIsRural(checked);
-                setRideRequested(false);
+                resetRideState();
             }} />
           </div>
 
           <div className="space-y-2">
             {!isRural && (
-                <Button className="w-full" onClick={handleRequestRide} disabled={isLoading}>
-                  {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <ArrowRight className="mr-2 h-4 w-4" />}
+                <Button className="w-full" onClick={handleRequestRide} disabled={isLoading || rideRequested}>
+                  {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                   {isLoading ? 'Enviando Solicitação...' : 'Pedir Corrida'}
                 </Button>
             )}
@@ -178,9 +197,30 @@ export function RideRequestForm({ availableDrivers, origin, setOrigin }: RideReq
 
            {rideRequested && !isRural && (
             <div className="space-y-4 pt-4 border-t text-center">
-              <h3 className="font-headline text-lg font-semibold">Procurando Motorista...</h3>
-              <p className="text-sm text-muted-foreground">Sua solicitação foi enviada. Assim que um motorista aceitar, você receberá uma notificação.</p>
-              <Loader2 className="mx-auto h-8 w-8 my-2 text-primary animate-spin" />
+              {!rideAccepted ? (
+                <>
+                  <h3 className="font-headline text-lg font-semibold">Procurando Motorista...</h3>
+                  <p className="text-sm text-muted-foreground">Sua solicitação foi enviada. Assim que um motorista aceitar, você receberá uma notificação.</p>
+                  <Loader2 className="mx-auto h-8 w-8 my-2 text-primary animate-spin" />
+                </>
+              ) : acceptedDriver && (
+                <Alert variant="default" className="bg-green-50 border-green-200 text-green-800 dark:bg-green-950 dark:border-green-800 dark:text-green-200 text-left">
+                  <CheckCircle className="h-4 w-4 !text-green-600 dark:!text-green-400" />
+                  <AlertTitle className="text-green-900 dark:text-green-200 font-headline">Corrida Aceita!</AlertTitle>
+                  <AlertDescription>
+                    <div className="flex items-center gap-3 mt-2">
+                        <Avatar>
+                            <AvatarImage src={`https://placehold.co/40x40.png`} data-ai-hint={`${acceptedDriver.avatar} face`} />
+                            <AvatarFallback>{acceptedDriver.name.charAt(0)}</AvatarFallback>
+                        </Avatar>
+                        <div>
+                            <p className="font-bold">{acceptedDriver.name}</p>
+                            <p className="text-xs">Chega em {acceptedDriver.distance}.</p>
+                        </div>
+                    </div>
+                  </AlertDescription>
+                </Alert>
+              )}
             </div>
           )}
 
@@ -193,7 +233,7 @@ export function RideRequestForm({ availableDrivers, origin, setOrigin }: RideReq
           ) : (
              <>
                 <Separator className="my-6" />
-                <Button variant="outline" className="w-full" onClick={() => { setShowDrivers(!showDrivers); setRideRequested(false); }}>
+                <Button variant="outline" className="w-full" onClick={() => { setShowDrivers(!showDrivers); resetRideState(); }}>
                     {showDrivers ? 'Ocultar Motoristas' : 'Ver Motoristas Próximos'}
                 </Button>
              </>
@@ -254,7 +294,7 @@ export function RideRequestForm({ availableDrivers, origin, setOrigin }: RideReq
                                 </TooltipProvider>
                             </div>
                              <div className="mt-3 pt-3 border-t">
-                                <RideChat passengerName="Passageiro" isNegotiation={true}>
+                                <RideChat passengerName="Passageiro" isNegotiation={true} onAcceptRide={() => {}}>
                                     <Button className="w-full">
                                         <MessageSquareQuote className="mr-2 h-4 w-4" />
                                         Chamar e Negociar (Interior)

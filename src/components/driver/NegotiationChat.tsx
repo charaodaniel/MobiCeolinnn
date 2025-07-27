@@ -13,24 +13,21 @@ import { useToast } from '@/hooks/use-toast';
 import { Alert, AlertTitle } from '../ui/alert';
 
 interface Message {
-    sender: 'driver' | 'passenger';
+    sender: 'driver' | 'passenger' | 'system';
     text: string;
     timestamp: string;
     type?: 'text' | 'offer';
 }
 
-const negotiationMessages: Message[] = [
-    { sender: 'passenger', text: 'Olá! Solicitei uma corrida para a Zona Rural Leste. Qual seria o valor?', timestamp: '10:30', type: 'text' },
-];
-
-const regularMessages: Message[] = [
+const initialMessages = (isNegotiation: boolean): Message[] => isNegotiation ? [
+    { sender: 'system', text: 'Negociação iniciada. Aguardando proposta do motorista.', timestamp: '10:30', type: 'text' },
+] : [
     { sender: 'passenger', text: 'Olá! Já estou no local de partida.', timestamp: '10:35', type: 'text' },
 ];
 
-
 export function RideChat({ passengerName, children, isNegotiation, isReadOnly = false, onAcceptRide }: { passengerName: string; children: React.ReactNode, isNegotiation: boolean, isReadOnly?: boolean, onAcceptRide?: () => void; }) {
     const { toast } = useToast();
-    const [messages, setMessages] = useState<Message[]>(isNegotiation ? negotiationMessages : regularMessages);
+    const [messages, setMessages] = useState<Message[]>(initialMessages(isNegotiation));
     const [newMessage, setNewMessage] = useState('');
     const [offer, setOffer] = useState('');
 
@@ -38,9 +35,10 @@ export function RideChat({ passengerName, children, isNegotiation, isReadOnly = 
         if (content.trim() === '' || isReadOnly) return;
         
         const text = type === 'offer' ? `Minha proposta de valor é R$${content}.` : content;
+        const senderRole = passengerName === "Passageiro" ? 'passenger' : 'driver';
 
         const newMessages: Message[] = [...messages, {
-            sender: 'driver',
+            sender: senderRole,
             text: text,
             timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
             type: type,
@@ -56,7 +54,7 @@ export function RideChat({ passengerName, children, isNegotiation, isReadOnly = 
         // Simple bot response for demo purposes
         setTimeout(() => {
             const botResponse: Message = {
-                sender: 'passenger',
+                sender: senderRole === 'driver' ? 'passenger' : 'driver',
                 text: type === 'offer' ? 'Ok, valor recebido. Vou analisar.' : 'Entendido.',
                 timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
                 type: 'text'
@@ -65,6 +63,22 @@ export function RideChat({ passengerName, children, isNegotiation, isReadOnly = 
         }, 1500);
     };
 
+    // Simulate driver sending an initial offer in negotiation mode
+    useState(() => {
+        if (isNegotiation && !isReadOnly && passengerName === "Passageiro") {
+            setTimeout(() => {
+                setMessages(prev => [...prev, {
+                    sender: 'driver',
+                    text: 'Olá! Faço a corrida para esta região por R$ 150,00.',
+                    timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                    type: 'offer'
+                }]);
+            }, 2000);
+        }
+    });
+    
+    const isPassengerView = passengerName === "Passageiro";
+
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -72,36 +86,39 @@ export function RideChat({ passengerName, children, isNegotiation, isReadOnly = 
             </DialogTrigger>
             <DialogContent className="max-w-lg">
                 <DialogHeader>
-                    <DialogTitle>{isNegotiation ? `Negociar com ${passengerName}` : `Conversar com ${passengerName}`}</DialogTitle>
+                    <DialogTitle>{isNegotiation ? `Negociar com ${isPassengerView ? 'Motorista' : passengerName}` : `Conversar com ${isPassengerView ? 'Motorista' : passengerName}`}</DialogTitle>
                     <DialogDescription>
-                        {isNegotiation ? 'Converse com o passageiro para combinar os detalhes e o valor da corrida.' : 'Comunique-se com o passageiro.'}
+                        {isNegotiation ? 'Converse para combinar os detalhes e o valor da corrida.' : 'Comunique-se sobre a corrida.'}
                     </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-4">
                     <ScrollArea className="h-72 w-full pr-4">
                         <div className="space-y-4">
                             {messages.map((msg, index) => (
-                                <div key={index} className={cn('flex items-end gap-2', { 'justify-end': msg.sender === 'driver' })}>
-                                    {msg.sender === 'passenger' && (
+                                <div key={index} className={cn('flex items-end gap-2', { 'justify-end': msg.sender === (isPassengerView ? 'passenger' : 'driver') })}>
+                                    {msg.sender !== (isPassengerView ? 'passenger' : 'driver') && msg.sender !== 'system' && (
                                         <Avatar className="h-8 w-8">
                                             <AvatarImage src={`https://placehold.co/40x40.png`} data-ai-hint="person face" />
-                                            <AvatarFallback>{passengerName.charAt(0)}</AvatarFallback>
+                                            <AvatarFallback>{isPassengerView ? 'M' : passengerName.charAt(0)}</AvatarFallback>
                                         </Avatar>
                                     )}
                                     <div className={cn('max-w-[75%] rounded-lg p-3 text-sm', {
-                                        'bg-muted': msg.sender === 'passenger',
-                                        'bg-primary text-primary-foreground': msg.sender === 'driver',
+                                        'bg-muted': msg.sender !== (isPassengerView ? 'passenger' : 'driver'),
+                                        'bg-primary text-primary-foreground': msg.sender === (isPassengerView ? 'passenger' : 'driver'),
+                                        'bg-blue-100 text-blue-900 text-center w-full': msg.sender === 'system'
                                     })}>
                                         <p>{msg.text}</p>
-                                        <p className={cn('text-xs mt-1', {
-                                            'text-muted-foreground': msg.sender === 'passenger',
-                                            'text-primary-foreground/70': msg.sender === 'driver'
-                                        })}>{msg.timestamp}</p>
+                                        {msg.sender !== 'system' && (
+                                            <p className={cn('text-xs mt-1', {
+                                                'text-muted-foreground': msg.sender !== (isPassengerView ? 'passenger' : 'driver'),
+                                                'text-primary-foreground/70': msg.sender === (isPassengerView ? 'passenger' : 'driver')
+                                            })}>{msg.timestamp}</p>
+                                        )}
                                     </div>
-                                     {msg.sender === 'driver' && (
+                                     {msg.sender === (isPassengerView ? 'passenger' : 'driver') && (
                                         <Avatar className="h-8 w-8">
                                             <AvatarImage src={`https://placehold.co/40x40.png`} data-ai-hint="person portrait" />
-                                            <AvatarFallback>M</AvatarFallback>
+                                            <AvatarFallback>{isPassengerView ? 'P' : 'M'}</AvatarFallback>
                                         </Avatar>
                                     )}
                                 </div>
@@ -111,7 +128,7 @@ export function RideChat({ passengerName, children, isNegotiation, isReadOnly = 
 
                     {isReadOnly ? (
                         <Alert>
-                            <AlertTitle className="text-center">Corrida Finalizada</AlertTitle>
+                            <AlertTitle className="text-center">Esta conversa foi arquivada.</AlertTitle>
                         </Alert>
                     ) : (
                         <>
@@ -133,7 +150,7 @@ export function RideChat({ passengerName, children, isNegotiation, isReadOnly = 
                                         <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                                         <Input
                                             type="number"
-                                            placeholder="Propor valor (ex: 150.00)"
+                                            placeholder="Sua contraproposta"
                                             className="pl-10"
                                             value={offer}
                                             onChange={(e) => setOffer(e.target.value)}
@@ -152,7 +169,7 @@ export function RideChat({ passengerName, children, isNegotiation, isReadOnly = 
                     <DialogFooter>
                         <Button onClick={onAcceptRide} className="w-full">
                             <ThumbsUp className="mr-2 h-4 w-4" />
-                            Aceitar Corrida e Iniciar Viagem
+                            {isPassengerView ? 'Aceitar Proposta e Chamar' : 'Aceitar Corrida e Iniciar Viagem'}
                         </Button>
                     </DialogFooter>
                  )}
