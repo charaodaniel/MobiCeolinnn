@@ -311,8 +311,12 @@ export function RideRequestForm({ availableDrivers, origin, setOrigin, isRural, 
 
           {isRural ? (
             <>
-                <Separator className="my-6" />
-                <FareNegotiation destination={destination} />
+              {origin && destination && (
+                <>
+                  <Separator className="my-6" />
+                  <FareNegotiation destination={destination} />
+                </>
+              )}
             </>
           ) : (
              <>
