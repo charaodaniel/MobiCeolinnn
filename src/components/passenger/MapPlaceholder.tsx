@@ -129,6 +129,10 @@ export function MapPlaceholder({ drivers, origin }: MapPlaceholderProps) {
                 </PopoverContent>
             </Popover>
         ))}
+
+        <p className="absolute bottom-2 right-2 text-xs text-muted-foreground text-right">
+            Imagens meramente ilustrativas.<br />Localização não exata.
+        </p>
       </CardContent>
     </Card>
   );

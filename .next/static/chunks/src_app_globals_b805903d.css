@@ -477,6 +477,10 @@ body {
   top: 50%;
 }
 
+.bottom-2 {
+  bottom: .5rem;
+}
+
 .z-10 {
   z-index: 10;
 }
