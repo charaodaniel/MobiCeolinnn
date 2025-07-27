@@ -4,7 +4,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Check, X, MapPin, DollarSign, MessageSquareQuote } from 'lucide-react';
+import { Check, X, MapPin, DollarSign, MessageSquareQuote, Flag, CheckSquare } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { RideChat } from './NegotiationChat';
 import { useState } from 'react';
@@ -106,6 +106,29 @@ export function RideRequests({ setDriverStatus }: { setDriverStatus: (status: st
         setRequests(prev => prev.filter(r => r.id !== rideId));
     };
 
+    const handleEndRide = () => {
+        const ride = requests.find(r => r.id === acceptedRideId);
+        if (!ride) return;
+
+        setDriverStatus('online');
+        setAcceptedRideId(null);
+        setRequests(prev => prev.filter(r => r.id !== acceptedRideId));
+
+        toast({
+            title: "Viagem Finalizada!",
+            description: `A corrida com ${ride.passenger} foi concluída com sucesso.`,
+        });
+
+        // Simulate notification to passenger
+        setTimeout(() => {
+            toast({
+                title: "Avalie sua última viagem!",
+                description: `Sua opinião sobre a corrida com ${ride.passenger} é importante.`,
+                variant: "default",
+            })
+        }, 1000);
+    }
+
     const acceptedRide = requests.find(r => r.id === acceptedRideId);
 
     if (acceptedRide) {
@@ -113,7 +136,7 @@ export function RideRequests({ setDriverStatus }: { setDriverStatus: (status: st
              <Card className="shadow-lg border-primary">
                  <CardHeader>
                     <CardTitle className="font-headline">Corrida em Andamento</CardTitle>
-                    <CardDescription>Comunique-se com seu passageiro.</CardDescription>
+                    <CardDescription>Comunique-se com seu passageiro e finalize a viagem ao chegar ao destino.</CardDescription>
                 </CardHeader>
                 <CardContent>
                     <div className="flex flex-row items-center gap-4 space-y-0 pb-4">
@@ -133,6 +156,12 @@ export function RideRequests({ setDriverStatus }: { setDriverStatus: (status: st
                         </Button>
                     </RideChat>
                 </CardContent>
+                <CardFooter>
+                    <Button variant="destructive" className="w-full" onClick={handleEndRide}>
+                        <CheckSquare className="mr-2 h-4 w-4" />
+                        Finalizar Viagem
+                    </Button>
+                </CardFooter>
             </Card>
          )
     }
