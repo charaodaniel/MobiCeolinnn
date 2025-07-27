@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Separator } from '@/components/ui/separator';
-import { MapPin, ArrowRight, DollarSign, Clock, Route, Star, User, Copy, MessageSquareQuote, LocateFixed, Loader2, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
+import { MapPin, ArrowRight, DollarSign, Clock, Route, Star, User, Copy, MessageSquareQuote, LocateFixed, Loader2, CheckCircle, XCircle, AlertCircle, RefreshCcw } from 'lucide-react';
 import { FareNegotiation } from './FareNegotiation';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useToast } from '@/hooks/use-toast';
@@ -17,6 +17,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { RideChat } from '@/components/driver/NegotiationChat';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Alert, AlertTitle, AlertDescription } from '../ui/alert';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../ui/alert-dialog';
 
 export interface RideRequestFormProps {
   availableDrivers: {
@@ -123,6 +124,35 @@ export function RideRequestForm({ availableDrivers, origin, setOrigin, isRural, 
     }, 3000);
   };
 
+  const handleSwitchDriver = () => {
+    const originalDriverName = acceptedDriver?.name || "O motorista anterior";
+    setRideState('requesting');
+    setAcceptedDriver(null);
+    toast({
+        title: 'Transferência Solicitada!',
+        description: `A corrida com ${originalDriverName} foi cancelada. Procurando um novo motorista...`
+    });
+    // Simulate finding a new driver
+    setTimeout(() => {
+        const newDriver = availableDrivers.find(d => d.id === '3'); // Simulate Roberto accepting
+        if (newDriver) {
+            setAcceptedDriver(newDriver);
+            setRideState('accepted');
+            toast({
+                title: 'Novo Motorista Encontrado!',
+                description: `${newDriver.name} está a caminho para continuar sua viagem.`,
+            });
+        } else {
+            setRideState('rejected');
+            toast({
+                variant: 'destructive',
+                title: 'Nenhum motorista encontrado',
+                description: 'Não foi possível encontrar outro motorista no momento. Tente novamente mais tarde.'
+            })
+        }
+    }, 4000);
+  }
+
   const resetRideState = () => {
       setRideState('idle');
       setAcceptedDriver(null);
@@ -221,6 +251,34 @@ export function RideRequestForm({ availableDrivers, origin, setOrigin, isRural, 
                             <p className="font-bold">{acceptedDriver.name}</p>
                             <p className="text-xs">Chega em {acceptedDriver.distance}.</p>
                         </div>
+                    </div>
+                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4">
+                        <RideChat passengerName="Passageiro" isNegotiation={false} onAcceptRide={() => {}}>
+                           <Button variant="outline" className="w-full">
+                                <MessageSquareQuote className="mr-2 h-4 w-4" />
+                                Abrir Chat
+                            </Button>
+                        </RideChat>
+                        <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                                <Button variant="destructive" className="w-full">
+                                    <RefreshCcw className="mr-2 h-4 w-4" />
+                                    Trocar de Motorista
+                                </Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                                <AlertDialogHeader>
+                                    <AlertDialogTitle>Deseja realmente trocar de motorista?</AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                        Esta ação irá cancelar a corrida com o motorista atual e procurar por um novo. Use em caso de imprevistos ou problemas.
+                                    </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                    <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                                    <AlertDialogAction onClick={handleSwitchDriver}>Sim, trocar</AlertDialogAction>
+                                </AlertDialogFooter>
+                            </AlertDialogContent>
+                        </AlertDialog>
                     </div>
                   </AlertDescription>
                 </Alert>
@@ -331,5 +389,3 @@ export function RideRequestForm({ availableDrivers, origin, setOrigin, isRural, 
     </Card>
   );
 }
-
-    

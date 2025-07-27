@@ -1,15 +1,17 @@
+
 'use client';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "../ui/scroll-area";
-import { History, Star, Calendar, MapPin, DollarSign } from "lucide-react";
+import { History, Star, Calendar, MapPin, DollarSign, AlertCircle } from "lucide-react";
 import { RideRatingDialog } from "./RideRatingDialog";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 
 const rides = [
-  { id: '1', date: '25/07/2024', driver: 'Carlos Motorista', origin: 'Shopping Pátio', destination: 'Centro', value: 'R$ 25,50', status: 'Concluída' },
-  { id: '2', date: '24/07/2024', driver: 'Fernanda Lima', origin: 'Aeroporto', destination: 'Zona Rural Leste', value: 'R$ 150,00', status: 'Concluída' },
-  { id: '3', date: '22/07/2024', driver: 'Carlos Motorista', origin: 'Rodoviária', destination: 'Bairro Universitário', value: 'R$ 18,00', status: 'Concluída' },
-    { id: '4', date: '20/07/2024', driver: 'Roberto Freire', origin: 'Centro', destination: 'Hospital Regional', value: 'R$ 15,00', status: 'Cancelada' },
+  { id: '1', date: '25/07/2024', driver: 'Carlos Motorista', origin: 'Shopping Pátio', destination: 'Centro', value: 'R$ 25,50', status: 'Concluída', notes: null },
+  { id: '2', date: '24/07/2024', driver: 'Fernanda Lima', origin: 'Aeroporto', destination: 'Zona Rural Leste', value: 'R$ 150,00', status: 'Concluída', notes: 'Corrida transferida do motorista original.' },
+  { id: '3', date: '22/07/2024', driver: 'Carlos Motorista', origin: 'Rodoviária', destination: 'Bairro Universitário', value: 'R$ 18,00', status: 'Concluída', notes: null },
+    { id: '4', date: '20/07/2024', driver: 'Roberto Freire', origin: 'Centro', destination: 'Hospital Regional', value: 'R$ 15,00', status: 'Cancelada', notes: null },
 ];
 
 export function RideHistory() {
@@ -35,6 +37,18 @@ export function RideHistory() {
                 <p className="font-semibold flex items-center gap-2">
                   <MapPin className="h-4 w-4 text-primary" />
                   {ride.destination}
+                  {ride.notes && (
+                      <TooltipProvider>
+                          <Tooltip>
+                              <TooltipTrigger>
+                                  <AlertCircle className="h-4 w-4 text-amber-500" />
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                  <p>{ride.notes}</p>
+                              </TooltipContent>
+                          </Tooltip>
+                      </TooltipProvider>
+                  )}
                 </p>
                  <p className="text-xs text-muted-foreground flex items-center gap-2 mt-1">
                   <Calendar className="h-3 w-3" />
@@ -73,7 +87,23 @@ export function RideHistory() {
             {rides.map((ride) => (
               <TableRow key={ride.id}>
                 <TableCell className="font-medium">{ride.date}</TableCell>
-                <TableCell>{ride.destination}</TableCell>
+                <TableCell>
+                    <div className="flex items-center gap-2">
+                        {ride.destination}
+                        {ride.notes && (
+                            <TooltipProvider>
+                                <Tooltip>
+                                    <TooltipTrigger>
+                                        <AlertCircle className="h-4 w-4 text-amber-500" />
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                        <p>{ride.notes}</p>
+                                    </TooltipContent>
+                                </Tooltip>
+                            </TooltipProvider>
+                        )}
+                    </div>
+                </TableCell>
                 <TableCell className="text-right">{ride.value}</TableCell>
                 <TableCell className="text-center">
                   <Badge variant={ride.status === 'Concluída' ? 'secondary' : 'destructive'}>

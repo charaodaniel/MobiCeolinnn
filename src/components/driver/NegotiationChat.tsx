@@ -19,11 +19,15 @@ interface Message {
     type?: 'text' | 'offer';
 }
 
-const initialMessages = (isNegotiation: boolean): Message[] => isNegotiation ? [
-    { sender: 'system', text: 'Negociação iniciada. Aguardando proposta do motorista.', timestamp: '10:30', type: 'text' },
-] : [
-    { sender: 'passenger', text: 'Olá! Já estou no local de partida.', timestamp: '10:35', type: 'text' },
-];
+const initialMessages = (isNegotiation: boolean): Message[] => {
+    if (isNegotiation) {
+        return [{ sender: 'system', text: 'Negociação iniciada. Aguardando proposta do motorista.', timestamp: '10:30', type: 'text' }];
+    }
+    // Simulating a driver having an issue
+    return [
+        { sender: 'driver', text: 'Olá, tive um imprevisto com o pneu. Vou demorar um pouco mais, mas já estou resolvendo.', timestamp: '10:35', type: 'text' },
+    ];
+};
 
 export function RideChat({ passengerName, children, isNegotiation, isReadOnly = false, onAcceptRide }: { passengerName: string; children: React.ReactNode, isNegotiation: boolean, isReadOnly?: boolean, onAcceptRide?: () => void; }) {
     const { toast } = useToast();
