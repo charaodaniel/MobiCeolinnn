@@ -25,6 +25,7 @@ export function PassengerDashboard() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAuthDialogOpen, setIsAuthDialogOpen] = useState(false);
   const [origin, setOrigin] = useState('');
+  const [isRural, setIsRural] = useState(false);
 
   const showRequestForm = ANONYMOUS_RIDES_ALLOWED || isLoggedIn;
 
@@ -40,6 +41,8 @@ export function PassengerDashboard() {
                 availableDrivers={allDrivers} // O formulário pode mostrar todos, o mapa não
                 origin={origin}
                 setOrigin={setOrigin}
+                isRural={isRural}
+                setIsRural={setIsRural}
             />
           ) : (
             <Card className="shadow-lg h-full flex flex-col justify-center">
@@ -72,7 +75,7 @@ export function PassengerDashboard() {
                 <h2 className="font-headline text-xl font-semibold">Motoristas Disponíveis</h2>
             </div>
           <div className="flex-1">
-            <MapPlaceholder drivers={availableDrivers} origin={origin} />
+            <MapPlaceholder drivers={availableDrivers} origin={origin} isRural={isRural} />
           </div>
         </div>
       </div>

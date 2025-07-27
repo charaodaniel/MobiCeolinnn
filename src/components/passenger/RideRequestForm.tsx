@@ -33,11 +33,12 @@ export interface RideRequestFormProps {
   }[];
   origin: string;
   setOrigin: (origin: string) => void;
+  isRural: boolean;
+  setIsRural: (isRural: boolean) => void;
 }
 
 
-export function RideRequestForm({ availableDrivers, origin, setOrigin }: RideRequestFormProps) {
-  const [isRural, setIsRural] = useState(false);
+export function RideRequestForm({ availableDrivers, origin, setOrigin, isRural, setIsRural }: RideRequestFormProps) {
   const [showDrivers, setShowDrivers] = useState(false);
   const [destination, setDestination] = useState('');
   const { toast } = useToast();

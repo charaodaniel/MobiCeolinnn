@@ -10,6 +10,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import type { RideRequestFormProps } from './RideRequestForm';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
+import { Dialog, DialogTrigger } from '../ui/dialog';
+import { RideChat } from '../driver/NegotiationChat';
 
 
 interface DriverPosition {
@@ -22,6 +24,7 @@ interface DriverPosition {
 interface MapPlaceholderProps {
   drivers: RideRequestFormProps['availableDrivers'];
   origin: string;
+  isRural: boolean;
 }
 
 const generateRandomPosition = (): { top: string; left: string } => {
@@ -30,7 +33,7 @@ const generateRandomPosition = (): { top: string; left: string } => {
   return { top: `${top}%`, left: `${left}%` };
 };
 
-export function MapPlaceholder({ drivers, origin }: MapPlaceholderProps) {
+export function MapPlaceholder({ drivers, origin, isRural }: MapPlaceholderProps) {
   const [driverPositions, setDriverPositions] = useState<DriverPosition[]>([]);
   const { toast } = useToast();
 
@@ -57,6 +60,13 @@ export function MapPlaceholder({ drivers, origin }: MapPlaceholderProps) {
     toast({
       title: 'Chamada Iniciada',
       description: `Estamos conectando você com ${driverName}.`,
+    });
+  };
+  
+  const handleAcceptRide = () => {
+    toast({
+      title: 'Corrida Confirmada!',
+      description: 'Seu motorista está a caminho.',
     });
   };
 
@@ -95,40 +105,61 @@ export function MapPlaceholder({ drivers, origin }: MapPlaceholderProps) {
         </div>
 
         {/* Simulated Online Drivers */}
-        {driverPositions.map(({id, top, left, driver}) => (
+        {driverPositions.map(({id, top, left, driver}) => {
+          const DriverIcon = () => (
+            <div
+                className="absolute transition-all duration-1000 ease-in-out cursor-pointer"
+                style={{ top: top, left: left }}
+            >
+                <Car className="h-8 w-8 text-foreground bg-background/80 p-1 rounded-full shadow-md" />
+            </div>
+          );
+
+          if (isRural) {
+            return (
+              <RideChat
+                key={id}
+                passengerName="Passageiro"
+                isNegotiation={true}
+                onAcceptRide={handleAcceptRide}
+              >
+                <div className="absolute" style={{ top, left }}>
+                   <DriverIcon />
+                </div>
+              </RideChat>
+            );
+          }
+
+          return (
             <Popover key={id}>
-                <PopoverTrigger asChild>
-                    <div
-                        className="absolute transition-all duration-1000 ease-in-out cursor-pointer"
-                        style={{ top: top, left: left }}
-                    >
-                        <Car className="h-8 w-8 text-foreground bg-background/80 p-1 rounded-full shadow-md" />
+              <PopoverTrigger asChild>
+                <div><DriverIcon /></div>
+              </PopoverTrigger>
+              <PopoverContent className="w-80">
+                <div className="flex flex-col gap-4">
+                  <div className="flex gap-4">
+                    <Avatar className="h-12 w-12">
+                      <AvatarImage src={`https://placehold.co/48x48.png`} data-ai-hint={`${driver.avatar} face`} />
+                      <AvatarFallback>{driver.name.charAt(0)}</AvatarFallback>
+                    </Avatar>
+                    <div className="space-y-1">
+                      <h4 className="font-semibold">{driver.name}</h4>
+                      <p className="text-sm text-muted-foreground">{driver.vehicle} - <span className="font-mono">{driver.licensePlate}</span></p>
+                      <div className="flex items-center pt-1">
+                        <Star className="w-4 h-4 mr-1 fill-primary text-primary" />
+                        <span className="text-xs text-muted-foreground">{driver.rating} · {driver.distance}</span>
+                      </div>
                     </div>
-                </PopoverTrigger>
-                <PopoverContent className="w-80">
-                    <div className="flex flex-col gap-4">
-                        <div className="flex gap-4">
-                            <Avatar className="h-12 w-12">
-                                <AvatarImage src={`https://placehold.co/48x48.png`} data-ai-hint={`${driver.avatar} face`} />
-                                <AvatarFallback>{driver.name.charAt(0)}</AvatarFallback>
-                            </Avatar>
-                            <div className="space-y-1">
-                                <h4 className="font-semibold">{driver.name}</h4>
-                                <p className="text-sm text-muted-foreground">{driver.vehicle} - <span className="font-mono">{driver.licensePlate}</span></p>
-                                <div className="flex items-center pt-1">
-                                    <Star className="w-4 h-4 mr-1 fill-primary text-primary" />
-                                    <span className="text-xs text-muted-foreground">{driver.rating} · {driver.distance}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <Button className="w-full" onClick={() => handleCallDriver(driver.name)}>
-                            <Phone className="mr-2 h-4 w-4" />
-                            Chamar Motorista
-                        </Button>
-                    </div>
-                </PopoverContent>
+                  </div>
+                  <Button className="w-full" onClick={() => handleCallDriver(driver.name)}>
+                    <Phone className="mr-2 h-4 w-4" />
+                    Chamar Motorista
+                  </Button>
+                </div>
+              </PopoverContent>
             </Popover>
-        ))}
+          );
+        })}
 
         <p className="absolute bottom-2 right-2 text-xs text-muted-foreground text-right">
             Imagens meramente ilustrativas.<br />Localização não exata.
