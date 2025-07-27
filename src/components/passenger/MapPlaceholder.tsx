@@ -102,7 +102,7 @@ export function MapPlaceholder({ drivers, origin }: MapPlaceholderProps) {
                         className="absolute transition-all duration-1000 ease-in-out cursor-pointer"
                         style={{ top: top, left: left }}
                     >
-                        <Car className="h-8 w-8 text-foreground bg-background/80 p-1 rounded-full shadow-md animate-pulse" />
+                        <Car className="h-8 w-8 text-foreground bg-background/80 p-1 rounded-full shadow-md" />
                     </div>
                 </PopoverTrigger>
                 <PopoverContent className="w-80">

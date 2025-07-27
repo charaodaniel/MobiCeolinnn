@@ -2546,7 +2546,7 @@ function MapPlaceholder({ drivers, origin }) {
                                         left: left
                                     },
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$car$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Car$3e$__["Car"], {
-                                        className: "h-8 w-8 text-foreground bg-background/80 p-1 rounded-full shadow-md animate-pulse"
+                                        className: "h-8 w-8 text-foreground bg-background/80 p-1 rounded-full shadow-md"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/passenger/MapPlaceholder.tsx",
                                         lineNumber: 105,
@@ -5795,7 +5795,7 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-const availableDrivers = [
+const allDrivers = [
     {
         id: '1',
         name: 'Carlos Motorista',
@@ -5806,7 +5806,8 @@ const availableDrivers = [
         distance: '2 min',
         avatar: 'man',
         pixKey: 'carlos.motorista@email.com',
-        urbanFare: 25.50
+        urbanFare: 25.50,
+        status: 'online'
     },
     {
         id: '2',
@@ -5818,7 +5819,8 @@ const availableDrivers = [
         distance: '5 min',
         avatar: 'woman',
         pixKey: '123.456.789-00',
-        urbanFare: 28.00
+        urbanFare: 28.00,
+        status: 'offline'
     },
     {
         id: '3',
@@ -5830,7 +5832,8 @@ const availableDrivers = [
         distance: '8 min',
         avatar: 'person',
         pixKey: '(11) 98765-4321',
-        urbanFare: 22.00
+        urbanFare: 22.00,
+        status: 'online'
     }
 ];
 // Simula a configuração do admin. Troque para `false` para testar o fluxo de login obrigatório.
@@ -5841,6 +5844,8 @@ function PassengerDashboard() {
     const [isAuthDialogOpen, setIsAuthDialogOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [origin, setOrigin] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
     const showRequestForm = ANONYMOUS_RIDES_ALLOWED || isLoggedIn;
+    // Filtra motoristas para mostrar apenas os online no mapa
+    const availableDrivers = allDrivers.filter((driver)=>driver.status === 'online');
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$layout$2f$AppLayout$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AppLayout"], {
         title: "Painel do Passageiro",
         showAuthButtons: true,
@@ -5850,17 +5855,17 @@ function PassengerDashboard() {
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "lg:col-span-1",
                     children: ("TURBOPACK compile-time truthy", 1) ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$passenger$2f$RideRequestForm$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RideRequestForm"], {
-                        availableDrivers: availableDrivers,
+                        availableDrivers: allDrivers,
                         origin: origin,
                         setOrigin: setOrigin
                     }, void 0, false, {
                         fileName: "[project]/src/components/passenger/PassengerDashboard.tsx",
-                        lineNumber: 36,
+                        lineNumber: 39,
                         columnNumber: 13
                     }, this) : ("TURBOPACK unreachable", undefined)
                 }, void 0, false, {
                     fileName: "[project]/src/components/passenger/PassengerDashboard.tsx",
-                    lineNumber: 34,
+                    lineNumber: 37,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5873,21 +5878,21 @@ function PassengerDashboard() {
                                     className: "h-6 w-6 text-primary"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/passenger/PassengerDashboard.tsx",
-                                    lineNumber: 68,
+                                    lineNumber: 71,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                                     className: "font-headline text-xl font-semibold",
-                                    children: "Motoristas Próximos"
+                                    children: "Motoristas Disponíveis"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/passenger/PassengerDashboard.tsx",
-                                    lineNumber: 69,
+                                    lineNumber: 72,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/passenger/PassengerDashboard.tsx",
-                            lineNumber: 67,
+                            lineNumber: 70,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5897,29 +5902,29 @@ function PassengerDashboard() {
                                 origin: origin
                             }, void 0, false, {
                                 fileName: "[project]/src/components/passenger/PassengerDashboard.tsx",
-                                lineNumber: 72,
+                                lineNumber: 75,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/passenger/PassengerDashboard.tsx",
-                            lineNumber: 71,
+                            lineNumber: 74,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/passenger/PassengerDashboard.tsx",
-                    lineNumber: 66,
+                    lineNumber: 69,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/passenger/PassengerDashboard.tsx",
-            lineNumber: 33,
+            lineNumber: 36,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/passenger/PassengerDashboard.tsx",
-        lineNumber: 32,
+        lineNumber: 35,
         columnNumber: 5
     }, this);
 }
