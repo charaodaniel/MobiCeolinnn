@@ -40,7 +40,11 @@ const RideRequestCard = ({ id, passenger, from, to, price, negotiated, onAccept,
             </CardContent>
             <CardFooter className="grid grid-cols-2 gap-2">
                 {negotiated ? (
-                     <RideChat passengerName={passenger} isNegotiation={true}>
+                     <RideChat 
+                        passengerName={passenger} 
+                        isNegotiation={true}
+                        onAcceptRide={() => onAccept(id, true)}
+                     >
                         <Button className="w-full col-span-2">
                             <MessageSquareQuote className="mr-2 h-4 w-4" />
                             Negociar Valor

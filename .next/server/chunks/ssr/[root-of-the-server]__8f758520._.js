@@ -4148,6 +4148,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$map$2d$pin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__MapPin$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/map-pin.js [app-ssr] (ecmascript) <export default as MapPin>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$dollar$2d$sign$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__DollarSign$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/dollar-sign.js [app-ssr] (ecmascript) <export default as DollarSign>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$message$2d$square$2d$quote$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__MessageSquareQuote$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/message-square-quote.js [app-ssr] (ecmascript) <export default as MessageSquareQuote>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$square$2d$check$2d$big$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__CheckSquare$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/square-check-big.js [app-ssr] (ecmascript) <export default as CheckSquare>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$use$2d$toast$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/hooks/use-toast.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$driver$2f$NegotiationChat$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/driver/NegotiationChat.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
@@ -4441,6 +4442,25 @@ function RideRequests({ setDriverStatus }) {
         });
         setRequests((prev)=>prev.filter((r)=>r.id !== rideId));
     };
+    const handleEndRide = ()=>{
+        const ride = requests.find((r)=>r.id === acceptedRideId);
+        if (!ride) return;
+        setDriverStatus('online');
+        setAcceptedRideId(null);
+        setRequests((prev)=>prev.filter((r)=>r.id !== acceptedRideId));
+        toast({
+            title: "Viagem Finalizada!",
+            description: `A corrida com ${ride.passenger} foi concluída com sucesso.`
+        });
+        // Simulate notification to passenger
+        setTimeout(()=>{
+            toast({
+                title: "Avalie sua última viagem!",
+                description: `Sua opinião sobre a corrida com ${ride.passenger} é importante.`,
+                variant: "default"
+            });
+        }, 1000);
+    };
     const acceptedRide = requests.find((r)=>r.id === acceptedRideId);
     if (acceptedRide) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Card"], {
@@ -4453,20 +4473,20 @@ function RideRequests({ setDriverStatus }) {
                             children: "Corrida em Andamento"
                         }, void 0, false, {
                             fileName: "[project]/src/components/driver/RideRequests.tsx",
-                            lineNumber: 115,
+                            lineNumber: 138,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardDescription"], {
-                            children: "Comunique-se com seu passageiro."
+                            children: "Comunique-se com seu passageiro e finalize a viagem ao chegar ao destino."
                         }, void 0, false, {
                             fileName: "[project]/src/components/driver/RideRequests.tsx",
-                            lineNumber: 116,
+                            lineNumber: 139,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/driver/RideRequests.tsx",
-                    lineNumber: 114,
+                    lineNumber: 137,
                     columnNumber: 18
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -4481,20 +4501,20 @@ function RideRequests({ setDriverStatus }) {
                                             "data-ai-hint": "person face"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/driver/RideRequests.tsx",
-                                            lineNumber: 121,
+                                            lineNumber: 144,
                                             columnNumber: 29
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$avatar$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AvatarFallback"], {
                                             children: acceptedRide.passenger.charAt(0)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/driver/RideRequests.tsx",
-                                            lineNumber: 122,
+                                            lineNumber: 145,
                                             columnNumber: 29
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/driver/RideRequests.tsx",
-                                    lineNumber: 120,
+                                    lineNumber: 143,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4504,7 +4524,7 @@ function RideRequests({ setDriverStatus }) {
                                             children: acceptedRide.passenger
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/driver/RideRequests.tsx",
-                                            lineNumber: 125,
+                                            lineNumber: 148,
                                             columnNumber: 29
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -4512,19 +4532,19 @@ function RideRequests({ setDriverStatus }) {
                                             children: "EM ANDAMENTO"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/driver/RideRequests.tsx",
-                                            lineNumber: 126,
+                                            lineNumber: 149,
                                             columnNumber: 29
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/driver/RideRequests.tsx",
-                                    lineNumber: 124,
+                                    lineNumber: 147,
                                     columnNumber: 25
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/driver/RideRequests.tsx",
-                            lineNumber: 119,
+                            lineNumber: 142,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$driver$2f$NegotiationChat$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["RideChat"], {
@@ -4537,7 +4557,7 @@ function RideRequests({ setDriverStatus }) {
                                         className: "mr-2 h-4 w-4"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/driver/RideRequests.tsx",
-                                        lineNumber: 131,
+                                        lineNumber: 154,
                                         columnNumber: 29
                                     }, this),
                                     "Abrir Chat com ",
@@ -4545,24 +4565,49 @@ function RideRequests({ setDriverStatus }) {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/driver/RideRequests.tsx",
-                                lineNumber: 130,
+                                lineNumber: 153,
                                 columnNumber: 25
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/driver/RideRequests.tsx",
-                            lineNumber: 129,
+                            lineNumber: 152,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/driver/RideRequests.tsx",
-                    lineNumber: 118,
+                    lineNumber: 141,
+                    columnNumber: 17
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardFooter"], {
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
+                        variant: "destructive",
+                        className: "w-full",
+                        onClick: handleEndRide,
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$square$2d$check$2d$big$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__CheckSquare$3e$__["CheckSquare"], {
+                                className: "mr-2 h-4 w-4"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/driver/RideRequests.tsx",
+                                lineNumber: 161,
+                                columnNumber: 25
+                            }, this),
+                            "Finalizar Viagem"
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/driver/RideRequests.tsx",
+                        lineNumber: 160,
+                        columnNumber: 21
+                    }, this)
+                }, void 0, false, {
+                    fileName: "[project]/src/components/driver/RideRequests.tsx",
+                    lineNumber: 159,
                     columnNumber: 17
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/driver/RideRequests.tsx",
-            lineNumber: 113,
+            lineNumber: 136,
             columnNumber: 14
         }, this);
     }
@@ -4574,20 +4619,20 @@ function RideRequests({ setDriverStatus }) {
                     children: "Nenhuma solicitação no momento"
                 }, void 0, false, {
                     fileName: "[project]/src/components/driver/RideRequests.tsx",
-                    lineNumber: 143,
+                    lineNumber: 172,
                     columnNumber: 17
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardDescription"], {
                     children: "Aguardando novas corridas..."
                 }, void 0, false, {
                     fileName: "[project]/src/components/driver/RideRequests.tsx",
-                    lineNumber: 144,
+                    lineNumber: 173,
                     columnNumber: 17
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/driver/RideRequests.tsx",
-            lineNumber: 142,
+            lineNumber: 171,
             columnNumber: 13
         }, this);
     }
@@ -4603,7 +4648,7 @@ function RideRequests({ setDriverStatus }) {
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/driver/RideRequests.tsx",
-                lineNumber: 151,
+                lineNumber: 180,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$scroll$2d$area$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ScrollArea"], {
@@ -4621,23 +4666,23 @@ function RideRequests({ setDriverStatus }) {
                             onReject: handleReject
                         }, req.id, false, {
                             fileName: "[project]/src/components/driver/RideRequests.tsx",
-                            lineNumber: 155,
+                            lineNumber: 184,
                             columnNumber: 25
                         }, this))
                 }, void 0, false, {
                     fileName: "[project]/src/components/driver/RideRequests.tsx",
-                    lineNumber: 153,
+                    lineNumber: 182,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/driver/RideRequests.tsx",
-                lineNumber: 152,
+                lineNumber: 181,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/driver/RideRequests.tsx",
-        lineNumber: 150,
+        lineNumber: 179,
         columnNumber: 9
     }, this);
 }

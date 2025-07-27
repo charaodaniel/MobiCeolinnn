@@ -28,7 +28,7 @@ const regularMessages: Message[] = [
 ];
 
 
-export function RideChat({ passengerName, children, isNegotiation, isReadOnly = false }: { passengerName: string; children: React.ReactNode, isNegotiation: boolean, isReadOnly?: boolean }) {
+export function RideChat({ passengerName, children, isNegotiation, isReadOnly = false, onAcceptRide }: { passengerName: string; children: React.ReactNode, isNegotiation: boolean, isReadOnly?: boolean, onAcceptRide?: () => void; }) {
     const { toast } = useToast();
     const [messages, setMessages] = useState<Message[]>(isNegotiation ? negotiationMessages : regularMessages);
     const [newMessage, setNewMessage] = useState('');
@@ -64,14 +64,6 @@ export function RideChat({ passengerName, children, isNegotiation, isReadOnly = 
             setMessages(prev => [...prev, botResponse]);
         }, 1500);
     };
-
-    const handleAcceptRide = () => {
-        toast({
-            title: 'Corrida Aceita!',
-            description: `Você aceitou a corrida com ${passengerName}. Bom trabalho!`,
-        });
-        // Here you would typically close the dialog and update the ride status
-    }
 
     return (
         <Dialog>
@@ -158,7 +150,7 @@ export function RideChat({ passengerName, children, isNegotiation, isReadOnly = 
                 </div>
                  {isNegotiation && !isReadOnly && (
                     <DialogFooter>
-                        <Button onClick={handleAcceptRide} className="w-full">
+                        <Button onClick={onAcceptRide} className="w-full">
                             <ThumbsUp className="mr-2 h-4 w-4" />
                             Aceitar Corrida e Iniciar Viagem
                         </Button>
