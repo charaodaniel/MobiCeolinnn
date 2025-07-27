@@ -57,10 +57,21 @@ export function MapPlaceholder({ drivers, origin, isRural }: MapPlaceholderProps
         });
         return;
     }
-    toast({
-      title: 'Chamada Iniciada',
-      description: `Estamos conectando você com ${driverName}.`,
-    });
+
+    if (isRural) {
+         toast({
+          title: 'Chamada para Negociação Iniciada',
+          description: `Aguarde a proposta de ${driverName} no chat.`,
+        });
+        // In a real app, this would trigger a flow to open the chat
+        // once the driver sends the first message. For now, we rely on the
+        // user opening the chat from the form or another UI element.
+    } else {
+        toast({
+          title: 'Chamada Iniciada',
+          description: `Estamos conectando você com ${driverName}.`,
+        });
+    }
   };
   
   const handleAcceptRide = () => {
@@ -114,21 +125,6 @@ export function MapPlaceholder({ drivers, origin, isRural }: MapPlaceholderProps
                 <Car className="h-8 w-8 text-foreground bg-background/80 p-1 rounded-full shadow-md" />
             </div>
           );
-
-          if (isRural) {
-            return (
-              <RideChat
-                key={id}
-                passengerName="Passageiro"
-                isNegotiation={true}
-                onAcceptRide={handleAcceptRide}
-              >
-                <div className="absolute" style={{ top, left }}>
-                   <DriverIcon />
-                </div>
-              </RideChat>
-            );
-          }
 
           return (
             <Popover key={id}>
