@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -29,14 +30,15 @@ export interface RideRequestFormProps {
     pixKey: string;
     urbanFare: number;
   }[];
+  origin: string;
+  setOrigin: (origin: string) => void;
 }
 
 
-export function RideRequestForm({ availableDrivers }: RideRequestFormProps) {
+export function RideRequestForm({ availableDrivers, origin, setOrigin }: RideRequestFormProps) {
   const [isRural, setIsRural] = useState(false);
   const [showDrivers, setShowDrivers] = useState(false);
   const [destination, setDestination] = useState('');
-  const [origin, setOrigin] = useState('');
   const { toast } = useToast();
   const [selectedDriver, setSelectedDriver] = useState<(typeof availableDrivers)[0] | null>(null);
   const [isLoading, setIsLoading] = useState(false);

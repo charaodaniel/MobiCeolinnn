@@ -24,6 +24,7 @@ const ANONYMOUS_RIDES_ALLOWED = true;
 export function PassengerDashboard() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAuthDialogOpen, setIsAuthDialogOpen] = useState(false);
+  const [origin, setOrigin] = useState('');
 
   const showRequestForm = ANONYMOUS_RIDES_ALLOWED || isLoggedIn;
 
@@ -32,7 +33,11 @@ export function PassengerDashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-4 md:p-6 lg:p-8">
         <div className="lg:col-span-1">
           {showRequestForm ? (
-            <RideRequestForm availableDrivers={availableDrivers} />
+            <RideRequestForm 
+                availableDrivers={availableDrivers}
+                origin={origin}
+                setOrigin={setOrigin}
+            />
           ) : (
             <Card className="shadow-lg h-full flex flex-col justify-center">
               <CardHeader className="text-center">
@@ -64,7 +69,7 @@ export function PassengerDashboard() {
                 <h2 className="font-headline text-xl font-semibold">Motoristas Próximos</h2>
             </div>
           <div className="flex-1">
-            <MapPlaceholder drivers={availableDrivers} />
+            <MapPlaceholder drivers={availableDrivers} origin={origin} />
           </div>
         </div>
       </div>

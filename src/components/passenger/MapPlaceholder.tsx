@@ -19,13 +19,18 @@ interface DriverPosition {
   driver: RideRequestFormProps['availableDrivers'][0];
 }
 
+interface MapPlaceholderProps {
+  drivers: RideRequestFormProps['availableDrivers'];
+  origin: string;
+}
+
 const generateRandomPosition = (): { top: string; left: string } => {
   const top = Math.floor(Math.random() * 80) + 10;
   const left = Math.floor(Math.random() * 80) + 10;
   return { top: `${top}%`, left: `${left}%` };
 };
 
-export function MapPlaceholder({ drivers }: { drivers: RideRequestFormProps['availableDrivers'] }) {
+export function MapPlaceholder({ drivers, origin }: MapPlaceholderProps) {
   const [driverPositions, setDriverPositions] = useState<DriverPosition[]>([]);
   const { toast } = useToast();
 
@@ -41,6 +46,14 @@ export function MapPlaceholder({ drivers }: { drivers: RideRequestFormProps['ava
   }, [drivers]);
 
   const handleCallDriver = (driverName: string) => {
+    if (!origin) {
+        toast({
+            variant: 'destructive',
+            title: 'Campo obrigatório',
+            description: 'Por favor, preencha o local de partida antes de chamar um motorista.',
+        });
+        return;
+    }
     toast({
       title: 'Chamada Iniciada',
       description: `Estamos conectando você com ${driverName}.`,
@@ -120,4 +133,3 @@ export function MapPlaceholder({ drivers }: { drivers: RideRequestFormProps['ava
     </Card>
   );
 }
-
