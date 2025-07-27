@@ -87,7 +87,7 @@ export function DriverProfilePage() {
         </TabsList>
         <div className="p-4 md:p-6 lg:p-8">
             <TabsContent value="requests">
-                <RideRequests />
+                <RideRequests setDriverStatus={setStatus} />
             </TabsContent>
             <TabsContent value="chats">
                 <DriverChatHistory />

@@ -10,17 +10,7 @@ import { RideChat } from './NegotiationChat';
 import { useState } from 'react';
 import { ScrollArea } from '../ui/scroll-area';
 
-const RideRequestCard = ({ id, passenger, from, to, price, negotiated, onAccept }: { id: string, passenger: string, from: string, to: string, price: string, negotiated?: boolean, onAccept: (id: string) => void }) => {
-    const { toast } = useToast();
-    
-    const handleReject = () => {
-        toast({
-            variant: "destructive",
-            title: "Corrida Rejeitada",
-            description: `Você rejeitou a corrida de ${passenger}.`,
-        });
-        // In a real app, this would also update the state to remove this request
-    };
+const RideRequestCard = ({ id, passenger, from, to, price, negotiated, onAccept, onReject }: { id: string, passenger: string, from: string, to: string, price: string, negotiated?: boolean, onAccept: (id: string, negotiated: boolean) => void, onReject: (id: string) => void }) => {
 
     return (
         <Card className={negotiated ? 'border-primary' : ''}>
@@ -58,11 +48,11 @@ const RideRequestCard = ({ id, passenger, from, to, price, negotiated, onAccept 
                     </RideChat>
                 ) : (
                     <>
-                        <Button variant="outline" className="w-full" onClick={handleReject}>
+                        <Button variant="outline" className="w-full" onClick={() => onReject(id)}>
                             <X className="mr-2 h-4 w-4" />
                             Rejeitar
                         </Button>
-                        <Button className="w-full" onClick={() => onAccept(id)}>
+                        <Button className="w-full" onClick={() => onAccept(id, negotiated || false)}>
                             <Check className="mr-2 h-4 w-4" />
                             Aceitar
                         </Button>
@@ -80,12 +70,12 @@ const initialRequests = [
     { id: 'req3', passenger: "Lucas Andrade", from: "Av. Principal, 123", to: "Rua do Comércio, 456", price: "R$ 18,00", negotiated: false },
 ];
 
-export function RideRequests() {
+export function RideRequests({ setDriverStatus }: { setDriverStatus: (status: string) => void }) {
     const { toast } = useToast();
     const [requests, setRequests] = useState(initialRequests);
     const [acceptedRideId, setAcceptedRideId] = useState<string | null>(null);
 
-    const handleAccept = (rideId: string) => {
+    const handleAccept = (rideId: string, isNegotiated: boolean) => {
         const ride = requests.find(r => r.id === rideId);
         if (!ride) return;
 
@@ -94,6 +84,26 @@ export function RideRequests() {
             description: `Você aceitou a corrida de ${ride.passenger}.`,
         });
         setAcceptedRideId(rideId);
+        
+        // Automatically update driver status
+        if (isNegotiated) {
+            setDriverStatus('rural-trip');
+        } else {
+            setDriverStatus('urban-trip');
+        }
+    };
+    
+    const handleReject = (rideId: string) => {
+        const ride = requests.find(r => r.id === rideId);
+        if (!ride) return;
+
+        toast({
+            variant: "destructive",
+            title: "Corrida Rejeitada",
+            description: `Você rejeitou a corrida de ${ride.passenger}.`,
+        });
+        
+        setRequests(prev => prev.filter(r => r.id !== rideId));
     };
 
     const acceptedRide = requests.find(r => r.id === acceptedRideId);
@@ -126,6 +136,15 @@ export function RideRequests() {
             </Card>
          )
     }
+    
+    if(requests.length === 0) {
+        return (
+            <div className="text-center text-muted-foreground p-8 border rounded-lg bg-card">
+                <CardTitle>Nenhuma solicitação no momento</CardTitle>
+                <CardDescription>Aguardando novas corridas...</CardDescription>
+            </div>
+        )
+    }
 
     return (
         <div className="space-y-4">
@@ -142,6 +161,7 @@ export function RideRequests() {
                             price={req.price}
                             negotiated={req.negotiated}
                             onAccept={handleAccept}
+                            onReject={handleReject}
                         />
                     ))}
                 </div>

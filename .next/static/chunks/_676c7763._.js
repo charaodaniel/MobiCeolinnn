@@ -315,7 +315,7 @@ function DriverLoginPage() {
                                         className: "h-12 w-12 text-primary"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/driver/login/page.tsx",
-                                        lineNumber: 43,
+                                        lineNumber: 44,
                                         columnNumber: 29
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardTitle"], {
@@ -323,13 +323,13 @@ function DriverLoginPage() {
                                         children: "Portal do Motorista"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/driver/login/page.tsx",
-                                        lineNumber: 44,
+                                        lineNumber: 45,
                                         columnNumber: 29
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/driver/login/page.tsx",
-                                lineNumber: 42,
+                                lineNumber: 43,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardDescription"], {
@@ -337,13 +337,13 @@ function DriverLoginPage() {
                                 children: "Acesse sua conta para começar a dirigir."
                             }, void 0, false, {
                                 fileName: "[project]/src/app/driver/login/page.tsx",
-                                lineNumber: 46,
+                                lineNumber: 47,
                                 columnNumber: 25
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/driver/login/page.tsx",
-                        lineNumber: 41,
+                        lineNumber: 42,
                         columnNumber: 21
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -357,7 +357,7 @@ function DriverLoginPage() {
                                         children: "Email"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/driver/login/page.tsx",
-                                        lineNumber: 50,
+                                        lineNumber: 51,
                                         columnNumber: 29
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -369,13 +369,13 @@ function DriverLoginPage() {
                                         required: true
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/driver/login/page.tsx",
-                                        lineNumber: 51,
+                                        lineNumber: 52,
                                         columnNumber: 29
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/driver/login/page.tsx",
-                                lineNumber: 49,
+                                lineNumber: 50,
                                 columnNumber: 26
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -386,7 +386,7 @@ function DriverLoginPage() {
                                         children: "Senha"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/driver/login/page.tsx",
-                                        lineNumber: 54,
+                                        lineNumber: 55,
                                         columnNumber: 29
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -398,19 +398,19 @@ function DriverLoginPage() {
                                         required: true
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/driver/login/page.tsx",
-                                        lineNumber: 55,
+                                        lineNumber: 56,
                                         columnNumber: 29
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/driver/login/page.tsx",
-                                lineNumber: 53,
+                                lineNumber: 54,
                                 columnNumber: 26
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/driver/login/page.tsx",
-                        lineNumber: 48,
+                        lineNumber: 49,
                         columnNumber: 21
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardFooter"], {
@@ -422,7 +422,7 @@ function DriverLoginPage() {
                                 children: "Entrar"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/driver/login/page.tsx",
-                                lineNumber: 59,
+                                lineNumber: 60,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -435,34 +435,34 @@ function DriverLoginPage() {
                                     children: "Voltar para o início"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/driver/login/page.tsx",
-                                    lineNumber: 61,
+                                    lineNumber: 62,
                                     columnNumber: 30
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/driver/login/page.tsx",
-                                lineNumber: 60,
+                                lineNumber: 61,
                                 columnNumber: 26
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/driver/login/page.tsx",
-                        lineNumber: 58,
+                        lineNumber: 59,
                         columnNumber: 21
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/driver/login/page.tsx",
-                lineNumber: 40,
+                lineNumber: 41,
                 columnNumber: 17
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/app/driver/login/page.tsx",
-            lineNumber: 39,
+            lineNumber: 40,
             columnNumber: 13
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/driver/login/page.tsx",
-        lineNumber: 38,
+        lineNumber: 39,
         columnNumber: 9
     }, this);
 }
