@@ -9,9 +9,9 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/
 
 const rides = [
   { id: '1', date: '25/07/2024', driver: 'Carlos Motorista', origin: 'Shopping Pátio', destination: 'Centro', value: 'R$ 25,50', status: 'Concluída', notes: null },
-  { id: '2', date: '24/07/2024', driver: 'Fernanda Lima', origin: 'Aeroporto', destination: 'Zona Rural Leste', value: 'R$ 150,00', status: 'Concluída', notes: 'Corrida transferida do motorista original.' },
+  { id: '2', date: '24/07/2024', driver: 'Roberto Freire', origin: 'Aeroporto', destination: 'Zona Rural Leste', value: 'R$ 150,00', status: 'Concluída', notes: 'Corrida transferida de Fernanda Lima devido a um imprevisto.' },
   { id: '3', date: '22/07/2024', driver: 'Carlos Motorista', origin: 'Rodoviária', destination: 'Bairro Universitário', value: 'R$ 18,00', status: 'Concluída', notes: null },
-    { id: '4', date: '20/07/2024', driver: 'Roberto Freire', origin: 'Centro', destination: 'Hospital Regional', value: 'R$ 15,00', status: 'Cancelada', notes: null },
+  { id: '4', date: '20/07/2024', driver: 'Roberto Freire', origin: 'Centro', destination: 'Hospital Regional', value: 'R$ 15,00', status: 'Cancelada', notes: null },
 ];
 
 export function RideHistory() {

@@ -4,11 +4,13 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Check, X, MapPin, DollarSign, MessageSquareQuote, Flag, CheckSquare } from 'lucide-react';
+import { Check, X, MapPin, DollarSign, MessageSquareQuote, Flag, CheckSquare, AlertTriangle, RefreshCcw } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { RideChat } from './NegotiationChat';
 import { useState } from 'react';
 import { ScrollArea } from '../ui/scroll-area';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../ui/alert-dialog';
+
 
 const RideRequestCard = ({ id, passenger, from, to, price, negotiated, onAccept, onReject }: { id: string, passenger: string, from: string, to: string, price: string, negotiated?: boolean, onAccept: (id: string, negotiated: boolean) => void, onReject: (id: string) => void }) => {
 
@@ -133,6 +135,14 @@ export function RideRequests({ setDriverStatus }: { setDriverStatus: (status: st
         }, 1000);
     }
 
+    const handleReportIssue = () => {
+        toast({
+            title: 'Passageiro Notificado',
+            description: 'O passageiro foi notificado do imprevisto e da necessidade de troca.',
+        });
+        // In a real app, this would trigger a WebSocket event to the passenger's UI.
+    };
+
     const acceptedRide = requests.find(r => r.id === acceptedRideId);
 
     if (acceptedRide) {
@@ -160,8 +170,28 @@ export function RideRequests({ setDriverStatus }: { setDriverStatus: (status: st
                         </Button>
                     </RideChat>
                 </CardContent>
-                <CardFooter>
-                    <Button variant="destructive" className="w-full" onClick={handleEndRide}>
+                <CardFooter className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                     <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                            <Button variant="outline" className="w-full text-amber-600 border-amber-500 hover:bg-amber-50 hover:text-amber-700">
+                                <AlertTriangle className="mr-2 h-4 w-4" />
+                                Informar Imprevisto
+                            </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                            <AlertDialogHeader>
+                                <AlertDialogTitle>Informar Imprevisto ao Passageiro?</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                    Isso notificará o passageiro que você teve um problema e solicitará a troca de motorista. Use esta opção apenas em caso de real necessidade.
+                                </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                                <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                                <AlertDialogAction onClick={handleReportIssue} className="bg-amber-600 hover:bg-amber-700">Sim, Notificar</AlertDialogAction>
+                            </AlertDialogFooter>
+                        </AlertDialogContent>
+                    </AlertDialog>
+                    <Button variant="destructive" className="w-full md:col-span-2" onClick={handleEndRide}>
                         <CheckSquare className="mr-2 h-4 w-4" />
                         Finalizar Viagem
                     </Button>

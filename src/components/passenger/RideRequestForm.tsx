@@ -45,7 +45,7 @@ export function RideRequestForm({ availableDrivers, origin, setOrigin, isRural, 
   const { toast } = useToast();
   const [selectedDriver, setSelectedDriver] = useState<(typeof availableDrivers)[0] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [rideState, setRideState] = useState<'idle' | 'requesting' | 'accepted' | 'rejected'>('idle');
+  const [rideState, setRideState] = useState<'idle' | 'requesting' | 'accepted' | 'rejected' | 'awaiting_switch'>('idle');
   const [acceptedDriver, setAcceptedDriver] = useState<(typeof availableDrivers)[0] | null>(null);
 
 
@@ -119,6 +119,16 @@ export function RideRequestForm({ availableDrivers, origin, setOrigin, isRural, 
                     title: 'Corrida Aceita!',
                     description: `${driver.name} está a caminho.`,
                 });
+
+                // Simulate driver having an issue after a while
+                setTimeout(() => {
+                    setRideState('awaiting_switch');
+                    toast({
+                        variant: 'destructive',
+                        title: "Alerta de Imprevisto!",
+                        description: `O motorista ${driver.name} informou um problema. Por favor, procure por um novo motorista.`,
+                    });
+                }, 15000); // 15 seconds after accepting
             }
         }
     }, 3000);
@@ -130,7 +140,7 @@ export function RideRequestForm({ availableDrivers, origin, setOrigin, isRural, 
     setAcceptedDriver(null);
     toast({
         title: 'Transferência Solicitada!',
-        description: `A corrida com ${originalDriverName} foi cancelada. Procurando um novo motorista...`
+        description: `Procurando um novo motorista...`
     });
     // Simulate finding a new driver
     setTimeout(() => {
@@ -221,7 +231,7 @@ export function RideRequestForm({ availableDrivers, origin, setOrigin, isRural, 
 
           <div className="space-y-2">
             {!isRural && (
-                <Button className="w-full" onClick={handleRequestRide} disabled={rideState === 'requesting' || rideState === 'accepted'}>
+                <Button className="w-full" onClick={handleRequestRide} disabled={rideState !== 'idle' && rideState !== 'rejected'}>
                   {rideState === 'requesting' && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                   {rideState === 'requesting' ? 'Enviando Solicitação...' : 'Pedir Corrida'}
                 </Button>
@@ -252,37 +262,34 @@ export function RideRequestForm({ availableDrivers, origin, setOrigin, isRural, 
                             <p className="text-xs">Chega em {acceptedDriver.distance}.</p>
                         </div>
                     </div>
-                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4">
+                     <div className="grid grid-cols-1 sm:grid-cols-1 gap-2 mt-4">
                         <RideChat passengerName="Passageiro" isNegotiation={false} onAcceptRide={() => {}}>
                            <Button variant="outline" className="w-full">
                                 <MessageSquareQuote className="mr-2 h-4 w-4" />
                                 Abrir Chat
                             </Button>
                         </RideChat>
-                        <AlertDialog>
-                            <AlertDialogTrigger asChild>
-                                <Button variant="destructive" className="w-full">
-                                    <RefreshCcw className="mr-2 h-4 w-4" />
-                                    Trocar de Motorista
-                                </Button>
-                            </AlertDialogTrigger>
-                            <AlertDialogContent>
-                                <AlertDialogHeader>
-                                    <AlertDialogTitle>Deseja realmente trocar de motorista?</AlertDialogTitle>
-                                    <AlertDialogDescription>
-                                        Esta ação irá cancelar a corrida com o motorista atual e procurar por um novo. Use em caso de imprevistos ou problemas.
-                                    </AlertDialogDescription>
-                                </AlertDialogHeader>
-                                <AlertDialogFooter>
-                                    <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                                    <AlertDialogAction onClick={handleSwitchDriver}>Sim, trocar</AlertDialogAction>
-                                </AlertDialogFooter>
-                            </AlertDialogContent>
-                        </AlertDialog>
                     </div>
                   </AlertDescription>
                 </Alert>
               )}
+                {rideState === 'awaiting_switch' && acceptedDriver && (
+                    <Alert variant="destructive" className="text-left">
+                      <AlertCircle className="h-4 w-4" />
+                      <AlertTitle className="font-headline">Imprevisto na Corrida</AlertTitle>
+                      <AlertDescription>
+                         O motorista <span className="font-bold">{acceptedDriver.name}</span> informou um problema e não poderá continuar.
+                         <br />
+                         Clique no botão abaixo para encontrar um novo motorista.
+                      </AlertDescription>
+                      <div className="mt-4">
+                          <Button className="w-full" onClick={handleSwitchDriver}>
+                              <RefreshCcw className="mr-2 h-4 w-4"/>
+                              Procurar Novo Motorista
+                          </Button>
+                      </div>
+                  </Alert>
+                )}
               {rideState === 'rejected' && (
                   <Alert variant="destructive" className="text-left">
                       <XCircle className="h-4 w-4" />
@@ -292,7 +299,7 @@ export function RideRequestForm({ availableDrivers, origin, setOrigin, isRural, 
                       </AlertDescription>
                       <div className="mt-4">
                           <Button className="w-full" onClick={resetRideState}>
-                              <AlertCircle className="mr-2 h-4 w-4"/>
+                              <RefreshCcw className="mr-2 h-4 w-4"/>
                               Tentar Novamente
                           </Button>
                       </div>
