@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { register, login } from '../controllers/authController';
-import { registerValidation, loginValidation } from '../validation/authValidation'; // Importa os middlewares de validação
+import { register, login, changePassword, logout } from '../controllers/authController'; // Adicionado changePassword e logout
+import { registerValidation, loginValidation } from '../validation/authValidation';
 
 const router = Router();
 
@@ -9,5 +9,11 @@ router.post('/register', registerValidation, register);
 
 // Rota para autenticar um usuário com validação
 router.post('/login', loginValidation, login);
+
+// Rota para alterar a senha do usuário
+router.put('/change-password', changePassword);
+
+// Rota para fazer logout do usuário
+router.post('/logout', logout);
 
 export default router;

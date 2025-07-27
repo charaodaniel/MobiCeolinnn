@@ -1,6 +1,6 @@
-## CEOLIN Mobilidade urbana: Seu App de Transporte Inteligente
+## CEOLIN Mobilidade Urbana: Seu App de Transporte Inteligente
 
-CEOLIN Mobilidade urbana é uma plataforma de transporte que conecta passageiros e motoristas de forma eficiente e inovadora, com foco especial em atender tanto demandas urbanas quanto rurais e intermunicipais.
+CEOLIN Mobilidade Urbana é uma plataforma de transporte que conecta passageiros e motoristas de forma eficiente e inovadora, com foco especial em atender tanto demandas urbanas quanto rurais e intermunicipais.
 
 ## Funcionalidades Principais
 
@@ -52,3 +52,24 @@ CEOLIN Mobilidade urbana é uma plataforma de transporte que conecta passageiros
 - **PREINSTALL.md:** Informações importantes antes da instalação.
 - **POSTINSTALL.md:** Passos a serem seguidos após a instalação.
 - **CHANGELOG.md:** Histórico de mudanças da aplicação.
+
+## Estrutura do Projeto
+
+O projeto é organizado da seguinte forma:
+
+- `/api`: Contém o código do backend da aplicação.
+- `/src`: Contém o código do frontend da aplicação, incluindo componentes, pages e hooks.
+- `/docs`: Contém a documentação adicional do projeto.
+- `/public`: Contém arquivos estáticos, como a service worker.
+
+## Tecnologias Utilizadas
+
+- **Backend:** Node.js, Express, TypeScript
+- **Frontend:** React, Next.js, TypeScript, Tailwind CSS
+- **IA:** Genkit
+
+## Próximos Passos
+
+- Adicionar instruções sobre como configurar o banco de dados.
+- Detalhar as rotas da API.
+- Expandir a seção de documentação adicional.
