@@ -46,3 +46,37 @@ export const login = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Erro ao fazer login' });
   }
 };
+
+export const changePassword = async (req: Request, res: Response) => {
+  // Lógica para alterar a senha de um usuário autenticado
+  const { userId, oldPassword, newPassword } = req.body; // Exemplo de dados esperados
+
+  try {
+    // TODO: Validar dados de entrada
+    // TODO: Verificar se o usuário está autenticado
+    // TODO: Buscar o usuário no BD e verificar a senha antiga
+    // TODO: Hashear a nova senha e atualizar no BD
+
+    console.log(`Tentativa de alteração de senha para o usuário ${userId}`);
+    res.status(200).json({ message: 'Senha alterada com sucesso' });
+
+  } catch (error) {
+    console.error('Erro ao alterar senha:', error);
+    res.status(500).json({ message: 'Erro ao alterar senha' });
+  }
+};
+
+export const logout = async (req: Request, res: Response) => {
+  // Lógica para fazer logout do usuário
+  try {
+    // TODO: Se estiver usando tokens JWT, o logout é geralmente tratado no lado do cliente
+    // (removendo o token). Se estiver usando sessões no servidor, destrua a sessão aqui.
+    
+    console.log('Usuário deslogado');
+    res.status(200).json({ message: 'Logout bem-sucedido' });
+
+  } catch (error) {
+    console.error('Erro no logout:', error);
+    res.status(500).json({ message: 'Erro ao fazer logout' });
+  }
+};

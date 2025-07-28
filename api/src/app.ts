@@ -4,6 +4,8 @@ import usersRouter from './routes/users'; // Importa o router de usuários
 import authRouter from './routes/auth'; // Importa o router de autenticação
 import driversRouter from './routes/drivers'; // Importa o router de motoristas
 import ridesRouter from './routes/rides'; // Importa o router de corridas
+import negotiationsRouter from './routes/negotiations'; // Importa o router de negociações
+import ratingsRouter from './routes/ratings'; // Importa o router de avaliações
 
 import { validationResult } from 'express-validator'; // Importa validationResult
 
@@ -48,6 +50,8 @@ app.use('/api/users', usersRouter); // Monta o router de usuários
 app.use('/api/auth', authRouter); // Monta o router de autenticação
 app.use('/api/drivers', driversRouter); // Monta o router de motoristas
 app.use('/api/rides', ridesRouter); // Monta o router de corridas
+app.use('/api/negotiations', negotiationsRouter); // Monta o router de negociações
+app.use('/api/ratings', ratingsRouter); // Monta o router de avaliações
 
 // Middleware para lidar com erros de validação do express-validator
 app.use((req: Request, res: Response, next: NextFunction) => {
