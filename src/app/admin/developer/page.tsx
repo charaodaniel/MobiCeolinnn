@@ -4,7 +4,7 @@ import { AppLayout } from '@/components/layout/AppLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { AlertTriangle, Bell, BookOpen, Cpu, HardDrive, Server, ShieldCheck, Database, Save, TestTube2 } from 'lucide-react';
+import { AlertTriangle, Bell, BookOpen, Cpu, HardDrive, Server, ShieldCheck, Database, Save, TestTube2, Loader2 } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -82,7 +82,7 @@ export default function DeveloperPage() {
                         <CardDescription>
                             Insira as credenciais para a conexão com o banco de dados PostgreSQL na sua VPS.
                             <br />
-                            <span className="text-destructive font-semibold">Atenção:</span> Estas configurações são para referência e teste na interface. As credenciais reais devem ser configuradas como variáveis de ambiente no servidor da API.
+                            <span className="text-destructive font-semibold">Atenção:</span> Este formulário é apenas para referência e teste visual. As credenciais reais devem ser configuradas como variáveis de ambiente no servidor da API para garantir a segurança.
                         </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
@@ -110,8 +110,8 @@ export default function DeveloperPage() {
                         </div>
                         <div className="flex justify-end pt-2">
                             <Button onClick={handleSaveAndTest} disabled={isTesting}>
-                                {isTesting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <TestTube2 className="mr-2" />}
-                                Salvar e Testar Conexão
+                                {isTesting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <TestTube2 className="mr-2 h-4 w-4" />}
+                                Testar Conexão
                             </Button>
                         </div>
                     </CardContent>
