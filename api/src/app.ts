@@ -11,7 +11,7 @@ const app = express();
 const port = process.env.PORT || 3001; // Use a porta 3001 por padrão, ou a variável de ambiente PORT
 
 // Configuração básica do pool de conexão com o PostgreSQL
-// É ALTAMENTE recomendado usar variáveis de ambiente para as credenciais!
+// As credenciais são lidas das variáveis de ambiente.
 const pool = new Pool({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
@@ -24,22 +24,20 @@ const pool = new Pool({
 pool.connect((err, client, done) => {
   if (err) {
     console.error('Erro ao conectar ao banco de dados:', err.stack);
-    done(err); // Passa o erro para done
-    return; // Sai da função
+    if(done) done(err);
+    return;
   }
 
-  // Verifica se 'client' existe antes de tentar usar .release()
   if (client) {
     console.log('Conexão bem-sucedida com o banco de dados!');
-    client.release(); // Libera o cliente de volta para o pool
+    client.release();
   } else {
-      // Caso hipotético onde não há erro mas o cliente é undefined (improvável na prática com pg, mas lida com a tipagem)n      console.error('Erro interno: Cliente do banco de dados undefined.');
-      done(new Error('Cliente do banco de dados undefined'));
+      console.error('Erro interno: Cliente do banco de dados undefined.');
+      if(done) done(new Error('Cliente do banco de dados undefined'));
       return;
   }
-
-
-  done(); // Chama done() apenas no fluxo de sucesso após liberar o cliente
+  
+  if(done) done();
 });
 
 // Middleware para parsear JSON no corpo das requisições

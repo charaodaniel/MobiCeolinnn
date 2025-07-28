@@ -4,10 +4,14 @@ import { AppLayout } from '@/components/layout/AppLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { AlertTriangle, Bell, BookOpen, Cpu, HardDrive, Server, ShieldCheck, Thermometer } from 'lucide-react';
+import { AlertTriangle, Bell, BookOpen, Cpu, HardDrive, Server, ShieldCheck, Database, Save, TestTube2 } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { useToast } from '@/hooks/use-toast';
+import { useState } from 'react';
 
 const apiEndpoints = [
     { name: '/api/auth/login', status: 'Operacional' },
@@ -25,9 +29,94 @@ const errorLogs = [
 ];
 
 export default function DeveloperPage() {
+    const { toast } = useToast();
+    const [dbConfig, setDbConfig] = useState({
+        host: '',
+        port: '5432',
+        user: 'postgres',
+        password: '',
+        name: 'postgres'
+    });
+    const [isTesting, setIsTesting] = useState(false);
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { id, value } = e.target;
+        setDbConfig(prev => ({ ...prev, [id]: value }));
+    };
+    
+    const handleSaveAndTest = () => {
+        setIsTesting(true);
+        toast({
+            title: 'Testando Conexão...',
+            description: 'Aguarde enquanto tentamos conectar ao banco de dados.'
+        });
+
+        // Simulação de teste de conexão
+        setTimeout(() => {
+            setIsTesting(false);
+            if (dbConfig.password === 'supabase123') { // Condição de sucesso simulada
+                 toast({
+                    title: 'Conexão Bem-sucedida!',
+                    description: 'As credenciais são válidas e a conexão foi estabelecida.',
+                });
+            } else {
+                toast({
+                    variant: 'destructive',
+                    title: 'Falha na Conexão',
+                    description: 'Não foi possível conectar. Verifique as credenciais e as regras de firewall.',
+                });
+            }
+        }, 2000);
+    }
+
     return (
         <AppLayout title="Painel do Desenvolvedor">
             <div className="container mx-auto max-w-7xl p-4 md:p-6 lg:p-8 space-y-8">
+                 {/* Configuração do Banco de Dados */}
+                <Card>
+                    <CardHeader>
+                        <CardTitle className="font-headline flex items-center gap-2">
+                            <Database />
+                            Configuração do Banco de Dados (Supabase Self-Hosted)
+                        </CardTitle>
+                        <CardDescription>
+                            Insira as credenciais para a conexão com o banco de dados PostgreSQL na sua VPS.
+                            <br />
+                            <span className="text-destructive font-semibold">Atenção:</span> Estas configurações são para referência e teste na interface. As credenciais reais devem ser configuradas como variáveis de ambiente no servidor da API.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                             <div className="space-y-1">
+                                <Label htmlFor="host">Host</Label>
+                                <Input id="host" placeholder="Ex: 127.0.0.1 ou supabase.meudominio.com" value={dbConfig.host} onChange={handleInputChange} />
+                            </div>
+                             <div className="space-y-1">
+                                <Label htmlFor="port">Porta</Label>
+                                <Input id="port" type="number" placeholder="5432" value={dbConfig.port} onChange={handleInputChange} />
+                            </div>
+                            <div className="space-y-1">
+                                <Label htmlFor="name">Nome do Banco</Label>
+                                <Input id="name" placeholder="postgres" value={dbConfig.name} onChange={handleInputChange} />
+                            </div>
+                            <div className="space-y-1">
+                                <Label htmlFor="user">Usuário</Label>
+                                <Input id="user" placeholder="postgres" value={dbConfig.user} onChange={handleInputChange} />
+                            </div>
+                             <div className="space-y-1">
+                                <Label htmlFor="password">Senha</Label>
+                                <Input id="password" type="password" placeholder="••••••••" value={dbConfig.password} onChange={handleInputChange} />
+                            </div>
+                        </div>
+                        <div className="flex justify-end pt-2">
+                            <Button onClick={handleSaveAndTest} disabled={isTesting}>
+                                {isTesting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <TestTube2 className="mr-2" />}
+                                Salvar e Testar Conexão
+                            </Button>
+                        </div>
+                    </CardContent>
+                </Card>
+
                 {/* Métricas de Desempenho */}
                 <Card>
                     <CardHeader>
