@@ -1,0 +1,174 @@
+
+'use client';
+import { AppLayout } from '@/components/layout/AppLayout';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Badge } from '@/components/ui/badge';
+import { AlertTriangle, Bell, BookOpen, Cpu, HardDrive, Server, ShieldCheck, Thermometer } from 'lucide-react';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+
+const apiEndpoints = [
+    { name: '/api/auth/login', status: 'Operacional' },
+    { name: '/api/users', status: 'Operacional' },
+    { name: '/api/rides', status: 'Operacional' },
+    { name: '/api/drivers/nearby', status: 'Operacional' },
+    { name: '/api/negotiations/ride/:id', status: 'Operacional' },
+];
+
+const errorLogs = [
+    { level: 'ERROR', timestamp: '2024-07-30 10:45:12', message: 'Database connection timeout on query for user: 123' },
+    { level: 'WARN', timestamp: '2024-07-30 10:42:01', message: 'High latency detected on /api/rides endpoint: 1200ms' },
+    { level: 'ERROR', timestamp: '2024-07-30 09:15:33', message: 'TypeError: Cannot read properties of null (reading \'id\') in ridesController.ts:55' },
+    { level: 'INFO', timestamp: '2024-07-30 09:10:00', message: 'Server restart initiated.' },
+];
+
+export default function DeveloperPage() {
+    return (
+        <AppLayout title="Painel do Desenvolvedor">
+            <div className="container mx-auto max-w-7xl p-4 md:p-6 lg:p-8 space-y-8">
+                {/* Métricas de Desempenho */}
+                <Card>
+                    <CardHeader>
+                        <CardTitle className="font-headline">Métricas de Desempenho</CardTitle>
+                        <CardDescription>Visão geral da saúde do servidor e da API.</CardDescription>
+                    </CardHeader>
+                    <CardContent className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <Card>
+                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                                <CardTitle className="text-sm font-medium">Tempo de Resposta</CardTitle>
+                                <Server className="h-4 w-4 text-muted-foreground" />
+                            </CardHeader>
+                            <CardContent>
+                                <div className="text-2xl font-bold">120ms</div>
+                                <p className="text-xs text-muted-foreground">Média das últimas 24 horas</p>
+                            </CardContent>
+                        </Card>
+                         <Card>
+                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                                <CardTitle className="text-sm font-medium">Taxa de Erro</CardTitle>
+                                <AlertTriangle className="h-4 w-4 text-muted-foreground" />
+                            </CardHeader>
+                            <CardContent>
+                                <div className="text-2xl font-bold">0.8%</div>
+                                <p className="text-xs text-muted-foreground">Aumentou 0.2% hoje</p>
+                            </CardContent>
+                        </Card>
+                         <Card>
+                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                                <CardTitle className="text-sm font-medium">Uso de CPU</CardTitle>
+                                <Cpu className="h-4 w-4 text-muted-foreground" />
+                            </CardHeader>
+                            <CardContent>
+                                <div className="text-2xl font-bold">34%</div>
+                                <p className="text-xs text-muted-foreground">Pico de 55% às 14:00</p>
+                            </CardContent>
+                        </Card>
+                         <Card>
+                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                                <CardTitle className="text-sm font-medium">Uso de Memória</CardTitle>
+                                <HardDrive className="h-4 w-4 text-muted-foreground" />
+                            </CardHeader>
+                            <CardContent>
+                                <div className="text-2xl font-bold">1.2 GB</div>
+                                <p className="text-xs text-muted-foreground">De 4 GB disponíveis</p>
+                            </CardContent>
+                        </Card>
+                    </CardContent>
+                </Card>
+
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    {/* Status da API */}
+                    <Card className="lg:col-span-2">
+                         <CardHeader>
+                            <CardTitle className="font-headline">Status da API</CardTitle>
+                             <CardDescription>Verificação em tempo real dos endpoints da aplicação.</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <Table>
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHead>Endpoint</TableHead>
+                                        <TableHead className="text-right">Status</TableHead>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody>
+                                    {apiEndpoints.map((endpoint) => (
+                                        <TableRow key={endpoint.name}>
+                                            <TableCell className="font-mono text-sm">{endpoint.name}</TableCell>
+                                            <TableCell className="text-right">
+                                                <Badge variant={endpoint.status === 'Operacional' ? 'secondary' : 'destructive'}>
+                                                    <ShieldCheck className="mr-1 h-3 w-3" />
+                                                    {endpoint.status}
+                                                </Badge>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </CardContent>
+                    </Card>
+                    
+                    {/* Alertas e Documentação */}
+                    <div className="space-y-8">
+                        <Card>
+                             <CardHeader>
+                                <CardTitle className="font-headline">Alertas e Notificações</CardTitle>
+                                <CardDescription>Configure alertas para métricas críticas.</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="space-y-4">
+                                     <div className="flex items-center justify-between">
+                                        <p className="text-sm font-medium">Notificar se taxa de erro > 5%</p>
+                                        <Button size="sm" variant="outline">Configurar</Button>
+                                    </div>
+                                    <div className="flex items-center justify-between">
+                                        <p className="text-sm font-medium">Notificar se CPU > 80% por 5 min</p>
+                                        <Button size="sm" variant="outline">Configurar</Button>
+                                    </div>
+                                </div>
+                            </CardContent>
+                        </Card>
+                        <Card>
+                             <CardHeader>
+                                <CardTitle className="font-headline">Documentação Rápida</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="space-y-2">
+                                     <Link href="/docs" passHref>
+                                        <Button variant="link" className="p-0 h-auto">Ver Documentação da API</Button>
+                                     </Link>
+                                     <Link href="#" passHref>
+                                        <Button variant="link" className="p-0 h-auto">Exemplos de Requisições (Postman)</Button>
+                                     </Link>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </div>
+                </div>
+
+                {/* Logs de Erros */}
+                <Card>
+                    <CardHeader>
+                        <CardTitle className="font-headline">Logs de Erros Recentes</CardTitle>
+                        <CardDescription>Visualize os erros mais recentes para facilitar a depuração.</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <ScrollArea className="h-72 w-full rounded-md border">
+                            <div className="p-4 font-mono text-xs">
+                                {errorLogs.map((log, index) => (
+                                    <div key={index} className="flex gap-4 items-start">
+                                        <span className="text-muted-foreground">{log.timestamp}</span>
+                                        <Badge variant={log.level === 'ERROR' ? 'destructive' : 'default'} className="h-5">{log.level}</Badge>
+                                        <span>{log.message}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </ScrollArea>
+                    </CardContent>
+                </Card>
+            </div>
+        </AppLayout>
+    );
+}

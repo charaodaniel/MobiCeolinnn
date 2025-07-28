@@ -1,3 +1,4 @@
+
 'use client';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { UserManagementTable } from '@/components/admin/UserManagementTable';
@@ -10,10 +11,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { ShieldCheck, Settings, UserCheck } from 'lucide-react';
+import { ShieldCheck, Settings, UserCheck, Terminal, Link as LinkIcon } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 
 export default function AdminDashboard() {
@@ -83,6 +86,25 @@ export default function AdminDashboard() {
                             aria-label="Permitir corridas sem login"
                         />
                     </div>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="developer-panel">
+                <AccordionTrigger>
+                  <div className="flex items-center gap-2">
+                    <Terminal className="h-5 w-5" />
+                    Painel do Desenvolvedor
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="pt-4">
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Acesse a página de monitoramento da API, logs e métricas de desempenho.
+                  </p>
+                  <Link href="/admin/developer" passHref>
+                    <Button variant="outline">
+                      <LinkIcon className="mr-2 h-4 w-4" />
+                      Acessar Painel
+                    </Button>
+                  </Link>
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
