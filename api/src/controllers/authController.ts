@@ -1,21 +1,37 @@
 import { Request, Response } from 'express';
-import { Pool } from 'pg';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { pool } from '../db';
+import { validationResult } from 'express-validator';
 
-// Recomenda-se criar um módulo separado para o pool do BD e importá-lo aqui
-// import { pool } from '../db/pool'; // Exemplo
+const JWT_SECRET = process.env.JWT_SECRET || 'seu_segredo_jwt_padrao';
 
 export const register = async (req: Request, res: Response) => {
-  // Lógica para registrar um novo usuário
-  const { name, email, password, role } = req.body; // Exemplo de dados esperados
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { name, email, password, role = 'passenger' } = req.body;
 
   try {
-    // TODO: Validar os dados de entrada
-    // TODO: Hashear a senha antes de salvar
-    // TODO: Inserir o novo usuário no banco de dados (tabela de usuários)
-    // TODO: Gerar um token de autenticação (ex: JWT) se o usuário fizer login automaticamente após o registro
+    // Verificar se o usuário já existe
+    const userExists = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    if (userExists.rows.length > 0) {
+      return res.status(400).json({ message: 'Este email já está em uso.' });
+    }
 
-    // Exemplo de resposta de sucesso (após inserir no BD)
-    res.status(201).json({ message: 'Usuário registrado com sucesso' });
+    // Hashear a senha
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Inserir o novo usuário no banco de dados
+    const newUser = await pool.query(
+      'INSERT INTO users (name, email, password_hash, role) VALUES ($1, $2, $3, $4) RETURNING id, name, email, role',
+      [name, email, hashedPassword, role]
+    );
+
+    res.status(201).json({ message: 'Usuário registrado com sucesso', user: newUser.rows[0] });
 
   } catch (error) {
     console.error('Erro no registro:', error);
@@ -24,22 +40,55 @@ export const register = async (req: Request, res: Response) => {
 };
 
 export const login = async (req: Request, res: Response) => {
-  // Lógica para autenticar um usuário
-  const { email, password } = req.body; // Exemplo de dados esperados
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+  const { email, password } = req.body;
 
   try {
-    // TODO: Validar os dados de entrada
-    // TODO: Buscar o usuário no banco de dados pelo email
-    // TODO: Comparar a senha fornecida com a senha hasheada no BD
-    // TODO: Gerar um token de autenticação (ex: JWT) se as credenciais forem válidas
+    // Buscar o usuário no banco de dados pelo email
+    const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    const user = result.rows[0];
 
-    // Exemplo de verificação básica (não use isso em produção!)
-    if (email === 'test@example.com' && password === 'password') {
-      // Em produção, aqui você geraria e retornaria um token
-      res.status(200).json({ message: 'Login bem-sucedido', token: 'exemplo_token' });
-    } else {
-      res.status(401).json({ message: 'Credenciais inválidas' });
+    if (!user) {
+      return res.status(401).json({ message: 'Credenciais inválidas' });
     }
+
+    // Comparar a senha fornecida com a senha hasheada no BD
+    const isMatch = await bcrypt.compare(password, user.password_hash);
+
+    if (!isMatch) {
+      return res.status(401).json({ message: 'Credenciais inválidas' });
+    }
+
+    // Gerar um token de autenticação (JWT)
+    const payload = {
+      user: {
+        id: user.id,
+        role: user.role
+      }
+    };
+
+    jwt.sign(
+      payload,
+      JWT_SECRET,
+      { expiresIn: '7d' }, // Token expira em 7 dias
+      (err, token) => {
+        if (err) throw err;
+        res.status(200).json({ 
+            message: 'Login bem-sucedido', 
+            token,
+            user: {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                role: user.role
+            }
+        });
+      }
+    );
 
   } catch (error) {
     console.error('Erro no login:', error);
@@ -49,12 +98,12 @@ export const login = async (req: Request, res: Response) => {
 
 export const changePassword = async (req: Request, res: Response) => {
   // Lógica para alterar a senha de um usuário autenticado
-  const { userId, oldPassword, newPassword } = req.body; // Exemplo de dados esperados
+  const { userId, oldPassword, newPassword } = req.body; 
 
   try {
     // TODO: Validar dados de entrada
-    // TODO: Verificar se o usuário está autenticado
-    // TODO: Buscar o usuário no BD e verificar a senha antiga
+    // TODO: Verificar se o usuário está autenticado (usando middleware de autenticação)
+    // TODO: Buscar o usuário no BD e verificar a senha antiga com bcrypt.compare
     // TODO: Hashear a nova senha e atualizar no BD
 
     console.log(`Tentativa de alteração de senha para o usuário ${userId}`);
@@ -69,8 +118,8 @@ export const changePassword = async (req: Request, res: Response) => {
 export const logout = async (req: Request, res: Response) => {
   // Lógica para fazer logout do usuário
   try {
-    // TODO: Se estiver usando tokens JWT, o logout é geralmente tratado no lado do cliente
-    // (removendo o token). Se estiver usando sessões no servidor, destrua a sessão aqui.
+    // O logout com JWT é tratado no lado do cliente, removendo o token.
+    // Nenhuma ação é necessária no servidor, a menos que você tenha uma blacklist de tokens.
     
     console.log('Usuário deslogado');
     res.status(200).json({ message: 'Logout bem-sucedido' });
