@@ -28,10 +28,56 @@ CEOLIN Mobilidade Urbana é uma plataforma de transporte que conecta passageiros
 
 ## Como Começar
 
-1. **Clone o repositório.**
-2. **Instale as dependências:** `npm install`
-3. **Execute o servidor de desenvolvimento:** `npm run dev`
-4. A aplicação estará disponível em `http://localhost:9002`.
+### 1. Configurando o Frontend (Interface do Usuário)
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone <URL_DO_SEU_REPOSITORIO>
+    cd <NOME_DO_DIRETORIO>
+    ```
+2.  **Instale as dependências:**
+    ```bash
+    npm install
+    ```
+3.  **Execute o servidor de desenvolvimento:**
+    ```bash
+    npm run dev
+    ```
+4.  A aplicação estará disponível em `http://localhost:9002`.
+
+### 2. Configurando o Backend (API)
+
+O backend é um projeto Node.js/Express localizado na pasta `/api`.
+
+1.  **Navegue até a pasta da API:**
+    ```bash
+    cd api
+    ```
+2.  **Instale as dependências da API:**
+    ```bash
+    npm install
+    ```
+3.  **Configure as Variáveis de Ambiente:**
+    - Crie um arquivo chamado `.env` dentro da pasta `/api`.
+    - Este arquivo guardará as credenciais do seu banco de dados PostgreSQL (que pode estar rodando na sua VPS, por exemplo, via Supabase self-hosted) e o segredo para os tokens de autenticação (JWT).
+    - Copie o conteúdo abaixo para o seu arquivo `api/.env` e preencha com suas credenciais:
+      ```env
+      # Credenciais do Banco de Dados PostgreSQL
+      DB_USER=seu_usuario_do_banco
+      DB_HOST=host_do_seu_banco # Ex: localhost ou o IP da sua VPS
+      DB_NAME=nome_do_seu_banco
+      DB_PASSWORD=sua_senha_do_banco
+      DB_PORT=5432
+
+      # Segredo para Autenticação JWT
+      # Use uma string longa, complexa e aleatória para segurança
+      JWT_SECRET=seu_segredo_super_secreto_para_jwt
+      ```
+4.  **Execute o servidor da API:**
+    ```bash
+    npm run dev
+    ```
+5.  O servidor da API estará disponível em `http://localhost:3001`.
 
 ## Acessos de Demonstração
 
@@ -64,12 +110,12 @@ O projeto é organizado da seguinte forma:
 
 ## Tecnologias Utilizadas
 
-- **Backend:** Node.js, Express, TypeScript
+- **Backend:** Node.js, Express, TypeScript, PostgreSQL
 - **Frontend:** React, Next.js, TypeScript, Tailwind CSS
 - **IA:** Genkit
 
 ## Próximos Passos
 
-- Adicionar instruções sobre como configurar o banco de dados.
-- Detalhar as rotas da API.
+- Implementar as consultas ao banco de dados nos controllers da API.
+- Detalhar as rotas da API na documentação.
 - Expandir a seção de documentação adicional.

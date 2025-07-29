@@ -917,6 +917,10 @@ body {
   max-width: 56rem;
 }
 
+.max-w-7xl {
+  max-width: 80rem;
+}
+
 .max-w-\[75\%\] {
   max-width: 75%;
 }
@@ -931,10 +935,6 @@ body {
 
 .max-w-none {
   max-width: none;
-}
-
-.max-w-7xl {
-  max-width: 80rem;
 }
 
 .flex-1 {
