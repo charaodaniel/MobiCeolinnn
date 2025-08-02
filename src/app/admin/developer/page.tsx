@@ -91,7 +91,7 @@ export default function DeveloperPage() {
         } finally {
             setIsTesting(false);
         }
-    }
+    };
 
     return (
         <AppLayout title="Painel do Desenvolvedor">
