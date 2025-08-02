@@ -1,118 +1,131 @@
--- Arquivo de setup do banco de dados para o projeto CEOLIN Mobilidade Urbana
--- Este script contém as definições de tabelas para um banco de dados PostgreSQL.
+-- Arquivo de setup do banco de dados para CEOLIN Mobilidade Urbana
 
--- Apagar tabelas existentes (se necessário, para um ambiente de desenvolvimento limpo)
-DROP TABLE IF EXISTS driver_status_logs;
-DROP TABLE IF EXISTS ratings;
-DROP TABLE IF EXISTS negotiations;
-DROP TABLE IF EXISTS rides;
-DROP TABLE IF EXISTS drivers_profiles;
-DROP TABLE IF EXISTS users;
+-- Habilitar a extensão para usar UUIDs, se ainda não estiver habilitada
+-- CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
--- Criar tipos ENUM para padronizar valores de status e perfis
-CREATE TYPE user_role AS ENUM ('passenger', 'driver', 'admin');
-CREATE TYPE ride_status AS ENUM ('pending', 'accepted', 'in_progress', 'completed', 'cancelled', 'negotiating');
-CREATE TYPE ride_type AS ENUM ('urban', 'rural');
-CREATE TYPE driver_status AS ENUM ('offline', 'online', 'urban-trip', 'rural-trip');
-CREATE TYPE negotiation_status AS ENUM ('pending', 'accepted', 'rejected');
-
--- Tabela principal de usuários
--- Armazena dados de login para todos os tipos de usuários.
+-- 1. Tabela de Usuários (users)
+-- Armazena informações básicas de todos os usuários (passageiros, motoristas, administradores).
 CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
-    role user_role NOT NULL DEFAULT 'passenger',
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    is_active BOOLEAN DEFAULT true
+    role VARCHAR(50) NOT NULL CHECK (role IN ('passenger', 'driver', 'admin')) DEFAULT 'passenger',
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabela com informações adicionais para motoristas
-CREATE TABLE drivers_profiles (
-    user_id INTEGER PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
-    vehicle_model VARCHAR(255),
-    license_plate VARCHAR(20) UNIQUE,
+-- 2. Tabela de Perfis dos Motoristas (driver_profiles)
+-- Armazena informações adicionais específicas dos motoristas.
+CREATE TABLE driver_profiles (
+    user_id UUID PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
     cnh_document_url VARCHAR(255),
-    crlv_document_url VARCHAR(255),
-    vehicle_photo_url VARCHAR(255),
     pix_key VARCHAR(255),
-    current_status driver_status DEFAULT 'offline',
+    status VARCHAR(50) NOT NULL CHECK (status IN ('online', 'offline', 'in_ride_urban', 'in_ride_rural')) DEFAULT 'offline',
     current_latitude DECIMAL(9, 6),
     current_longitude DECIMAL(9, 6),
-    avg_rating DECIMAL(3, 2) DEFAULT 5.0,
-    updated_at TIMESTAMPTZ DEFAULT NOW()
+    updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabela principal para armazenar todas as corridas
+-- 3. Tabela de Veículos (vehicles)
+-- Armazena informações sobre os veículos dos motoristas.
+CREATE TABLE vehicles (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    driver_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    model VARCHAR(100) NOT NULL,
+    license_plate VARCHAR(20) UNIQUE NOT NULL,
+    photo_url VARCHAR(255),
+    crlv_document_url VARCHAR(255),
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 4. Tabela de Corridas (rides)
+-- Armazena todas as solicitações de corrida.
 CREATE TABLE rides (
-    id SERIAL PRIMARY KEY,
-    passenger_id INTEGER REFERENCES users(id) ON DELETE SET NULL, -- Passageiro pode não ser registrado
-    driver_id INTEGER REFERENCES users(id) ON DELETE SET NULL, -- Motorista é definido depois
-    status ride_status NOT NULL,
-    type ride_type NOT NULL,
-    origin_address VARCHAR(255),
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    passenger_id UUID REFERENCES users(id) ON DELETE SET NULL, -- Pode ser nulo para passageiros anônimos
+    driver_id UUID REFERENCES users(id) ON DELETE SET NULL,
+    origin_description TEXT NOT NULL,
     origin_latitude DECIMAL(9, 6),
     origin_longitude DECIMAL(9, 6),
-    destination_address VARCHAR(255),
+    destination_description TEXT,
     destination_latitude DECIMAL(9, 6),
     destination_longitude DECIMAL(9, 6),
+    status VARCHAR(50) NOT NULL CHECK (status IN ('pending', 'accepted', 'in_progress', 'completed', 'cancelled', 'negotiating')) DEFAULT 'pending',
+    type VARCHAR(50) NOT NULL CHECK (type IN ('urban', 'rural')),
     fare DECIMAL(10, 2),
-    requested_at TIMESTAMPTZ DEFAULT NOW(),
-    accepted_at TIMESTAMPTZ,
-    picked_up_at TIMESTAMPTZ,
-    completed_at TIMESTAMPTZ,
-    notes TEXT -- Para registrar eventos como troca de motorista
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabela para o chat de negociação de corridas rurais/intermunicipais
+-- 5. Tabela de Negociações (negotiations)
+-- Armazena o histórico de chat e propostas para corridas rurais.
 CREATE TABLE negotiations (
-    id SERIAL PRIMARY KEY,
-    ride_id INTEGER NOT NULL REFERENCES rides(id) ON DELETE CASCADE,
-    sender_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    message TEXT,
-    proposed_fare DECIMAL(10, 2),
-    status negotiation_status DEFAULT 'pending',
-    created_at TIMESTAMPTZ DEFAULT NOW()
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    ride_id UUID NOT NULL REFERENCES rides(id) ON DELETE CASCADE,
+    sender_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    message_type VARCHAR(50) NOT NULL CHECK (message_type IN ('text', 'proposal')),
+    content TEXT,
+    amount DECIMAL(10, 2), -- Usado se message_type for 'proposal'
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabela para avaliações das corridas
+-- 6. Tabela de Avaliações (ratings)
+-- Armazena as avaliações feitas pelos passageiros para os motoristas.
 CREATE TABLE ratings (
-    id SERIAL PRIMARY KEY,
-    ride_id INTEGER UNIQUE NOT NULL REFERENCES rides(id) ON DELETE CASCADE,
-    passenger_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    driver_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    ride_id UUID NOT NULL REFERENCES rides(id) ON DELETE CASCADE,
+    passenger_id UUID REFERENCES users(id) ON DELETE SET NULL,
+    driver_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    rating INT NOT NULL CHECK (rating >= 1 AND rating <= 5),
     comment TEXT,
-    created_at TIMESTAMPTZ DEFAULT NOW()
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabela para registrar o histórico de status de um motorista (log)
+-- 7. Tabela de Log de Status dos Motoristas (driver_status_logs)
+-- Registra o histórico de mudanças de status dos motoristas para auditoria.
 CREATE TABLE driver_status_logs (
-    id SERIAL PRIMARY KEY,
-    driver_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    status driver_status NOT NULL,
-    timestamp TIMESTAMPTZ DEFAULT NOW()
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    driver_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    status VARCHAR(50) NOT NULL,
+    timestamp TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Índices para otimizar consultas comuns
-CREATE INDEX idx_rides_status ON rides(status);
-CREATE INDEX idx_rides_driver_id ON rides(driver_id);
 CREATE INDEX idx_rides_passenger_id ON rides(passenger_id);
+CREATE INDEX idx_rides_driver_id ON rides(driver_id);
+CREATE INDEX idx_rides_status ON rides(status);
+CREATE INDEX idx_negotiations_ride_id ON negotiations(ride_id);
+CREATE INDEX idx_ratings_driver_id ON ratings(driver_id);
 CREATE INDEX idx_driver_status_logs_driver_id ON driver_status_logs(driver_id);
 
+-- Função para atualizar o campo 'updated_at' automaticamente
+CREATE OR REPLACE FUNCTION trigger_set_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
--- Inserir dados de exemplo para teste
-INSERT INTO users (name, email, password_hash, role) VALUES
-('Admin User', 'admin@mobiceolin.com', '$2b$10$f/a5r.s.x5C6E6A7B8C9D0e', 'admin'), -- Senha: admin123 (exemplo, use um hash real)
-('João Passageiro', 'joao@email.com', '$2b$10$g/h1i.j.k1L2M3N4O5P6q7r', 'passenger'), -- Senha: 123456
-('Carlos Motorista', 'carlos@email.com', '$2b$10$s/t1u.v.w1X2Y3Z4A5B6c7d', 'driver'), -- Senha: 123456
-('Roberto Freire', 'roberto.f@email.com', '$2b$10$d/e1f.g.h1I2J3K4L5M6n7o', 'driver');
+-- Triggers para as tabelas que possuem o campo 'updated_at'
+CREATE TRIGGER set_timestamp_users
+BEFORE UPDATE ON users
+FOR EACH ROW
+EXECUTE FUNCTION trigger_set_timestamp();
 
--- Inserir perfil de motorista
-INSERT INTO drivers_profiles (user_id, vehicle_model, license_plate, pix_key, current_status) VALUES
-((SELECT id FROM users WHERE email = 'carlos@email.com'), 'Toyota Corolla', 'BRA2E19', 'carlos.motorista@email.com', 'online'),
-((SELECT id FROM users WHERE email = 'roberto.f@email.com'), 'Chevrolet Onix', 'ABC9876', '(11) 98765-4321', 'online');
+CREATE TRIGGER set_timestamp_driver_profiles
+BEFORE UPDATE ON driver_profiles
+FOR EACH ROW
+EXECUTE FUNCTION trigger_set_timestamp();
 
+CREATE TRIGGER set_timestamp_vehicles
+BEFORE UPDATE ON vehicles
+FOR EACH ROW
+EXECUTE FUNCTION trigger_set_timestamp();
 
--- Fim do Script
+CREATE TRIGGER set_timestamp_rides
+BEFORE UPDATE ON rides
+FOR EACH ROW
+EXECUTE FUNCTION trigger_set_timestamp();
