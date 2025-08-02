@@ -6,7 +6,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { User, LogIn, UserPlus, LogOut, KeyRound, Camera, History, MessageSquare, ChevronRight } from 'lucide-react';
+import { User, LogIn, UserPlus, LogOut, KeyRound, Camera, History, MessageSquare, ChevronRight, Loader2 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { RideHistory } from '../passenger/RideHistory';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog';
@@ -15,53 +15,116 @@ import { Separator } from '../ui/separator';
 import { ChatHistory } from '../passenger/ChatHistory';
 import { Card, CardContent, CardFooter } from '../ui/card';
 import { useRouter } from 'next/navigation';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 
 interface PassengerAuthFormProps {
   onLoginSuccess?: () => void;
 }
 
+interface UserData {
+    id: string;
+    name: string;
+    email: string;
+    role: string;
+}
+
 export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
   const { toast } = useToast();
   const router = useRouter();
+  
+  // Auth State
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userData, setUserData] = useState<UserData | null>(null);
+  const [authToken, setAuthToken] = useState<string | null>(null);
+
+  // Form State
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Profile State
   const [isPasswordDialogOpen, setIsPasswordDialogOpen] = useState(false);
   const [newPassword, setNewPassword] = useState({ password: '', confirmPassword: '' });
   const [isCameraDialogOpen, setIsCameraDialogOpen] = useState(false);
   const [avatarImage, setAvatarImage] = useState('https://placehold.co/128x128.png');
   const [activeTab, setActiveTab] = useState<'rides' | 'chats'>('rides');
 
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-  const handleLogin = () => {
-    if (email === 'joao@email.com' && password === '123456') {
-        toast({
-            title: 'Login bem-sucedido!',
-            description: 'Bem-vindo de volta, João!',
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    if (!apiUrl) {
+        toast({ variant: 'destructive', title: 'Erro de Configuração', description: 'URL da API não configurada.' });
+        setIsLoading(false);
+        return;
+    }
+
+    try {
+        const response = await fetch(`${apiUrl}/auth/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
         });
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || 'Erro ao fazer login.');
+        }
+        
+        toast({ title: 'Login bem-sucedido!', description: `Bem-vindo(a) de volta, ${data.user.name}!` });
+        setUserData(data.user);
+        setAuthToken(data.token);
         setIsLoggedIn(true);
+
         if (onLoginSuccess) {
           onLoginSuccess();
         }
-    } else {
-        toast({
-            variant: 'destructive',
-            title: 'Credenciais Inválidas',
-            description: 'Por favor, verifique seu e-mail e senha.',
-        });
+    } catch (error: any) {
+        toast({ variant: 'destructive', title: 'Erro de Login', description: error.message });
+    } finally {
+        setIsLoading(false);
     }
   };
 
-  const handleRegister = () => {
-    toast({
-      title: 'Registro bem-sucedido!',
-      description: 'Sua conta foi criada. Você já pode fazer o login.',
-    });
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+     if (!apiUrl) {
+        toast({ variant: 'destructive', title: 'Erro de Configuração', description: 'URL da API não configurada.' });
+        setIsLoading(false);
+        return;
+    }
+
+    try {
+         const response = await fetch(`${apiUrl}/auth/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, password, role: 'Passageiro' }),
+        });
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || 'Erro ao registrar.');
+        }
+        
+        toast({ title: 'Registro bem-sucedido!', description: 'Sua conta foi criada. Você já pode fazer o login.' });
+        // Optionally switch to login tab after registration
+    } catch (error: any) {
+        toast({ variant: 'destructive', title: 'Erro de Registro', description: error.message });
+    } finally {
+        setIsLoading(false);
+    }
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
+    setUserData(null);
+    setAuthToken(null);
     setEmail('');
     setPassword('');
      toast({
@@ -73,6 +136,7 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
 
   const handleChangePassword = (e: React.FormEvent) => {
     e.preventDefault();
+    // TODO: Implement API call to change password
     if (!newPassword.password || !newPassword.confirmPassword) {
         toast({ variant: 'destructive', title: 'Erro', description: 'Preencha ambos os campos de senha.' });
         return;
@@ -86,7 +150,7 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
     setNewPassword({ password: '', confirmPassword: '' });
   }
 
-  if (isLoggedIn) {
+  if (isLoggedIn && userData) {
       return (
         <div className="flex flex-col bg-muted/40 max-h-[85vh] overflow-y-auto">
             <div className="flex flex-col items-center gap-4 py-8 bg-card">
@@ -95,7 +159,7 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
                          <div className="relative group">
                             <Avatar className="h-24 w-24 cursor-pointer ring-4 ring-background">
                                 <AvatarImage src={avatarImage} data-ai-hint="person face" />
-                                <AvatarFallback>JP</AvatarFallback>
+                                <AvatarFallback>{userData.name.charAt(0)}</AvatarFallback>
                             </Avatar>
                             <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded-full">
                                 <Camera className="h-8 w-8 text-white" />
@@ -110,8 +174,8 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
                     />
                 </Dialog>
                 <div className="text-center">
-                    <h2 className="font-headline text-2xl font-semibold">João Passageiro</h2>
-                    <p className="font-body text-muted-foreground">joao@email.com</p>
+                    <h2 className="font-headline text-2xl font-semibold">{userData.name}</h2>
+                    <p className="font-body text-muted-foreground">{userData.email}</p>
                 </div>
             </div>
 
@@ -187,35 +251,68 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
 
   return (
     <Card className="w-full border-0 shadow-none">
-      <CardContent className="pt-6">
-          <div className="text-center mb-6">
+      <CardContent className="p-0">
+          <div className="text-center mb-6 pt-6">
             <div className="flex justify-center items-center mb-4">
                 <User className="h-10 w-10 text-primary" />
                 <h2 className="font-headline text-3xl ml-2">Área do Passageiro</h2>
             </div>
             <p className="font-body text-muted-foreground">Faça login ou registre-se para salvar suas viagens.</p>
           </div>
-        <div className="space-y-4">
-            <div className="space-y-1">
-                <Label htmlFor="email-passenger">Email</Label>
-                <Input id="email-passenger" type="email" placeholder="joao@email.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
-            </div>
-            <div className="space-y-1">
-                <Label htmlFor="password-passenger">Senha</Label>
-                <Input id="password-passenger" type="password" placeholder="123456" value={password} onChange={(e) => setPassword(e.target.value)} required />
-            </div>
-        </div>
+        <Tabs defaultValue="login" className="w-full">
+            <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="login">Entrar</TabsTrigger>
+                <TabsTrigger value="register">Registrar</TabsTrigger>
+            </TabsList>
+            <TabsContent value="login">
+                <form onSubmit={handleLogin}>
+                    <CardContent className="space-y-4 pt-6">
+                        <div className="space-y-1">
+                            <Label htmlFor="email-login">Email</Label>
+                            <Input id="email-login" type="email" placeholder="seu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} required disabled={isLoading} />
+                        </div>
+                        <div className="space-y-1">
+                            <Label htmlFor="password-login">Senha</Label>
+                            <Input id="password-login" type="password" placeholder="********" value={password} onChange={(e) => setPassword(e.target.value)} required disabled={isLoading} />
+                        </div>
+                    </CardContent>
+                    <CardFooter>
+                         <Button type="submit" className="w-full" disabled={isLoading}>
+                            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                            <LogIn className="mr-2 h-4 w-4" />
+                            {isLoading ? 'Entrando...' : 'Entrar'}
+                        </Button>
+                    </CardFooter>
+                </form>
+            </TabsContent>
+            <TabsContent value="register">
+                <form onSubmit={handleRegister}>
+                    <CardContent className="space-y-4 pt-6">
+                         <div className="space-y-1">
+                            <Label htmlFor="name-register">Nome Completo</Label>
+                            <Input id="name-register" type="text" placeholder="Seu Nome Completo" value={name} onChange={(e) => setName(e.target.value)} required disabled={isLoading} />
+                        </div>
+                        <div className="space-y-1">
+                            <Label htmlFor="email-register">Email</Label>
+                            <Input id="email-register" type="email" placeholder="seu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} required disabled={isLoading} />
+                        </div>
+                        <div className="space-y-1">
+                            <Label htmlFor="password-register">Senha</Label>
+                            <Input id="password-register" type="password" placeholder="Mínimo 6 caracteres" value={password} onChange={(e) => setPassword(e.target.value)} required disabled={isLoading} />
+                        </div>
+                    </CardContent>
+                    <CardFooter>
+                         <Button type="submit" className="w-full" disabled={isLoading}>
+                            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                            <UserPlus className="mr-2 h-4 w-4" />
+                            {isLoading ? 'Registrando...' : 'Criar Conta'}
+                        </Button>
+                    </CardFooter>
+                </form>
+            </TabsContent>
+        </Tabs>
       </CardContent>
-      <CardFooter className="flex flex-col sm:flex-row gap-2 p-6 pt-0">
-        <Button onClick={handleLogin} className="w-full">
-            <LogIn className="mr-2 h-4 w-4" />
-            Entrar
-        </Button>
-        <Button onClick={handleRegister} variant="secondary" className="w-full">
-            <UserPlus className="mr-2 h-4 w-4" />
-            Registrar
-        </Button>
-      </CardFooter>
     </Card>
   );
 }
+
