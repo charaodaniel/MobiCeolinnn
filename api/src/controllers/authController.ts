@@ -77,8 +77,8 @@ export const login = async (req: Request, res: Response) => {
       { expiresIn: '7d' }, // Token expira em 7 dias
       (err, token) => {
         if (err) throw err;
-        res.status(200).json({ 
-            message: 'Login bem-sucedido', 
+        res.status(200).json({
+            message: 'Login bem-sucedido',
             token,
             user: {
                 id: user.id,
@@ -98,7 +98,7 @@ export const login = async (req: Request, res: Response) => {
 
 export const changePassword = async (req: Request, res: Response) => {
   // Lógica para alterar a senha de um usuário autenticado
-  const { userId, oldPassword, newPassword } = req.body; 
+  const { userId, oldPassword, newPassword } = req.body;
 
   try {
     // TODO: Validar dados de entrada
@@ -120,7 +120,7 @@ export const logout = async (req: Request, res: Response) => {
   try {
     // O logout com JWT é tratado no lado do cliente, removendo o token.
     // Nenhuma ação é necessária no servidor, a menos que você tenha uma blacklist de tokens.
-    
+
     console.log('Usuário deslogado');
     res.status(200).json({ message: 'Logout bem-sucedido' });
 
