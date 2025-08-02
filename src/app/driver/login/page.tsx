@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Car } from 'lucide-react';
+import { Car, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 export default function DriverLoginPage() {
@@ -16,22 +16,62 @@ export default function DriverLoginPage() {
     const { toast } = useToast();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Simple mock login
-        if (email === 'carlos@email.com' && password === '123456') {
+        setIsLoading(true);
+
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+        if (!apiUrl) {
+            console.error("API URL não está configurada em .env.local");
             toast({
-                title: 'Login bem-sucedido!',
-                description: 'Bem-vindo, Carlos! Redirecionando para o painel.',
+                variant: 'destructive',
+                title: 'Erro de Configuração',
+                description: 'A URL da API não foi encontrada. O administrador precisa configurar o sistema.',
             });
-            router.push('/driver');
-        } else {
+            setIsLoading(false);
+            return;
+        }
+
+        try {
+            const response = await fetch(`${apiUrl}/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                // Se a resposta não for OK, lança um erro com a mensagem da API
+                throw new Error(data.message || 'Erro ao tentar fazer login.');
+            }
+
+            // Lógica para login de motorista
+            if (data.user && data.user.role === 'Motorista') {
+                // Em uma aplicação real, você salvaria o token (data.token)
+                // em um local seguro (ex: cookies httpOnly) para autenticar requisições futuras.
+                toast({
+                    title: 'Login bem-sucedido!',
+                    description: `Bem-vindo, ${data.user.name}! Redirecionando para o painel.`,
+                });
+                router.push('/driver');
+            } else {
+                 throw new Error('Acesso permitido apenas para motoristas.');
+            }
+
+        } catch (error: any) {
             toast({
                 variant: 'destructive',
                 title: 'Erro de Login',
-                description: 'Credenciais inválidas. Verifique seu e-mail e senha.',
+                description: error.message || 'Credenciais inválidas ou erro no servidor. Tente novamente.',
             });
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -49,15 +89,18 @@ export default function DriverLoginPage() {
                     <CardContent className="space-y-4 p-6">
                          <div className="space-y-1">
                             <Label htmlFor="email">Email</Label>
-                            <Input id="email" type="email" placeholder="seu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                            <Input id="email" type="email" placeholder="seu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} required disabled={isLoading} />
                         </div>
                          <div className="space-y-1">
                             <Label htmlFor="password">Senha</Label>
-                            <Input id="password" type="password" placeholder="********" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                            <Input id="password" type="password" placeholder="********" value={password} onChange={(e) => setPassword(e.target.value)} required disabled={isLoading} />
                         </div>
                     </CardContent>
                     <CardFooter className="flex flex-col gap-4">
-                        <Button type="submit" className="w-full h-12 text-lg">Entrar</Button>
+                        <Button type="submit" className="w-full h-12 text-lg" disabled={isLoading}>
+                            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                            {isLoading ? 'Entrando...' : 'Entrar'}
+                        </Button>
                          <Link href="/" passHref>
                              <Button variant="link" size="sm" className="text-muted-foreground">Voltar para o início</Button>
                         </Link>
