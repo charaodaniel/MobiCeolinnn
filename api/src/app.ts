@@ -7,16 +7,41 @@ import driversRouter from './routes/drivers';
 import ridesRouter from './routes/rides';
 import negotiationsRouter from './routes/negotiations';
 import ratingsRouter from './routes/ratings';
-import type { PoolClient } from 'pg';
 
 import { validationResult } from 'express-validator';
 
 const app = express();
 const port = process.env.PORT || 3001;
 
-// Middleware para habilitar CORS
-// Isso permite que o seu frontend (rodando em outra porta/domínio) se comunique com a API.
-app.use(cors());
+// Configuração de CORS mais específica
+const allowedOrigins = [
+    'http://localhost:9002', // Frontend local
+    'https://62.72.9.108', // Acesso direto ou via proxy
+    // Adicione outras origens se necessário
+];
+
+const corsOptions: cors.CorsOptions = {
+    origin: (origin, callback) => {
+        // Permite requisições sem 'origin' (ex: Postman, apps mobile)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            // Verifica se a origem da requisição começa com a URL base do proxy
+            const isProxy = allowedOrigins.some(allowed => origin.startsWith(allowed));
+            if (isProxy) {
+                callback(null, true);
+            } else {
+                callback(new Error('Not allowed by CORS'));
+            }
+        }
+    },
+    credentials: true,
+};
+
+// Middleware para habilitar CORS com as opções configuradas
+app.use(cors(corsOptions));
+
 
 // Middleware para parsear JSON no corpo das requisições
 app.use(express.json());
@@ -41,6 +66,10 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 // Middleware genérico para tratamento de outros erros
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     console.error(err.stack);
+    // Verifica se o erro é de CORS
+    if (err.message === 'Not allowed by CORS') {
+        return res.status(403).json({ message: 'Acesso negado pela política de CORS.'});
+    }
     res.status(500).send('Ocorreu um erro no servidor!');
   });
 
