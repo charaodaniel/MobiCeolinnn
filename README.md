@@ -35,15 +35,25 @@ CEOLIN Mobilidade Urbana é uma plataforma de transporte que conecta passageiros
     git clone <URL_DO_SEU_REPOSITORIO>
     cd <NOME_DO_DIRETORIO>
     ```
-2.  **Instale as dependências:**
+2.  **Configure as Variáveis de Ambiente do Frontend:**
+    - Crie um arquivo chamado `.env.local` na raiz principal do projeto.
+    - Este arquivo guardará as chaves públicas do seu projeto Supabase, permitindo que a interface se comunique com os serviços de autenticação e APIs.
+    - Copie o conteúdo abaixo para o seu arquivo `.env.local` e preencha com suas credenciais do Supabase:
+      ```env
+      # Credenciais do Cliente Supabase (Frontend)
+      # Estas são seguras para serem expostas no navegador.
+      NEXT_PUBLIC_SUPABASE_URL=http://SEU_IP_DA_VPS:8000
+      NEXT_PUBLIC_SUPABASE_ANON_KEY=sua_chave_anon_publica_do_supabase
+      ```
+3.  **Instale as dependências:**
     ```bash
     npm install
     ```
-3.  **Execute o servidor de desenvolvimento:**
+4.  **Execute o servidor de desenvolvimento:**
     ```bash
     npm run dev
     ```
-4.  A aplicação estará disponível em `http://localhost:9002`.
+5.  A aplicação estará disponível em `http://localhost:9002`.
 
 ### 2. Configurando o Backend (API)
 
@@ -57,16 +67,17 @@ O backend é um projeto Node.js/Express localizado na pasta `/api`.
     ```bash
     npm install
     ```
-3.  **Configure as Variáveis de Ambiente:**
+3.  **Configure as Variáveis de Ambiente do Backend:**
     - Crie um arquivo chamado `.env` dentro da pasta `/api`.
-    - Este arquivo guardará as credenciais do seu banco de dados PostgreSQL (que pode estar rodando na sua VPS, por exemplo, via Supabase self-hosted) e o segredo para os tokens de autenticação (JWT).
+    - Este arquivo guardará as credenciais de **conexão direta** com seu banco de dados PostgreSQL (que está rodando no Supabase self-hosted) e o segredo para os tokens de autenticação (JWT). **Estas credenciais são sensíveis e nunca devem ser expostas no código-fonte ou no frontend.**
+    - Você pode encontrar as informações de conexão direta no painel do seu projeto Supabase, em "Database" -> "Connection info".
     - Copie o conteúdo abaixo para o seu arquivo `api/.env` e preencha com suas credenciais:
       ```env
-      # Credenciais do Banco de Dados PostgreSQL
-      DB_USER=seu_usuario_do_banco
-      DB_HOST=host_do_seu_banco # Ex: localhost ou o IP da sua VPS
-      DB_NAME=nome_do_seu_banco
-      DB_PASSWORD=sua_senha_do_banco
+      # Credenciais de Conexão Direta com o Banco de Dados PostgreSQL
+      DB_USER=postgres
+      DB_HOST=seu_ip_da_vps # Ex: 62.72.9.108
+      DB_NAME=postgres
+      DB_PASSWORD=sua_senha_do_banco_de_dados_supabase
       DB_PORT=5432
 
       # Segredo para Autenticação JWT
@@ -95,8 +106,8 @@ O backend é um projeto Node.js/Express localizado na pasta `/api`.
 
 ## Documentação Adicional
 
-- **PREINSTALL.md:** Informações importantes antes da instalação.
-- **POSTINSTALL.md:** Passos a serem seguidos após a instalação.
+- **api/src/database.sql:** Script SQL inicial para a criação das tabelas no banco de dados.
+- **docs/APRESENTACAO_CLIENTE.md:** Resumo do status do projeto para apresentação.
 - **CHANGELOG.md:** Histórico de mudanças da aplicação.
 
 ## Estrutura do Projeto
@@ -104,9 +115,9 @@ O backend é um projeto Node.js/Express localizado na pasta `/api`.
 O projeto é organizado da seguinte forma:
 
 - `/api`: Contém o código do backend da aplicação.
-- `/src`: Contém o código do frontend da aplicação, incluindo componentes, pages e hooks.
+- `/src`: Contém o código do frontend da aplicação (Next.js), incluindo componentes, páginas e hooks.
 - `/docs`: Contém a documentação adicional do projeto.
-- `/public`: Contém arquivos estáticos, como a service worker.
+- `/public`: Contém arquivos estáticos, como o manifesto do PWA.
 
 ## Tecnologias Utilizadas
 
@@ -116,6 +127,5 @@ O projeto é organizado da seguinte forma:
 
 ## Próximos Passos
 
-- Implementar as consultas ao banco de dados nos controllers da API.
-- Detalhar as rotas da API na documentação.
-- Expandir a seção de documentação adicional.
+- Implementar as consultas ao banco de dados nos controllers da API, substituindo os dados mocados.
+- Conectar a interface do frontend com os endpoints da API para realizar operações reais.
