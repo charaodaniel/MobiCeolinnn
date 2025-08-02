@@ -1,4 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express';
+import cors from 'cors';
 import { pool } from './db';
 import usersRouter from './routes/users';
 import authRouter from './routes/auth';
@@ -12,6 +13,10 @@ import { validationResult } from 'express-validator';
 
 const app = express();
 const port = process.env.PORT || 3001;
+
+// Middleware para habilitar CORS
+// Isso permite que o seu frontend (rodando em outra porta/domínio) se comunique com a API.
+app.use(cors());
 
 // Middleware para parsear JSON no corpo das requisições
 app.use(express.json());
