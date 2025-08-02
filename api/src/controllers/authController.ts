@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { pool } from '../db';
 import { validationResult } from 'express-validator';
+import { Pool } from 'pg';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'seu_segredo_jwt_padrao';
 
@@ -127,5 +128,32 @@ export const logout = async (req: Request, res: Response) => {
   } catch (error) {
     console.error('Erro no logout:', error);
     res.status(500).json({ message: 'Erro ao fazer logout' });
+  }
+};
+
+export const testDbConnection = async (req: Request, res: Response) => {
+  const { host, port, user, password, name } = req.body;
+  
+  const testPool = new Pool({
+    host,
+    port: parseInt(port, 10),
+    user,
+    password,
+    database: name,
+    connectionTimeoutMillis: 5000, // Timeout de 5 segundos
+  });
+
+  try {
+    const client = await testPool.connect();
+    // Apenas o fato de conectar já valida.
+    // Podemos fazer uma query simples para ter certeza.
+    await client.query('SELECT NOW()');
+    client.release();
+    await testPool.end();
+    res.status(200).json({ message: 'Conexão com o banco de dados bem-sucedida!' });
+  } catch (error: any) {
+    await testPool.end();
+    console.error('Falha na conexão com o banco de dados:', error.message);
+    res.status(500).json({ message: 'Falha ao conectar com o banco de dados.', error: error.message });
   }
 };

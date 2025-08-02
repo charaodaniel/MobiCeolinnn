@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { register, login, changePassword, logout } from '../controllers/authController';
+import { register, login, changePassword, logout, testDbConnection } from '../controllers/authController';
 import { registerValidation, loginValidation } from '../validation/authValidation';
 
 const router = Router();
@@ -15,5 +15,8 @@ router.put('/change-password', changePassword);
 
 // Rota para fazer logout do usuário
 router.post('/logout', logout);
+
+// Rota para testar a conexão com o banco de dados
+router.post('/test-db', testDbConnection);
 
 export default router;

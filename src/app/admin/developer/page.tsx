@@ -44,29 +44,53 @@ export default function DeveloperPage() {
         setDbConfig(prev => ({ ...prev, [id]: value }));
     };
     
-    const handleSaveAndTest = () => {
+    const handleSaveAndTest = async () => {
         setIsTesting(true);
         toast({
             title: 'Testando Conexão...',
             description: 'Aguarde enquanto tentamos conectar ao banco de dados.'
         });
 
-        // Simulação de teste de conexão
-        setTimeout(() => {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+        if (!apiUrl) {
+            toast({
+                variant: 'destructive',
+                title: 'Erro de Configuração',
+                description: 'A URL da API não foi encontrada. O administrador precisa configurar o sistema.',
+            });
             setIsTesting(false);
-            if (dbConfig.password === 'supabase123') { // Condição de sucesso simulada
-                 toast({
-                    title: 'Conexão Bem-sucedida!',
-                    description: 'As credenciais são válidas e a conexão foi estabelecida.',
-                });
-            } else {
-                toast({
-                    variant: 'destructive',
-                    title: 'Falha na Conexão',
-                    description: 'Não foi possível conectar. Verifique as credenciais e as regras de firewall.',
-                });
+            return;
+        }
+
+        try {
+            const response = await fetch(`${apiUrl}/auth/test-db`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dbConfig),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Erro desconhecido no servidor.');
             }
-        }, 2000);
+
+            toast({
+                title: 'Conexão Bem-sucedida!',
+                description: data.message,
+            });
+
+        } catch (error: any) {
+             toast({
+                variant: 'destructive',
+                title: 'Falha na Conexão',
+                description: error.message || 'Não foi possível conectar. Verifique as credenciais e as regras de firewall.',
+            });
+        } finally {
+            setIsTesting(false);
+        }
     }
 
     return (
@@ -81,15 +105,14 @@ export default function DeveloperPage() {
                         </CardTitle>
                         <CardDescription>
                             Insira as credenciais para a conexão com o banco de dados PostgreSQL na sua VPS.
-                            <br />
-                            <span className="text-destructive font-semibold">Atenção:</span> Este formulário é apenas para referência e teste visual. As credenciais reais devem ser configuradas como variáveis de ambiente no servidor da API para garantir a segurança.
+                            Estas credenciais serão enviadas para a API para um teste de conexão seguro.
                         </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                              <div className="space-y-1">
-                                <Label htmlFor="host">Host</Label>
-                                <Input id="host" placeholder="Ex: 127.0.0.1 ou supabase.meudominio.com" value={dbConfig.host} onChange={handleInputChange} />
+                                <Label htmlFor="host">Host (IP da VPS)</Label>
+                                <Input id="host" placeholder="Ex: 62.72.9.108" value={dbConfig.host} onChange={handleInputChange} />
                             </div>
                              <div className="space-y-1">
                                 <Label htmlFor="port">Porta</Label>
@@ -222,7 +245,7 @@ export default function DeveloperPage() {
                         <Card>
                              <CardHeader>
                                 <CardTitle className="font-headline">Documentação Rápida</CardTitle>
-                            </CardHeader>
+                            </Header>
                             <CardContent>
                                 <div className="space-y-2">
                                      <Link href="/docs" passHref>
