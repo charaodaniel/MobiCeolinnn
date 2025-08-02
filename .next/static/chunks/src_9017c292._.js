@@ -5455,7 +5455,7 @@ function PassengerAuthForm({ onLoginSuccess }) {
     const [isCameraDialogOpen, setIsCameraDialogOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [avatarImage, setAvatarImage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('https://placehold.co/128x128.png');
     const [activeTab, setActiveTab] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('rides');
-    const apiUrl = ("TURBOPACK compile-time value", "https://62.72.9.108/proxy/3001/api");
+    const apiUrl = ("TURBOPACK compile-time value", "http://62.72.9.108:3001");
     const handleLogin = async (e)=>{
         e.preventDefault();
         setIsLoading(true);
