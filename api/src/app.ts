@@ -1,5 +1,4 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { pool } from './db';
 import usersRouter from './routes/users';
 import authRouter from './routes/auth';
 import driversRouter from './routes/drivers';
