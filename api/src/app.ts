@@ -1,36 +1,17 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { pool } from './db'; // Importa o pool de conexão centralizado
+import { pool } from './db'; 
 import usersRouter from './routes/users'; 
 import authRouter from './routes/auth'; 
 import driversRouter from './routes/drivers';
 import ridesRouter from './routes/rides'; 
 import negotiationsRouter from './routes/negotiations'; 
 import ratingsRouter from './routes/ratings';
+import type { PoolClient, PoolConfig } from 'pg';
 
 import { validationResult } from 'express-validator';
 
 const app = express();
 const port = process.env.PORT || 3001; 
-
-// Testando a conexão com o banco de dados (opcional)
-pool.connect((err, client, done) => {
-  if (err) {
-    console.error('Erro ao conectar ao banco de dados:', err.stack);
-    if(done) done(err);
-    return;
-  }
-
-  if (client) {
-    console.log('Conexão bem-sucedida com o banco de dados!');
-    client.release();
-  } else {
-      console.error('Erro interno: Cliente do banco de dados undefined.');
-      if(done) done(new Error('Cliente do banco de dados undefined'));
-      return;
-  }
-  
-  if(done) done();
-});
 
 // Middleware para parsear JSON no corpo das requisições
 app.use(express.json());
