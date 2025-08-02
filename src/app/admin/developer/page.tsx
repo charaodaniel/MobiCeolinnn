@@ -245,7 +245,7 @@ export default function DeveloperPage() {
                         <Card>
                              <CardHeader>
                                 <CardTitle className="font-headline">Documentação Rápida</CardTitle>
-                            </Header>
+                            </CardHeader>
                             <CardContent>
                                 <div className="space-y-2">
                                      <Link href="/docs" passHref>
@@ -283,4 +283,5 @@ export default function DeveloperPage() {
             </div>
         </AppLayout>
     );
-}
+
+    
