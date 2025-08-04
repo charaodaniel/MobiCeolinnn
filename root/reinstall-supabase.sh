@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Este script automatiza a instalação completa do Docker e a configuração do Supabase self-hosted,
-# incluindo a modificação do docker-compose.yml para expor a porta do banco de dados.
+# Este script automatiza a instalação completa do Docker e a configuração do Supabase self-hosted.
 # ATENÇÃO: Ele removerá instalações anteriores do Docker e do Supabase no diretório /root/supabase.
 # Execute com cautela.
 
@@ -18,12 +17,12 @@ set -e # Encerra o script se qualquer comando falhar
 echo "### INICIANDO A REINSTALAÇÃO DO AMBIENTE DOCKER E SUPABASE ###"
 
 # --- Etapa 1: Instalação do Docker ---
-echo "-> 1/5 - Removendo versões antigas do Docker..."
+echo "-> 1/4 - Removendo versões antigas do Docker..."
 for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do
     sudo apt-get remove -y $pkg > /dev/null 2>&1 || true
 done
 
-echo "-> 2/5 - Instalando o Docker Engine e o Compose Plugin..."
+echo "-> 2/4 - Instalando o Docker Engine e o Compose Plugin..."
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -41,15 +40,15 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plug
 echo "-> Docker instalado com sucesso!"
 
 # --- Etapa 2: Configuração do Supabase ---
-echo "-> 3/5 - Configurando o Supabase..."
+echo "-> 3/4 - Configurando o Supabase..."
 # Remove o diretório antigo para garantir uma instalação limpa
 if [ -d "/root/supabase" ]; then
     echo "    - Removendo instalação antiga do Supabase..."
     # Para o docker-compose antes de remover os arquivos
-    if [ -f "$COMPOSE_FILE_PATH" ]; then
+    if [ -f "/root/supabase/docker/docker-compose.yml" ]; then
         cd /root/supabase/docker && docker compose down --volumes > /dev/null 2>&1 || true
     fi
-    # **CORREÇÃO: Volta para um diretório seguro antes de apagar**
+    # Volta para um diretório seguro antes de apagar
     cd ~ 
     rm -rf /root/supabase
 fi
@@ -70,32 +69,14 @@ sed -i "s/JWT_SECRET=super-secret-jwt-token-with-at-least-32-characters-long/JWT
 sed -i "s/ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.*/ANON_KEY=${SUPABASE_ANON_KEY}/g" .env
 sed -i "s/SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.*/SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}/g" .env
 
-echo "-> 4/5 - Modificando docker-compose.yml para expor a porta direta do banco de dados (5433)..."
-# Usa awk para adicionar a seção de portas ao serviço 'db'
-awk '
-/services:/ { in_services=1 }
-in_services && /^[[:space:]]*db:/ {
-  print;
-  print "    ports:";
-  print "      - \"5433:5432\"";
-  in_db=1
-  next
-}
-in_db && /^[[:space:]]*ports:/ {
-  # Se a seção de portas já existir (improvável no default), ignora a nossa adição
-  in_db=0
-}
-{ print }
-' docker-compose.yml > docker-compose.tmp && mv docker-compose.tmp docker-compose.yml
-
-echo "-> 5/5 - Configuração do Supabase concluída."
+echo "-> 4/4 - Configuração do Supabase concluída."
 
 echo "### PROCESSO FINALIZADO COM SUCESSO! ###"
 echo ""
 echo "Próximos passos recomendados:"
 echo "1. Execute o script de inicialização para subir o Supabase e a API:"
 echo "   cd /root/api && ./start-project.sh"
-echo "2. Verifique se a conexão com o banco de dados funciona (agora na porta 5433):"
+echo "2. Verifique se a conexão com o banco de dados funciona:"
 echo "   cd /root/api && node test-db-connection.js"
 echo ""
-echo "Lembre-se de garantir que seu arquivo 'api/.env' esteja usando DB_PORT=5433 e DB_HOST=127.0.0.1 ou localhost."
+echo "Lembre-se de garantir que seu arquivo 'api/.env' esteja usando DB_PORT=5432 e DB_HOST=127.0.0.1."
