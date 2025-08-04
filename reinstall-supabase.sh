@@ -49,6 +49,8 @@ if [ -d "/root/supabase" ]; then
     if [ -f "$COMPOSE_FILE_PATH" ]; then
         cd /root/supabase/docker && docker compose down --volumes > /dev/null 2>&1 || true
     fi
+    # **CORREÇÃO: Volta para um diretório seguro antes de apagar**
+    cd ~ 
     rm -rf /root/supabase
 fi
 
@@ -72,8 +74,8 @@ echo "-> 4/5 - Modificando docker-compose.yml para expor a porta do banco de dad
 # Adiciona o mapeamento da porta 5432 ao serviço 'db'
 # Este comando insere a seção 'ports' abaixo da linha 'image: supabase/postgres...'
 # A verificação 'grep' evita adicionar a seção se ela já existir.
-if ! grep -q "ports:" $COMPOSE_FILE_PATH; then
-    sed -i "/image: supabase\/postgres.*/a \    ports:\n      - \"5432:5432\"" $COMPOSE_FILE_PATH
+if ! grep -A 1 "image: supabase/postgres" "$COMPOSE_FILE_PATH" | grep -q "ports:"; then
+    sed -i "/image: supabase\/postgres.*/a \    ports:\n      - \"5432:5432\"" "$COMPOSE_FILE_PATH"
 fi
 
 
