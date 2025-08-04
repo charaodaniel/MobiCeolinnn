@@ -5,7 +5,7 @@
 echo "-> 1/3 - Iniciando serviços do Supabase..."
 
 # Navega até o diretório do Docker Compose do Supabase
-cd /root/supabase/supabase/docker || { echo "Erro: Diretório do Supabase não encontrado."; exit 1; }
+cd /root/supabase/docker || { echo "Erro: Diretório do Supabase não encontrado."; exit 1; }
 
 # Inicia os contêineres do Supabase em segundo plano
 docker compose up -d
