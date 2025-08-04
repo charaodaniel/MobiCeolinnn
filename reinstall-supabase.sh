@@ -18,12 +18,12 @@ set -e # Encerra o script se qualquer comando falhar
 echo "### INICIANDO A REINSTALAÇÃO DO AMBIENTE DOCKER E SUPABASE ###"
 
 # --- Etapa 1: Instalação do Docker ---
-echo "-> 1/5 - Removendo versões antigas do Docker..."
+echo "-> 1/4 - Removendo versões antigas do Docker..."
 for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do
     sudo apt-get remove -y $pkg > /dev/null 2>&1 || true
 done
 
-echo "-> 2/5 - Instalando o Docker Engine e o Compose Plugin..."
+echo "-> 2/4 - Instalando o Docker Engine e o Compose Plugin..."
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -41,7 +41,7 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plug
 echo "-> Docker instalado com sucesso!"
 
 # --- Etapa 2: Configuração do Supabase ---
-echo "-> 3/5 - Configurando o Supabase..."
+echo "-> 3/4 - Configurando o Supabase..."
 # Remove o diretório antigo para garantir uma instalação limpa
 if [ -d "/root/supabase" ]; then
     echo "    - Removendo instalação antiga do Supabase..."
@@ -70,23 +70,14 @@ sed -i "s/JWT_SECRET=super-secret-jwt-token-with-at-least-32-characters-long/JWT
 sed -i "s/ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.*/ANON_KEY=${SUPABASE_ANON_KEY}/g" .env
 sed -i "s/SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.*/SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}/g" .env
 
-echo "-> 4/5 - Modificando docker-compose.yml para expor a porta do banco de dados..."
-# Adiciona o mapeamento da porta 5432 ao serviço 'db'
-# Este comando insere a seção 'ports' abaixo da linha 'image: supabase/postgres...'
-# A verificação 'grep' evita adicionar a seção se ela já existir.
-if ! grep -A 1 "image: supabase/postgres" "$COMPOSE_FILE_PATH" | grep -q "ports:"; then
-    sed -i "/image: supabase\/postgres.*/a \    ports:\n      - \"5432:5432\"" "$COMPOSE_FILE_PATH"
-fi
-
-
-echo "-> 5/5 - Configuração do Supabase concluída."
+echo "-> 4/4 - Configuração do Supabase concluída."
 
 echo "### PROCESSO FINALIZADO COM SUCESSO! ###"
 echo ""
 echo "Próximos passos recomendados:"
 echo "1. Execute o script de inicialização para subir o Supabase e a API:"
 echo "   cd /root/api && ./start-project.sh"
-echo "2. Verifique se a conexão com o banco de dados funciona:"
+echo "2. Verifique se a conexão com o banco de dados funciona (use a porta 5432):"
 echo "   cd /root/api && node test-db-connection.js"
 echo ""
 echo "Lembre-se de garantir que seu arquivo 'api/.env' esteja usando DB_PORT=5432 e DB_HOST=127.0.0.1 ou localhost."
