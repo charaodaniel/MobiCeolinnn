@@ -70,6 +70,10 @@ export function OperatorDashboard() {
                             </Button>
                         </DialogTrigger>
                         <DialogContent className="max-w-6xl h-[90vh] p-0">
+                           <DialogHeader>
+                               <DialogTitle className="sr-only">Painel de Conversas</DialogTitle>
+                               <DialogDescription className="sr-only">Converse com motoristas, passageiros e administradores.</DialogDescription>
+                           </DialogHeader>
                            <OperatorConversationsPage />
                         </DialogContent>
                     </Dialog>
