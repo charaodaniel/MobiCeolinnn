@@ -40,7 +40,7 @@ mkdir -p ${APPWRITE_DIR}
 cd ${APPWRITE_DIR}
 
 # --- Etapa 3: Criação do docker-compose.yml ---
-echo "-> 3/5 - Criando o arquivo docker-compose.yml..."
+echo "-> 3/5 - Criando o arquivo docker-compose.yml com versões de imagem corrigidas..."
 
 cat > docker-compose.yml << EOF
 services:
@@ -423,7 +423,7 @@ services:
       - appwrite
 
   appwrite-worker-migrations:
-    image: appwrite/appwrite-worker-migrations:1.1.2
+    image: appwrite/appwrite-worker-migrations:1.2.0
     container_name: appwrite-worker-migrations
     restart: unless-stopped
     depends_on:
