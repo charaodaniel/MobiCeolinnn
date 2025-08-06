@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { User, Car, Shield, Rocket } from 'lucide-react';
+import { User, Car, Shield, Rocket, Headset } from 'lucide-react';
 
 export function LoginCard() {
   return (
@@ -27,6 +27,12 @@ export function LoginCard() {
           <Button variant="outline" className="w-full h-14 text-lg justify-start gap-4">
             <Car className="text-primary" />
             <span className="font-headline">Sou Motorista</span>
+          </Button>
+        </Link>
+        <Link href="/operator" passHref>
+          <Button variant="outline" className="w-full h-14 text-lg justify-start gap-4">
+            <Headset className="text-primary" />
+            <span className="font-headline">Sou Operador</span>
           </Button>
         </Link>
       </CardContent>
