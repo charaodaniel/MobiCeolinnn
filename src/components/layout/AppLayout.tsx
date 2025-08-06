@@ -17,27 +17,39 @@ import {
 
 
 export function AppLayout({ children, title, showAuthButtons = false, showDriverAvatar = false }: { children: ReactNode; title: string, showAuthButtons?: boolean, showDriverAvatar?: boolean }) {
+  const renderLogoLink = () => {
+    if (showDriverAvatar) {
+      return (
+        <Link href="/" className="flex items-center gap-2">
+          <Avatar className="h-8 w-8">
+              <AvatarImage src={'https://placehold.co/48x48.png'} data-ai-hint="person portrait" />
+              <AvatarFallback>C</AvatarFallback>
+          </Avatar>
+          <span className="font-headline text-lg font-semibold sm:inline">CEOLIN</span>
+        </Link>
+      );
+    }
+    if (title === 'Conversas') {
+      return (
+        <Link href="/operator" className="flex items-center gap-2">
+          <MessageSquare className="h-6 w-6 text-primary" />
+          <span className="font-headline text-lg font-semibold sm:inline">CEOLIN</span>
+        </Link>
+      )
+    }
+    return (
+      <Link href="/" className="flex items-center gap-2">
+        <Rocket className="h-6 w-6 text-primary" />
+        <span className="font-headline text-lg font-semibold sm:inline">CEOLIN</span>
+      </Link>
+    )
+  }
+  
   return (
     <div className="flex flex-col min-h-screen">
       <header className="sticky top-0 z-10 w-full border-b bg-background/80 backdrop-blur-sm">
         <div className="container flex h-16 items-center justify-between px-4 md:px-6">
-            <Link href="/" className="flex items-center gap-2">
-              {showDriverAvatar ? (
-                <Avatar className="h-8 w-8">
-                    <AvatarImage src={'https://placehold.co/48x48.png'} data-ai-hint="person portrait" />
-                    <AvatarFallback>C</AvatarFallback>
-                </Avatar>
-              ) : (
-                 title === 'Conversas' ? (
-                   <Link href="/operator">
-                      <MessageSquare className="h-6 w-6 text-primary" />
-                   </Link>
-                 ) : (
-                    <Rocket className="h-6 w-6 text-primary" />
-                 )
-              )}
-              <span className="font-headline text-lg font-semibold sm:inline">CEOLIN</span>
-            </Link>
+            {renderLogoLink()}
 
             <h1 className="hidden sm:block flex-1 text-center font-headline text-xl font-bold text-foreground/80">{title}</h1>
 
@@ -53,8 +65,8 @@ export function AppLayout({ children, title, showAuthButtons = false, showDriver
                     </SheetTrigger>
                     <SheetContent side="left">
                       <SheetHeader>
-                        <SheetTitle className="sr-only">Seleção de Perfil</SheetTitle>
-                        <SheetDescription className="sr-only">Escolha entre pedir uma viagem, entrar como motorista ou operador.</SheetDescription>
+                        <SheetTitle>Seleção de Perfil</SheetTitle>
+                        <SheetDescription>Escolha entre pedir uma viagem, entrar como motorista ou operador.</SheetDescription>
                       </SheetHeader>
                       <LoginCard />
                     </SheetContent>
@@ -76,8 +88,8 @@ export function AppLayout({ children, title, showAuthButtons = false, showDriver
                 </SheetTrigger>
                 <SheetContent>
                     <SheetHeader>
-                        <SheetTitle className="sr-only">Painel do Passageiro</SheetTitle>
-                        <SheetDescription className="sr-only">Faça login, registre-se ou gerencie seu perfil de passageiro.</SheetDescription>
+                        <SheetTitle>Painel do Passageiro</SheetTitle>
+                        <SheetDescription>Faça login, registre-se ou gerencie seu perfil de passageiro.</SheetDescription>
                     </SheetHeader>
                     <PassengerAuthForm />
                 </SheetContent>
