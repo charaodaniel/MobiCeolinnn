@@ -363,10 +363,6 @@ body {
   pointer-events: auto;
 }
 
-.visible {
-  visibility: visible;
-}
-
 .invisible {
   visibility: hidden;
 }
@@ -510,6 +506,11 @@ body {
   margin-right: -.25rem;
 }
 
+.-mx-6 {
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+}
+
 .mx-1 {
   margin-left: .25rem;
   margin-right: .25rem;
@@ -545,9 +546,8 @@ body {
   margin-bottom: 1.5rem;
 }
 
-.-mx-6 {
-  margin-left: -1.5rem;
-  margin-right: -1.5rem;
+.-mb-6 {
+  margin-bottom: -1.5rem;
 }
 
 .-ml-4 {
@@ -582,6 +582,10 @@ body {
   margin-left: .5rem;
 }
 
+.ml-4 {
+  margin-left: 1rem;
+}
+
 .ml-auto {
   margin-left: auto;
 }
@@ -608,18 +612,6 @@ body {
 
 .mt-4 {
   margin-top: 1rem;
-}
-
-.ml-4 {
-  margin-left: 1rem;
-}
-
-.mt-0 {
-  margin-top: 0;
-}
-
-.-mb-6 {
-  margin-bottom: -1.5rem;
 }
 
 .block {
@@ -690,6 +682,10 @@ body {
   height: .625rem;
 }
 
+.h-20 {
+  height: 5rem;
+}
+
 .h-24 {
   height: 6rem;
 }
@@ -754,6 +750,10 @@ body {
   height: 500px;
 }
 
+.h-\[90vh\] {
+  height: 90vh;
+}
+
 .h-\[var\(--radix-select-trigger-height\)\] {
   height: var(--radix-select-trigger-height);
 }
@@ -770,20 +770,8 @@ body {
   height: 1px;
 }
 
-.h-\[calc\(100vh-8rem\)\] {
-  height: calc(100vh - 8rem);
-}
-
-.h-\[calc\(100vh-64px\)\] {
-  height: calc(100vh - 64px);
-}
-
-.h-20 {
-  height: 5rem;
-}
-
-.h-\[90vh\] {
-  height: 90vh;
+.h-\[calc\(100vh-4rem\)\] {
+  height: calc(100vh - 4rem);
 }
 
 .max-h-96 {
@@ -848,6 +836,10 @@ body {
 
 .w-12 {
   width: 3rem;
+}
+
+.w-16 {
+  width: 4rem;
 }
 
 .w-2 {
@@ -934,10 +926,6 @@ body {
   width: 1px;
 }
 
-.w-16 {
-  width: 4rem;
-}
-
 .min-w-0 {
   min-width: 0;
 }
@@ -962,6 +950,10 @@ body {
   max-width: 56rem;
 }
 
+.max-w-6xl {
+  max-width: 72rem;
+}
+
 .max-w-7xl {
   max-width: 80rem;
 }
@@ -980,10 +972,6 @@ body {
 
 .max-w-none {
   max-width: none;
-}
-
-.max-w-6xl {
-  max-width: 72rem;
 }
 
 .flex-1 {
@@ -1197,10 +1185,6 @@ body {
 
 .gap-8 {
   gap: 2rem;
-}
-
-.gap-6 {
-  gap: 1.5rem;
 }
 
 .space-x-1 > :not([hidden]) ~ :not([hidden]) {
@@ -1502,16 +1486,16 @@ body {
   background-color: hsl(var(--primary));
 }
 
+.bg-primary\/10 {
+  background-color: hsl(var(--primary) / .1);
+}
+
 .bg-secondary {
   background-color: hsl(var(--secondary));
 }
 
 .bg-transparent {
   background-color: #0000;
-}
-
-.bg-primary\/10 {
-  background-color: hsl(var(--primary) / .1);
 }
 
 .bg-gradient-to-br {
@@ -1644,6 +1628,11 @@ body {
   padding-bottom: .5rem;
 }
 
+.py-3 {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+}
+
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -1652,11 +1641,6 @@ body {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
-}
-
-.py-3 {
-  padding-top: .75rem;
-  padding-bottom: .75rem;
 }
 
 .pb-2 {
@@ -2197,6 +2181,10 @@ body {
   background-color: rgb(180 83 9 / var(--tw-bg-opacity, 1));
 }
 
+.hover\:bg-background:hover {
+  background-color: hsl(var(--background));
+}
+
 .hover\:bg-destructive\/80:hover {
   background-color: hsl(var(--destructive) / .8);
 }
@@ -2227,10 +2215,6 @@ body {
 
 .hover\:bg-secondary\/80:hover {
   background-color: hsl(var(--secondary) / .8);
-}
-
-.hover\:bg-background:hover {
-  background-color: hsl(var(--background));
 }
 
 .hover\:text-accent-foreground:hover {
@@ -2799,10 +2783,6 @@ body {
     grid-column: span 2 / span 2;
   }
 
-  .md\:col-span-3 {
-    grid-column: span 3 / span 3;
-  }
-
   .md\:block {
     display: block;
   }
@@ -2843,10 +2823,6 @@ body {
     padding: 1.5rem;
   }
 
-  .md\:p-0 {
-    padding: 0;
-  }
-
   .md\:px-6 {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -2864,10 +2840,6 @@ body {
 
   .lg\:col-span-3 {
     grid-column: span 3 / span 3;
-  }
-
-  .lg\:col-span-4 {
-    grid-column: span 4 / span 4;
   }
 
   .lg\:h-\[calc\(100vh-12rem\)\] {

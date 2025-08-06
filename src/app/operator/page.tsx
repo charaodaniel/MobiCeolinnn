@@ -5,7 +5,7 @@ import { AppLayout } from '@/components/layout/AppLayout';
 
 export default function OperatorPage() {
   return (
-    <AppLayout title="Painel de Operações">
+    <AppLayout title="Painel de Operações" showAuthButtons>
       <OperatorDashboard />
     </AppLayout>
   );

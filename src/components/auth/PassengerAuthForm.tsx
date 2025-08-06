@@ -107,7 +107,7 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
 
   if (isLoggedIn && userData) {
       return (
-        <div className="flex flex-col bg-muted/40 max-h-[85vh] overflow-y-auto">
+        <div className="flex flex-col bg-muted/40 h-full">
             <div className="flex flex-col items-center gap-4 py-8 bg-card">
                 <Dialog open={isCameraDialogOpen} onOpenChange={setIsCameraDialogOpen}>
                     <DialogTrigger asChild>
@@ -205,7 +205,7 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
   }
 
   return (
-    <Card className="w-full border-0 shadow-none">
+    <Card className="w-full border-0 shadow-none h-full flex flex-col justify-center">
       <CardContent className="p-0">
           <div className="text-center mb-6 pt-6">
             <div className="flex justify-center items-center mb-4">

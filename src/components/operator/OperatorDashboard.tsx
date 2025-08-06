@@ -7,7 +7,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { FleetMonitor } from './FleetMonitor';
 import Link from 'next/link';
 import { Button } from '../ui/button';
-import OperatorConversationsPage from '@/app/operator/conversations/page';
 
 const MetricCard = ({ title, value, icon: Icon }: { title: string, value: string | number, icon: React.ElementType }) => (
     <Card className="p-4">
@@ -62,21 +61,12 @@ export function OperatorDashboard() {
                         </DialogContent>
                     </Dialog>
                     
-                     <Dialog>
-                        <DialogTrigger asChild>
-                            <Button variant="outline" className="w-full h-20 text-lg">
-                                <MessageSquare className="mr-2 h-5 w-5" />
-                                Abrir Conversas
-                            </Button>
-                        </DialogTrigger>
-                        <DialogContent className="max-w-6xl h-[90vh] p-0">
-                           <DialogHeader>
-                               <DialogTitle className="sr-only">Painel de Conversas</DialogTitle>
-                               <DialogDescription className="sr-only">Converse com motoristas, passageiros e administradores.</DialogDescription>
-                           </DialogHeader>
-                           <OperatorConversationsPage />
-                        </DialogContent>
-                    </Dialog>
+                    <Link href="/operator/conversations" passHref>
+                        <Button variant="outline" className="w-full h-20 text-lg">
+                            <MessageSquare className="mr-2 h-5 w-5" />
+                            Abrir Conversas
+                        </Button>
+                    </Link>
                 </div>
             </CardContent>
         </Card>

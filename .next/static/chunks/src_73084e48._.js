@@ -1865,7 +1865,7 @@ const RoleIcon = ({ role })=>{
                 className: "h-5 w-5 text-muted-foreground"
             }, void 0, false, {
                 fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                lineNumber: 29,
+                lineNumber: 30,
                 columnNumber: 34
             }, this);
         case 'Administrador':
@@ -1873,7 +1873,7 @@ const RoleIcon = ({ role })=>{
                 className: "h-5 w-5 text-muted-foreground"
             }, void 0, false, {
                 fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                lineNumber: 30,
+                lineNumber: 31,
                 columnNumber: 38
             }, this);
         case 'Passageiro':
@@ -1881,7 +1881,7 @@ const RoleIcon = ({ role })=>{
                 className: "h-5 w-5 text-muted-foreground"
             }, void 0, false, {
                 fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                lineNumber: 31,
+                lineNumber: 32,
                 columnNumber: 35
             }, this);
         default:
@@ -1939,12 +1939,12 @@ function ChatWindow({ conversation, onBack }) {
                             className: "h-5 w-5"
                         }, void 0, false, {
                             fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                            lineNumber: 67,
+                            lineNumber: 68,
                             columnNumber: 17
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                        lineNumber: 66,
+                        lineNumber: 67,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1958,20 +1958,20 @@ function ChatWindow({ conversation, onBack }) {
                                         "data-ai-hint": `${conversation.avatar} face`
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                                        lineNumber: 72,
+                                        lineNumber: 73,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$avatar$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AvatarFallback"], {
                                         children: conversation.name.slice(0, 2)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                                        lineNumber: 73,
+                                        lineNumber: 74,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                                lineNumber: 71,
+                                lineNumber: 72,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1981,7 +1981,7 @@ function ChatWindow({ conversation, onBack }) {
                                         children: conversation.name
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                                        lineNumber: 76,
+                                        lineNumber: 77,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1991,32 +1991,32 @@ function ChatWindow({ conversation, onBack }) {
                                                 role: conversation.role
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                                                lineNumber: 78,
+                                                lineNumber: 79,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: conversation.role
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                                                lineNumber: 79,
+                                                lineNumber: 80,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                                        lineNumber: 77,
+                                        lineNumber: 78,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                                lineNumber: 75,
+                                lineNumber: 76,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                        lineNumber: 70,
+                        lineNumber: 71,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2030,7 +2030,7 @@ function ChatWindow({ conversation, onBack }) {
                                         className: "h-5 w-5"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                                        lineNumber: 85,
+                                        lineNumber: 86,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2038,13 +2038,13 @@ function ChatWindow({ conversation, onBack }) {
                                         children: "Ligar"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                                        lineNumber: 86,
+                                        lineNumber: 87,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                                lineNumber: 84,
+                                lineNumber: 85,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -2055,7 +2055,7 @@ function ChatWindow({ conversation, onBack }) {
                                         className: "h-5 w-5"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                                        lineNumber: 89,
+                                        lineNumber: 90,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2063,25 +2063,25 @@ function ChatWindow({ conversation, onBack }) {
                                         children: "Mais opções"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                                        lineNumber: 90,
+                                        lineNumber: 91,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                                lineNumber: 88,
+                                lineNumber: 89,
                                 columnNumber: 12
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                        lineNumber: 83,
+                        lineNumber: 84,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                lineNumber: 64,
+                lineNumber: 65,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$scroll$2d$area$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ScrollArea"], {
@@ -2101,20 +2101,20 @@ function ChatWindow({ conversation, onBack }) {
                                             "data-ai-hint": "person face"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                                            lineNumber: 102,
+                                            lineNumber: 103,
                                             columnNumber: 29
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$avatar$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AvatarFallback"], {
                                             children: conversation.name.charAt(0)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                                            lineNumber: 103,
+                                            lineNumber: 104,
                                             columnNumber: 29
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                                    lineNumber: 101,
+                                    lineNumber: 102,
                                     columnNumber: 26
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2127,7 +2127,7 @@ function ChatWindow({ conversation, onBack }) {
                                             children: msg.text
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                                            lineNumber: 110,
+                                            lineNumber: 111,
                                             columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2138,29 +2138,29 @@ function ChatWindow({ conversation, onBack }) {
                                             children: msg.timestamp
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                                            lineNumber: 111,
+                                            lineNumber: 112,
                                             columnNumber: 25
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                                    lineNumber: 106,
+                                    lineNumber: 107,
                                     columnNumber: 22
                                 }, this)
                             ]
                         }, index, true, {
                             fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                            lineNumber: 99,
+                            lineNumber: 100,
                             columnNumber: 17
                         }, this))
                 }, void 0, false, {
                     fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                    lineNumber: 97,
+                    lineNumber: 98,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                lineNumber: 96,
+                lineNumber: 97,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("footer", {
@@ -2175,7 +2175,7 @@ function ChatWindow({ conversation, onBack }) {
                             onKeyDown: (e)=>e.key === 'Enter' && handleSendMessage()
                         }, void 0, false, {
                             fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                            lineNumber: 124,
+                            lineNumber: 125,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -2186,7 +2186,7 @@ function ChatWindow({ conversation, onBack }) {
                                     className: "h-5 w-5"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                                    lineNumber: 131,
+                                    lineNumber: 132,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2194,30 +2194,30 @@ function ChatWindow({ conversation, onBack }) {
                                     children: "Enviar"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                                    lineNumber: 132,
+                                    lineNumber: 133,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                            lineNumber: 130,
+                            lineNumber: 131,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                    lineNumber: 123,
+                    lineNumber: 124,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/operator/ChatWindow.tsx",
-                lineNumber: 122,
+                lineNumber: 123,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/operator/ChatWindow.tsx",
-        lineNumber: 62,
+        lineNumber: 63,
         columnNumber: 5
     }, this);
 }

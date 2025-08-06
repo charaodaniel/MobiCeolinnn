@@ -8,8 +8,8 @@ import { AppLayout } from '@/components/layout/AppLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Car, User, UserCheck } from 'lucide-react';
-import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '../ui/dialog';
 import { PassengerAuthForm } from '../auth/PassengerAuthForm';
+import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 
 
 const allDrivers = [
@@ -23,7 +23,7 @@ const ANONYMOUS_RIDES_ALLOWED = true;
 
 export function PassengerDashboard() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isAuthDialogOpen, setIsAuthDialogOpen] = useState(false);
+  const [isAuthSheetOpen, setIsAuthSheetOpen] = useState(false);
   const [origin, setOrigin] = useState('');
   const [isRural, setIsRural] = useState(false);
 
@@ -56,15 +56,14 @@ export function PassengerDashboard() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex flex-col gap-2">
-                <Dialog open={isAuthDialogOpen} onOpenChange={setIsAuthDialogOpen}>
-                    <DialogTrigger asChild>
+                <Sheet open={isAuthSheetOpen} onOpenChange={setIsAuthSheetOpen}>
+                    <SheetTrigger asChild>
                          <Button className="w-full">Fazer Login ou Registrar</Button>
-                    </DialogTrigger>
-                    <DialogContent className="max-w-md">
-                        <DialogTitle className="sr-only">Autenticação do Passageiro</DialogTitle>
-                        <PassengerAuthForm onLoginSuccess={() => { setIsLoggedIn(true); setIsAuthDialogOpen(false); }} />
-                    </DialogContent>
-                </Dialog>
+                    </SheetTrigger>
+                    <SheetContent>
+                        <PassengerAuthForm onLoginSuccess={() => { setIsLoggedIn(true); setIsAuthSheetOpen(false); }} />
+                    </SheetContent>
+                </Sheet>
               </CardContent>
             </Card>
           )}

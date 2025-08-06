@@ -1,5 +1,4 @@
 {
-  "/operator/conversations/page": "app/operator/conversations/page.js",
   "/operator/page": "app/operator/page.js",
   "/page": "app/page.js"
 }
