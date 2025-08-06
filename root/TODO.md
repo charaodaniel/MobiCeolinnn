@@ -4,16 +4,16 @@ Este documento descreve as etapas concluídas e as tarefas pendentes para levar 
 
 ---
 
-## ✅ Fase 1: Fundação e Migração para Appwrite (Concluído)
+## ✅ Fase 1: Fundação e Infraestrutura com Appwrite (Concluído)
 
-Esta fase estabeleceu a base do projeto e migrou a arquitetura para usar Appwrite.
+Esta fase estabeleceu a base do projeto e a infraestrutura do backend.
 
 -   **[X] Estrutura do Projeto:** Criação da estrutura de pastas para o frontend (Next.js).
 -   **[X] Prototipagem da Interface (UI):** Desenvolvimento de todas as telas e componentes visuais para os fluxos do passageiro, motorista e administrador.
--   **[X] Decisão Arquitetural:** Migração do backend de uma API Node.js + Supabase para uma solução auto-hospedada com **Appwrite** para melhor performance e eficiência de recursos.
--   **[X] Remoção da API Antiga:** O diretório `api/` foi removido.
--   **[X] Script de Automação:** Criação do script `appwrite-init.sh` para facilitar a instalação do Docker e do Appwrite na VPS.
--   **[X] Atualização da Documentação:** `README.md` e este `TODO.md` foram atualizados para refletir a nova arquitetura.
+-   **[X] Decisão Arquitetural:** Definição da solução auto-hospedada com **Appwrite** para o backend.
+-   **[X] Remoção da API Antiga:** O diretório `api/` foi removido para focar na integração com Appwrite.
+-   **[X] Script de Reconfiguração:** Criação do script `reconfigure-appwrite.sh` para ajustar um ambiente Appwrite já instalado.
+-   **[X] Atualização da Documentação:** `README.md` e este `TODO.md` foram atualizados para refletir a nova arquitetura e o processo de instalação correto.
 
 ---
 
@@ -22,7 +22,7 @@ Esta fase estabeleceu a base do projeto e migrou a arquitetura para usar Appwrit
 Esta é a fase principal de desenvolvimento, onde configuraremos o Appwrite e conectaremos a interface com seus serviços.
 
 ### 1. Configuração no Painel do Appwrite
--   **[ ] Criar Projeto:** Após iniciar o Appwrite, criar um novo projeto no painel web.
+-   **[ ] Criar Projeto:** Após instalar e iniciar o Appwrite, criar um novo projeto no painel web.
 -   **[ ] Configurar Autenticação:** Habilitar os provedores de autenticação necessários (ex: Email/Senha).
 -   **[ ] Definir Coleções no Banco de Dados (Appwrite Database):**
     -   Criar uma coleção para `users` (com atributos como `name`, `role`, `pixKey`, etc.).

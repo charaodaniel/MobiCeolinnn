@@ -4,38 +4,16 @@ CEOLIN Mobilidade Urbana é uma plataforma de transporte que conecta passageiros
 
 Esta versão do projeto utiliza **Appwrite** como backend, uma solução de Backend-como-um-Serviço (BaaS) de código aberto que é leve, performática e ideal para auto-hospedagem (self-hosting), especialmente em VPS com recursos moderados.
 
-## Funcionalidades Principais
-
-As funcionalidades principais da aplicação permanecem as mesmas, com a lógica de negócio agora sendo gerenciada pelo Appwrite.
-
-### Para Passageiros
-- Solicitação de Corrida (Urbana e Rural/Intermunicipal)
-- Negociação de Tarifa via IA (Genkit)
-- Visualização de Motoristas e Chat
-- Autenticação Opcional
-
-### Para Motoristas
-- Painel de Controle com Login
-- Gerenciamento de Perfil, Veículo e Documentos
-- Status de Disponibilidade
-- Recebimento de Solicitações
-- Histórico e Relatórios
-
-### Para Administradores
-- Painel de Gerenciamento Completo
-- Gerenciamento de Usuários
-- Relatórios e Auditoria
-
 ## Como Começar (Ambiente com Appwrite)
 
 ### 1. Configurando o Backend (Appwrite na VPS)
 
-O Appwrite funciona com Docker, tornando a instalação simples e isolada.
+A instalação do Appwrite é feita com um único comando Docker.
 
 1.  **Conecte-se à sua VPS via SSH.**
 2.  **Execute o instalador oficial do Appwrite:**
     -   Certifique-se de que o Docker esteja instalado e atualizado em sua máquina.
-    -   Execute o comando abaixo. Ele irá guiá-lo por um processo de configuração interativo.
+    -   O comando abaixo irá guiá-lo por um processo de configuração interativo.
         ```bash
         docker run -it --rm \
             --volume /var/run/docker.sock:/var/run/docker.sock \
@@ -52,7 +30,15 @@ O Appwrite funciona com Docker, tornando a instalação simples e isolada.
     -   Na seção "Platforms", adicione uma nova plataforma "Web", inserindo `localhost` para desenvolvimento e o IP da sua VPS para produção.
     -   Na seção "API Keys", gere uma nova chave de API com todos os escopos. Anote o **Secret**.
 
-### 2. Configurando o Frontend (Interface do Usuário)
+### 2. (Opcional) Reconfigurando o Ambiente
+Se você aceitou as configurações padrão durante a instalação e deseja ajustá-las (por exemplo, mudar a senha do banco de dados), você pode usar o script `reconfigure-appwrite.sh` contido neste repositório.
+
+1.  Envie o script para sua VPS.
+2.  Dê permissão de execução: `chmod +x reconfigure-appwrite.sh`
+3.  Execute-o: `sudo ./reconfigure-appwrite.sh`
+4.  Siga as instruções do script para reiniciar o Appwrite e aplicar as mudanças.
+
+### 3. Configurando o Frontend (Interface do Usuário)
 
 1.  **Clone o repositório (se ainda não o fez):**
     ```bash
@@ -94,12 +80,6 @@ O Appwrite funciona com Docker, tornando a instalação simples e isolada.
 
 ## Tecnologias Utilizadas
 
-- **Backend:** Appwrite (Docker, Node.js)
+- **Backend:** Appwrite (Docker)
 - **Frontend:** React, Next.js, TypeScript, Tailwind CSS
 - **IA:** Genkit
-
-## Próximos Passos
-
--   Configurar as coleções (Databases), buckets (Storage) e funções (Functions) no painel do Appwrite.
--   Conectar a interface do frontend com os serviços do Appwrite para realizar operações reais.
--   Implementar a lógica de negócio complexa usando as Appwrite Functions.
