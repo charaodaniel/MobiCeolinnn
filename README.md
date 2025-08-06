@@ -33,22 +33,20 @@ As funcionalidades principais da aplicação permanecem as mesmas, com a lógica
 O Appwrite funciona com Docker, tornando a instalação simples e isolada.
 
 1.  **Conecte-se à sua VPS via SSH.**
-2.  **Execute o script de inicialização do Appwrite:**
-    -   Primeiro, dê permissão de execução ao script:
+2.  **Execute o instalador oficial do Appwrite:**
+    -   Certifique-se de que o Docker esteja instalado e atualizado em sua máquina.
+    -   Execute o comando abaixo. Ele irá guiá-lo por um processo de configuração interativo.
         ```bash
-        chmod +x appwrite-init.sh
+        docker run -it --rm \
+            --volume /var/run/docker.sock:/var/run/docker.sock \
+            --volume "$(pwd)"/appwrite:/usr/src/code/appwrite:rw \
+            --entrypoint="install" \
+            appwrite/appwrite:latest
         ```
-    -   Depois, execute o script. Ele irá instalar/atualizar o Docker e baixar a configuração do Appwrite.
-        ```bash
-        ./appwrite-init.sh
-        ```
-3.  **Inicie o Appwrite:**
-    -   O script o levará para a pasta correta. Inicie os contêineres do Appwrite:
-        ```bash
-        docker compose up -d
-        ```
-4.  **Acesse o Painel do Appwrite:**
-    -   Abra seu navegador e acesse `http://SEU_IP_DA_VPS`.
+    -   Siga as instruções no terminal para configurar a porta HTTP, o domínio e outras chaves secretas.
+
+3.  **Acesse o Painel do Appwrite:**
+    -   Após a instalação, abra seu navegador e acesse `http://SEU_IP_DA_VPS`.
     -   Crie sua conta de administrador.
     -   Crie um novo projeto. Anote o **Project ID**.
     -   Na seção "Platforms", adicione uma nova plataforma "Web", inserindo `localhost` para desenvolvimento e o IP da sua VPS para produção.
