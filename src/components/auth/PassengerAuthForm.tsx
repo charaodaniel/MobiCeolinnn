@@ -23,10 +23,9 @@ interface PassengerAuthFormProps {
 }
 
 interface UserData {
-    id: string;
+    $id: string;
     name: string;
     email: string;
-    role: string;
 }
 
 export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
@@ -36,7 +35,6 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
   // Auth State
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState<UserData | null>(null);
-  const [authToken, setAuthToken] = useState<string | null>(null);
 
   // Form State
   const [name, setName] = useState('');
@@ -51,80 +49,37 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
   const [avatarImage, setAvatarImage] = useState('https://placehold.co/128x128.png');
   const [activeTab, setActiveTab] = useState<'rides' | 'chats'>('rides');
 
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
+  // TODO: Replace with Appwrite SDK
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    if (!apiUrl) {
-        toast({ variant: 'destructive', title: 'Erro de Configuração', description: 'URL da API não configurada.' });
-        setIsLoading(false);
-        return;
-    }
-
-    try {
-        const response = await fetch(`${apiUrl}/auth/login`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
-        });
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new Error(data.message || 'Erro ao fazer login.');
-        }
-        
-        toast({ title: 'Login bem-sucedido!', description: `Bem-vindo(a) de volta, ${data.user.name}!` });
-        setUserData(data.user);
-        setAuthToken(data.token);
+    // MOCK LOGIN
+    if (email === 'joao@email.com' && password === '123456') {
+        toast({ title: 'Login bem-sucedido!', description: `Bem-vindo(a) de volta, João Passageiro!` });
+        setUserData({ $id: '1', name: 'João Passageiro', email: 'joao@email.com' });
         setIsLoggedIn(true);
-
-        if (onLoginSuccess) {
-          onLoginSuccess();
-        }
-    } catch (error: any) {
-        toast({ variant: 'destructive', title: 'Erro de Login', description: error.message });
-    } finally {
-        setIsLoading(false);
+        if (onLoginSuccess) onLoginSuccess();
+    } else {
+        toast({ variant: 'destructive', title: 'Erro de Login', description: 'Credenciais inválidas.' });
     }
+    setIsLoading(false);
   };
 
+  // TODO: Replace with Appwrite SDK
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-
-     if (!apiUrl) {
-        toast({ variant: 'destructive', title: 'Erro de Configuração', description: 'URL da API não configurada.' });
-        setIsLoading(false);
-        return;
-    }
-
-    try {
-         const response = await fetch(`${apiUrl}/auth/register`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, password, role: 'Passageiro' }),
-        });
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new Error(data.message || 'Erro ao registrar.');
-        }
-        
-        toast({ title: 'Registro bem-sucedido!', description: 'Sua conta foi criada. Você já pode fazer o login.' });
-        // Optionally switch to login tab after registration
-    } catch (error: any) {
-        toast({ variant: 'destructive', title: 'Erro de Registro', description: error.message });
-    } finally {
-        setIsLoading(false);
-    }
+    
+    toast({ title: 'Registro bem-sucedido!', description: 'Sua conta foi criada. Você já pode fazer o login.' });
+    // In real app, you might auto-login or switch to login tab.
+    
+    setIsLoading(false);
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
     setUserData(null);
-    setAuthToken(null);
     setEmail('');
     setPassword('');
      toast({
@@ -136,7 +91,7 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
 
   const handleChangePassword = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement API call to change password
+    // TODO: Implement API call to Appwrite to change password
     if (!newPassword.password || !newPassword.confirmPassword) {
         toast({ variant: 'destructive', title: 'Erro', description: 'Preencha ambos os campos de senha.' });
         return;
@@ -269,11 +224,11 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
                     <CardContent className="space-y-4 pt-6">
                         <div className="space-y-1">
                             <Label htmlFor="email-login">Email</Label>
-                            <Input id="email-login" type="email" placeholder="seu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} required disabled={isLoading} />
+                            <Input id="email-login" type="email" placeholder="joao@email.com" value={email} onChange={(e) => setEmail(e.target.value)} required disabled={isLoading} />
                         </div>
                         <div className="space-y-1">
                             <Label htmlFor="password-login">Senha</Label>
-                            <Input id="password-login" type="password" placeholder="********" value={password} onChange={(e) => setPassword(e.target.value)} required disabled={isLoading} />
+                            <Input id="password-login" type="password" placeholder="123456" value={password} onChange={(e) => setPassword(e.target.value)} required disabled={isLoading} />
                         </div>
                     </CardContent>
                     <CardFooter>
@@ -298,7 +253,7 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
                         </div>
                         <div className="space-y-1">
                             <Label htmlFor="password-register">Senha</Label>
-                            <Input id="password-register" type="password" placeholder="Mínimo 6 caracteres" value={password} onChange={(e) => setPassword(e.target.value)} required disabled={isLoading} />
+                            <Input id="password-register" type="password" placeholder="Mínimo 8 caracteres" value={password} onChange={(e) => setPassword(e.target.value)} required disabled={isLoading} />
                         </div>
                     </CardContent>
                     <CardFooter>
@@ -315,4 +270,3 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
     </Card>
   );
 }
-
