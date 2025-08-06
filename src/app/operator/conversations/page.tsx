@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { ConversationList, type Conversation } from '@/components/operator/ConversationList';
 import { ChatWindow } from '@/components/operator/ChatWindow';
-import { AppLayout } from '@/components/layout/AppLayout';
 import { Card } from '@/components/ui/card';
 import { MessageSquare } from 'lucide-react';
 import { useMediaQuery } from '@/hooks/use-media-query';
@@ -77,39 +76,37 @@ export default function OperatorConversationsPage() {
     const showChat = selectedConversation;
 
     return (
-        <AppLayout title="Painel de Conversas">
-             <div className="p-4 md:p-0 h-[calc(100vh-64px)]">
-                <Card className="h-full grid md:grid-cols-3 lg:grid-cols-4 shadow-lg overflow-hidden">
+        <div className="p-0 h-full">
+            <Card className="h-full grid md:grid-cols-3 lg:grid-cols-4 shadow-none border-0 rounded-lg overflow-hidden">
+                <div className={cn(
+                    "md:col-span-1 lg:col-span-1 border-r",
+                    !showList && "hidden"
+                )}>
+                    <ConversationList 
+                        conversations={conversations} 
+                        onSelectConversation={handleSelectConversation}
+                        selectedConversationId={selectedConversation?.id}
+                    />
+                </div>
                     <div className={cn(
-                        "md:col-span-1 lg:col-span-1 border-r",
-                        !showList && "hidden"
-                    )}>
-                        <ConversationList 
-                            conversations={conversations} 
-                            onSelectConversation={handleSelectConversation}
-                            selectedConversationId={selectedConversation?.id}
+                    "h-full",
+                    isDesktop ? "md:col-span-2 lg:col-span-3" : "col-span-full",
+                    !showChat && "hidden md:block"
+                )}>
+                    {selectedConversation ? (
+                        <ChatWindow 
+                            conversation={selectedConversation} 
+                            onBack={() => setSelectedConversation(null)}
                         />
-                    </div>
-                     <div className={cn(
-                        "h-full",
-                        isDesktop ? "md:col-span-2 lg:col-span-3" : "col-span-full",
-                        !showChat && "hidden md:block"
-                    )}>
-                        {selectedConversation ? (
-                            <ChatWindow 
-                                conversation={selectedConversation} 
-                                onBack={() => setSelectedConversation(null)}
-                            />
-                        ) : (
-                            <div className="hidden md:flex flex-col items-center justify-center h-full text-muted-foreground bg-background">
-                                <MessageSquare className="h-16 w-16 mb-4" />
-                                <p className="text-lg">Selecione uma conversa</p>
-                                <p className="text-sm">Escolha um contato na lista para ver as mensagens.</p>
-                            </div>
-                        )}
-                    </div>
-                </Card>
-            </div>
-        </AppLayout>
+                    ) : (
+                        <div className="hidden md:flex flex-col items-center justify-center h-full text-muted-foreground bg-background">
+                            <MessageSquare className="h-16 w-16 mb-4" />
+                            <p className="text-lg">Selecione uma conversa</p>
+                            <p className="text-sm">Escolha um contato na lista para ver as mensagens.</p>
+                        </div>
+                    )}
+                </div>
+            </Card>
+        </div>
     )
 }

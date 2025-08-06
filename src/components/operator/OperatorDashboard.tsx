@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,6 +7,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { FleetMonitor } from './FleetMonitor';
 import Link from 'next/link';
 import { Button } from '../ui/button';
+import OperatorConversationsPage from '@/app/operator/conversations/page';
 
 const MetricCard = ({ title, value, icon: Icon }: { title: string, value: string | number, icon: React.ElementType }) => (
     <Card className="p-4">
@@ -60,12 +62,17 @@ export function OperatorDashboard() {
                         </DialogContent>
                     </Dialog>
                     
-                    <Link href="/operator/conversations" passHref className="w-full">
-                       <Button variant="outline" className="w-full h-20 text-lg">
-                            <MessageSquare className="mr-2 h-5 w-5" />
-                            Abrir Conversas
-                       </Button>
-                    </Link>
+                     <Dialog>
+                        <DialogTrigger asChild>
+                            <Button variant="outline" className="w-full h-20 text-lg">
+                                <MessageSquare className="mr-2 h-5 w-5" />
+                                Abrir Conversas
+                            </Button>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-6xl h-[90vh] p-0">
+                           <OperatorConversationsPage />
+                        </DialogContent>
+                    </Dialog>
                 </div>
             </CardContent>
         </Card>
