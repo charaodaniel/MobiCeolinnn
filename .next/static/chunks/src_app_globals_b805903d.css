@@ -545,6 +545,11 @@ body {
   margin-bottom: 1.5rem;
 }
 
+.-mx-6 {
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+}
+
 .-ml-4 {
   margin-left: -1rem;
 }
@@ -611,6 +616,10 @@ body {
 
 .mt-0 {
   margin-top: 0;
+}
+
+.-mb-6 {
+  margin-bottom: -1.5rem;
 }
 
 .block {
@@ -767,6 +776,14 @@ body {
 
 .h-\[calc\(100vh-64px\)\] {
   height: calc(100vh - 64px);
+}
+
+.h-20 {
+  height: 5rem;
+}
+
+.h-\[90vh\] {
+  height: 90vh;
 }
 
 .max-h-96 {
