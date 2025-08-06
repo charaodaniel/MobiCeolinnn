@@ -5,9 +5,12 @@ import { ConversationList } from './ConversationList';
 import { ChatWindow } from './ChatWindow';
 import { Card } from '@/components/ui/card';
 import type { Conversation } from './ConversationList';
-import { Car, MessageSquare, Map, List, Activity, AlertTriangle } from 'lucide-react';
+import { Car, MessageSquare, Map, List, Activity, AlertTriangle, ArrowLeft } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 import { FleetMonitor } from './FleetMonitor';
+import { useMediaQuery } from '@/hooks/use-media-query';
+import { Button } from '../ui/button';
+import { cn } from '@/lib/utils';
 
 const mockConversations: Conversation[] = [
   {
@@ -73,7 +76,8 @@ const MetricCard = ({ title, value, icon: Icon }: { title: string, value: string
 
 export function OperatorDashboard() {
   const [conversations, setConversations] = useState<Conversation[]>(mockConversations);
-  const [selectedConversation, setSelectedConversation] = useState<Conversation | null>(conversations[0]);
+  const [selectedConversation, setSelectedConversation] = useState<Conversation | null>(null);
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const handleSelectConversation = (conversation: Conversation) => {
     setSelectedConversation(conversation);
@@ -84,6 +88,28 @@ export function OperatorDashboard() {
       )
     );
   };
+
+  const ChatContent = () => (
+    selectedConversation ? (
+        <div className="flex flex-col h-full">
+           {!isDesktop && (
+            <div className="p-3 border-b">
+                <Button variant="ghost" size="sm" onClick={() => setSelectedConversation(null)}>
+                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    Voltar
+                </Button>
+            </div>
+           )}
+           <ChatWindow conversation={selectedConversation} />
+        </div>
+    ) : (
+        <div className="hidden md:flex flex-col items-center justify-center h-full text-muted-foreground">
+            <MessageSquare className="h-16 w-16 mb-4" />
+            <p className="text-lg">Selecione uma conversa</p>
+            <p className="text-sm">Escolha um contato na lista ao lado para começar a conversar.</p>
+        </div>
+    )
+  );
 
   return (
     <div className="p-4 md:p-6 lg:p-8 h-[calc(100vh-8rem)] flex flex-col gap-6">
@@ -97,9 +123,13 @@ export function OperatorDashboard() {
 
         {/* Painel Principal */}
         <Card className="flex-1 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 shadow-lg overflow-hidden">
-            <Tabs defaultValue="conversations" className="md:col-span-3 lg:col-span-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 h-full">
-                 <div className="md:col-span-1 lg:col-span-1 border-r h-full flex flex-col">
-                    <TabsList className="grid grid-cols-2 w-full rounded-none h-auto p-0">
+             {/* Left Pane (List) - Always visible on desktop, conditionally on mobile */}
+             <div className={cn(
+                "md:col-span-1 lg:col-span-1 border-r h-full flex-col",
+                isDesktop ? "flex" : selectedConversation ? "hidden" : "flex"
+             )}>
+                <Tabs defaultValue="conversations" className="w-full h-full flex flex-col">
+                    <TabsList className="grid grid-cols-2 w-full rounded-none h-auto p-0 flex-shrink-0">
                         <TabsTrigger value="conversations" className="py-3 rounded-none">
                             <MessageSquare className="mr-2 h-4 w-4" />
                             Conversas
@@ -117,26 +147,18 @@ export function OperatorDashboard() {
                         />
                      </TabsContent>
                      <TabsContent value="fleet" className="mt-0 flex-1">
-                        {/* Placeholder for Fleet List */}
-                        <div className="p-4 text-center">
-                            <h3 className="font-semibold">Status da Frota</h3>
-                            <p className="text-sm text-muted-foreground">Em desenvolvimento...</p>
-                        </div>
+                        <FleetMonitor />
                      </TabsContent>
-                </div>
-
-                <div className="hidden md:flex md:col-span-2 lg:col-span-3 h-full flex-col">
-                    {selectedConversation ? (
-                         <ChatWindow conversation={selectedConversation} />
-                    ) : (
-                        <div className="flex flex-col items-center justify-center h-full text-muted-foreground">
-                            <MessageSquare className="h-16 w-16 mb-4" />
-                            <p className="text-lg">Selecione uma conversa</p>
-                            <p className="text-sm">Escolha um contato na lista ao lado para começar a conversar.</p>
-                        </div>
-                    )}
-                </div>
-            </Tabs>
+                </Tabs>
+            </div>
+            
+            {/* Right Pane (Content) - Conditionally visible */}
+            <div className={cn(
+                "md:col-span-2 lg:col-span-3 h-full",
+                isDesktop ? "block" : selectedConversation ? "block" : "hidden"
+            )}>
+               <ChatContent />
+            </div>
         </Card>
     </div>
   );
