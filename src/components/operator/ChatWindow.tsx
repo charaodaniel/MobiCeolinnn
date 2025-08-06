@@ -60,9 +60,9 @@ export function ChatWindow({ conversation, onBack }: { conversation: Conversatio
   };
   
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full bg-background">
       {/* Chat Header */}
-      <header className="flex items-center p-3 border-b bg-muted/50">
+      <header className="flex items-center p-3 border-b bg-muted/50 shrink-0">
         {isMobile && (
             <Button variant="ghost" size="icon" className="mr-2" onClick={onBack}>
                 <ArrowLeft className="h-5 w-5" />
@@ -94,33 +94,36 @@ export function ChatWindow({ conversation, onBack }: { conversation: Conversatio
       </header>
 
       {/* Messages */}
-      <ScrollArea className="flex-1 bg-background">
-        <div className="p-4 md:p-6 space-y-6">
-            {messages.map((msg, index) => (
-                <div key={index} className={cn('flex items-end gap-2', { 'justify-end': msg.sender === 'operator' })}>
-                    {msg.sender === 'contact' && (
-                         <Avatar className="h-8 w-8">
-                            <AvatarImage src={`https://placehold.co/40x40.png`} data-ai-hint="person face" />
-                            <AvatarFallback>{conversation.name.charAt(0)}</AvatarFallback>
-                        </Avatar>
-                    )}
-                     <div className={cn('max-w-[75%] rounded-lg p-3 text-sm', {
-                        'bg-muted': msg.sender === 'contact',
-                        'bg-primary text-primary-foreground': msg.sender === 'operator'
-                    })}>
-                        <p>{msg.text}</p>
-                        <p className={cn('text-xs mt-1 text-right', {
-                            'text-muted-foreground': msg.sender === 'contact',
-                            'text-primary-foreground/70': msg.sender === 'operator'
-                        })}>{msg.timestamp}</p>
+      <div className="flex-1 overflow-y-auto">
+        <ScrollArea className="h-full">
+            <div className="p-4 md:p-6 space-y-6">
+                {messages.map((msg, index) => (
+                    <div key={index} className={cn('flex items-end gap-2', { 'justify-end': msg.sender === 'operator' })}>
+                        {msg.sender === 'contact' && (
+                             <Avatar className="h-8 w-8">
+                                <AvatarImage src={`https://placehold.co/40x40.png`} data-ai-hint="person face" />
+                                <AvatarFallback>{conversation.name.charAt(0)}</AvatarFallback>
+                            </Avatar>
+                        )}
+                         <div className={cn('max-w-[75%] rounded-lg p-3 text-sm', {
+                            'bg-muted': msg.sender === 'contact',
+                            'bg-primary text-primary-foreground': msg.sender === 'operator'
+                        })}>
+                            <p>{msg.text}</p>
+                            <p className={cn('text-xs mt-1 text-right', {
+                                'text-muted-foreground': msg.sender === 'contact',
+                                'text-primary-foreground/70': msg.sender === 'operator'
+                            })}>{msg.timestamp}</p>
+                        </div>
                     </div>
-                </div>
-            ))}
-        </div>
-      </ScrollArea>
+                ))}
+            </div>
+        </ScrollArea>
+      </div>
+
 
       {/* Message Input */}
-      <footer className="p-3 border-t bg-muted/50">
+      <footer className="p-3 border-t bg-muted/50 shrink-0">
         <div className="flex items-center gap-2">
             <Input 
                 placeholder="Digite uma mensagem..."
