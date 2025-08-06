@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Este script automatiza a instalação do Docker e a configuração inicial do Appwrite,
-# definindo credenciais importantes de forma explícita para evitar problemas de conexão.
+# copiando os arquivos de configuração locais para o diretório de instalação.
 # Execute com cautela.
 
 set -e # Encerra o script se qualquer comando falhar
@@ -37,11 +37,13 @@ echo "-> 2/4 - Configurando o diretório do Appwrite..."
 mkdir -p /root/appwrite
 cd /root/appwrite
 
-echo "-> 3/4 - Baixando arquivos de configuração do Appwrite..."
+echo "-> 3/4 - Copiando arquivos de configuração do Appwrite..."
 
-# Baixa o docker-compose.yml e o .env do Appwrite
-curl -fsSL https://appwrite.io/docker-compose.yml -o docker-compose.yml
-curl -fsSL https://appwrite.io/.env -o .env
+# Copia os arquivos locais para o diretório do Appwrite
+# ATENÇÃO: Execute este script a partir do diretório raiz do seu projeto clonado,
+# para que ele possa encontrar a pasta 'appwrite/'.
+cp ../appwrite/docker-compose.yml .
+cp ../appwrite/.env .
 
 echo "-> 4/4 - Definindo credenciais e variáveis de ambiente no arquivo .env..."
 
