@@ -2219,12 +2219,12 @@ const MetricCard = ({ title, value, icon: Icon })=>/*#__PURE__*/ (0, __TURBOPACK
                         className: "h-6 w-6 text-primary"
                     }, void 0, false, {
                         fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                        lineNumber: 67,
+                        lineNumber: 68,
                         columnNumber: 17
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                    lineNumber: 66,
+                    lineNumber: 67,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2235,7 +2235,7 @@ const MetricCard = ({ title, value, icon: Icon })=>/*#__PURE__*/ (0, __TURBOPACK
                             children: title
                         }, void 0, false, {
                             fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                            lineNumber: 70,
+                            lineNumber: 71,
                             columnNumber: 17
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2243,24 +2243,24 @@ const MetricCard = ({ title, value, icon: Icon })=>/*#__PURE__*/ (0, __TURBOPACK
                             children: value
                         }, void 0, false, {
                             fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                            lineNumber: 71,
+                            lineNumber: 72,
                             columnNumber: 17
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                    lineNumber: 69,
+                    lineNumber: 70,
                     columnNumber: 13
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-            lineNumber: 65,
+            lineNumber: 66,
             columnNumber: 9
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-        lineNumber: 64,
+        lineNumber: 65,
         columnNumber: 5
     }, this);
 _c = MetricCard;
@@ -2277,79 +2277,89 @@ function OperatorDashboard() {
                     unreadCount: 0
                 } : c));
     };
-    const ChatContent = ()=>selectedConversation ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "flex flex-col h-full",
-            children: [
-                !isDesktop && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "p-3 border-b",
-                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                        variant: "ghost",
-                        size: "sm",
-                        onClick: ()=>setSelectedConversation(null),
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$arrow$2d$left$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ArrowLeft$3e$__["ArrowLeft"], {
-                                className: "mr-2 h-4 w-4"
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                                lineNumber: 98,
-                                columnNumber: 21
-                            }, this),
-                            "Voltar"
-                        ]
-                    }, void 0, true, {
+    const renderChatOrPlaceholder = ()=>{
+        if (selectedConversation) {
+            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "flex flex-col h-full",
+                children: [
+                    !isDesktop && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "p-3 border-b flex-shrink-0",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                            variant: "ghost",
+                            size: "sm",
+                            onClick: ()=>setSelectedConversation(null),
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$arrow$2d$left$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ArrowLeft$3e$__["ArrowLeft"], {
+                                    className: "mr-2 h-4 w-4"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
+                                    lineNumber: 100,
+                                    columnNumber: 21
+                                }, this),
+                                "Voltar"
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
+                            lineNumber: 99,
+                            columnNumber: 17
+                        }, this)
+                    }, void 0, false, {
                         fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                        lineNumber: 97,
-                        columnNumber: 17
+                        lineNumber: 98,
+                        columnNumber: 13
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$operator$2f$ChatWindow$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ChatWindow"], {
+                        conversation: selectedConversation
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
+                        lineNumber: 105,
+                        columnNumber: 11
                     }, this)
-                }, void 0, false, {
-                    fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                    lineNumber: 96,
-                    columnNumber: 13
-                }, this),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$operator$2f$ChatWindow$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ChatWindow"], {
-                    conversation: selectedConversation
-                }, void 0, false, {
-                    fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                    lineNumber: 103,
-                    columnNumber: 12
-                }, this)
-            ]
-        }, void 0, true, {
-            fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-            lineNumber: 94,
-            columnNumber: 9
-        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "hidden md:flex flex-col items-center justify-center h-full text-muted-foreground",
-            children: [
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$message$2d$square$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__MessageSquare$3e$__["MessageSquare"], {
-                    className: "h-16 w-16 mb-4"
-                }, void 0, false, {
-                    fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                    lineNumber: 107,
-                    columnNumber: 13
-                }, this),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                    className: "text-lg",
-                    children: "Selecione uma conversa"
-                }, void 0, false, {
-                    fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                    lineNumber: 108,
-                    columnNumber: 13
-                }, this),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                    className: "text-sm",
-                    children: "Escolha um contato na lista ao lado para começar a conversar."
-                }, void 0, false, {
-                    fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                    lineNumber: 109,
-                    columnNumber: 13
-                }, this)
-            ]
-        }, void 0, true, {
-            fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-            lineNumber: 106,
-            columnNumber: 9
-        }, this);
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
+                lineNumber: 96,
+                columnNumber: 9
+            }, this);
+        }
+        if (isDesktop) {
+            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "flex flex-col items-center justify-center h-full text-muted-foreground bg-background",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$message$2d$square$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__MessageSquare$3e$__["MessageSquare"], {
+                        className: "h-16 w-16 mb-4"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
+                        lineNumber: 113,
+                        columnNumber: 13
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "text-lg",
+                        children: "Selecione uma conversa"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
+                        lineNumber: 114,
+                        columnNumber: 13
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "text-sm",
+                        children: "Escolha um contato na lista ao lado para começar a conversar."
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
+                        lineNumber: 115,
+                        columnNumber: 13
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
+                lineNumber: 112,
+                columnNumber: 9
+            }, this);
+        }
+        return null;
+    };
+    const showList = !selectedConversation || isDesktop;
+    const showChat = selectedConversation;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "p-4 md:p-6 lg:p-8 h-[calc(100vh-8rem)] flex flex-col gap-6",
         children: [
@@ -2362,7 +2372,7 @@ function OperatorDashboard() {
                         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$car$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Car$3e$__["Car"]
                     }, void 0, false, {
                         fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                        lineNumber: 118,
+                        lineNumber: 130,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(MetricCard, {
@@ -2371,7 +2381,7 @@ function OperatorDashboard() {
                         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$activity$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Activity$3e$__["Activity"]
                     }, void 0, false, {
                         fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                        lineNumber: 119,
+                        lineNumber: 131,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(MetricCard, {
@@ -2380,7 +2390,7 @@ function OperatorDashboard() {
                         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$message$2d$square$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__MessageSquare$3e$__["MessageSquare"]
                     }, void 0, false, {
                         fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                        lineNumber: 120,
+                        lineNumber: 132,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(MetricCard, {
@@ -2389,20 +2399,20 @@ function OperatorDashboard() {
                         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$triangle$2d$alert$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__AlertTriangle$3e$__["AlertTriangle"]
                     }, void 0, false, {
                         fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                        lineNumber: 121,
+                        lineNumber: 133,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                lineNumber: 117,
+                lineNumber: 129,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
-                className: "flex-1 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 shadow-lg overflow-hidden",
+                className: "flex-1 grid md:grid-cols-3 lg:grid-cols-4 shadow-lg overflow-hidden",
                 children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])("md:col-span-1 lg:col-span-1 border-r h-full flex-col", isDesktop ? "flex" : selectedConversation ? "hidden" : "flex"),
+                    showList && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "md:col-span-1 lg:col-span-1 border-r",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$tabs$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Tabs"], {
                             defaultValue: "conversations",
                             className: "w-full h-full flex flex-col",
@@ -2418,14 +2428,14 @@ function OperatorDashboard() {
                                                     className: "mr-2 h-4 w-4"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                                                    lineNumber: 134,
+                                                    lineNumber: 143,
                                                     columnNumber: 29
                                                 }, this),
                                                 "Conversas"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                                            lineNumber: 133,
+                                            lineNumber: 142,
                                             columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$tabs$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TabsTrigger"], {
@@ -2436,85 +2446,81 @@ function OperatorDashboard() {
                                                     className: "mr-2 h-4 w-4"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                                                    lineNumber: 138,
+                                                    lineNumber: 147,
                                                     columnNumber: 29
                                                 }, this),
                                                 "Frota"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                                            lineNumber: 137,
+                                            lineNumber: 146,
                                             columnNumber: 25
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                                    lineNumber: 132,
+                                    lineNumber: 141,
                                     columnNumber: 21
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$tabs$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TabsContent"], {
                                     value: "conversations",
-                                    className: "mt-0 flex-1",
+                                    className: "mt-0 flex-1 overflow-y-auto",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$operator$2f$ConversationList$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ConversationList"], {
                                         conversations: conversations,
                                         onSelectConversation: handleSelectConversation,
                                         selectedConversationId: selectedConversation?.id
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                                        lineNumber: 143,
+                                        lineNumber: 152,
                                         columnNumber: 25
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                                    lineNumber: 142,
+                                    lineNumber: 151,
                                     columnNumber: 22
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$tabs$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TabsContent"], {
                                     value: "fleet",
-                                    className: "mt-0 flex-1",
+                                    className: "mt-0 flex-1 overflow-y-auto",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$operator$2f$FleetMonitor$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FleetMonitor"], {}, void 0, false, {
                                         fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                                        lineNumber: 150,
+                                        lineNumber: 159,
                                         columnNumber: 25
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                                    lineNumber: 149,
+                                    lineNumber: 158,
                                     columnNumber: 22
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                            lineNumber: 131,
+                            lineNumber: 140,
                             columnNumber: 17
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                        lineNumber: 127,
-                        columnNumber: 14
+                        lineNumber: 139,
+                        columnNumber: 15
                     }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])("md:col-span-2 lg:col-span-3 h-full", isDesktop ? "block" : selectedConversation ? "block" : "hidden"),
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(ChatContent, {}, void 0, false, {
-                            fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                            lineNumber: 160,
-                            columnNumber: 16
-                        }, this)
+                    showChat && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])("h-full", isDesktop ? "md:col-span-2 lg:col-span-3" : "col-span-full"),
+                        children: renderChatOrPlaceholder()
                     }, void 0, false, {
                         fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                        lineNumber: 156,
-                        columnNumber: 13
+                        lineNumber: 166,
+                        columnNumber: 15
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-                lineNumber: 125,
+                lineNumber: 137,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/operator/OperatorDashboard.tsx",
-        lineNumber: 115,
+        lineNumber: 127,
         columnNumber: 5
     }, this);
 }

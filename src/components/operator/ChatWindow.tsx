@@ -6,9 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
-import { MoreVertical, Phone, Send, Car, User, Shield } from "lucide-react";
+import { MoreVertical, Phone, Send, Car, User, Shield, ArrowLeft } from "lucide-react";
 import { Conversation } from './ConversationList';
 import { Separator } from '../ui/separator';
+import { useMediaQuery } from '@/hooks/use-media-query';
 
 interface Message {
     sender: 'operator' | 'contact';
@@ -32,9 +33,10 @@ const RoleIcon = ({ role }: { role: Conversation['role'] }) => {
     }
 }
 
-export function ChatWindow({ conversation }: { conversation: Conversation }) {
+export function ChatWindow({ conversation, onBack }: { conversation: Conversation, onBack: () => void }) {
   const [messages, setMessages] = useState<Message[]>(getMockMessages(conversation.name));
   const [newMessage, setNewMessage] = useState('');
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   const handleSendMessage = () => {
     if (!newMessage.trim()) return;
@@ -60,6 +62,11 @@ export function ChatWindow({ conversation }: { conversation: Conversation }) {
     <div className="flex flex-col h-full">
       {/* Chat Header */}
       <header className="flex items-center p-3 border-b bg-muted/50">
+        {isMobile && (
+            <Button variant="ghost" size="icon" className="mr-2" onClick={onBack}>
+                <ArrowLeft className="h-5 w-5" />
+            </Button>
+        )}
         <div className="flex items-center gap-4 flex-1">
             <Avatar className="h-10 w-10">
                 <AvatarImage src={`https://placehold.co/40x40.png`} data-ai-hint={`${conversation.avatar} face`} />
