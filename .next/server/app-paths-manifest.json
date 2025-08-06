@@ -1,3 +1,4 @@
 {
+  "/operator/page": "app/operator/page.js",
   "/page": "app/page.js"
 }

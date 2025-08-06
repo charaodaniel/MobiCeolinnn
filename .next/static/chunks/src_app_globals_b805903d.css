@@ -597,6 +597,14 @@ body {
   margin-top: 1rem;
 }
 
+.ml-4 {
+  margin-left: 1rem;
+}
+
+.mt-0 {
+  margin-top: 0;
+}
+
 .block {
   display: block;
 }
@@ -1158,6 +1166,10 @@ body {
   gap: 2rem;
 }
 
+.gap-6 {
+  gap: 1.5rem;
+}
+
 .space-x-1 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(.25rem * var(--tw-space-x-reverse));
@@ -1278,6 +1290,10 @@ body {
 
 .rounded-sm {
   border-radius: calc(var(--radius)  - 4px);
+}
+
+.rounded-none {
+  border-radius: 0;
 }
 
 .border {
@@ -1461,6 +1477,10 @@ body {
   background-color: #0000;
 }
 
+.bg-primary\/10 {
+  background-color: hsl(var(--primary) / .1);
+}
+
 .bg-gradient-to-br {
   background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
 }
@@ -1599,6 +1619,11 @@ body {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+.py-3 {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
 }
 
 .pb-2 {
@@ -2741,6 +2766,10 @@ body {
     grid-column: span 2 / span 2;
   }
 
+  .md\:col-span-3 {
+    grid-column: span 3 / span 3;
+  }
+
   .md\:block {
     display: block;
   }
@@ -2800,6 +2829,10 @@ body {
     grid-column: span 3 / span 3;
   }
 
+  .lg\:col-span-4 {
+    grid-column: span 4 / span 4;
+  }
+
   .lg\:h-\[calc\(100vh-12rem\)\] {
     height: calc(100vh - 12rem);
   }
@@ -2814,6 +2847,12 @@ body {
 
   .lg\:p-8 {
     padding: 2rem;
+  }
+}
+
+@media (width >= 1280px) {
+  .xl\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
