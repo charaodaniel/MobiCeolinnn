@@ -745,6 +745,10 @@ body {
   height: 1px;
 }
 
+.h-\[calc\(100vh-8rem\)\] {
+  height: calc(100vh - 8rem);
+}
+
 .max-h-96 {
   max-height: 24rem;
 }
@@ -891,6 +895,10 @@ body {
 
 .w-px {
   width: 1px;
+}
+
+.w-16 {
+  width: 4rem;
 }
 
 .min-w-0 {
@@ -2163,6 +2171,10 @@ body {
   background-color: hsl(var(--secondary) / .8);
 }
 
+.hover\:bg-background:hover {
+  background-color: hsl(var(--background));
+}
+
 .hover\:text-accent-foreground:hover {
   color: hsl(var(--accent-foreground));
 }
@@ -2721,12 +2733,24 @@ body {
 }
 
 @media (width >= 768px) {
+  .md\:col-span-1 {
+    grid-column: span 1 / span 1;
+  }
+
+  .md\:col-span-2 {
+    grid-column: span 2 / span 2;
+  }
+
   .md\:block {
     display: block;
   }
 
   .md\:inline {
     display: inline;
+  }
+
+  .md\:flex {
+    display: flex;
   }
 
   .md\:hidden {
@@ -2739,6 +2763,10 @@ body {
 
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .md\:flex-row {
@@ -2766,6 +2794,10 @@ body {
 
   .lg\:col-span-2 {
     grid-column: span 2 / span 2;
+  }
+
+  .lg\:col-span-3 {
+    grid-column: span 3 / span 3;
   }
 
   .lg\:h-\[calc\(100vh-12rem\)\] {
