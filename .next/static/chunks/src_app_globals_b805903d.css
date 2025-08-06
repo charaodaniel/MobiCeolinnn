@@ -501,6 +501,10 @@ body {
   grid-column: span 2 / span 2;
 }
 
+.col-span-full {
+  grid-column: 1 / -1;
+}
+
 .-mx-1 {
   margin-left: -.25rem;
   margin-right: -.25rem;
