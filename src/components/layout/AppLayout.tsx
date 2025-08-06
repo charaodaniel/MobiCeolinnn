@@ -2,7 +2,6 @@ import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Car, Rocket, Shield, User, MessageSquare } from 'lucide-react';
-import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '../ui/dialog';
 import { LoginCard } from '../auth/LoginCard';
 import { PassengerAuthForm } from '../auth/PassengerAuthForm';
 import { Footer } from './Footer';
@@ -53,6 +52,10 @@ export function AppLayout({ children, title, showAuthButtons = false, showDriver
                       </Button>
                     </SheetTrigger>
                     <SheetContent side="left">
+                      <SheetHeader>
+                        <SheetTitle className="sr-only">Seleção de Perfil</SheetTitle>
+                        <SheetDescription className="sr-only">Escolha entre pedir uma viagem, entrar como motorista ou operador.</SheetDescription>
+                      </SheetHeader>
                       <LoginCard />
                     </SheetContent>
                   </Sheet>
@@ -72,6 +75,10 @@ export function AppLayout({ children, title, showAuthButtons = false, showDriver
                   </Button>
                 </SheetTrigger>
                 <SheetContent>
+                    <SheetHeader>
+                        <SheetTitle className="sr-only">Painel do Passageiro</SheetTitle>
+                        <SheetDescription className="sr-only">Faça login, registre-se ou gerencie seu perfil de passageiro.</SheetDescription>
+                    </SheetHeader>
                     <PassengerAuthForm />
                 </SheetContent>
               </Sheet>
