@@ -4,61 +4,50 @@ CEOLIN Mobilidade Urbana é uma plataforma de transporte que conecta passageiros
 
 Esta versão do projeto utiliza **Supabase** como backend, uma alternativa de código aberto ao Firebase que oferece banco de dados, autenticação e mais, com a flexibilidade da auto-hospedagem (self-hosting).
 
-## Como Começar (Ambiente com Supabase)
+## Fluxo de Trabalho de Desenvolvimento
 
-### 1. Preparando o Ambiente (VPS)
+O fluxo recomendado é executar o backend (Supabase e API) na sua VPS e o frontend (Next.js) na sua máquina local.
 
-Antes de tudo, você precisa de um ambiente com Docker e Git. O script abaixo automatiza todo o processo, reinstalando o Docker para garantir uma versão limpa e compatível, e clonando o repositório do Supabase.
+### 1. Configuração do Backend (Na sua VPS)
 
-1.  **Envie o script de reinstalação para sua VPS.**
-2.  **Dê permissão de execução:** `chmod +x reinstall-supabase.sh`
-3.  **Execute-o como sudo:**
-    ```bash
-    sudo ./reinstall-supabase.sh
-    ```
-    Este script cuidará de tudo, desde a instalação do Docker até a configuração dos arquivos do Supabase com as credenciais corretas.
-
-### 2. Iniciando o Projeto
-
-Após a preparação do ambiente, você pode iniciar todos os serviços (Supabase e a API de backend) com um único comando.
-
-1.  **Navegue até o diretório da API (se não estiver lá):**
-    ```bash
-    cd /root/api
-    ```
-2.  **Execute o script de inicialização:**
-    ```bash
-    ./start-project.sh
-    ```
-    Este script irá:
-    -   Iniciar os contêineres do Supabase em segundo plano.
-    -   Aguardar o banco de dados ficar pronto.
-    -   Iniciar a API Node.js usando `pm2` para mantê-la rodando.
-
-### 3. Configurando o Frontend (Interface do Usuário)
-
-1.  **Clone o repositório (se ainda não o fez):**
+1.  **Clone o projeto para a VPS:**
     ```bash
     git clone <URL_DO_SEU_REPOSITORIO>
     cd <NOME_DO_DIRETORIO>
     ```
-2.  **Configure as Variáveis de Ambiente do Frontend:**
-    -   Crie um arquivo chamado `.env.local` na raiz do projeto.
-    -   Adicione a URL da sua API de backend.
+2.  **Execute o script de instalação do Supabase:** Este script prepara todo o ambiente Docker e Supabase.
+    ```bash
+    chmod +x reinstall-supabase.sh
+    sudo ./reinstall-supabase.sh
+    ```
+3.  **Envie a pasta `api` para a VPS (se não clonou o repo inteiro):**
+    ```bash
+    # No seu computador local
+    scp -r api/ root@SEU_IP_DA_VPS:/root/
+    ```
+4.  **Inicie todos os serviços do backend:**
+    ```bash
+    cd /root/api
+    chmod +x start-project.sh
+    ./start-project.sh
+    ```
+    Isso iniciará o Supabase e a API Node.js. Sua API estará rodando em `http://SEU_IP_DA_VPS:3001`.
+
+### 2. Configuração do Frontend (Na sua máquina local)
+
+1.  **Configure as Variáveis de Ambiente:**
+    -   Certifique-se de que você tem o projeto na sua máquina local.
+    -   Na raiz do projeto, edite o arquivo `.env.local`.
+    -   Altere a variável `NEXT_PUBLIC_API_URL` para apontar para o IP da sua VPS onde a API está rodando.
       ```env
-      # URL da API de Backend
-      # O IP deve ser o da sua VPS onde o Supabase e a API estão rodando.
       NEXT_PUBLIC_API_URL=http://SEU_IP_DA_VPS:3001/api
       ```
-3.  **Instale as dependências:**
+2.  **Instale as dependências e execute:**
     ```bash
     npm install
-    ```
-4.  **Execute o servidor de desenvolvimento:**
-    ```bash
     npm run dev
     ```
-5.  A aplicação estará disponível em `http://localhost:9002`.
+3.  Seu aplicativo estará disponível em `http://localhost:9002` e se comunicará com a API na sua VPS.
 
 ## Acessos de Demonstração
 
@@ -73,10 +62,3 @@ Após a preparação do ambiente, você pode iniciar todos os serviços (Supabas
 - **Passageiro:**
   - **Email:** `joao@email.com`
   - **Senha:** `123456`
-
-## Tecnologias Utilizadas
-
-- **Backend:** Supabase (Docker), Node.js (Express)
-- **Frontend:** React, Next.js, TypeScript, Tailwind CSS
-- **IA:** Genkit
-- **Banco de Dados:** PostgreSQL (via Supabase)

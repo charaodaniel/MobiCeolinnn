@@ -5190,18 +5190,12 @@ function PassengerAuthForm({ onLoginSuccess }) {
     const [isCameraDialogOpen, setIsCameraDialogOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [avatarImage, setAvatarImage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('https://placehold.co/128x128.png');
     const [activeTab, setActiveTab] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('rides');
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    const apiUrl = ("TURBOPACK compile-time value", "http://SEU_IP_DA_VPS:3001/api");
     const handleLogin = async (e)=>{
         e.preventDefault();
         setIsLoading(true);
-        if (!apiUrl) {
-            toast({
-                variant: 'destructive',
-                title: 'Erro de Configuração',
-                description: 'A URL da API não foi configurada.'
-            });
-            setIsLoading(false);
-            return;
+        if ("TURBOPACK compile-time falsy", 0) {
+            "TURBOPACK unreachable";
         }
         try {
             const response = await fetch(`${apiUrl}/auth/login`, {
@@ -5235,14 +5229,8 @@ function PassengerAuthForm({ onLoginSuccess }) {
     const handleRegister = async (e)=>{
         e.preventDefault();
         setIsLoading(true);
-        if (!apiUrl) {
-            toast({
-                variant: 'destructive',
-                title: 'Erro de Configuração',
-                description: 'A URL da API não foi configurada.'
-            });
-            setIsLoading(false);
-            return;
+        if ("TURBOPACK compile-time falsy", 0) {
+            "TURBOPACK unreachable";
         }
         try {
             const response = await fetch(`${apiUrl}/auth/register`, {
