@@ -23,7 +23,7 @@ interface PassengerAuthFormProps {
 }
 
 interface UserData {
-    $id: string;
+    id: string;
     name: string;
     email: string;
 }
@@ -49,30 +49,60 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
   const [avatarImage, setAvatarImage] = useState('https://placehold.co/128x128.png');
   const [activeTab, setActiveTab] = useState<'rides' | 'chats'>('rides');
 
-  // TODO: Replace with Appwrite SDK
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // MOCK LOGIN
-    if (email === 'joao@email.com' && password === '123456') {
-        toast({ title: 'Login bem-sucedido!', description: `Bem-vindo(a) de volta, João Passageiro!` });
-        setUserData({ $id: '1', name: 'João Passageiro', email: 'joao@email.com' });
+    if (!apiUrl) {
+        toast({ variant: 'destructive', title: 'Erro de Configuração', description: 'A URL da API não foi configurada.' });
+        setIsLoading(false);
+        return;
+    }
+
+    try {
+        const response = await fetch(`${apiUrl}/auth/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message);
+        
+        toast({ title: 'Login bem-sucedido!', description: `Bem-vindo(a) de volta, ${data.user.name}!` });
+        setUserData(data.user);
         setIsLoggedIn(true);
         if (onLoginSuccess) onLoginSuccess();
-    } else {
-        toast({ variant: 'destructive', title: 'Erro de Login', description: 'Credenciais inválidas.' });
+    } catch (error: any) {
+        toast({ variant: 'destructive', title: 'Erro de Login', description: error.message || 'Credenciais inválidas.' });
     }
     setIsLoading(false);
   };
 
-  // TODO: Replace with Appwrite SDK
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     
-    toast({ title: 'Registro bem-sucedido!', description: 'Sua conta foi criada. Você já pode fazer o login.' });
-    // In real app, you might auto-login or switch to login tab.
+    if (!apiUrl) {
+        toast({ variant: 'destructive', title: 'Erro de Configuração', description: 'A URL da API não foi configurada.' });
+        setIsLoading(false);
+        return;
+    }
+    
+    try {
+        const response = await fetch(`${apiUrl}/auth/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, password, role: 'Passageiro' })
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message);
+        
+        toast({ title: 'Registro bem-sucedido!', description: 'Sua conta foi criada. Você já pode fazer o login.' });
+    } catch (error: any) {
+         toast({ variant: 'destructive', title: 'Erro no Registro', description: error.message || 'Não foi possível criar a conta.' });
+    }
     
     setIsLoading(false);
   };
@@ -91,7 +121,7 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
 
   const handleChangePassword = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement API call to Appwrite to change password
+    // TODO: Implement API call to change password
     if (!newPassword.password || !newPassword.confirmPassword) {
         toast({ variant: 'destructive', title: 'Erro', description: 'Preencha ambos os campos de senha.' });
         return;

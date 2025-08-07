@@ -1,42 +1,39 @@
-## CEOLIN Mobilidade Urbana: Seu App de Transporte Inteligente
+# CEOLIN Mobilidade Urbana: Seu App de Transporte Inteligente
 
 CEOLIN Mobilidade Urbana é uma plataforma de transporte que conecta passageiros e motoristas de forma eficiente e inovadora, com foco especial em atender tanto demandas urbanas quanto rurais e intermunicipais.
 
-Esta versão do projeto utiliza **Appwrite** como backend, uma solução de Backend-como-um-Serviço (BaaS) de código aberto que é leve, performática e ideal para auto-hospedagem (self-hosting), especialmente em VPS com recursos moderados.
+Esta versão do projeto utiliza **Supabase** como backend, uma alternativa de código aberto ao Firebase que oferece banco de dados, autenticação e mais, com a flexibilidade da auto-hospedagem (self-hosting).
 
-## Como Começar (Ambiente com Appwrite)
+## Como Começar (Ambiente com Supabase)
 
-### 1. Configurando o Backend (Appwrite na VPS)
+### 1. Preparando o Ambiente (VPS)
 
-A instalação do Appwrite é feita com um único comando Docker.
+Antes de tudo, você precisa de um ambiente com Docker e Git. O script abaixo automatiza todo o processo, reinstalando o Docker para garantir uma versão limpa e compatível, e clonando o repositório do Supabase.
 
-1.  **Conecte-se à sua VPS via SSH.**
-2.  **Execute o instalador oficial do Appwrite:**
-    -   Certifique-se de que o Docker esteja instalado e atualizado em sua máquina.
-    -   O comando abaixo irá guiá-lo por um processo de configuração interativo.
-        ```bash
-        docker run -it --rm \
-            --volume /var/run/docker.sock:/var/run/docker.sock \
-            --volume "$(pwd)"/appwrite:/usr/src/code/appwrite:rw \
-            --entrypoint="install" \
-            appwrite/appwrite:latest
-        ```
-    -   Siga as instruções no terminal para configurar a porta HTTP, o domínio e outras chaves secretas.
+1.  **Envie o script de reinstalação para sua VPS.**
+2.  **Dê permissão de execução:** `chmod +x reinstall-supabase.sh`
+3.  **Execute-o como sudo:**
+    ```bash
+    sudo ./reinstall-supabase.sh
+    ```
+    Este script cuidará de tudo, desde a instalação do Docker até a configuração dos arquivos do Supabase com as credenciais corretas.
 
-3.  **Acesse o Painel do Appwrite:**
-    -   Após a instalação, abra seu navegador e acesse `http://SEU_IP_DA_VPS`.
-    -   Crie sua conta de administrador.
-    -   Crie um novo projeto. Anote o **Project ID**.
-    -   Na seção "Platforms", adicione uma nova plataforma "Web", inserindo `localhost` para desenvolvimento e o IP da sua VPS para produção.
-    -   Na seção "API Keys", gere uma nova chave de API com todos os escopos. Anote o **Secret**.
+### 2. Iniciando o Projeto
 
-### 2. (Opcional) Reconfigurando o Ambiente
-Se você aceitou as configurações padrão durante a instalação e deseja ajustá-las (por exemplo, mudar a senha do banco de dados), você pode usar o script `reconfigure-appwrite.sh` contido neste repositório.
+Após a preparação do ambiente, você pode iniciar todos os serviços (Supabase e a API de backend) com um único comando.
 
-1.  Envie o script para sua VPS.
-2.  Dê permissão de execução: `chmod +x reconfigure-appwrite.sh`
-3.  Execute-o: `sudo ./reconfigure-appwrite.sh`
-4.  Siga as instruções do script para reiniciar o Appwrite e aplicar as mudanças.
+1.  **Navegue até o diretório da API (se não estiver lá):**
+    ```bash
+    cd /root/api
+    ```
+2.  **Execute o script de inicialização:**
+    ```bash
+    ./start-project.sh
+    ```
+    Este script irá:
+    -   Iniciar os contêineres do Supabase em segundo plano.
+    -   Aguardar o banco de dados ficar pronto.
+    -   Iniciar a API Node.js usando `pm2` para mantê-la rodando.
 
 ### 3. Configurando o Frontend (Interface do Usuário)
 
@@ -47,12 +44,11 @@ Se você aceitou as configurações padrão durante a instalação e deseja ajus
     ```
 2.  **Configure as Variáveis de Ambiente do Frontend:**
     -   Crie um arquivo chamado `.env.local` na raiz do projeto.
-    -   Adicione as credenciais do seu projeto Appwrite. Estas chaves são seguras para serem expostas no frontend.
+    -   Adicione a URL da sua API de backend.
       ```env
-      # Credenciais do Cliente Appwrite (Frontend)
-      # Substitua com as informações do seu projeto
-      NEXT_PUBLIC_APPWRITE_ENDPOINT=http://SEU_IP_DA_VPS/v1
-      NEXT_PUBLIC_APPWRITE_PROJECT_ID=SEU_PROJECT_ID
+      # URL da API de Backend
+      # O IP deve ser o da sua VPS onde o Supabase e a API estão rodando.
+      NEXT_PUBLIC_API_URL=http://SEU_IP_DA_VPS:3001/api
       ```
 3.  **Instale as dependências:**
     ```bash
@@ -80,6 +76,7 @@ Se você aceitou as configurações padrão durante a instalação e deseja ajus
 
 ## Tecnologias Utilizadas
 
-- **Backend:** Appwrite (Docker)
+- **Backend:** Supabase (Docker), Node.js (Express)
 - **Frontend:** React, Next.js, TypeScript, Tailwind CSS
 - **IA:** Genkit
+- **Banco de Dados:** PostgreSQL (via Supabase)
