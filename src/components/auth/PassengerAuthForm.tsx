@@ -105,7 +105,7 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
   if (isLoggedIn && userData) {
       return (
         <div className="flex flex-col bg-muted/40 h-full">
-            <div className="flex flex-col items-center gap-4 py-8 bg-card">
+            <div className="flex flex-col items-center gap-4 py-8 bg-card shrink-0">
                 <Dialog open={isCameraDialogOpen} onOpenChange={setIsCameraDialogOpen}>
                     <DialogTrigger asChild>
                          <div className="relative group">
@@ -131,8 +131,8 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
                 </div>
             </div>
 
-            <div className="flex-1 flex flex-col pt-6 bg-muted/40">
-                 <div className="bg-card">
+            <div className="flex-1 flex flex-col pt-6 bg-muted/40 overflow-hidden">
+                 <div className="bg-card shrink-0">
                     <button onClick={() => setActiveTab('rides')} className="flex items-center justify-between w-full p-4 text-left">
                         <div className="flex items-center gap-4">
                             <History className="h-6 w-6 text-primary" />
@@ -179,7 +179,7 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
                                 </div>
                                 <DialogFooter>
                                      <Button type="button" variant="secondary" onClick={() => setIsPasswordDialogOpen(false)}>Cancelar</Button>
-                                    <Button type="submit">Salvar Nova Senha</Button>
+                                     <Button type="submit">Salvar Nova Senha</Button>
                                 </DialogFooter>
                             </form>
                         </DialogContent>
@@ -193,7 +193,7 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
                     </button>
                  </div>
                  
-                <div className="flex-1 flex flex-col mt-4 bg-card pb-4">
+                <div className="flex-1 flex flex-col mt-4 bg-card pb-4 overflow-hidden">
                     {activeTab === 'rides' ? <RideHistory /> : <ChatHistory />}
                 </div>
             </div>
@@ -267,3 +267,5 @@ export function PassengerAuthForm({ onLoginSuccess }: PassengerAuthFormProps) {
     </Card>
   );
 }
+
+    

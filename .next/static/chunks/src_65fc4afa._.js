@@ -5566,7 +5566,7 @@ function PassengerAuthForm({ onLoginSuccess }) {
             className: "flex flex-col bg-muted/40 h-full",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex flex-col items-center gap-4 py-8 bg-card",
+                    className: "flex flex-col items-center gap-4 py-8 bg-card shrink-0",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Dialog"], {
                             open: isCameraDialogOpen,
@@ -5674,10 +5674,10 @@ function PassengerAuthForm({ onLoginSuccess }) {
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex-1 flex flex-col pt-6 bg-muted/40",
+                    className: "flex-1 flex flex-col pt-6 bg-muted/40 overflow-hidden",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "bg-card",
+                            className: "bg-card shrink-0",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     onClick: ()=>setActiveTab('rides'),
@@ -5940,7 +5940,7 @@ function PassengerAuthForm({ onLoginSuccess }) {
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
                                                                 lineNumber: 182,
-                                                                columnNumber: 37
+                                                                columnNumber: 38
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
@@ -6009,7 +6009,7 @@ function PassengerAuthForm({ onLoginSuccess }) {
                             columnNumber: 18
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex-1 flex flex-col mt-4 bg-card pb-4",
+                            className: "flex-1 flex flex-col mt-4 bg-card pb-4 overflow-hidden",
                             children: activeTab === 'rides' ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$passenger$2f$RideHistory$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RideHistory"], {}, void 0, false, {
                                 fileName: "[project]/src/components/auth/PassengerAuthForm.tsx",
                                 lineNumber: 197,
