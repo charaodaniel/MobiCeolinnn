@@ -7,14 +7,6 @@ import { PassengerAuthForm } from '../auth/PassengerAuthForm';
 import { Footer } from './Footer';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet"
-import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -65,21 +57,23 @@ export function AppLayout({ children, title, showAuthButtons = false, showDriver
             <div className="flex items-center gap-2">
               {showAuthButtons && (
                 <>
-                  <Sheet>
-                    <SheetTrigger asChild>
+                  <Dialog>
+                    <DialogTrigger asChild>
                        <Button variant="ghost">
                         <Car />
                         <span className="ml-2 hidden md:inline">Motorista</span>
                       </Button>
-                    </SheetTrigger>
-                    <SheetContent side="left">
-                      <SheetHeader>
-                        <SheetTitle>Seleção de Perfil</SheetTitle>
-                        <SheetDescription>Escolha entre pedir uma viagem, entrar como motorista ou operador.</SheetDescription>
-                      </SheetHeader>
-                      <LoginCard />
-                    </SheetContent>
-                  </Sheet>
+                    </DialogTrigger>
+                    <DialogContent className="max-h-[90vh] flex flex-col">
+                      <DialogHeader>
+                        <DialogTitle>Portal de Acesso</DialogTitle>
+                        <DialogDescription>Acesse sua conta de motorista ou operador.</DialogDescription>
+                      </DialogHeader>
+                      <ScrollArea className="h-full">
+                        <LoginCard />
+                      </ScrollArea>
+                    </DialogContent>
+                  </Dialog>
                 </>
               )}
               <Link href="/admin/login">
