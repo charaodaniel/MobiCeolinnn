@@ -14,6 +14,15 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { ScrollArea } from '../ui/scroll-area';
 
 
 export function AppLayout({ children, title, showAuthButtons = false, showDriverAvatar = false }: { children: ReactNode; title: string, showAuthButtons?: boolean, showDriverAvatar?: boolean }) {
@@ -79,21 +88,25 @@ export function AppLayout({ children, title, showAuthButtons = false, showDriver
                     <span className="sr-only">Admin</span>
                   </Button>
               </Link>
-              <Sheet>
-                <SheetTrigger asChild>
+              <Dialog>
+                <DialogTrigger asChild>
                   <Button variant="ghost" size="icon" className="rounded-full">
                     <User className="h-5 w-5" />
                     <span className="sr-only">Toggle user menu</span>
                   </Button>
-                </SheetTrigger>
-                <SheetContent>
-                    <SheetHeader>
-                        <SheetTitle>Painel do Passageiro</SheetTitle>
-                        <SheetDescription>Faça login, registre-se ou gerencie seu perfil de passageiro.</SheetDescription>
-                    </SheetHeader>
-                    <PassengerAuthForm />
-                </SheetContent>
-              </Sheet>
+                </DialogTrigger>
+                <DialogContent className="max-h-[90vh] flex flex-col">
+                    <DialogHeader>
+                        <DialogTitle>Painel do Passageiro</DialogTitle>
+                        <DialogDescription>Faça login, registre-se ou gerencie seu perfil de passageiro.</DialogDescription>
+                    </DialogHeader>
+                    <div className="flex-1 overflow-hidden">
+                      <ScrollArea className="h-full">
+                        <PassengerAuthForm />
+                      </ScrollArea>
+                    </div>
+                </DialogContent>
+              </Dialog>
             </div>
         </div>
         <div className="container sm:hidden pb-2 px-4">
