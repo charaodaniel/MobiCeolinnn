@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Car, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { createClient } from '@/lib/supabase/client';
 
 export default function DriverLoginPage() {
     const router = useRouter();
@@ -21,58 +22,48 @@ export default function DriverLoginPage() {
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
+        
+        const supabase = createClient();
 
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email: email,
+            password: password,
+        });
 
-        if (!apiUrl) {
-            console.error("API URL não está configurada em .env.local");
-            toast({
-                variant: 'destructive',
-                title: 'Erro de Configuração',
-                description: 'A URL da API não foi encontrada. O administrador precisa configurar o sistema.',
-            });
-            setIsLoading(false);
-            return;
-        }
-
-        try {
-            const response = await fetch(`${apiUrl}/auth/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password }),
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                // Se a resposta não for OK, lança um erro com a mensagem da API
-                throw new Error(data.message || 'Erro ao tentar fazer login.');
-            }
-
-            // Lógica para login de motorista
-            if (data.user && data.user.role === 'Motorista') {
-                // Em uma aplicação real, você salvaria o token (data.token)
-                // em um local seguro (ex: cookies httpOnly) para autenticar requisições futuras.
-                toast({
-                    title: 'Login bem-sucedido!',
-                    description: `Bem-vindo, ${data.user.name}! Redirecionando para o painel.`,
-                });
-                router.push('/driver');
-            } else {
-                 throw new Error('Acesso permitido apenas para motoristas.');
-            }
-
-        } catch (error: any) {
+        if (error) {
             toast({
                 variant: 'destructive',
                 title: 'Erro de Login',
                 description: error.message || 'Credenciais inválidas ou erro no servidor. Tente novamente.',
             });
-        } finally {
             setIsLoading(false);
+            return;
         }
+
+        // Após o login, verificar se o usuário tem o perfil de motorista.
+        // Em um app real, isso viria de uma tabela de perfis.
+        // Por agora, vamos simular que qualquer login bem-sucedido é de motorista.
+        
+        // TODO: Adicionar verificação de perfil de 'Motorista' em uma tabela 'profiles'.
+        const isDriver = true; // Simulação
+
+        if (data.user && isDriver) {
+            toast({
+                title: 'Login bem-sucedido!',
+                description: `Bem-vindo! Redirecionando para o painel.`,
+            });
+            router.push('/driver');
+        } else {
+             toast({
+                variant: 'destructive',
+                title: 'Acesso Negado',
+                description: 'Acesso permitido apenas para motoristas.',
+            });
+            // Deslogar o usuário se ele não for motorista
+            await supabase.auth.signOut();
+        }
+
+        setIsLoading(false);
     };
 
     return (
