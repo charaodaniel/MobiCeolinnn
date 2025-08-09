@@ -90,10 +90,6 @@ export function AppLayout({ children, title, showAuthButtons = false, showDriver
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="max-h-[90vh] flex flex-col">
-                    <DialogHeader>
-                        <DialogTitle>Painel do Passageiro</DialogTitle>
-                        <DialogDescription>Faça login, registre-se ou gerencie seu perfil de passageiro.</DialogDescription>
-                    </DialogHeader>
                     <div className="flex-1 overflow-hidden">
                       <ScrollArea className="h-full">
                         <PassengerAuthForm />
