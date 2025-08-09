@@ -10,7 +10,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Car, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { createClient } from '@/lib/supabase/client';
+import { account } from '@/lib/appwrite/client';
+import { AppwriteException } from 'appwrite';
 
 export default function DriverLoginPage() {
     const router = useRouter();
@@ -23,47 +24,50 @@ export default function DriverLoginPage() {
         e.preventDefault();
         setIsLoading(true);
         
-        const supabase = createClient();
+        try {
+            await account.createEmailPasswordSession(email, password);
+            
+            // Após o login, verificar se o usuário tem o perfil de motorista.
+            // Em um app real, isso viria de uma coleção de perfis ou de um time no Appwrite.
+            // Por agora, vamos simular que qualquer login bem-sucedido é de motorista.
+            const user = await account.get();
+            
+            // TODO: Adicionar verificação de perfil de 'Motorista'
+            const isDriver = true; // Simulação
 
-        const { data, error } = await supabase.auth.signInWithPassword({
-            email: email,
-            password: password,
-        });
+            if (user && isDriver) {
+                toast({
+                    title: 'Login bem-sucedido!',
+                    description: `Bem-vindo! Redirecionando para o painel.`,
+                });
+                router.push('/driver');
+            } else {
+                 toast({
+                    variant: 'destructive',
+                    title: 'Acesso Negado',
+                    description: 'Acesso permitido apenas para motoristas.',
+                });
+                // Deslogar o usuário se ele não for motorista
+                await account.deleteSession('current');
+            }
 
-        if (error) {
+        } catch (error) {
+            let description = 'Ocorreu um erro inesperado. Tente novamente.';
+            if (error instanceof AppwriteException) {
+                if(error.code === 401) {
+                    description = 'Credenciais inválidas. Verifique seu e-mail e senha.';
+                } else {
+                    description = error.message;
+                }
+            }
             toast({
                 variant: 'destructive',
                 title: 'Erro de Login',
-                description: error.message || 'Credenciais inválidas ou erro no servidor. Tente novamente.',
+                description: description,
             });
+        } finally {
             setIsLoading(false);
-            return;
         }
-
-        // Após o login, verificar se o usuário tem o perfil de motorista.
-        // Em um app real, isso viria de uma tabela de perfis.
-        // Por agora, vamos simular que qualquer login bem-sucedido é de motorista.
-        
-        // TODO: Adicionar verificação de perfil de 'Motorista' em uma tabela 'profiles'.
-        const isDriver = true; // Simulação
-
-        if (data.user && isDriver) {
-            toast({
-                title: 'Login bem-sucedido!',
-                description: `Bem-vindo! Redirecionando para o painel.`,
-            });
-            router.push('/driver');
-        } else {
-             toast({
-                variant: 'destructive',
-                title: 'Acesso Negado',
-                description: 'Acesso permitido apenas para motoristas.',
-            });
-            // Deslogar o usuário se ele não for motorista
-            await supabase.auth.signOut();
-        }
-
-        setIsLoading(false);
     };
 
     return (
