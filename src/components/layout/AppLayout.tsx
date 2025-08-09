@@ -15,6 +15,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { ScrollArea } from '../ui/scroll-area';
+import { AdminLoginForm } from '../auth/AdminLoginForm';
 
 
 export function AppLayout({ children, title, showAuthButtons = false, showDriverAvatar = false }: { children: ReactNode; title: string, showAuthButtons?: boolean, showDriverAvatar?: boolean }) {
@@ -76,12 +77,17 @@ export function AppLayout({ children, title, showAuthButtons = false, showDriver
                   </Dialog>
                 </>
               )}
-              <Link href="/admin/login">
+              <Dialog>
+                <DialogTrigger asChild>
                   <Button variant="ghost" size="icon" className="rounded-full">
                     <Shield className="h-5 w-5" />
                     <span className="sr-only">Admin</span>
                   </Button>
-              </Link>
+                </DialogTrigger>
+                <DialogContent>
+                    <AdminLoginForm />
+                </DialogContent>
+              </Dialog>
               <Dialog>
                 <DialogTrigger asChild>
                   <Button variant="ghost" size="icon" className="rounded-full">
