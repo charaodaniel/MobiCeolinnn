@@ -6542,6 +6542,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$a
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/ui/dialog.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$scroll$2d$area$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/ui/scroll-area.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$auth$2f$AdminLoginForm$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/auth/AdminLoginForm.tsx [app-client] (ecmascript)");
+'use client';
 ;
 ;
 ;
@@ -6567,20 +6568,20 @@ function AppLayout({ children, title, showAuthButtons = false, showDriverAvatar 
                                 "data-ai-hint": "person portrait"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                lineNumber: 27,
-                                columnNumber: 15
+                                lineNumber: 39,
+                                columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$avatar$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AvatarFallback"], {
                                 children: "C"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                lineNumber: 28,
-                                columnNumber: 15
+                                lineNumber: 43,
+                                columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/layout/AppLayout.tsx",
-                        lineNumber: 26,
+                        lineNumber: 38,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -6588,13 +6589,13 @@ function AppLayout({ children, title, showAuthButtons = false, showDriverAvatar 
                         children: "CEOLIN"
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/AppLayout.tsx",
-                        lineNumber: 30,
+                        lineNumber: 45,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/layout/AppLayout.tsx",
-                lineNumber: 25,
+                lineNumber: 37,
                 columnNumber: 9
             }, this);
         }
@@ -6607,7 +6608,7 @@ function AppLayout({ children, title, showAuthButtons = false, showDriverAvatar 
                         className: "h-6 w-6 text-primary"
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/AppLayout.tsx",
-                        lineNumber: 37,
+                        lineNumber: 54,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -6615,13 +6616,13 @@ function AppLayout({ children, title, showAuthButtons = false, showDriverAvatar 
                         children: "CEOLIN"
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/AppLayout.tsx",
-                        lineNumber: 38,
+                        lineNumber: 55,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/layout/AppLayout.tsx",
-                lineNumber: 36,
+                lineNumber: 53,
                 columnNumber: 9
             }, this);
         }
@@ -6633,7 +6634,7 @@ function AppLayout({ children, title, showAuthButtons = false, showDriverAvatar 
                     className: "h-6 w-6 text-primary"
                 }, void 0, false, {
                     fileName: "[project]/src/components/layout/AppLayout.tsx",
-                    lineNumber: 44,
+                    lineNumber: 63,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -6641,13 +6642,13 @@ function AppLayout({ children, title, showAuthButtons = false, showDriverAvatar 
                     children: "CEOLIN"
                 }, void 0, false, {
                     fileName: "[project]/src/components/layout/AppLayout.tsx",
-                    lineNumber: 45,
+                    lineNumber: 64,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/layout/AppLayout.tsx",
-            lineNumber: 43,
+            lineNumber: 62,
             columnNumber: 7
         }, this);
     };
@@ -6666,8 +6667,8 @@ function AppLayout({ children, title, showAuthButtons = false, showDriverAvatar 
                                 children: title
                             }, void 0, false, {
                                 fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                lineNumber: 56,
-                                columnNumber: 13
+                                lineNumber: 77,
+                                columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "flex items-center gap-2",
@@ -6685,27 +6686,27 @@ function AppLayout({ children, title, showAuthButtons = false, showDriverAvatar 
                                                             className: "h-5 w-5"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                                            lineNumber: 62,
-                                                            columnNumber: 21
+                                                            lineNumber: 85,
+                                                            columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                             className: "sr-only",
                                                             children: "Admin"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                                            lineNumber: 63,
-                                                            columnNumber: 21
+                                                            lineNumber: 86,
+                                                            columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                                    lineNumber: 61,
-                                                    columnNumber: 19
+                                                    lineNumber: 84,
+                                                    columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                                lineNumber: 60,
-                                                columnNumber: 17
+                                                lineNumber: 83,
+                                                columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogContent"], {
                                                 children: [
@@ -6716,38 +6717,38 @@ function AppLayout({ children, title, showAuthButtons = false, showDriverAvatar 
                                                                 children: "Acesso Restrito"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                                                lineNumber: 68,
-                                                                columnNumber: 23
+                                                                lineNumber: 91,
+                                                                columnNumber: 19
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogDescription"], {
                                                                 children: "Painel do Administrador."
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                                                lineNumber: 69,
-                                                                columnNumber: 23
+                                                                lineNumber: 92,
+                                                                columnNumber: 19
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                                        lineNumber: 67,
-                                                        columnNumber: 21
+                                                        lineNumber: 90,
+                                                        columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$auth$2f$AdminLoginForm$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AdminLoginForm"], {}, void 0, false, {
                                                         fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                                        lineNumber: 71,
-                                                        columnNumber: 21
+                                                        lineNumber: 94,
+                                                        columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                                lineNumber: 66,
-                                                columnNumber: 17
+                                                lineNumber: 89,
+                                                columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                        lineNumber: 59,
-                                        columnNumber: 15
+                                        lineNumber: 82,
+                                        columnNumber: 14
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Dialog"], {
                                         children: [
@@ -6762,27 +6763,27 @@ function AppLayout({ children, title, showAuthButtons = false, showDriverAvatar 
                                                             className: "h-5 w-5"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                                            lineNumber: 77,
-                                                            columnNumber: 21
+                                                            lineNumber: 100,
+                                                            columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                             className: "sr-only",
                                                             children: "Toggle user menu"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                                            lineNumber: 78,
-                                                            columnNumber: 21
+                                                            lineNumber: 101,
+                                                            columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                                    lineNumber: 76,
-                                                    columnNumber: 19
+                                                    lineNumber: 99,
+                                                    columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                                lineNumber: 75,
-                                                columnNumber: 17
+                                                lineNumber: 98,
+                                                columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogContent"], {
                                                 className: "max-h-[90vh] flex flex-col p-0",
@@ -6794,21 +6795,21 @@ function AppLayout({ children, title, showAuthButtons = false, showDriverAvatar 
                                                                 children: "Painel do Passageiro"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                                                lineNumber: 83,
-                                                                columnNumber: 25
+                                                                lineNumber: 106,
+                                                                columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogDescription"], {
                                                                 children: "Faça login, registre-se ou gerencie seu perfil de passageiro."
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                                                lineNumber: 84,
-                                                                columnNumber: 25
+                                                                lineNumber: 107,
+                                                                columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                                        lineNumber: 82,
-                                                        columnNumber: 21
+                                                        lineNumber: 105,
+                                                        columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                         className: "flex-1 overflow-hidden",
@@ -6818,41 +6819,41 @@ function AppLayout({ children, title, showAuthButtons = false, showDriverAvatar 
                                                                 onLoginSuccess: ()=>{}
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                                                lineNumber: 88,
-                                                                columnNumber: 25
+                                                                lineNumber: 111,
+                                                                columnNumber: 21
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                                            lineNumber: 87,
-                                                            columnNumber: 23
+                                                            lineNumber: 110,
+                                                            columnNumber: 19
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                                        lineNumber: 86,
-                                                        columnNumber: 21
+                                                        lineNumber: 109,
+                                                        columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                                lineNumber: 81,
-                                                columnNumber: 17
+                                                lineNumber: 104,
+                                                columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                        lineNumber: 74,
-                                        columnNumber: 15
+                                        lineNumber: 97,
+                                        columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/layout/AppLayout.tsx",
-                                lineNumber: 58,
-                                columnNumber: 13
+                                lineNumber: 81,
+                                columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/layout/AppLayout.tsx",
-                        lineNumber: 53,
+                        lineNumber: 74,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6862,18 +6863,18 @@ function AppLayout({ children, title, showAuthButtons = false, showDriverAvatar 
                             children: title
                         }, void 0, false, {
                             fileName: "[project]/src/components/layout/AppLayout.tsx",
-                            lineNumber: 96,
-                            columnNumber: 13
+                            lineNumber: 119,
+                            columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/AppLayout.tsx",
-                        lineNumber: 95,
+                        lineNumber: 118,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/layout/AppLayout.tsx",
-                lineNumber: 52,
+                lineNumber: 73,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -6881,18 +6882,18 @@ function AppLayout({ children, title, showAuthButtons = false, showDriverAvatar 
                 children: children
             }, void 0, false, {
                 fileName: "[project]/src/components/layout/AppLayout.tsx",
-                lineNumber: 99,
+                lineNumber: 124,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$layout$2f$Footer$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Footer"], {}, void 0, false, {
                 fileName: "[project]/src/components/layout/AppLayout.tsx",
-                lineNumber: 100,
+                lineNumber: 125,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/layout/AppLayout.tsx",
-        lineNumber: 51,
+        lineNumber: 72,
         columnNumber: 5
     }, this);
 }
