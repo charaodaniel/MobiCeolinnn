@@ -89,10 +89,14 @@ export function AppLayout({ children, title, showAuthButtons = false, showDriver
                     <span className="sr-only">Toggle user menu</span>
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="max-h-[90vh] flex flex-col">
+                <DialogContent className="max-h-[90vh] flex flex-col p-0">
+                    <DialogHeader className="sr-only">
+                        <DialogTitle>Painel do Passageiro</DialogTitle>
+                        <DialogDescription>Faça login, registre-se ou gerencie seu perfil de passageiro.</DialogDescription>
+                    </DialogHeader>
                     <div className="flex-1 overflow-hidden">
                       <ScrollArea className="h-full">
-                        <PassengerAuthForm />
+                        <PassengerAuthForm onLoginSuccess={() => {}} />
                       </ScrollArea>
                     </div>
                 </DialogContent>
