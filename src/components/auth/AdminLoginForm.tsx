@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Shield } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { DialogHeader, DialogTitle, DialogDescription } from '../ui/dialog';
 
 export function AdminLoginForm() {
     const router = useRouter();
@@ -36,29 +37,35 @@ export function AdminLoginForm() {
     };
 
   return (
-    <Card className="w-full shadow-none border-0">
-        <form onSubmit={handleLogin}>
-            <CardHeader className="text-center">
-                <div className="flex justify-center items-center mb-4">
-                    <Shield className="h-12 w-12 text-primary" />
-                    <CardTitle className="font-headline text-3xl ml-2">Acesso Restrito</CardTitle>
-                </div>
-                <CardDescription className="font-body">Painel do Administrador</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4 p-6">
-                <div className="space-y-1">
-                    <Label htmlFor="email-admin">Email</Label>
-                    <Input id="email-admin" type="email" placeholder="admin@mobiceolin.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                </div>
-                    <div className="space-y-1">
-                    <Label htmlFor="password-admin">Senha</Label>
-                    <Input id="password-admin" type="password" placeholder="********" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                </div>
-            </CardContent>
-            <CardFooter className="flex flex-col gap-4">
-                <Button type="submit" className="w-full h-12 text-lg">Entrar</Button>
-            </CardFooter>
-        </form>
-    </Card>
+    <>
+      <DialogHeader className="sr-only">
+        <DialogTitle>Acesso Restrito</DialogTitle>
+        <DialogDescription>Painel do Administrador.</DialogDescription>
+      </DialogHeader>
+      <Card className="w-full shadow-none border-0">
+          <form onSubmit={handleLogin}>
+              <CardHeader className="text-center">
+                  <div className="flex justify-center items-center mb-4">
+                      <Shield className="h-12 w-12 text-primary" />
+                      <CardTitle className="font-headline text-3xl ml-2">Acesso Restrito</CardTitle>
+                  </div>
+                  <CardDescription className="font-body">Painel do Administrador</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4 p-6">
+                  <div className="space-y-1">
+                      <Label htmlFor="email-admin">Email</Label>
+                      <Input id="email-admin" type="email" placeholder="admin@mobiceolin.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                  </div>
+                      <div className="space-y-1">
+                      <Label htmlFor="password-admin">Senha</Label>
+                      <Input id="password-admin" type="password" placeholder="********" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                  </div>
+              </CardContent>
+              <CardFooter className="flex flex-col gap-4">
+                  <Button type="submit" className="w-full h-12 text-lg">Entrar</Button>
+              </CardFooter>
+          </form>
+      </Card>
+    </>
   );
 }
