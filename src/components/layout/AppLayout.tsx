@@ -1,8 +1,8 @@
+
 import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Car, Rocket, Shield, User, MessageSquare } from 'lucide-react';
-import { LoginCard } from '../auth/LoginCard';
 import { PassengerAuthForm } from '../auth/PassengerAuthForm';
 import { Footer } from './Footer';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
@@ -56,27 +56,6 @@ export function AppLayout({ children, title, showAuthButtons = false, showDriver
             <h1 className="hidden sm:block flex-1 text-center font-headline text-xl font-bold text-foreground/80">{title}</h1>
 
             <div className="flex items-center gap-2">
-              {showAuthButtons && (
-                <>
-                  <Dialog>
-                    <DialogTrigger asChild>
-                       <Button variant="ghost">
-                        <Car />
-                        <span className="ml-2 hidden md:inline">Motorista</span>
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="max-h-[90vh] flex flex-col">
-                      <DialogHeader>
-                        <DialogTitle>Portal de Acesso</DialogTitle>
-                        <DialogDescription>Acesse sua conta de motorista ou operador.</DialogDescription>
-                      </DialogHeader>
-                      <ScrollArea className="h-full">
-                        <LoginCard />
-                      </ScrollArea>
-                    </DialogContent>
-                  </Dialog>
-                </>
-              )}
               <Dialog>
                 <DialogTrigger asChild>
                   <Button variant="ghost" size="icon" className="rounded-full">
@@ -85,6 +64,10 @@ export function AppLayout({ children, title, showAuthButtons = false, showDriver
                   </Button>
                 </DialogTrigger>
                 <DialogContent>
+                    <DialogHeader className="sr-only">
+                      <DialogTitle>Acesso Restrito</DialogTitle>
+                      <DialogDescription>Painel do Administrador.</DialogDescription>
+                    </DialogHeader>
                     <AdminLoginForm />
                 </DialogContent>
               </Dialog>
