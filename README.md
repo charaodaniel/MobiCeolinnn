@@ -2,22 +2,27 @@
 
 CEOLIN Mobilidade Urbana é uma plataforma de transporte que conecta passageiros e motoristas de forma eficiente e inovadora, com foco especial em atender tanto demandas urbanas quanto rurais e intermunicipais.
 
-Esta versão do projeto utiliza **Appwrite** como backend auto-hospedado, uma alternativa de código aberto ao Firebase que oferece banco de dados, autenticação e mais. A comunicação entre o frontend (Next.js) e o Appwrite é feita **diretamente**, utilizando a biblioteca de cliente oficial (`appwrite`), o que simplifica a arquitetura.
+Esta versão do projeto utiliza uma arquitetura robusta e escalável com **Next.js**, **NextAuth** para autenticação, **Prisma** como ORM para interagir com o banco de dados e **PostgreSQL** como nosso banco de dados relacional.
 
 ## Arquitetura do Projeto
 
-O projeto adota uma arquitetura moderna e unificada com Next.js. Isso significa que não há uma separação entre uma pasta "frontend" e uma pasta "backend". Todo o código, tanto o que roda no servidor para buscar dados (Server Components) quanto o que roda no navegador do usuário (Client Components), reside na mesma base de código, principalmente dentro de `src/app`.
+O projeto adota uma arquitetura moderna e unificada com Next.js. Todo o código, tanto o que roda no servidor para buscar e salvar dados (Server Components, API Routes) quanto o que roda no navegador (Client Components), reside na mesma base de código dentro de `src/`.
+
+- **Autenticação:** Gerenciada pelo `NextAuth`, que lida com sessões, login, e proteção de rotas.
+- **Banco de Dados:** O `Prisma` serve como uma ponte segura e eficiente entre a nossa aplicação e o banco de dados `PostgreSQL`, facilitando consultas e a manipulação de dados com segurança de tipos.
 
 ## Fluxo de Trabalho de Desenvolvimento
 
-O fluxo recomendado é utilizar sua instância auto-hospedada do Appwrite para o backend e rodar o projeto Next.js na sua máquina local para desenvolvimento. Para produção, o projeto Next.js será executado na sua VPS, conectado ao mesmo Appwrite.
+### 1. Configuração do Banco de Dados (Local ou na VPS)
 
-### 1. Configuração do Backend (Appwrite na sua VPS)
-
-1.  **Siga o Guia de Instalação:** Use o guia oficial do Appwrite para instalar o serviço na sua VPS usando Docker.
-2.  **Obtenha as Credenciais:** Após a instalação, acesse o painel do Appwrite. Navegue até o seu projeto e depois para as configurações (`Settings`). Você precisará de duas informações:
-    *   **Project ID:** O ID do seu projeto Appwrite.
-    *   **API Endpoint:** A URL do seu servidor Appwrite.
+1.  **Instale o PostgreSQL:** Você precisa de uma instância do PostgreSQL rodando. Para desenvolvimento local ou na VPS, a maneira mais fácil é usar o Docker:
+    ```bash
+    docker run --name mobiceolin-db -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password -e POSTGRES_DB=mobiceolin -p 5432:5432 -d postgres
+    ```
+    Isso iniciará um banco de dados PostgreSQL na porta `5432`.
+2.  **Obtenha a URL de Conexão:** A URL de conexão para o banco de dados que você acabou de criar será:
+    `postgresql://user:password@localhost:5432/mobiceolin`
+    Se o banco estiver em uma VPS, substitua `localhost` pelo IP da VPS.
 
 ### 2. Configuração do Frontend (Local ou na VPS)
 
@@ -26,17 +31,28 @@ O fluxo recomendado é utilizar sua instância auto-hospedada do Appwrite para o
     git clone <URL_DO_SEU_REPOSITORIO>
     cd <NOME_DO_DIRETORIO>
     ```
-2.  **Configure as Variáveis de Ambiente:**
-    *   Na raiz do projeto, renomeie o arquivo `.env.example` para `.env.local`.
-    *   Edite o arquivo `.env.local` e insira as credenciais obtidas no passo anterior:
+2.  **Instale as dependências:**
+    ```bash
+    npm install
+    ```
+3.  **Configure as Variáveis de Ambiente:**
+    *   Na raiz do projeto, renomeie o arquivo `.env.example` para `.env.local` (se ainda não existir).
+    *   Edite o arquivo `.env.local` e insira a URL de conexão do seu banco de dados:
       ```env
-      NEXT_PUBLIC_APPWRITE_ENDPOINT="A_SUA_URL_DO_APPWRITE_AQUI"
-      NEXT_PUBLIC_APPWRITE_PROJECT_ID="O_SEU_PROJECT_ID_AQUI"
+      DATABASE_URL="postgresql://user:password@localhost:5432/mobiceolin"
+      
+      # Gere um segredo para o NextAuth. Pode ser qualquer string aleatória.
+      # Exemplo de como gerar no Linux/Mac: openssl rand -base64 32
+      AUTH_SECRET="SEU_SEGREDO_SUPER_SEGURO_AQUI"
       ```
-3.  **Instale as dependências e execute:**
+4.  **Execute as Migrações do Banco de Dados:**
+    Este comando vai ler seu `schema.prisma` e criar todas as tabelas no banco de dados.
+    ```bash
+    npx prisma migrate dev --name init
+    ```
+5.  **Execute a Aplicação:**
     *   **Para Desenvolvimento Local:**
         ```bash
-        npm install
         npm run dev
         ```
         Seu aplicativo estará disponível em `http://localhost:9002`.
@@ -48,7 +64,7 @@ O fluxo recomendado é utilizar sua instância auto-hospedada do Appwrite para o
         ```
         Seu aplicativo estará disponível publicamente em `http://SEU_IP_DA_VPS:9002`.
 
-## Acessos de Demonstração (Após configurar os usuários no Appwrite)
+## Acessos de Demonstração (Após popular o banco)
 
 - **Administrador:**
   - **Email:** `admin@mobiceolin.com`
