@@ -10,8 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Car, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { account } from '@/lib/appwrite/client';
-import { AppwriteException } from 'appwrite';
+import { signIn } from 'next-auth/react';
 
 export default function DriverLoginPage() {
     const router = useRouter();
@@ -25,40 +24,32 @@ export default function DriverLoginPage() {
         setIsLoading(true);
         
         try {
-            await account.createEmailPasswordSession(email, password);
-            
-            // Após o login, verificar se o usuário tem o perfil de motorista.
-            // Em um app real, isso viria de uma coleção de perfis ou de um time no Appwrite.
-            // Por agora, vamos simular que qualquer login bem-sucedido é de motorista.
-            const user = await account.get();
-            
-            // TODO: Adicionar verificação de perfil de 'Motorista'
-            const isDriver = true; // Simulação
+            const result = await signIn('credentials', {
+                redirect: false,
+                email,
+                password,
+                role: 'DRIVER' // Specify the role for driver login
+            });
 
-            if (user && isDriver) {
-                toast({
+            if (result?.error) {
+                throw new Error(result.error);
+            }
+            
+            if (result?.ok) {
+                 toast({
                     title: 'Login bem-sucedido!',
                     description: `Bem-vindo! Redirecionando para o painel.`,
                 });
                 router.push('/driver');
-            } else {
-                 toast({
-                    variant: 'destructive',
-                    title: 'Acesso Negado',
-                    description: 'Acesso permitido apenas para motoristas.',
-                });
-                // Deslogar o usuário se ele não for motorista
-                await account.deleteSession('current');
+                router.refresh(); // Refresh to update session state
             }
 
-        } catch (error) {
+        } catch (error: any) {
             let description = 'Ocorreu um erro inesperado. Tente novamente.';
-            if (error instanceof AppwriteException) {
-                if(error.code === 401) {
-                    description = 'Credenciais inválidas. Verifique seu e-mail e senha.';
-                } else {
-                    description = error.message;
-                }
+            if (error.message.includes('CredentialsSignin')) {
+                description = 'Credenciais inválidas. Verifique seu e-mail e senha.';
+            } else {
+                description = error.message;
             }
             toast({
                 variant: 'destructive',
