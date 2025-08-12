@@ -12,8 +12,8 @@
  * 3. Execute o script a partir do diretório raiz com o comando: `npm run appwrite:setup`
  *
  * @important
- * Este script foi projetado para ser executado uma vez. Executá-lo novamente pode causar erros se
- * o banco de dados ou as coleções já existirem.
+ * Este script foi projetado para ser executado uma vez, mas agora pode ser executado várias vezes com segurança.
+ * Ele verificará se os recursos já existem antes de criá-los.
  */
 
 import { Client, Databases, ID, Permission, Role } from 'node-appwrite';
@@ -48,29 +48,31 @@ const COLLECTIONS = {
 // --- Funções Auxiliares ---
 
 /**
- * Cria uma nova coleção no banco de dados especificado.
+ * Cria uma nova coleção no banco de dados especificado, se ela não existir.
  * @param {string} dbId - O ID do banco de dados.
  * @param {object} collection - O objeto de configuração da coleção.
  */
 async function createCollection(dbId: string, collection: { NAME: string, ID: string }) {
     try {
-        console.log(`Criando coleção: ${collection.NAME}...`);
-        await databases.createCollection(dbId, collection.ID, collection.NAME, [
-            Permission.read(Role.any()),       // Qualquer um pode ler (para perfis públicos, etc.)
-            Permission.create(Role.users()),   // Apenas usuários logados podem criar
-            Permission.update(Role.users()),   // Usuários podem atualizar seus próprios documentos
-            Permission.delete(Role.users()),   // Usuários podem deletar seus próprios documentos
-        ]);
-        console.log(`Coleção "${collection.NAME}" criada com sucesso.`);
+        await databases.getCollection(dbId, collection.ID);
+        console.warn(`A coleção "${collection.NAME}" (${collection.ID}) já existe. Pulando.`);
     } catch (error: any) {
-        if (error.code === 409) { // 409 Conflict indica que já existe
-            console.warn(`A coleção "${collection.NAME}" (${collection.ID}) já existe. Pulando.`);
+        if (error.code === 404) { // 404 Not Found indica que a coleção não existe
+             console.log(`Criando coleção: ${collection.NAME}...`);
+            await databases.createCollection(dbId, collection.ID, collection.NAME, [
+                Permission.read(Role.any()),       // Qualquer um pode ler (para perfis públicos, etc.)
+                Permission.create(Role.users()),   // Apenas usuários logados podem criar
+                Permission.update(Role.users()),   // Usuários podem atualizar seus próprios documentos
+                Permission.delete(Role.users()),   // Usuários podem deletar seus próprios documentos
+            ]);
+            console.log(`Coleção "${collection.NAME}" criada com sucesso.`);
         } else {
-            console.error(`Erro ao criar a coleção "${collection.NAME}":`, error.message);
-            throw error; // Interrompe a execução se for um erro diferente
+             console.error(`Erro ao verificar a coleção "${collection.NAME}":`, error.message);
+            throw error;
         }
     }
 }
+
 
 /**
  * Cria os atributos para a coleção de usuários.
@@ -146,14 +148,15 @@ async function setup() {
 
     try {
         // 1. Criar o banco de dados
-        console.log(`Criando banco de dados: ${DB_NAME}...`);
-        await databases.create(DB_ID, DB_NAME);
-        console.log(`Banco de dados "${DB_NAME}" criado com sucesso.`);
+        await databases.get(DB_ID);
+        console.warn(`O banco de dados "${DB_NAME}" (${DB_ID}) já existe. Pulando.`);
     } catch (error: any) {
-        if (error.code === 409) { // 409 Conflict
-            console.warn(`O banco de dados "${DB_NAME}" (${DB_ID}) já existe. Pulando.`);
+        if (error.code === 404) { // 404 Not Found
+            console.log(`Criando banco de dados: ${DB_NAME}...`);
+            await databases.create(DB_ID, DB_NAME);
+            console.log(`Banco de dados "${DB_NAME}" criado com sucesso.`);
         } else {
-            console.error('Erro fatal ao criar o banco de dados. Verifique suas credenciais e a conexão com o Appwrite.', error.message);
+            console.error('Erro fatal ao verificar o banco de dados. Verifique suas credenciais e a conexão com o Appwrite.', error.message);
             return; // Interrompe a execução
         }
     }
